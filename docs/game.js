@@ -818,7 +818,7 @@ function initUI() {
 
 async function boot() {
   try {
-    const resp = await fetch('game_data.json');
+    const resp = await fetch('game_data.json?v=' + Date.now());
     const data = await resp.json();
     loadGameData(data);
     STATE = newState();
