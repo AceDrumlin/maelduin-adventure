@@ -163,7 +163,7 @@ def _make_npcs():
             "father": (
                 '"Ailill was a great warrior. His name meant \"noble wolf\" and he earned it. '
                 "He fell with his sword in his hand and his enemies' blood on his blade. "
-                "The manner of his death was not shameful — it is revenge that may be.""
+                "The manner of his death was not shameful — it is revenge that may be."
             ),
             "vengeance": (
                 '"Vengeance is like drinking poison and expecting the other man to die. '
@@ -203,12 +203,13 @@ def _make_npcs():
             ),
             "on_take": {
                 "talking_cat_tribute": lambda state, item: (
+                    state.inventory.append(items["pearl"]) or
+                    state.set_flag("cat_pacified") or
                     'You offer the bowl of milk to the cat. It sniffs once, then delicately laps it all up.\n\n'
                     '"Acceptable tribute. You may pass through my island safely. And take this — '
                     'a cat always pays its debts."\n\n'
                     'The cat produces a shimmering Pearl from somewhere (you\'re not sure where) and drops it at your feet.\n\n'
-                    '(+1 point, and you\'ve earned the cat\'s respect.)\n'
-                    + (lambda: (state.inventory.append(items["pearl"]), state.set_flag("cat_pacified"), None)() or "")
+                    '(+1 point, and you\'ve earned the cat\'s respect.)'
                 )
             }
         }
@@ -458,7 +459,7 @@ def _make_locations():
             "Ahead, the sea stretches endlessly. Diurán the poet is already writing about "
             "the experience. Conganchnes the invulnerable stands at the prow, scanning for enemies."
         ),
-        exits={"west": "island_ants"},
+        exits={"west": "island_ants", "north": "island_birds", "northeast": "island_cat", "east": "island_laughing", "south": "glass_bridge"},
         ambient=lambda s: "The waves slap against the curragh's hide. A seabird cries overhead." if s.turns % 2 == 0 else "A cold mist rolls across the water. Somewhere, a bell buoys tolls."
     )
 

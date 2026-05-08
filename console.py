@@ -4,7 +4,7 @@
 import sys
 import os
 
-# Add parent dir to path
+# Use the system Python if running from venv
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from game.engine import GameState, process_command, handle_look
@@ -49,11 +49,9 @@ def main():
 
     while not state.game_over:
         try:
-            cmd = input("
-> ").strip()
+            cmd = input("\n> ").strip()
         except (EOFError, KeyboardInterrupt):
-            print("
-Your voyage ends here. Farewell, Mael Duin.")
+            print("\nYour voyage ends here. Farewell, Mael Duin.")
             break
 
         if not cmd:
@@ -69,12 +67,10 @@ Your voyage ends here. Farewell, Mael Duin.")
             print(handle_look(state, []))
             continue
 
-        print("
-" + result)
+        print("\n" + result)
 
         if state.game_over:
-            print("
-=== THE END ===")
+            print("\n=== THE END ===")
             print(f"Final score: {state.score}")
             print("Thank you for playing The Voyage of Mael Duin!")
             break

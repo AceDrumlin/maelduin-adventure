@@ -526,7 +526,9 @@ VERBS = {
 
 
 def parse_command(text):
-    """Parse a command string into (verb, args) tuple."""
+    """Parse a command string into (handler, args) tuple.
+    Returns (handler_function, args_string) or (None, text) if unknown."""
+
     text = text.strip()
     if not text:
         return None, ""
@@ -538,7 +540,6 @@ def parse_command(text):
     words = lower.split()
 
     # Handle multi-word commands like "talk to npc" or "look at item"
-    # Map common patterns
     look_patterns = [
         r'^look at\s+(.+)$', r'^look\s+(.+)$', r'^l\s+(.+)$',
         r'^examine\s+(.+)$', r'^x\s+(.+)$',
@@ -546,7 +547,7 @@ def parse_command(text):
     for pat in look_patterns:
         m = re.match(pat, lower)
         if m:
-            return ("examine", m.group(1).strip())
+            return (handle_examine, m.group(1).strip())
 
     talk_patterns = [
         r'^talk to\s+(.+)$', r'^talk with\s+(.+)$',
@@ -555,17 +556,17 @@ def parse_command(text):
     for pat in talk_patterns:
         m = re.match(pat, lower)
         if m:
-            return ("talk", m.group(1).strip())
+            return (handle_talk, m.group(1).strip())
 
     give_pattern = r'^give\s+(.+)$'
     m = re.match(give_pattern, lower)
     if m:
-        return ("give", m.group(1).strip())
+        return (handle_give, m.group(1).strip())
 
     use_pattern = r'^use\s+(.+)$'
     m = re.match(use_pattern, lower)
     if m:
-        return ("use", m.group(1).strip())
+        return (handle_use, m.group(1).strip())
 
     take_patterns = [
         r'^take\s+(.+)$', r'^get\s+(.+)$', r'^pick up\s+(.+)$',
@@ -573,21 +574,24 @@ def parse_command(text):
     for pat in take_patterns:
         m = re.match(pat, lower)
         if m:
-            return ("take", m.group(1).strip())
+            return (handle_take, m.group(1).strip())
 
-    drop_pattern = r'^drop\s+(.+)$'
-    m = re.match(drop_pattern, lower)
-    if m:
-        return ("drop", m.group(1).strip())
+    drop_patterns = [
+        r'^drop\s+(.+)$', r'^discard\s+(.+)$',
+    ]
+    for pat in drop_patterns:
+        m = re.match(pat, lower)
+        if m:
+            return (handle_drop, m.group(1).strip())
 
     # Single word commands
     first_word = words[0]
     if first_word in VERBS:
-        action, handler = VERBS[first_word]
+        _, handler = VERBS[first_word]
         rest = " ".join(words[1:])
-        return (action, rest)
+        return (handler, rest)
 
-    # Check if it's a direction
+    # Check if it's a direction alias
     dir_aliases = {
         "n": "north", "s": "south", "e": "east", "w": "west",
         "ne": "northeast", "nw": "northwest",
@@ -595,22 +599,18 @@ def parse_command(text):
         "u": "up", "d": "down",
     }
     if first_word in dir_aliases:
-        return ("go", dir_aliases[first_word])
+        return (lambda s, a: handle_go(s, dir_aliases[first_word]), "")
 
     return None, text
 
 
 def process_command(state, text):
     """Process a command and return response text."""
-    verb, args = parse_command(text)
-    if verb is None:
+    handler, args = parse_command(text)
+    if handler is None:
         return handle_unknown(state, args)
 
-    if verb in VERBS:
-        action_name, handler = VERBS[verb]
-        return handler(state, args)
-
-    return handle_unknown(state, text)
+    return handler(state, args)
 
 
 # LOCATIONS will be imported/defined elsewhere
