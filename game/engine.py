@@ -415,6 +415,13 @@ def handle_give(state, args):
                 state.inventory.remove(item)
                 return result
 
+    # Fallback: interactions module for contextual responses
+    try:
+        from .interactions import get_give_response
+        return get_give_response(state, item, npc)
+    except ImportError:
+        pass
+
     # Default: NPC may not want it
     return f"You offer the {item.name} to {npc.name}. They look at you strangely and don't take it."
 
@@ -448,6 +455,13 @@ def handle_use(state, args):
         if callable(item.use_text):
             result = item.use_text(state, target)
         return result
+
+    # Fallback: interactions module
+    try:
+        from .interactions import get_use_response
+        return get_use_response(state, item, target)
+    except ImportError:
+        pass
 
     return f"You use the {item.name}. Nothing happens."
 

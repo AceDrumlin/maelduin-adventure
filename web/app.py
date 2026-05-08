@@ -20,15 +20,15 @@ HTML = r"""<!DOCTYPE html>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=MedievalSharp&family=Special+Elite&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#0a0806;color:#c8b89a;font-family:'Special Elite','Courier New',monospace;height:100vh;overflow:hidden;background-image:radial-gradient(ellipse at 20% 50%, #1a1410 0%, #0a0806 70%)}
-#game{display:flex;flex-direction:column;height:100vh;max-width:900px;margin:0 auto;position:relative}
+body{background:#0a0806;color:#c8b89a;font-family:'Special Elite','Courier New',monospace;height:100vh;height:100dvh;overflow:hidden;background-image:radial-gradient(ellipse at 20% 50%, #1a1410 0%, #0a0806 70%)}
+#game{display:flex;flex-direction:column;height:100vh;height:100dvh;max-width:900px;margin:0 auto;position:relative}
 #header{text-align:center;padding:6px 15px 4px;border-bottom:1px solid #2a1f14;flex-shrink:0;background:linear-gradient(180deg,#0f0b08,#0a0806)}
 #title-row{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:2px}
 #title-row pre{color:#b8860b;font-size:9px;line-height:1.1;text-shadow:0 0 8px rgba(184,134,11,.3)}
 .celtic{color:#5a4a3a;font-size:20px;user-select:none}
 #status-bar{display:flex;justify-content:space-between;font-size:11px;color:#5a4a3a;padding:3px 8px;border-top:1px solid #1a1410;font-family:'Courier New',monospace;letter-spacing:.5px}
 .status-val{color:#b8860b}
-#output{flex:1;overflow-y:auto;padding:12px 18px;white-space:pre-wrap;word-wrap:break-word;line-height:1.6;font-size:14px;scroll-behavior:smooth;color:#c8b89a}
+#output{flex:1;min-height:0;overflow-y:auto;padding:12px 18px;white-space:pre-wrap;word-wrap:break-word;line-height:1.6;font-size:14px;scroll-behavior:smooth;color:#c8b89a}
 #output::-webkit-scrollbar{width:5px}
 #output::-webkit-scrollbar-track{background:#0a0806}
 #output::-webkit-scrollbar-thumb{background:#2a1f14;border-radius:3px}
@@ -55,7 +55,7 @@ body{background:#0a0806;color:#c8b89a;font-family:'Special Elite','Courier New',
 .inv-item:before{content:"\2728";margin-right:3px;font-size:8px}
 #side-toggle{position:absolute;top:8px;right:12px;color:#5a4a3a;cursor:pointer;font-size:18px;z-index:20;transition:color .2s}
 #side-toggle:hover{color:#b8860b}
-#side-panel{position:fixed;top:0;right:-320px;width:300px;height:100vh;background:#0f0b08;border-left:2px solid #2a1f14;padding:50px 18px 20px;transition:right .3s ease;overflow-y:auto;z-index:19}
+#side-panel{position:fixed;top:0;right:-320px;width:300px;height:100vh;height:100dvh;background:#0f0b08;border-left:2px solid #2a1f14;padding:50px 18px 20px;transition:right .3s ease;overflow-y:auto;z-index:19}
 #side-panel.open{right:0}
 #side-panel h3{color:#b8860b;font-size:12px;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;border-bottom:1px solid #1a1410;padding-bottom:4px}
 #score-detail{margin:12px 0;font-size:12px;color:#5a4a3a}
@@ -70,13 +70,34 @@ body{background:#0a0806;color:#c8b89a;font-family:'Special Elite','Courier New',
 .backdrop{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:18;display:none}
 .backdrop.show{display:block}
 @media(max-width:600px){
-  #title-row pre{display:none}
+  #header{padding:0!important;border-bottom:0!important}
+  #title-row pre{display:none!important}
+  .celtic{display:none!important}
+  #title-row{display:none!important}
+  #status-bar{font-size:7px!important;padding:1px 3px!important}
+  #status-bar span{font-size:7px!important}
+  #output{font-size:11px!important;padding:3px 6px!important}
+  #inventory-bar{min-height:0!important;max-height:16px!important;padding:1px 4px!important}
+  .inv-item{font-size:7px!important;padding:0 2px!important}
+  #input-row{padding:2px 4px!important;min-height:30px!important}
+  #cmd{font-size:11px!important;padding:3px 5px!important}
+  #send{font-size:10px!important;padding:3px 6px!important}
+  #prompt{font-size:10px!important;line-height:24px!important}
+  #side-panel{width:200px!important;right:-220px!important}
+}
   .celtic{display:none}
-  #title-row{min-height:0;padding:0}
-  #status-bar span{font-size:9px;padding:1px 6px}
-  #output{font-size:12px;padding:6px 10px}
-  #cmd{font-size:12px;padding:5px 8px}
+  #title-row{min-height:0;padding:0;height:0}
+  #header{padding:0;border-bottom-width:0}
+  #status-bar{font-size:8px;padding:1px 4px}
+  #status-bar span{font-size:8px}
+  #output{font-size:12px;padding:4px 8px}
+  #inventory-bar{min-height:0;padding:1px 4px}
+  #inventory-bar .inv-item{font-size:8px;padding:0 3px}
+  #input-row{padding:3px 6px}
+  #cmd{font-size:12px;padding:4px 6px}
   #side-panel{width:240px;right:-260px}
+  #prompt{font-size:12px;line-height:28px}
+  #send{font-size:11px;padding:4px 8px}
 }
 @media(max-width:380px){
   #status-bar span{font-size:8px}
