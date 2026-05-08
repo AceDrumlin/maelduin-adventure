@@ -679,7 +679,7 @@ def _make_locations():
         ),
         items=[items["speaking_feather"]],
         npcs=[],
-        exits={"east": "sea1", "up": "birds_nest", "climb": "birds_nest"},
+        exits={"south": "sea1", "up": "birds_nest", "climb": "birds_nest"},
         ambient=lambda s: "The birds are arguing about the meaning of life. One of them makes an excellent point about salmon." if not s.has_flag("bird_talked") else "The birds now respectfully nod as you pass.",
     )
 
@@ -713,7 +713,7 @@ def _make_locations():
         ),
         items=[items["talking_cat_tribute"]],
         npcs=[npcs["cat"]],
-        exits={"east": "sea1"},
+        exits={"southwest": "sea1"},
         ambient=lambda s: "The cat's tail flicks once, twice. It is unimpressed with your existence." if not s.has_flag("cat_pacified") else "The cat purrs contentedly as you pass. You have been deemed acceptable.",
     )
 
@@ -731,7 +731,7 @@ def _make_locations():
         ),
         items=[],
         npcs=[npcs["laughing_king"]],
-        exits={"east": "sea1"},
+        exits={"west": "sea1"},
         ambient=lambda s: "HA HA HA HA HA! The laughter never stops. You feel your own lips twitching." if not s.has_flag("king_pacified") else "The island seems quieter now. People still chuckle, but it's a gentle mirth.",
     )
 
@@ -748,7 +748,7 @@ def _make_locations():
         ),
         items=[items["glass_shard"]],
         npcs=[],
-        exits={"east": "sea1", "cross": "glass_palace", "bridge": "glass_palace"},
+        exits={"north": "sea1", "cross": "glass_palace", "bridge": "glass_palace"},
         ambient=lambda s: "The glass bridge shimmers in the light. It's beautiful and absolutely terrifying."
     )
 
@@ -783,7 +783,7 @@ def _make_locations():
             "He hasn't noticed you yet."
         ),
         npcs=[npcs["smith"]],
-        exits={"east": "sea1"},
+        exits={"southeast": "sea1"},
         items=[],
         ambient=lambda s: "The forge roars. Embers drift like fireflies. The giant hums a tune that sounds suspiciously like a lullaby." if not s.has_flag("got_harpoon") else "The forge is quiet now. The giant waves cheerily as you pass.",
     )
@@ -802,7 +802,7 @@ def _make_locations():
         ),
         npcs=[npcs["queen"]],
         items=[items["truth_ring"]],
-        exits={"east": "sea1"},
+        exits={"northwest": "sea1"},
         ambient=lambda s: "The music swells. A woman laughs somewhere. The food smells incredible." if not s.has_flag("left_women") else "The island is silent now. The palace stands empty, as if everyone left in a hurry.",
     )
 
@@ -870,7 +870,7 @@ def _make_locations():
         ),
         npcs=[],
         items=[],
-        exits={"east": "island_women", "west": "sea1", "north": "island_laughing"},
+        exits={"east": "island_women", "northeast": "sea1", "north": "island_laughing"},
         on_enter=lambda s: (
             "A monstrous hand erupts from the water, clutching the gunwale of your curragh! "
             "The boat lurches violently. Crew members grab for their swords.\n\n"
@@ -894,7 +894,7 @@ def _make_locations():
         ),
         items=[items["golden_apple"]],
         npcs=[],
-        exits={"east": "sea1"},
+        exits={"west": "sea3"},
         ambient=lambda s: "The pig snores. Each snore sounds like a small earthquake." if not s.has_flag("apple_taken") else "The pig glares at you balefully. It remembers.",
     )
 
@@ -913,7 +913,7 @@ def _make_locations():
         ),
         npcs=[npcs["skull"]],
         items=[],
-        exits={"east": "sea1"},
+        exits={"east": "sea3"},
         ambient=lambda s: "The bush rustles, though there's no wind. The skull mutters something about the younger generation."
     )
 
@@ -932,7 +932,7 @@ def _make_locations():
         ),
         items=[items["antidote_herb"]],
         npcs=[],
-        exits={"east": "sea1", "through": "serpent_island_center"},
+        exits={"south": "sea3", "through": "serpent_island_center"},
         blocked={"through": ("the serpent blocks your way", lambda s: not s.has_flag("serpent_pacified"))},
         ambient=lambda s: "The serpent's scales make a soft rustling sound as it shifts, like leaves in a gentle breeze." if not s.has_flag("serpent_pacified") else "The serpent has moved aside, allowing passage.",
     )

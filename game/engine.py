@@ -920,6 +920,7 @@ def parse_command(text):
         "u": "up", "d": "down",
         "deeper": "deeper", "deep": "deeper",
         "back": "back", "return": "back", "shallows": "shallows",
+        "home": "home",
     }
     if first_word in dir_aliases:
         return (lambda s, a: handle_go(s, dir_aliases[first_word]), "")
