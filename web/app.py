@@ -20,21 +20,21 @@ HTML = r"""<!DOCTYPE html>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=MedievalSharp&family=Special+Elite&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#0a0806;color:#c8b89a;font-family:'Special Elite','Courier New',monospace;height:100vh;height:100dvh;overflow:hidden;background-image:radial-gradient(ellipse at 20% 50%, #1a1410 0%, #0a0806 70%)}
+body{background:#0a0806;color:#c8b89a;font-family:'Special Elite',ui-monospace,'Menlo','Consolas',monospace;height:100vh;height:100dvh;overflow:hidden;background-image:radial-gradient(ellipse at 20% 50%, #1a1410 0%, #0a0806 70%)}
 #game{display:flex;flex-direction:column;height:100vh;height:100dvh;max-width:900px;margin:0 auto;position:relative}
 #header{text-align:center;padding:6px 15px 4px;border-bottom:1px solid #2a1f14;flex-shrink:0;background:linear-gradient(180deg,#0f0b08,#0a0806)}
 #title-row{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:2px}
 #title-row pre{color:#b8860b;font-size:9px;line-height:1.1;text-shadow:0 0 8px rgba(184,134,11,.3)}
 .celtic{color:#5a4a3a;font-size:20px;user-select:none}
-#status-bar{display:flex;justify-content:space-between;font-size:11px;color:#5a4a3a;padding:3px 8px;border-top:1px solid #1a1410;font-family:'Courier New',monospace;letter-spacing:.5px}
+#status-bar{display:flex;justify-content:space-between;font-size:11px;color:#5a4a3a;padding:3px 8px;border-top:1px solid #1a1410;font-family:ui-monospace,'Cascadia Code','JetBrains Mono','Menlo','Consolas','DejaVu Sans Mono',monospace;letter-spacing:.5px}
 .status-val{color:#b8860b}
-#output{flex:1;min-height:0;overflow-y:auto;padding:12px 18px;white-space:pre-wrap;word-wrap:break-word;line-height:1.6;font-size:14px;scroll-behavior:smooth;color:#c8b89a}
+#output{flex:1;min-height:0;overflow-y:auto;padding:12px 18px;white-space:pre-wrap;word-wrap:break-word;line-height:1.6;font-size:16px;scroll-behavior:smooth;color:#c8b89a}
 #output::-webkit-scrollbar{width:5px}
 #output::-webkit-scrollbar-track{background:#0a0806}
 #output::-webkit-scrollbar-thumb{background:#2a1f14;border-radius:3px}
 #input-row{display:flex;padding:8px 15px;border-top:1px solid #2a1f14;gap:6px;flex-shrink:0;background:#0f0b08}
 #prompt{color:#b8860b;font-weight:bold;font-size:15px;line-height:38px;margin-right:2px}
-#cmd{flex:1;background:#0d0906;border:1px solid #2a1f14;color:#c8b89a;font-family:'Special Elite','Courier New',monospace;font-size:14px;padding:8px 12px;border-radius:3px;outline:none}
+#cmd{flex:1;background:#0d0906;border:1px solid #2a1f14;color:#c8b89a;font-size:15px;font-family:'Special Elite',ui-monospace,'Menlo','Consolas',monospace;font-size:14px;padding:8px 12px;border-radius:3px;outline:none}
 #cmd:focus{border-color:#b8860b}
 #cmd::placeholder{color:#3a2a1a}
 #send{background:#b8860b;color:#0a0806;border:none;padding:8px 16px;font-size:15px;border-radius:3px;cursor:pointer;font-weight:bold;font-family:'Special Elite',monospace}
@@ -70,22 +70,20 @@ body{background:#0a0806;color:#c8b89a;font-family:'Special Elite','Courier New',
 .backdrop{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:18;display:none}
 .backdrop.show{display:block}
 @media(max-width:600px){
-  #header{padding:2px 0!important}
+  #header{padding:4px 0!important}
   #title-row pre{display:none!important}
   .celtic{display:none!important}
   #title-row{min-height:0!important;padding:0!important}
-  #status-bar{font-size:11px!important;padding:2px 6px!important}
-  #status-bar span{font-size:11px!important}
-  #output{font-size:15px!important;padding:6px 10px!important}
-  #inventory-bar{min-height:20px!important;padding:2px 6px!important}
-  .inv-item{font-size:10px!important;padding:1px 4px!important}
-  #input-row{padding:6px 8px!important}
-  #cmd{font-size:16px!important;padding:8px 10px!important}
-  #send{font-size:14px!important;padding:8px 14px!important}
-  #prompt{font-size:16px!important;line-height:36px!important}
+  #status-bar{flex-wrap:wrap!important;font-size:12px!important;padding:3px 8px!important;gap:2px 6px!important;line-height:1.4!important}
+  #status-bar span{font-size:12px!important}
+  #output{font-size:16px!important;padding:8px 12px!important;line-height:1.5!important}
+  #inventory-bar{min-height:24px!important;padding:3px 8px!important}
+  .inv-item{font-size:11px!important;padding:2px 6px!important}
+  #input-row{padding:8px 10px!important}
+  #cmd{font-size:16px!important;padding:10px 12px!important}
+  #prompt{font-size:18px!important;line-height:40px!important}
   #side-panel{width:260px!important;right:-280px!important}
 }
-  .celtic{display:none}
   #title-row{min-height:0;padding:0;height:0}
   #header{padding:0;border-bottom-width:0}
   #status-bar{font-size:8px;padding:1px 4px}
@@ -94,7 +92,6 @@ body{background:#0a0806;color:#c8b89a;font-family:'Special Elite','Courier New',
   #inventory-bar{min-height:0;padding:1px 4px}
   #inventory-bar .inv-item{font-size:8px;padding:0 3px}
   #input-row{padding:3px 6px}
-  #cmd{font-size:12px;padding:4px 6px}
   #side-panel{width:240px;right:-260px}
   #prompt{font-size:12px;line-height:28px}
   #send{font-size:11px;padding:4px 8px}
