@@ -587,8 +587,13 @@ def handle_fight(state, target):
 
 def handle_joke(state, args):
     """Tell a joke. Used for the Laughing King puzzle."""
-    if not args:
-        return "Tell a joke to whom? Use: JOKE TO [npc] or just 'joke'"
+    # Auto-target the laughing king if present and no target specified
+    if not args or args == "to":
+        npc = state.get_npc_at_location("king")
+        if npc:
+            args = "a joke"
+        else:
+            return "Tell a joke to whom? Use: JOKE TO [npc] or JOKE [text]"
 
     # Check if laughing king is here
     npc = state.get_npc_at_location("king")
