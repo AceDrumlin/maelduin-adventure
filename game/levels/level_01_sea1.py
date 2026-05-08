@@ -63,6 +63,8 @@ def register(items, npcs):
         items=[items["everlasting_fruit"]],
         npcs=[],
         exits={"east": "sea1", "in": "ants_grove", "grove": "ants_grove"},
+        blocked={"in": ("giant ants block the path — they seem to fear the speaking birds",
+                        lambda s: s.get_item_from_inventory("speaking_feather") is None)},
         ambient=lambda s: (
             "The ants click their mandibles rhythmically, like tiny swords being sharpened. "
             "It sounds almost like a song."
@@ -218,6 +220,16 @@ def register(items, npcs):
         items=[items["glass_shard"]],
         npcs=[],
         exits={"north": "sea1", "cross": "glass_palace", "bridge": "glass_palace"},
+        on_enter=lambda s: (
+            "The glass groans under your weight. You realize halfway across that this bridge "
+            "was not meant for mortal feet. The glass creaks \u2014 a hairline crack spreads.\n\n"
+            "You dive forward and roll onto the far side just as the section behind you shatters "
+            "and falls into the abyss.\n\n"
+            "Your crew makes it across, but one of them is bleeding. "
+            "The glass is sharper than it looks."
+            if not s.has_flag("crossed_bridge") and s.get_item_from_inventory("otter_pelt") is None
+            else None
+        ),
         ambient=lambda s: (
             "The glass bridge shimmers in the light. It's beautiful and absolutely terrifying. "
             "The wind whistles through the chasm below."
@@ -264,10 +276,11 @@ def register(items, npcs):
         ),
         npcs=[npcs["smith"]],
         exits={"southeast": "sea1"},
-        items=[],
+        items=[items["fiery_ash"]],
         ambient=lambda s: (
             "The forge roars. Embers drift like fireflies. The giant hums a tune "
-            "that sounds suspiciously like 'Row, Row, Row Your Boat' but in a minor key."
+            "that sounds suspiciously like 'Row, Row, Row Your Boat' but in a minor key. "
+            "A sign above the forge reads: 'Payment accepted: shiny things only.'"
             if not s.has_flag("got_harpoon") else
             "The forge is quiet now. The giant waves cheerily as you pass. "
             "'Come back if you need anything else! I do good work!'"
@@ -291,7 +304,7 @@ def register(items, npcs):
             "She smiles at you — a smile that promises everything and costs nothing."
         ),
         npcs=[npcs["queen"]],
-        items=[items["truth_ring"]],
+        items=[],
         exits={"northwest": "sea1"},
         ambient=lambda s: (
             "The music swells. A woman laughs somewhere. The food smells incredible. "

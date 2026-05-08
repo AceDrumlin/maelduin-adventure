@@ -64,7 +64,8 @@ def register(items, npcs):
         items=[items["antidote_herb"]],
         npcs=[],
         exits={"south": "sea3", "through": "serpent_island_center"},
-        blocked={"through": ("the serpent blocks your way", lambda s: not s.has_flag("serpent_pacified"))},
+        blocked={"through": ("the serpent blocks your way — it responds to the sound of silver",
+                             lambda s: s.get_item_from_inventory("silver_bell") is None)},
         ambient=lambda s: (
             "The serpent's scales make a soft rustling sound as it shifts, like leaves in a gentle breeze. "
             "It is beautiful and terrifying in equal measure."
@@ -168,7 +169,10 @@ def register(items, npcs):
         ),
         items=[],
         npcs=[npcs["water_horse"]],
-        exits={"north": "sea3"},
+        exits={"north": "sea3", "ride": "water_horse_doom", "mount": "water_horse_doom"},
+        blocked={"ride": ("the kelpie's eyes are hypnotic — you need something to break its spell",
+                          lambda s: s.get_item_from_inventory("truth_ring") is None
+                          and s.get_item_from_inventory("laughing_potion") is None)},
         ambient=lambda s: (
             "The Water Horse stamps a hoof, and the water ripples in perfect, hypnotic circles. "
             "It is singing something in a language that sounds like waves."
@@ -180,7 +184,10 @@ def register(items, npcs):
             'The Water Horse tosses its head. "Come, climb on. '
             'I promise you a ride you\'ll never forget."\n\n'
             "Fergus grabs your arm. 'Don't do it, Captain! "
-            "A kelpie will take you to the bottom of the sea and devour you!'"
+            "A kelpie will take you to the bottom of the sea and devour you!'\n\n"
+            "You have the Truth Ring — you could expose its lies.\n"
+            "Or the Laughing Potion — you could make it too drunk to drown you.\n"
+            "Or you could try to ride it and hope for the best (not recommended)."
             if not s.has_flag("kelpie_tricked") else None
         ),
     )
@@ -205,15 +212,24 @@ def register(items, npcs):
             "The pigs snort, and small fireballs shoot from their nostrils. "
             "They look hungry. Not for food — for something else."
         ),
-        items=[],
+        items=[items["fiery_ash"]],
         npcs=[],
         exits={"southwest": "sea3"},
+        blocked={"southwest": ("the fiery pigs surge around you — the heat is unbearable",
+                                lambda s: not s.has_flag("fiery_pigs_pacified"))},
         ambient=lambda s: (
-            "A pig trots past you, close enough that you feel the heat. "
-            "It sniffs at your shoes, then moves on, disappointed."
+            "The fiery pigs snort and stamp. Their hooves leave scorch marks on the stone. "
+            "They will not let you leave until you give them what they want.\n\n"
+            "The altar inscription says: 'A sacrifice of ash for ash, of fire for fire.'"
             if not s.has_flag("fiery_pigs_pacified") else
             "The pigs have calmed down. They now glow warmly instead of burning hotly. "
             "One of them offers you a smoldering clover."
+        ),
+        on_enter=lambda s: (
+            "The fiery pigs surround you! They are hungry — not for food, but for something else.\n\n"
+            "The altar's inscription echoes in your mind: 'A sacrifice of ash for ash, of fire for fire.'\n\n"
+            "If you have Fiery Ash, you could give it to them."
+            if not s.has_flag("fiery_pigs_pacified") else None
         ),
     )
 
@@ -237,13 +253,29 @@ def register(items, npcs):
         ),
         items=[],
         npcs=[],
-        exits={"southeast": "sea3"},
+        exits={"southeast": "sea3",
+               "red": "castle_red", "blue": "castle_blue",
+               "green": "castle_green", "black": "castle_black"},
+        blocked={"red": ("the Red Door is locked — a keyhole turns restlessly",
+                          lambda s: s.get_item_from_inventory("revolving_key") is None),
+                 "blue": ("the Blue Door is sealed — no keyhole, just a smooth surface", lambda s: True),
+                 "green": ("the Green Door is frozen shut", lambda s: True),
+                 "black": ("the Black Door is a void — you sense nothing but emptiness beyond", lambda s: True)},
         ambient=lambda s: (
             "CREEEEAK... The castle turns. A door aligns with the platform, waits, then passes. "
-            "The next one approaches. Each door seems to whisper a different promise."
+            "The Red Door has a keyhole that seems to match your restless key. "
+            "The others are sealed."
             if not s.has_flag("castle_entered") else
             "The castle has stopped revolving. It sits silently, as if exhausted by the effort. "
             "The doors are all open now, revealing empty rooms."
+        ),
+        on_enter=lambda s: (
+            "The castle grinds to a halt. The Red Door is aligned with the platform. "
+            "Its keyhole glows faintly, waiting.\n\n"
+            "Your Revolving Key vibrates eagerly in your pack.\n\n"
+            "Type RED to enter the Red Door with your key."
+            if s.get_item_from_inventory("revolving_key") and not s.has_flag("castle_entered")
+            else None
         ),
     )
 

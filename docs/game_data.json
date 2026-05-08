@@ -896,7 +896,9 @@
         "in": "ants_grove",
         "grove": "ants_grove"
       },
-      "blocked": {}
+      "blocked": {
+        "in": "giant ants block the path — they seem to fear the speaking birds"
+      }
     },
     "ants_grove": {
       "id": "ants_grove",
@@ -1005,7 +1007,9 @@
       "name": "Island of the Smithy",
       "description": "An island of volcanic rock, dominated by a massive forge that belches fire and smoke.",
       "detailed_desc": "The air shimmers with heat. A mountain of slag and cinder rises from the center of the island, topped by a FORGE the size of a hill.\n\nCLANG. CLANG. CLANG.\n\nEach hammer strike shakes the ground beneath your feet. The vibrations travel up through your legs and rattle your teeth.\n\nA GIANT works the bellows — each breath of the bellows sends a gale across the island. You realize the bellows are what create storms at sea. The giant sneezes, and a bolt of lightning cracks across the sky, followed by a thunderclap that rocks the boat.\n\n\"...Bless you,\" says a crew member quietly.\n\nThe giant hasn't noticed you yet. He's too busy hammering a block of metal that's glowing like a small sun.",
-      "items": [],
+      "items": [
+        "fiery_ash"
+      ],
       "npcs": [
         "smith"
       ],
@@ -1019,9 +1023,7 @@
       "name": "Island of Women",
       "description": "An island of perpetual sunset, where beautiful women feast, dance, and sing endlessly.",
       "detailed_desc": "You step onto an island that seems untouched by time. The sun is always just setting, painting everything in gold and rose. The air is warm and smells of honey and jasmine.\n\nBeautiful women in silken gowns approach, offering trays of roasted meats, fresh bread, and honeyed wine. Music — a harp and a flute — floats on the warm air.\n\nYour crew is already drooling. Diurán is composing poetry. Conganchnes is blushing. Fergus has forgotten how to navigate.\n\nAt the center of the feast, a QUEEN sits on a throne of flowers. She smiles at you — a smile that promises everything and costs nothing.",
-      "items": [
-        "truth_ring"
-      ],
+      "items": [],
       "npcs": [
         "queen"
       ],
@@ -1119,7 +1121,11 @@
       "items": [],
       "npcs": [],
       "exits": {
-        "east": "sea2"
+        "east": "sea2",
+        "gold": "four_fences_gold",
+        "silver": "four_fences_silver",
+        "copper": "four_fences_copper",
+        "crystal": "four_fences_crystal"
       },
       "blocked": {}
     },
@@ -1132,6 +1138,60 @@
       "npcs": [],
       "exits": {
         "southeast": "sea2"
+      },
+      "blocked": {}
+    },
+    "four_fences_gold": {
+      "id": "four_fences_gold",
+      "name": "The Golden Gate — Greed's Reward",
+      "description": "You chose the gold gate. It was a trap.",
+      "detailed_desc": "The moment you step through the golden gate, it SLAMS shut behind you. The golden bars grow thorns. The path ahead dissolves into mist.\n\nFrom the mist, a voice: 'You chose what glitters. Now you must pay.'\n\nA golden spike shoots from the ground. You barely dodge it. Your crew scrambles to escape. In the chaos, one of your items falls into a crevice and is lost forever.\n\nYou barely make it back to the gate, which has reopened. Your crew is shaken. One item is gone. The lesson: greed has a price.",
+      "items": [],
+      "npcs": [],
+      "exits": {
+        "back": "island_four_fences",
+        "east": "island_four_fences"
+      },
+      "blocked": {}
+    },
+    "four_fences_silver": {
+      "id": "four_fences_silver",
+      "name": "The Silver Gate — Elegance Unrewarded",
+      "description": "You chose the silver gate. A dead end.",
+      "detailed_desc": "The silver gate opens onto a path that winds through beautiful gardens. Flowers bloom in impossible colors. Fountains sing. It is lovely.\n\nIt is also a circle. The path leads nowhere — it brings you back to the starting point.\n\nYou have wasted time. The silver gate was beautiful but empty. The real treasure lies elsewhere.",
+      "items": [],
+      "npcs": [],
+      "exits": {
+        "back": "island_four_fences",
+        "east": "island_four_fences"
+      },
+      "blocked": {}
+    },
+    "four_fences_copper": {
+      "id": "four_fences_copper",
+      "name": "The Copper Gate — Humility Rewarded",
+      "description": "You chose the copper gate. The humble path. You chose wisely.",
+      "detailed_desc": "The copper gate swings open with a sound like a contented sigh. The path beyond is simple — packed earth, wildflowers, the smell of rain.\n\nAt the end of the path sits a small stone pedestal. On it rests a BRONZE KEY that turns in place of its own accord, as if it cannot stop moving.\n\nA voice on the wind: 'You chose humility over pride. The key to the turning world is yours.'\n\nThe key is meant for the Revolving Castle. With it, you can choose the right door.",
+      "items": [
+        "revolving_key"
+      ],
+      "npcs": [],
+      "exits": {
+        "back": "island_four_fences",
+        "east": "island_four_fences"
+      },
+      "blocked": {}
+    },
+    "four_fences_crystal": {
+      "id": "four_fences_crystal",
+      "name": "The Crystal Gate — Fragile Beauty",
+      "description": "You chose the crystal gate. It shattered.",
+      "detailed_desc": "The crystal gate is beautiful — delicate, rainbow-shot, perfect.\n\nIt is also as fragile as it looks. The moment you touch it, the entire gate shatters into a million pieces. Shards fly everywhere.\n\nOne of your crew members is cut badly. They will need time to recover. You cannot take them further into danger.\n\nYou lose a crew member. The crystal gate had no answer — only pain.",
+      "items": [],
+      "npcs": [],
+      "exits": {
+        "back": "island_four_fences",
+        "east": "island_four_fences"
       },
       "blocked": {}
     },
@@ -1170,7 +1230,7 @@
         "through": "serpent_island_center"
       },
       "blocked": {
-        "through": "the serpent blocks your way"
+        "through": "the serpent blocks your way — it responds to the sound of silver"
       }
     },
     "serpent_island_center": {
@@ -1225,21 +1285,29 @@
         "water_horse"
       ],
       "exits": {
-        "north": "sea3"
+        "north": "sea3",
+        "ride": "water_horse_doom",
+        "mount": "water_horse_doom"
       },
-      "blocked": {}
+      "blocked": {
+        "ride": "the kelpie's eyes are hypnotic — you need something to break its spell"
+      }
     },
     "island_fiery_pigs": {
       "id": "island_fiery_pigs",
       "name": "Island of the Fiery Pigs",
       "description": "An island covered in blackened grass. Pigs made of living flame trot across the scorched earth.",
       "detailed_desc": "The grass on this island is charred black. Small fires smolder everywhere. And trotting across the landscape are PIGS — but pigs made entirely of flame, their bodies crackling with fire, their eyes burning coals.\n\nWherever they walk, the grass ignites. They seem to be... grazing on the ashes? One of them roots in the sooty earth and pulls out a glowing ember, which it eats with evident pleasure.\n\nAt the center of the island, a stone altar stands untouched by fire. An inscription reads:\n\n'To calm the Fiery Pigs, you must give them what they crave — '\n'not water, not earth, but the memory of what was lost.'\n'A sacrifice of ash for ash, of fire for fire.'\n\nThe pigs snort, and small fireballs shoot from their nostrils. They look hungry. Not for food — for something else.",
-      "items": [],
+      "items": [
+        "fiery_ash"
+      ],
       "npcs": [],
       "exits": {
         "southwest": "sea3"
       },
-      "blocked": {}
+      "blocked": {
+        "southwest": "the fiery pigs surge around you — the heat is unbearable"
+      }
     },
     "island_revolving_castle": {
       "id": "island_revolving_castle",
@@ -1249,9 +1317,18 @@
       "items": [],
       "npcs": [],
       "exits": {
-        "southeast": "sea3"
+        "southeast": "sea3",
+        "red": "castle_red",
+        "blue": "castle_blue",
+        "green": "castle_green",
+        "black": "castle_black"
       },
-      "blocked": {}
+      "blocked": {
+        "red": "the Red Door is locked — a keyhole turns restlessly",
+        "blue": "the Blue Door is sealed — no keyhole, just a smooth surface",
+        "green": "the Green Door is frozen shut",
+        "black": "the Black Door is a void — you sense nothing but emptiness beyond"
+      }
     },
     "island_trumpet": {
       "id": "island_trumpet",

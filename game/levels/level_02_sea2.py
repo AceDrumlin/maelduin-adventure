@@ -149,17 +149,22 @@ def register(items, npcs):
         ),
         items=[],
         npcs=[],
-        exits={"east": "sea2"},
+        exits={"east": "sea2",
+               "gold": "four_fences_gold",
+               "silver": "four_fences_silver",
+               "copper": "four_fences_copper",
+               "crystal": "four_fences_crystal"},
         ambient=lambda s: (
             "The fences hum with different energies. The gold one radiates greed — it makes your teeth ache. "
             "The copper one whispers humility — it smells like bread baking."
             if not s.has_flag("four_fences_solved") else
-            "The copper fence has crumbled to dust. The path to the treasure is open. "
-            "It wasn't gold you needed. It never was."
+            "The copper fence has crumbled to dust. A treasure chest lies open at your feet. "
+            "Inside: a bronze key that turns of its own accord."
         ),
         on_enter=lambda s: (
-            "A faint breeze carries a whisper: 'Not all that glitters is gold. "
-            "Not all that is humble is worthless.'"
+            "A faded sign offers a clue: 'The humble path is the true path. The proud path is the fool's path.'\n\n"
+            "Four gates stand before you. Which do you open?\n"
+            "Type GOLD, SILVER, COPPER, or CRYSTAL to choose."
             if not s.has_flag("four_fences_solved") else None
         ),
     )
@@ -193,5 +198,82 @@ def register(items, npcs):
             "One of them mutters 'cannibal' under its breath."
         ),
     )
+
+
+    # Sub-locations for Four Fences choices
+    l["four_fences_gold"] = Location(
+        "four_fences_gold", "The Golden Gate — Greed's Reward",
+        "You chose the gold gate. It was a trap.",
+        detailed_desc=(
+            "The moment you step through the golden gate, it SLAMS shut behind you. "
+            "The golden bars grow thorns. The path ahead dissolves into mist.\n\n"
+            "From the mist, a voice: 'You chose what glitters. Now you must pay.'\n\n"
+            "A golden spike shoots from the ground. You barely dodge it. "
+            "Your crew scrambles to escape. In the chaos, one of your items falls into a crevice "
+            "and is lost forever.\n\n"
+            "You barely make it back to the gate, which has reopened. "
+            "Your crew is shaken. One item is gone. The lesson: greed has a price."
+        ),
+        items=[], npcs=[], exits={"back": "island_four_fences", "east": "island_four_fences"},
+        on_enter=lambda s: (
+            setattr(s, "awaiting_choice", "fences_gold_penalty") or
+            "The gold fence was a trap! You stumble back, lucky to be alive."
+            if not s.has_flag("gold_fence_tried") else None
+        ),
+    )
+
+    l["four_fences_silver"] = Location(
+        "four_fences_silver", "The Silver Gate — Elegance Unrewarded",
+        "You chose the silver gate. A dead end.",
+        detailed_desc=(
+            "The silver gate opens onto a path that winds through beautiful gardens. "
+            "Flowers bloom in impossible colors. Fountains sing. It is lovely.\n\n"
+            "It is also a circle. The path leads nowhere — it brings you back to the starting point.\n\n"
+            "You have wasted time. The silver gate was beautiful but empty. "
+            "The real treasure lies elsewhere."
+        ),
+        items=[], npcs=[], exits={"back": "island_four_fences", "east": "island_four_fences"},
+    )
+
+    l["four_fences_copper"] = Location(
+        "four_fences_copper", "The Copper Gate — Humility Rewarded",
+        "You chose the copper gate. The humble path. You chose wisely.",
+        detailed_desc=(
+            "The copper gate swings open with a sound like a contented sigh. "
+            "The path beyond is simple — packed earth, wildflowers, the smell of rain.\n\n"
+            "At the end of the path sits a small stone pedestal. On it rests a BRONZE KEY "
+            "that turns in place of its own accord, as if it cannot stop moving.\n\n"
+            "A voice on the wind: 'You chose humility over pride. The key to the turning world is yours.'\n\n"
+            "The key is meant for the Revolving Castle. With it, you can choose the right door."
+        ),
+        items=[items["revolving_key"]], npcs=[], exits={"back": "island_four_fences", "east": "island_four_fences"},
+        on_enter=lambda s: (
+            (s.set_flag("four_fences_solved") or True) and
+            "The copper fence crumbles to dust. The path is clear. "
+            "The key hums in your hand, eager to be used."
+            if not s.has_flag("four_fences_solved") else None
+        ),
+    )
+
+    l["four_fences_crystal"] = Location(
+        "four_fences_crystal", "The Crystal Gate — Fragile Beauty",
+        "You chose the crystal gate. It shattered.",
+        detailed_desc=(
+            "The crystal gate is beautiful — delicate, rainbow-shot, perfect.\n\n"
+            "It is also as fragile as it looks. The moment you touch it, the entire gate "
+            "shatters into a million pieces. Shards fly everywhere.\n\n"
+            "One of your crew members is cut badly. They will need time to recover. "
+            "You cannot take them further into danger.\n\n"
+            "You lose a crew member. The crystal gate had no answer — only pain."
+        ),
+        items=[], npcs=[], exits={"back": "island_four_fences", "east": "island_four_fences"},
+        on_enter=lambda s: (
+            (s.lose_crew("diuran") or True) and
+            "Diurán is wounded by flying crystal! He cannot continue."
+            if not s.has_flag("crystal_tried") else None
+        ),
+    )
+
+
 
     LOCATIONS.update(l)
