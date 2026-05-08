@@ -279,6 +279,86 @@ def register(items, npcs):
         ),
     )
 
+    # ── Revolving Castle interior rooms ──
+    l["castle_red"] = Location(
+        "castle_red", "The Red Door — Heart of the Castle",
+        "A circular chamber of black obsidian. A single shaft of red light illuminates a stone pedestal at the center.",
+        detailed_desc=(
+            "The Red Door swings open with a groan of ancient hinges. You step into a circular chamber "
+            "of polished black obsidian. The walls curve inward overhead, forming a dome. "
+            "A single shaft of red light — from where, you cannot tell — illuminates a STONE PEDESTAL "
+            "at the exact center of the room.\n\n"
+            "On the pedestal rests a SILVER NET, finely woven, shimmering like moonlight on water.\n\n"
+            "The castle shudders around you, as if acknowledging your presence. "
+            "You have entered the heart of the turning world."
+        ),
+        items=[items["silver_net"]],
+        npcs=[],
+        exits={"out": "island_revolving_castle", "back": "island_revolving_castle"},
+        on_enter=lambda s: (
+            s.set_flag("castle_entered") or
+            "The Red Door swings open with a groan of ancient hinges...\n\n"
+            "You step into the heart of the Revolving Castle. The room is circular, "
+            "made of black obsidian polished to a mirror shine. A red shaft of light "
+            "illuminates a pedestal at the center.\n\n"
+            "On the pedestal: a Silver Net. This must be what you came for."
+            if not s.has_flag("castle_entered") else None
+        ),
+    )
+
+    l["castle_blue"] = Location(
+        "castle_blue", "The Blue Door — Chamber of Storms",
+        "A room filled with howling wind and freezing rain. The floor is slick with ice.",
+        detailed_desc=(
+            "The Blue Door opens onto a tempest. Wind howls through the chamber, "
+            "whipping rain into your face. The floor is treacherous with black ice.\n\n"
+            "In the center of the storm, barely visible through the sleet, a pedestal "
+            "holds a single item: a pair of WAX EARPLUGS.\n\n"
+            "The storm is too fierce. You cannot reach it without being frozen solid. "
+            "This door was not meant for you."
+        ),
+        items=[],
+        npcs=[],
+        exits={"out": "island_revolving_castle", "back": "island_revolving_castle"},
+        on_enter=lambda s: (
+            "The Blue Door resists at first, then opens to a howling gale. "
+            "You shield your eyes against the stinging ice. "
+            "There is nothing for you here — the storm would kill you before you reached the center."
+            if not s.has_flag("castle_blue_entered") else None
+        ),
+    )
+
+    l["castle_green"] = Location(
+        "castle_green", "The Green Door — Garden of Stone",
+        "A room that was once a garden. Petrified vines hang from the ceiling like frozen snakes.",
+        detailed_desc=(
+            "The Green Door opens onto what was once a lush garden. Everything — vines, flowers, "
+            "a small fountain — has turned to grey stone. The air is dry and still.\n\n"
+            "In the center of the garden, a stone table holds a SCROLL etched in stone, "
+            "but the text is too weathered to read. Whatever wisdom was here has been lost to time.\n\n"
+            "This door, too, was sealed long ago. The Green path holds nothing for you now."
+        ),
+        items=[],
+        npcs=[],
+        exits={"out": "island_revolving_castle", "back": "island_revolving_castle"},
+    )
+
+    l["castle_black"] = Location(
+        "castle_black", "The Black Door — The Void",
+        "Absolute darkness. The floor may or may not exist. You cannot tell.",
+        detailed_desc=(
+            "You open the Black Door and step into — nothing.\n\n"
+            "There is no light. No sound. No sensation of floor beneath your feet, "
+            "yet you do not fall. You simply... exist, in a space that has no dimensions.\n\n"
+            "A voice — perhaps your own thoughts — whispers: 'You were not meant to enter here. "
+            "The Black Door is the end of all journeys, not the middle. Go back.'\n\n"
+            "You step backward and find yourself outside again, shaken."
+        ),
+        items=[],
+        npcs=[],
+        exits={"out": "island_revolving_castle", "back": "island_revolving_castle"},
+    )
+
     # ═══════════════════════════════════════════
     # ISLAND OF THE GIANT TRUMPET
     # ═══════════════════════════════════════════
