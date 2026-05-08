@@ -87,7 +87,7 @@ def _make_items():
 
     i["pearl"] = Item(
         "pearl", "Sea Pearl",
-        "A shimmering pearl from the Island of Sea-Birds. It glows with a soft inner light.",
+        "A shimmering pearl from the Island of the Cat. It glows with a soft inner light.",
         examine_text="A flawless pearl, the size of your thumb, pulsing with a gentle luminescence. It seems to contain the light of a full moon.",
         aliases=["pearl", "sea pearl"],
     )
@@ -127,6 +127,66 @@ def _make_items():
         aliases=["ring", "truth ring", "silver ring"],
     )
 
+    # ---- NEW ITEMS for the extra islands ----
+
+    i["earplugs"] = Item(
+        "earplugs", "Wax Earplugs",
+        "A pair of earplugs made from beeswax. Perfect for blocking out loud noises.",
+        examine_text="Two small, pliable balls of beeswax, carefully shaped to fit in your ears. They smell faintly of honey.",
+        aliases=["earplugs", "wax plugs", "beeswax", "wax earplugs"],
+    )
+
+    i["wisdom_salmon"] = Item(
+        "wisdom_salmon", "Wisdom Salmon",
+        "A salmon from the Stream of Wisdom. Eating it will grant you incredible knowledge.",
+        examine_text="A silver-scaled salmon with eyes that seem to hold the secrets of the universe. It glows faintly with inner light.",
+        aliases=["salmon", "fish", "wisdom fish"],
+        takeable=True,
+        use_text="You take a bite of the Wisdom Salmon. Instantly, your mind floods with understanding. You see the patterns in the waves, the names of all the stars, and why the druid smiled cryptically. For a moment, you understand everything. Then you take another bite because it tastes really good.",
+    )
+
+    i["silver_net"] = Item(
+        "silver_net", "Silver Net",
+        "A finely woven net of silver thread. It shimmers like moonlight on water.",
+        examine_text="A delicate net made of interwoven silver strands. It's surprisingly strong for its weight. Perfect for catching something... fishy?",
+        aliases=["net", "silver net", "silver fishnet"],
+    )
+
+    i["demon_coin"] = Item(
+        "demon_coin", "Demon's Coin",
+        "A coin of black iron from the Demon's Forge, still warm to the touch. It bears the face of a laughing devil.",
+        examine_text="A heavy coin of scorched iron. One side shows a leering demon face. The other side is blank, as if waiting to be stamped with your own face. Egotistical currency.",
+        aliases=["coin", "demon coin", "iron coin", "black coin"],
+    )
+
+    i["crystal_pillar_fish"] = Item(
+        "crystal_pillar_fish", "Golden Fish",
+        "A fish made of pure gold, caught in a silver net at the base of the Golden Pillar.",
+        examine_text="A perfect, life-sized fish crafted from solid gold. Every scale is individually rendered. It's worth a king's ransom. It's also very, very heavy.",
+        aliases=["gold fish", "golden fish", "fish"],
+    )
+
+    i["trumpet_muffler"] = Item(
+        "trumpet_muffler", "Trumpet Muffler",
+        "A strange cloth stuffed into the giant trumpet's bell. It seems to be made of soundproofed otter fur.",
+        examine_text="A thick, heavy cloth made of layered otter pelts and waxed linen. Whoever put this here knew exactly what they were doing.",
+        aliases=["muffler", "cloth", "otter cloth"],
+    )
+
+    i["revolving_key"] = Item(
+        "revolving_key", "Revolving Key",
+        "A bronze key that turns in your hand of its own accord, as if it cannot stop moving.",
+        examine_text="A large bronze key that rotates slowly in your palm. When you hold it still, it vibrates insistently. It wants to be turned.",
+        aliases=["key", "bronze key", "revolving key"],
+    )
+
+    i["fiery_ash"] = Item(
+        "fiery_ash", "Fiery Ash",
+        "A handful of ash from the burning grass of the Island of Fiery Pigs. It still smolders warmly.",
+        examine_text="Grey ash with tiny red embers glowing within. It's warm but not hot enough to burn. It smells like a campfire and roasted acorns.",
+        aliases=["ash", "fiery ash", "embers"],
+    )
+
     items.update(i)
 
 _make_items()
@@ -147,31 +207,31 @@ def _make_npcs():
         dialogue={
             "greeting": (
                 "The druid strokes his long beard and speaks in a voice like rustling leaves:\n\n"
-                '"Ah, Mael Duin. I have been expecting you. You have learned of your father\'s murder, '
-                'and vengeance burns in your heart. But be warned — the path of revenge is a twisted one, '
+                "\"Ah, Mael Duin. I have been expecting you. You have learned of your father's murder, "
+                "and vengeance burns in your heart. But be warned — the path of revenge is a twisted one, "
                 "and the sea holds many mysteries.\n\n"
-                'Take this Magic Thread. Tie it to your mast, and it will guide you through the mists. '
-                'Take exactly three times nine men — no more, no less — and set sail to the west.\n\n'
-                'When you find what you seek... you may find it is not what you expected."\n\n'
-                'He presses a shimmering thread into your hand.'
+                "Take this Magic Thread. Tie it to your mast, and it will guide you through the mists. "
+                "Take exactly three times nine men — no more, no less — and set sail to the west.\n\n"
+                "When you find what you seek... you may find it is not what you expected.\"\n\n"
+                "He presses a shimmering thread into your hand."
             ),
             "murder": (
-                '"Your father, Ailill Ochair Ága. Slain by raiders from the Northern Isles. '
+                "\"Your father, Ailill Ochair Ága. Slain by raiders from the Northern Isles. "
                 "They came in the night, burned your village, and left his body on the strand. "
                 "Your foster mother found him at dawn, the tide washing his feet.\""
             ),
             "father": (
-                '"Ailill was a great warrior. His name meant \"noble wolf\" and he earned it. '
+                "\"Ailill was a great warrior. His name meant 'noble wolf' and he earned it. "
                 "He fell with his sword in his hand and his enemies' blood on his blade. "
-                "The manner of his death was not shameful — it is revenge that may be."
+                "The manner of his death was not shameful — it is revenge that may be.\""
             ),
             "vengeance": (
-                '"Vengeance is like drinking poison and expecting the other man to die. '
+                "\"Vengeance is like drinking poison and expecting the other man to die. "
                 "But I see you will not be swayed by philosophy. Very well — go, seek your revenge. "
-                'The sea will teach you what I cannot."'
+                "The sea will teach you what I cannot.\""
             ),
             "sea": (
-                '"The sea is a living thing, Mael Duin. It has moods, memories, and a sense of humor. '
+                "\"The sea is a living thing, Mael Duin. It has moods, memories, and a sense of humor. "
                 "Respect it, and it may let you live. Mock it, and it will show you depths you never wished to see.\""
             ),
         }
@@ -183,23 +243,23 @@ def _make_npcs():
         dialogue={
             "greeting": (
                 "The enormous cat blinks slowly, then speaks in a voice like gravel rolling downhill:\n\n"
-                '"You are in my house. Few humans visit. Fewer still leave without giving me something I want. '
+                "\"You are in my house. Few humans visit. Fewer still leave without giving me something I want. "
                 "I smell... milk. Do you have milk for me?\"\n\n"
                 "The cat's tail twitches expectantly."
             ),
             "milk": (
-                '"Milk. Yes. I like milk. Do you have milk?"'
+                "\"Milk. Yes. I like milk. Do you have milk?\""
             ),
             "riddle": (
-                '"Very well, a riddle. Answer and you may pass:\n\n'
-                '"I speak without a mouth and hear without ears. I have no body, but I come alive with the wind. What am I?"\n\n'
+                "\"Very well, a riddle. Answer and you may pass:\n\n"
+                "\"I speak without a mouth and hear without ears. I have no body, but I come alive with the wind. What am I?\"\n\n"
                 "The cat's whiskers twitch."
             ),
             "answer": (
-                '"An echo! Correct. You are smarter than you look, for a human. You may pass."'
+                "\"An echo! Correct. You are smarter than you look, for a human. You may pass.\""
             ),
             "wrong": (
-                '"Wrong. The correct answer is \"echo.\" I am disappointed in you. Try again or bring me milk."'
+                "\"Wrong. The correct answer is 'echo.' I am disappointed in you. Try again or bring me milk.\""
             ),
             "on_take": {
                 "talking_cat_tribute": lambda state, item: (
@@ -382,7 +442,7 @@ def _make_npcs():
                 'The sky is cold and grey,\n'
                 'We\'ve left our homes on Irish ground,\n'
                 "And no one knows the way.\"\n\n"
-                "It's a work in progress."
+                "It's a work in progress.\""
             ),
         }
     )
@@ -417,6 +477,95 @@ def _make_npcs():
         }
     )
 
+    # ---- NEW NPCs ----
+
+    n["skull"] = NPC(
+        "skull", "The Talking Skull", "A human skull impaled on a thornbush. Its jaw clatters as it speaks, and its empty eye sockets somehow convey a look of profound boredom.",
+        aliases=["skull", "talking skull", "skull", "head", "jaw"],
+        dialogue={
+            "greeting": (
+                'The skull clacks its teeth together before speaking:\n\n'
+                '"Well, well, well. A visitor! Do you have any idea how long I\'ve been sitting here? '
+                "Decades! Centuries! And let me tell you, the view doesn't improve. "
+                "Just bushes. Bushes and more bushes.\"\n\n"
+                "The skull's jaw hangs open in what might be a sigh."
+            ),
+            "bush": (
+                '"Thornbush. Singular. There\'s only the one. It\'s spiritual, apparently. '
+                "I think it's just a bush that got lucky.\""
+            ),
+            "story": (
+                '"How I ended up here? That\'s a long story involving a shipwreck, a bad decision, '
+                "and a seagull with a grudge. The short version: don't trust seagulls.\""
+            ),
+            "advice": (
+                '"My advice? Get off this island. There\'s nothing here but me and this bush, '
+                "and I'm not much for conversation after the first century.\""
+            ),
+            "death": (
+                '"Death? I\'ve been dead so long I\'m thinking of applying for a second career. '
+                "The afterlife is mostly waiting, interspersed with brief moments of existential dread.\""
+            ),
+        }
+    )
+
+    n["water_horse"] = NPC(
+        "water_horse", "The Water Horse", "A magnificent white horse standing on the water's surface as if it were solid ground. Its mane flows like seaweed, and its eyes are deep, dark pools that seem to have no bottom.",
+        aliases=["horse", "water horse", "kelpie", "white horse", "sea horse"],
+        dialogue={
+            "greeting": (
+                "The Water Horse tosses its mane and speaks in a voice like waves on a shingle beach:\n\n"
+                "\"Well met, traveler! I am the Water Horse of the Western Sea. "
+                "I can carry you across the ocean faster than any curragh. "
+                "I can take you anywhere you wish to go.\"\n\n"
+                "It stamps a hoof, and the water ripples outward in perfect circles.\n\n"
+                "\"Climb on. I promise you a ride you'll never forget.\""
+            ),
+            "ride": (
+                "\"Climb on my back. I'll take you across the sea. "
+                "I won't even drown you. Much.\""
+            ),
+            "trick": (
+                "The horse snorts. \"Trick? Me? I'm a horse of my word. Mostly.\""
+            ),
+            "forgiveness": (
+                "\"Forgiveness? I know nothing of that. I am a creature of the moment. "
+                "The past is like water under the bridge — gone, forgotten, and probably damp.\""
+            ),
+        }
+    )
+
+    n["demon_smith"] = NPC(
+        "demon_smith", "The Demon Smith", "A hulking figure of fire and shadow, working a forge that burns with black flames. His skin is cracked like cooling lava, and his eyes glow like embers.",
+        aliases=["demon", "smith", "demon smith", "black smith", "fire demon"],
+        dialogue={
+            "greeting": (
+                'The Demon Smith looks up from his forge. The heat is intense.\n\n'
+                '\"A mortal. How... bold. Most sailors see the smoke and turn back. \"\n'
+                "But you came closer. Either you have great courage or a poor sense of self-preservation. "
+                "I respect both.\"\n\n"
+                "He gestures to a pile of iron coins on a stone table.\n\n"
+                '"I forge coins here. Coins of power. Coins of pain. Coins that buy things no mortal merchant can offer. '
+                "Would you like to make a trade?\""
+            ),
+            "trade": (
+                '"I trade in souls, memories, and shiny objects. What do you have to offer?"'
+            ),
+            "coins": (
+                '"These coins are forged from the tears of bankers and the screams of auditors. '
+                "They spend anywhere — including places where money has no meaning.\""
+            ),
+            "fire": (
+                '"The fire? That\'s not ordinary fire. That\'s the first fire — the spark Prometheus stole. "\n'
+                "I bought it from him. He was short on rent that month.\""
+            ),
+            "soul": (
+                '"Your soul? Please. I have a warehouse full of souls. They\'re the most overrated currency in the universe. "\n'
+                "Give me something interesting instead.\""
+            ),
+        }
+    )
+
     npcs.update(n)
 
 _make_npcs()
@@ -425,6 +574,14 @@ _make_npcs()
 # ============================================================
 # LOCATIONS
 # ============================================================
+
+# Helper for unique items check in inventory
+def _has_item(state, item_id):
+    return any(i.id == item_id for i in state.inventory)
+
+def _has_flag(state, flag):
+    return state.has_flag(flag)
+
 
 def _make_locations():
     l = {}
@@ -447,7 +604,7 @@ def _make_locations():
         exits={"west": "sea1", "beach": "sea1", "sea": "sea1"},
     )
 
-    # ---- ACT 2: THE SEA ----
+    # ---- ACT 2: THE SEA - First waters ----
     l["sea1"] = Location(
         "sea1", "The Open Sea",
         "Your curragh rises and falls on the grey Atlantic. The coast of Ireland is a fading line behind you.",
@@ -459,7 +616,13 @@ def _make_locations():
             "Ahead, the sea stretches endlessly. Diurán the poet is already writing about "
             "the experience. Conganchnes the invulnerable stands at the prow, scanning for enemies."
         ),
-        exits={"west": "island_ants", "north": "island_birds", "northeast": "island_cat", "east": "island_laughing", "south": "glass_bridge"},
+        exits={
+            "west": "island_ants", "north": "island_birds",
+            "northeast": "island_cat", "east": "island_laughing",
+            "south": "glass_bridge", "northwest": "island_smithy",
+            "southeast": "island_women", "southwest": "sea_monsters",
+            "deeper": "sea2", "far": "sea2",
+        },
         ambient=lambda s: "The waves slap against the curragh's hide. A seabird cries overhead." if s.turns % 2 == 0 else "A cold mist rolls across the water. Somewhere, a bell buoys tolls."
     )
 
@@ -586,7 +749,6 @@ def _make_locations():
         items=[items["glass_shard"]],
         npcs=[],
         exits={"east": "sea1", "cross": "glass_palace", "bridge": "glass_palace"},
-        blocked={"cross": ("a sheer drop" if False else None, lambda s: not s.has_flag("crossed_bridge"))},
         ambient=lambda s: "The glass bridge shimmers in the light. It's beautiful and absolutely terrifying."
     )
 
@@ -657,7 +819,7 @@ def _make_locations():
         ),
         npcs=[npcs["hermit"]],
         items=[items["otter_pelt"]],
-        exits={"east": "sea1"},
+        exits={"west": "sea2"},
         on_enter=lambda s: (
             "The hermit's blessing washes over you as you step onto the rock. "
             "For a moment, the weight of your quest lifts from your shoulders." if not s.has_flag("met_hermit") else None
@@ -677,7 +839,7 @@ def _make_locations():
         ),
         items=[items["silver_bell"]],
         npcs=[],
-        exits={"east": "sea1"},
+        exits={"south": "sea2"},
         ambient=lambda s: "The self-ringing bell tolls softly. A monk chants in Latin. It is... peaceful." if not s.has_flag("took_bell") else "Without the bell, the island feels incomplete. The monks seem quieter now.",
     )
 
@@ -693,7 +855,7 @@ def _make_locations():
         ),
         npcs=[npcs["prophet_boy"]],
         items=[items["prophecy_scroll"]],
-        exits={"east": "sea1", "up": "prophecy_tower", "enter": "prophecy_tower"},
+        exits={"north": "sea2", "up": "prophecy_tower", "enter": "prophecy_tower"},
     )
 
     # ---- ISLAND 11: SEA MONSTERS ----
@@ -733,7 +895,7 @@ def _make_locations():
         items=[items["golden_apple"]],
         npcs=[],
         exits={"east": "sea1"},
-        ambient=lambda s: f"The pig snores. Each snore sounds like a small earthquake." if not s.has_flag("apple_taken") else "The pig glares at you balefully. It remembers.",
+        ambient=lambda s: "The pig snores. Each snore sounds like a small earthquake." if not s.has_flag("apple_taken") else "The pig glares at you balefully. It remembers.",
     )
 
     # ---- ISLAND 13: THE SPEAKING SKULL ----
@@ -749,12 +911,9 @@ def _make_locations():
             "Just bushes. Bushes and more bushes.\"\n\n"
             "The skull's empty eye sockets seem to fix you with an expectant stare."
         ),
-        npcs=[],
+        npcs=[npcs["skull"]],
         items=[],
         exits={"east": "sea1"},
-        on_enter=lambda s: (
-            f'"{s.get_location().name if s.get_location() else "..."}"' if not s.has_flag("met_skull") else None
-        ),
         ambient=lambda s: "The bush rustles, though there's no wind. The skull mutters something about the younger generation."
     )
 
@@ -792,6 +951,238 @@ def _make_locations():
         exits={"out": "serpent_island"},
     )
 
+    # ================================================================
+    # NEW ISLANDS FOR SEA2 AND SEA3
+    # ================================================================
+
+    # ---- SEA2: Deeper Waters ----
+    l["sea2"] = Location(
+        "sea2", "The Deeper Sea",
+        "The water has changed color — a deep, midnight blue. Strange lights flicker beneath the surface.",
+        detailed_desc=(
+            "You have sailed beyond the familiar waters into the deeper sea. "
+            "The coastline of Ireland is long gone. The sky is a different shade of grey here — "
+            "somehow older, more ancient.\n\n"
+            "The druid's Magic Thread pulls steadily westward. The wind has a different voice — "
+            "it whispers names you don't recognize.\n\n"
+            "Fergus squints at the horizon. 'We're in uncharted waters now, Captain. "
+            "The stars are different here. They have... stranger names.'"
+        ),
+        exits={
+            "north": "island_culdees", "south": "prophecy_tower",
+            "east": "hermit_rock", "west": "island_four_fences",
+            "northwest": "island_salmon", "deeper": "sea3",
+            "far": "sea3", "back": "sea1",
+        },
+        ambient=lambda s: (
+            "Bioluminescent creatures drift past the boat, trailing sparks of cold fire. "
+            "The water glows where your oars dip in." if s.turns % 3 == 0 else
+            "A deep, resonant sound echoes from below — like a whale singing, but older. "
+            "Much older."
+        ),
+    )
+
+    # ---- SEA3: The Final Stretch ----
+    l["sea3"] = Location(
+        "sea3", "The Final Sea",
+        "The water is black as ink. The sky swirls with colors you've never seen. The end is near.",
+        detailed_desc=(
+            "This is the edge of the known world. The sea here is dark and still — "
+            "no fish, no birds, no wind. Just your breath and the creak of the curragh.\n\n"
+            "The Magic Thread glows brightly, pulling with purpose. You feel that your journey "
+            "is almost at an end.\n\n"
+            "Diurán has stopped writing. He stares at the horizon, pale. "
+            "'Captain... I think we're close. I can feel it in my bones.'\n\n"
+            "Islands dot the darkness like scattered jewels. One of them must be the home of your father's killers."
+        ),
+        exits={
+            "north": "serpent_island", "east": "black_pig",
+            "west": "speaking_skull", "south": "island_water_horse",
+            "northeast": "island_fiery_pigs", "northwest": "island_revolving_castle",
+            "southeast": "island_trumpet", "southwest": "island_demons",
+            "southwest2": "island_golden_pillar",
+            "west_north": "island_golden_pillar",
+            "home": "homecoming",
+        },
+        ambient=lambda s: "The silence is oppressive. Even the water refuses to make noise." if s.turns % 2 == 0 else "A single light glimmers on the horizon, then vanishes. Was it a star? A ship? A warning?",
+    )
+
+    # ---- NEW ISLAND 1: FOUR FENCES ----
+    l["island_four_fences"] = Location(
+        "island_four_fences", "Island of the Four Fences",
+        "An island divided by four fences — gold, silver, copper, and crystal. You must choose the right one.",
+        detailed_desc=(
+            "A flat, grey island stretches before you. It is divided into four sections by four different fences.\n\n"
+            "The first fence is made of GOLD — gleaming, magnificent, clearly the most valuable. A gate stands open.\n\n"
+            "The second fence is made of SILVER — elegant, understated, with a latch that lifts easily.\n\n"
+            "The third fence is made of COPPER — humble, practical, with a simple rope holding the gate shut.\n\n"
+            "The fourth fence is made of CRYSTAL — delicate, beautiful, but it looks like it would shatter at a touch.\n\n"
+            "A faded sign reads: 'Beyond one fence lies a great treasure. Beyond the others, only regret. Choose wisely.'\n\n"
+            "In the center of the island, just visible beyond all four fences, a treasure chest gleams."
+        ),
+        items=[],
+        npcs=[],
+        exits={"east": "sea2"},
+        ambient=lambda s: "The fences seem to hum with different energies. The gold one radiates greed. The copper one whispers humility." if not s.has_flag("four_fences_solved") else "The copper fence has crumbled to dust. The path to the treasure is open.",
+        on_enter=lambda s: (
+            "A faint breeze carries a whisper: 'Not all that glitters is gold. Not all that is humble is worthless.'"
+        ),
+    )
+
+    # ---- NEW ISLAND 2: SALMON STREAM ----
+    l["island_salmon"] = Location(
+        "island_salmon", "Island of the Wisdom Salmon",
+        "An island with a single stream running through it, filled with silver salmon that leap against the current.",
+        detailed_desc=(
+            "A small, green island with a crystal-clear stream running from a spring in the center to the sea.\n\n"
+            "The stream is FULL of salmon — fat, silver, magnificent fish that leap against the current "
+            "with incredible determination.\n\n"
+            "But these are no ordinary salmon. When you look into their eyes, you see... understanding. "
+            "These are the Salmon of Wisdom, who ate the nine hazelnuts of knowledge.\n\n"
+            "A small sign on the bank reads: 'He who eats of the Salmon of Wisdom gains the knowledge of all things. "
+            "But catching one requires cunning, for they are wiser than any fish has a right to be.'\n\n"
+            "The salmon look at you smugly. They know you don't have a fishing rod."
+        ),
+        items=[],
+        npcs=[],
+        exits={"southeast": "sea2"},
+        ambient=lambda s: "A salmon leaps clear of the water, hangs in the air for a moment, and grins at you before splashing back down." if not s.has_flag("caught_salmon") else "The remaining salmon eye you warily. They've heard about what happened to their cousin.",
+    )
+
+    # ---- NEW ISLAND 3: WATER HORSE (KELPIE) ----
+    l["island_water_horse"] = Location(
+        "island_water_horse", "Island of the Water Horse",
+        "A small, grassy island where a magnificent white horse stands on the water's surface as if it were solid ground.",
+        detailed_desc=(
+            "The island is little more than a grassy knoll emerging from the dark sea. "
+            "But standing on the WATER beside it — not in it, ON it — is a magnificent WHITE HORSE.\n\n"
+            "Its mane flows like seaweed. Its hooves rest on the surface of the sea as if on marble. "
+            "It looks at you with eyes that are deep, dark pools.\n\n"
+            '"Welcome, traveler," it says. "I can carry you across the ocean faster than any ship. '
+            'I can take you anywhere you wish to go. Just climb on my back."\n\n'
+            "Your crew shifts uneasily. Fergus whispers: 'Captain, I don't think that's a horse. "
+            "I think that's a kelpie.'\n\n"
+            "The horse smiles. It has too many teeth."
+        ),
+        items=[],
+        npcs=[npcs["water_horse"]],
+        exits={"north": "sea3"},
+        ambient=lambda s: "The Water Horse stamps a hoof, and the water ripples in perfect, hypnotic circles." if not s.has_flag("kelpie_tricked") else "The Water Horse glares at you from a distance. It does not appreciate being outsmarted.",
+        on_enter=lambda s: (
+            'The Water Horse tosses its head. "Come, climb on. I promise you a ride you\'ll never forget."\n\n'
+            "Fergus grabs your arm. 'Don't do it, Captain! A kelpie will take you to the bottom of the sea and devour you!'"
+        ) if not s.has_flag("kelpie_tricked") else None,
+    )
+
+    # ---- NEW ISLAND 4: FIERY PIGS ----
+    l["island_fiery_pigs"] = Location(
+        "island_fiery_pigs", "Island of the Fiery Pigs",
+        "An island covered in blackened grass. Pigs made of living flame trot across the scorched earth.",
+        detailed_desc=(
+            "The grass on this island is charred black. Small fires smolder everywhere. "
+            "And trotting across the landscape are PIGS — but pigs made entirely of flame, "
+            "their bodies crackling with fire, their eyes burning coals.\n\n"
+            "Wherever they walk, the grass ignites. They seem to be... grazing on the ashes?\n\n"
+            "At the center of the island, a stone altar stands untouched by fire. "
+            "An inscription reads:\n\n"
+            "'To calm the Fiery Pigs, you must give them what they crave — '\n"
+            "'not water, not earth, but the memory of what was lost. '\n"
+            "'A sacrifice of ash for ash, of fire for fire.'\n\n"
+            "The pigs snort, and small fireballs shoot from their nostrils.\n"
+        ),
+        items=[],
+        npcs=[],
+        exits={"southwest": "sea3"},
+        ambient=lambda s: "A pig trots past you, close enough that you feel the heat. It sniffs at your shoes, then moves on, disappointed." if not s.has_flag("fiery_pigs_pacified") else "The pigs have calmed down. They now glow warmly instead of burning hotly.",
+    )
+
+    # ---- NEW ISLAND 5: REVOLVING CASTLE ----
+    l["island_revolving_castle"] = Location(
+        "island_revolving_castle", "Island of the Revolving Castle",
+        "A castle made of black stone that slowly rotates on a central axis. Its doors spin past at regular intervals.",
+        detailed_desc=(
+            "A strange castle dominates this island — a fortress of black obsidian that turns slowly, "
+            "ceaselessly, like a great stone top.\n\n"
+            "It has four doors — each one a different color: Red, Blue, Green, and Black. "
+            "As the castle revolves, each door passes a stone platform at the base, "
+            "staying aligned for only a few heartbeats before continuing its rotation.\n\n"
+            "The doors are locked. Or rather... each door has a keyhole, but the key must match the moment.\n\n"
+            "A stone plaque reads: 'Enter at the turning of the world. The right door at the right time. "
+            "Choose poorly, and the castle will never let you go.'\n\n"
+            "The castle GRINDS as it turns. It sounds almost alive."
+        ),
+        items=[],
+        npcs=[],
+        exits={"southeast": "sea3"},
+        ambient=lambda s: "CREEEEAK... The castle turns. A door aligns with the platform, waits, then passes. The next one approaches." if not s.has_flag("castle_entered") else "The castle has stopped revolving. It sits silently, as if exhausted by the effort.",
+    )
+
+    # ---- NEW ISLAND 6: THE TRUMPET ISLAND ----
+    l["island_trumpet"] = Location(
+        "island_trumpet", "Island of the Giant Trumpet",
+        "A barren island with a single giant brass trumpet mounted on a cliff, pointing out to sea.",
+        detailed_desc=(
+            "This island is a bare rock with a single feature: an enormous BRASS TRUMPET, "
+            "as large as a ship, mounted on a stone pedestal at the edge of a cliff.\n\n"
+            "The trumpet points out to sea. A mechanism of gears and levers connects to "
+            "a set of giant leather bellows behind it.\n\n"
+            "A chilling inscription is carved into the pedestal:\n\n"
+            "'One blast of this trumpet will shatter any ship within a league. "
+            "The sound is the voice of the sea god's anger. "
+            "Do not sound it unless you wish to drown all who hear.'\n\n"
+            "But you notice something: there is a small CLOTH stuffed into the trumpet's bell. "
+            "Someone else was here before you, and they tried to muffle it."
+        ),
+        items=[items["earplugs"], items["trumpet_muffler"]],
+        npcs=[],
+        exits={"northwest": "sea3"},
+        ambient=lambda s: "The trumpet gleams dully in the grey light. Wind whistles across its mouth, producing a low, mournful hum." if not s.has_flag("trumpet_muffled") else "The trumpet sits silent and harmless, its mouth stuffed with cloth.",
+    )
+
+    # ---- NEW ISLAND 7: ISLAND OF DEMONS ----
+    l["island_demons"] = Location(
+        "island_demons", "Island of the Demon Smith",
+        "An island wreathed in black smoke. The ground is hot to the touch. A forge burns in the center with flames that are blacker than night.",
+        detailed_desc=(
+            "The air is thick with smoke and the smell of brimstone. The ground is black glass — "
+            "melted and cooled volcanic rock.\n\n"
+            "At the center of the island, a massive FORGE burns with BLACK FLAMES — "
+            "fire that is darker than the smoke around it.\n\n"
+            "A DEMON works the forge — a figure of cracked stone and living ember, "
+            "his eyes like cooling coals. He hammers a piece of black iron into a coin.\n\n"
+            "CLANG. Each strike sends out a wave of heat that warps the air.\n\n"
+            "The demon looks up. 'Ah. A customer. Come to trade?'\n\n"
+            "Coins of black iron are piled on a table nearby."
+        ),
+        items=[items["demon_coin"]],
+        npcs=[npcs["demon_smith"]],
+        exits={"northeast": "sea3"},
+        ambient=lambda s: "The black flames hiss and pop. Each bubble of molten metal sounds like a whispered secret." if not s.has_flag("met_demon") else "The forge still burns, but the demon nods politely as you pass.",
+    )
+
+    # ---- NEW ISLAND 8: GOLDEN PILLAR ----
+    l["island_golden_pillar"] = Location(
+        "island_golden_pillar", "Island of the Golden Pillar",
+        "A pillar of solid gold rises from the sea, impossibly tall. A silver fishnet hangs from its apex.",
+        detailed_desc=(
+            "A PILLAR of solid gold rises from the sea — so tall that its top disappears into the clouds. "
+            "It is wider than a house, and polished to a mirror shine.\n\n"
+            "Carved into its surface are images of fish, ships, and sea creatures — "
+            "the history of the Atlantic, written in gold.\n\n"
+            "Near the top — just visible at the cloud line — a SILVER NET hangs from a hook. "
+            "Something gleams inside it.\n\n"
+            "At the base of the pillar, a tidepool contains a single, perfectly round opening — "
+            "a keyhole? Or something else?\n\n"
+            "An inscription at the base reads:\n\n"
+            "'He who would climb to heaven's gate must first see what the silver net makes great. "
+            "The golden pillar holds the sky. The silver net holds the answer. Catch what glitters, but know its weight.'"
+        ),
+        items=[],
+        npcs=[],
+        exits={"northeast": "sea3", "east": "sea3"},
+        ambient=lambda s: "The golden pillar gleams, reflecting the grey sea and sky. Standing beside it, you feel very small and very mortal." if not s.has_flag("got_golden_fish") else "The golden pillar still gleams, but the silver net hangs empty now.",
+    )
+
     # ---- FINAL ISLAND: HOME AGAIN ----
     l["homecoming"] = Location(
         "homecoming", "The Coast of Ireland — Home at Last",
@@ -806,37 +1197,66 @@ def _make_locations():
             "They are old now. The firelight shows grey in their beards.\n\n"
             "One of them speaks: \"We knew you would come, son of Ailill. We have been waiting.\"\n\n"
             "The prophecy rings in your ears: vengeance is a cup that empties the drinker.\n\n"
-            "What do you do?"
+            "What do you do?\n\n"
+            "Type YES to forgive them. Type NO to take your vengeance."
         ),
         npcs=[],
         items=[],
         exits={},
         on_enter=lambda s: (
             "The wind carries the smell of home. Your crew stands behind you, weapons drawn.\n\n"
-            "This is the moment your voyage was meant to end. But how?" if not s.has_flag("confronted") else None
+            "This is the moment your voyage was meant to end. But how?"
+            if not s.has_flag("confronted") else None
         ),
     )
 
-    # Register all
-    l.update({
-        "ants_grove": l["ants_grove"],
-        "birds_nest": l["birds_nest"],
-        "glass_palace": l["glass_palace"],
-        "prophecy_tower": l["prophecy_tower"],
-        "serpent_island": l["serpent_island"],
-        "serpent_island_center": l["serpent_island_center"],
-        "homecoming": l["homecoming"],
-    })
-
+    # Register all locations
     LOCATIONS.update(l)
+
 
 _make_locations()
 
 
 # ============================================================
-# SPECIAL EVENT HANDLERS (registered in engine.py)
+# PUZZLE HANDLERS — called from Location lambdas and engine hooks
 # ============================================================
 
 def setup_special_events():
-    """Configure special interactions that need custom logic."""
+    """Configure special interactions that need custom logic.
+
+    These handlers hook into the engine's give/use/fight/sing/joke system.
+    They are registered in engine.py and called from there.
+    """
     pass
+
+
+# ---- PUZZLE: Four Fences ----
+# The copper fence is the correct choice. Gold = greed, Silver = pride,
+# Crystal = fragility, Copper = humility.
+# Player types GO COPPER or GO THROUGH COPPER or GO GATE etc.
+# We handle this via an on_enter that sets awaiting_choice.
+
+# ---- PUZZLE: Wisdom Salmon ----
+# Player needs to catch the salmon. USE NET (from Golden Pillar)
+# or USE SPEAKING FEATHER (to distract), or USE SILVER BELL (to hypnotize).
+
+# ---- PUZZLE: Water Horse ----
+# Player must not ride the kelpie. Instead, GIVE something or
+# USE CROSS to bless it, or just leave.
+
+# ---- PUZZLE: Fiery Pigs ----
+# Player must GIVE ASH to the pigs (from the trumpet muffler cloth
+# being burned, or from the demon's forge). Or USE WATER.
+
+# ---- PUZZLE: Revolving Castle ----
+# Player must enter at the right door at the right time.
+# The answer is the Black Door (death/acceptance) - or Blue (sea/sky).
+# We'll make it a choice-based puzzle.
+
+# ---- PUZZLE: Giant Trumpet ----
+# Player must first take the earplugs, then USE EAPPLUGS on self
+# before using the trumpet. Or USE MUFFLER on trumpet.
+
+# ---- PUZZLE: Golden Pillar ----
+# Player needs the Silver Net (already there), then USE NET on tidepool
+# to catch the golden fish.

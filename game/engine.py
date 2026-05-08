@@ -94,6 +94,7 @@ class GameState:
         self.flags = {}
         self.score = 0
         self.turns = 0
+        self.days = 0  # in-game days passed
         self.game_over = False
         self.won = False
         self.message_log = []
@@ -104,6 +105,8 @@ class GameState:
         ]
         self.dead_crew = []
         self.known_islands = []
+        self.awaiting_choice = None  # For choice-based interactions
+        self.choice_data = None
 
     def add_message(self, msg):
         self.message_log.append(msg)
@@ -188,6 +191,10 @@ def handle_help(state, args):
         "  GIVE [item] TO [npc]   - Offer something\n"
         "  USE [item] [with item] - Use an item\n"
         "  SAIL                   - Set sail on the open sea\n"
+        "  FIGHT [target]         - Engage in combat\n"
+        "  JOKE TO [npc]          - Tell someone a joke\n"
+        "  SING [song]            - Belt out a tune\n"
+        "  YES / NO               - Respond to a choice\n"
         "  WAIT / Z               - Pass time\n"
         "  CREW                   - Check on your crew\n"
         "  SCORE                  - See your progress\n"
@@ -228,6 +235,13 @@ def handle_look(state, args):
         extra = loc.on_look(state)
         if extra:
             text += "\n\n" + extra
+
+    # Special: homecoming sets the ending choice
+    if loc.id == "homecoming" and not state.has_flag("confronted"):
+        state.set_flag("confronted")
+        state.awaiting_choice = "ending"
+        text += "\n\nType YES to forgive them. Type NO to take your vengeance."
+
     return text
 
 
@@ -251,6 +265,9 @@ def handle_go(state, direction):
         "in": "in", "inside": "in",
         "u": "up", "up": "up",
         "d": "down", "down": "down",
+        "deeper": "deeper", "deep": "deeper",
+        "back": "back", "return": "back", "shallows": "shallows",
+        "home": "home",
     }
 
     direction = dir_map.get(direction, direction)
@@ -472,6 +489,276 @@ def handle_sail(state, args):
     return "There's nowhere to sail from here."
 
 
+def handle_fight(state, target):
+    """Simple combat system."""
+    if not target:
+        return "Fight what? Use: FIGHT [target]"
+
+    loc = state.get_location()
+    if not loc:
+        return "There's nothing to fight here."
+
+    # Check for fightable NPCs/creatures via location-specific logic
+    # This is handled by hooks in the world module
+    if loc.id == "sea_monsters" and not state.has_flag("sea_monster_defeated"):
+        if state.has_flag("got_harpoon"):
+            state.set_flag("sea_monster_defeated")
+            state.score += 5
+            return (
+                "You hurl the magic harpoon at the monstrous hand! It strikes true, and "
+                "with a roar that shakes the sea, the creature releases the boat and sinks "
+                "back into the depths. The water is still once more.\n\n"
+                "Your crew cheers. Conganchnes claps you on the back. 'Good throw, Captain!'"
+            )
+        elif not state.has_flag("monster_attacked_without_harpoon"):
+            # Conganchnes can fight it
+            conganchnes = next((c for c in state.crew if c.id == "conganchnes"), None)
+            if conganchnes and conganchnes.alive:
+                state.set_flag("sea_monster_defeated")
+                state.score += 3
+                return (
+                    "Conganchnes leaps onto the monster's hand, his legendary skin "
+                    "turning aside its claws! He drives his sword deep into the creature's wrist, "
+                    "and with a howl of pain, it releases the boat and sinks beneath the waves.\n\n"
+                    "Conganchnes lands back on deck, dripping with ichor. 'Next time, you fight the sea monster.'"
+                )
+        return (
+            "You draw your sword and strike at the monstrous hand! The blade bounces off "
+            "its leathery skin. It barely seems to notice. You need a better weapon, or a stronger warrior."
+        )
+
+    if loc.id == "black_pig" and not state.has_flag("apple_taken"):
+        return (
+            "The black pig snorts and charges! Its tusks are the size of daggers. "
+            "Before you can react, it bowls you over and stands triumphantly on your chest.\n\n"
+            '"OINK," it says, with evident satisfaction. It then wanders back to the tree and goes to sleep.\n\n'
+            "You are unharmed, but your pride is in tatters. You were defeated by a pig."
+        )
+
+    return f"There's nothing to fight here. You can't just attack {target} for no reason."
+
+
+def handle_joke(state, args):
+    """Tell a joke. Used for the Laughing King puzzle."""
+    if not args:
+        return "Tell a joke to whom? Use: JOKE TO [npc] or just 'joke'"
+
+    # Check if laughing king is here
+    npc = state.get_npc_at_location("king")
+    if not npc:
+        return "There's no one here who wants to hear a joke."
+
+    if state.has_flag("king_pacified"):
+        return 'The Laughing King wipes a tear from his eye. "You already told me the best one! I can\'t take another!"'
+
+    # Accept any joke told
+    state.set_flag("king_pacified")
+    state.score += 2
+    # Add laughing potion to location
+    from .world import items
+    loc = state.get_location()
+    if loc and items.get("laughing_potion") and items["laughing_potion"] not in loc.items:
+        loc.items.append(items["laughing_potion"])
+
+    return (
+        f'You tell a joke: "{args}"\n\n'
+        "The Laughing King freezes. His eyes go wide. For a moment, there is silence.\n\n"
+        'Then he ERUPTS — laughing so hard he falls off his stool, rolls on the ground, '
+        "and pounds the earth with his fists. His subjects are laughing too, but at him, not with him.\n\n"
+        '"THAT\'S the one! THAT\'S the BEST joke I\'ve ever heard!" He gasps between gales of laughter. '
+        '"Here, take this! It\'s the Laughing Potion — one sip and you\'ll be as happy as me!"\n\n'
+        "He tosses you a bubbling vial.\n\n"
+        "(+2 points. The island is now quiet — well, quieter.)"
+    )
+
+
+def handle_sing(state, args):
+    """Sing a song. Used for various occasions."""
+    if not args:
+        return "Sing what? Use: SING [song]"
+
+    # Check if Diuran is here or at sea
+    loc = state.get_location()
+    if loc and loc.id == "sea1":
+        return (
+            f'You belt out a shanty: "{args}"\n\n'
+            "Your crew joins in, their rough voices carrying across the waves. "
+            "Diurán quickly scribbles down the lyrics, muttering about copyright."
+        )
+
+    return (
+        f'You sing: "{args}"\n\n'
+        "Your voice cracks slightly on the high notes, but you give it your all. "
+        "A nearby seal applauds by slapping its flippers together."
+    )
+
+
+def handle_yes(state, args):
+    """Handle YES response to a choice."""
+    if state.awaiting_choice == "queen_stay":
+        return _queen_stay_choice(state)
+    elif state.awaiting_choice == "ending":
+        return _ending_forgive_choice(state)
+    elif state.awaiting_choice == "homecoming_leave":
+        state.set_flag("left_women")
+        state.current_location = "sea1"
+        return handle_look(state, [])
+    return "Yes to what? There's no pending choice."
+
+
+def handle_no(state, args):
+    """Handle NO response to a choice."""
+    if state.awaiting_choice == "queen_stay":
+        state.set_flag("resisted_queen")
+        state.score += 5
+        state.awaiting_choice = None
+        return (
+            '"No," you say firmly. "We must continue our voyage."\n\n'
+            "The Queen's smile flickers. For a moment, you see something ancient and cold in her eyes. "
+            "Then she laughs — a sound like breaking glass.\n\n"
+            '"As you wish, Mael Duin. But remember: not all who stay are prisoners, '
+            "and not all who leave are free.\"\n\n"
+            "She waves her hand, and you find yourself back on your curragh, "
+            "bobbing on the open sea. Days — or weeks? — have passed. "
+            "Your crew looks older, wearier. They remember everything.\n\n"
+            "You have resisted the ultimate temptation."
+        )
+    elif state.awaiting_choice == "ending":
+        return _ending_vengeance_choice(state)
+    return "No to what? There's no pending choice."
+
+
+def handle_number_choice(state, num_str):
+    """Handle numeric choice response."""
+    try:
+        num = int(num_str)
+    except ValueError:
+        return None  # Not a number choice
+
+    if state.awaiting_choice == "smith_trade":
+        items_list = state.choice_data or []
+        if 1 <= num <= len(items_list):
+            chosen = items_list[num - 1]
+            state.inventory.remove(chosen)
+            state.score += 3
+            state.awaiting_choice = None
+
+            # Give the harpoon
+            from .world import items
+            if items.get("magic_harpoon") and items["magic_harpoon"] not in state.inventory:
+                state.inventory.append(items["magic_harpoon"])
+
+            return (
+                f'You hand over {chosen.name}. The giant smith examines it, grunts, and tosses it into the forge.\n\n'
+                '"Fair trade, little man. Fair trade."\n\n'
+                "He works the bellows, and the ground shakes. Sparks fly like fireworks. "
+                "After an hour of ear-splitting hammering, he presents you with a MAGIC HARPOON — "
+                "dark iron etched with spirals, humming with power.\n\n"
+                '"This harpoon always returns to its thrower. Don\'t lose it. Well, you CAN lose it, but it\'ll come back. '
+                "You know what I mean.\"\n\n"
+                "(+3 points. Gained: Magic Harpoon)"
+            )
+        else:
+            return f"Choose a number between 1 and {len(items_list)}."
+
+    return None
+
+
+# ----- Choice helpers -----
+
+def _queen_stay_choice(state):
+    """The player chose to stay with the Queen."""
+    state.set_flag("stayed_with_queen")
+    state.days += 30  # A month passes
+    state.score += 1
+
+    # Random crew loss
+    alive = [c for c in state.crew if c.alive]
+    if alive:
+        lost = random.choice(alive)
+        lost.alive = False
+        state.dead_crew.append(lost)
+
+    state.awaiting_choice = None
+    return (
+        "You stay. Days turn to weeks. Weeks to months.\n\n"
+        "The feasts are glorious. The wine flows like rivers. The Queen's laughter is music, "
+        "and her touch is fire. Your crew forgets the voyage. You almost forget your father.\n\n"
+        "But one morning, you wake to find one of your crew has vanished. Then another. "
+        "The beautiful women grow pale and thin. The food tastes like ash.\n\n"
+        "You gather what remains of your crew and flee to the curragh. "
+        "As you push off from shore, the Queen watches from the palace steps, smiling her cold smile.\n\n"
+        "Months have passed in the real world. Your crew is smaller. Your quest feels more urgent than ever.\n\n"
+        f"(You lost {lost.name if 'lost' in dir() else 'a crew member'} to the Queen's enchantment. "
+        "30 days have passed.)"
+    )
+
+
+def _ending_forgive_choice(state):
+    """The player chose forgiveness in the ending."""
+    state.awaiting_choice = None
+    state.game_over = True
+    state.won = True
+
+    # Calculate final score
+    islands_visited = sum(1 for k in state.flags if k.endswith("_visited"))
+    state.score += islands_visited * 2
+
+    return (
+        'You lower your sword.\n\n'
+        '"Go," you say. "I did not sail across the edge of the world, visit thirty islands, '
+        'fight giant ants and talking cats and laughing kings, to become the same kind of man who killed my father."\n\n'
+        "The raiders stare at you. The eldest — grey-bearded, one-eyed — nods slowly.\n\n"
+        '"Your father was a good man," he says. "He died well. I have carried his death '
+        "like a stone in my chest ever since. Thank you, Mael Duin, for lifting it.\"\n\n"
+        "They leave their weapons on the sand and walk away into the mist.\n\n"
+        "Your crew gathers around you. Diurán is weeping. Conganchnes sheathes his sword. "
+        "Fergus puts a hand on your shoulder.\n\n"
+        '"Well," says the poet, "that\'s a better ending than I\'d written."\n\n'
+        "You return to your village a different man. The druid is waiting for you by the fire. "
+        "He smiles — the first time you've ever seen him smile.\n\n"
+        '"I see the sea has taught you what I could not," he says.\n\n'
+        "=== THE END ===\n"
+        "Thank you for playing The Voyage of Mael Duin.\n"
+        f"Final score: {state.score} | "
+        f"Islands visited: {islands_visited} | "
+        f"Days at sea: {state.days} | "
+        f"Crew survived: {state.total_crew_alive()}/{len(state.crew)}\n\n"
+        '"Forgiveness is a cup that fills the drinker."'
+    )
+
+
+def _ending_vengeance_choice(state):
+    """The player chose vengeance in the ending."""
+    state.awaiting_choice = None
+    state.game_over = True
+    state.won = True
+
+    # Calculate final score
+    islands_visited = sum(1 for k in state.flags if k.endswith("_visited"))
+    state.score += islands_visited
+
+    return (
+        'You raise your sword.\n\n'
+        '"For my father!" you cry, and your crew charges with you.\n\n'
+        "The battle is short and brutal. Conganchnes cuts through three men before they can draw breath. "
+        "The grey-bearded raider falls to his knees before you, and you drive your blade home.\n\n"
+        "It is done. Your father is avenged.\n\n"
+        "But as you stand over the body, you feel... empty. The prophecy scroll hangs heavy in your pack. "
+        "Diurán has stopped writing. He has nothing to say.\n\n"
+        "You return to your village a victor. The druid is waiting. He looks at you with sad eyes.\n\n"
+        '"You have your revenge, Mael Duin. I hope it keeps you warm at night."\n\n'
+        "It doesn't.\n\n"
+        "=== THE END ===\n"
+        "Thank you for playing The Voyage of Mael Duin.\n"
+        f"Final score: {state.score} | "
+        f"Islands visited: {islands_visited} | "
+        f"Days at sea: {state.days} | "
+        f"Crew survived: {state.total_crew_alive()}/{len(state.crew)}\n\n"
+        '"Vengeance is a cup that empties the drinker."'
+    )
+
+
 # ----- Parser -----
 
 VERBS = {
@@ -519,6 +806,14 @@ VERBS = {
     "q": ("quit", handle_quit),
     "restart": ("restart", handle_restart),
     "sail": ("sail", handle_sail),
+    "fight": ("fight", handle_fight),
+    "attack": ("fight", handle_fight),
+    "joke": ("joke", handle_joke),
+    "sing": ("sing", handle_sing),
+    "yes": ("yes", handle_yes),
+    "y": ("yes", handle_yes),
+    "no": ("no", handle_no),
+    "nope": ("no", handle_no),
     "help": ("help", handle_help),
     "?": ("help", handle_help),
     "h": ("help", handle_help),
@@ -584,6 +879,32 @@ def parse_command(text):
         if m:
             return (handle_drop, m.group(1).strip())
 
+    # Joke pattern: "joke to [npc]" or "joke [text]"
+    joke_pattern = r'^joke to\s+(.+)$'
+    m = re.match(joke_pattern, lower)
+    if m:
+        return (handle_joke, m.group(1).strip())
+    joke_pattern2 = r'^joke\s+(.+)$'
+    m = re.match(joke_pattern2, lower)
+    if m:
+        return (handle_joke, m.group(1).strip())
+
+    # Fight pattern: "fight [target]"
+    fight_pattern = r'^fight\s+(.+)$'
+    m = re.match(fight_pattern, lower)
+    if m:
+        return (handle_fight, m.group(1).strip())
+    attack_pattern = r'^attack\s+(.+)$'
+    m = re.match(attack_pattern, lower)
+    if m:
+        return (handle_fight, m.group(1).strip())
+
+    # Sing pattern: "sing [song]"
+    sing_pattern = r'^sing\s+(.+)$'
+    m = re.match(sing_pattern, lower)
+    if m:
+        return (handle_sing, m.group(1).strip())
+
     # Single word commands
     first_word = words[0]
     if first_word in VERBS:
@@ -597,6 +918,8 @@ def parse_command(text):
         "ne": "northeast", "nw": "northwest",
         "se": "southeast", "sw": "southwest",
         "u": "up", "d": "down",
+        "deeper": "deeper", "deep": "deeper",
+        "back": "back", "return": "back", "shallows": "shallows",
     }
     if first_word in dir_aliases:
         return (lambda s, a: handle_go(s, dir_aliases[first_word]), "")
