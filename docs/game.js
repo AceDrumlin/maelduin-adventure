@@ -49,7 +49,7 @@ function getItem(id) {
 
 function newState() {
   return {
-    location: 'home',
+    location: 'ailill_keep',
     inventory: [],
     flags: {},
     score: 0,
