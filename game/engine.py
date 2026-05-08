@@ -383,6 +383,18 @@ def handle_talk(state, npc_name):
     if "greeting" in npc.dialogue:
         result = npc.dialogue["greeting"]
 
+        # Special: Ailill at the keep is gone after his death
+        if npc.id == "ailill" and state.has_flag("witnessed_death"):
+            return (
+                "The hall feels empty now. Ailill Ochair Ága is gone — "
+                "cut down on the strand by raiders from the Northern Isles. "
+                "The Wolf's Fang leans against his throne, untouched. "
+                "His drinking horn sits half-full on the table. "
+                "But the Wolf himself will never laugh again.\n\n"
+                "You are a ghost in this hall, and the ghost of your father "
+                "walks beside you in silence."
+            )
+
         # Special: queen's greeting sets up the stay/leave choice
         if npc.id == "queen" and not state.has_flag("queen_choice_offered"):
             state.set_flag("queen_choice_offered")

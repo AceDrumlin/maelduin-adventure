@@ -61,17 +61,9 @@ def register(items, npcs):
     # ────────────────────────────────────────────────────────────
     
     def _beach_enter(s):
-        """Handle entering the beach: remove Ailill from both locations, set death witness flag."""
+        """Handle entering the beach: witness Ailill's death, set death flag."""
         if not s.has_flag("witnessed_death"):
             s.set_flag("witnessed_death")
-            # Remove Ailill from the keep's NPC list (he's dead)
-            keep_loc = LOCATIONS.get("ailill_keep")
-            if keep_loc:
-                keep_loc.npcs = [n for n in keep_loc.npcs if n.id != "ailill"]
-            # Remove Ailill from beach NPCs too (he's a corpse, not an interactable NPC)
-            beach_loc = LOCATIONS.get("ailill_beach")
-            if beach_loc:
-                beach_loc.npcs = [n for n in beach_loc.npcs if n.id != "ailill"]
             return (
                 "The salt spray stings your eyes. Or perhaps it's something else.\n\n"
                 "Ailill Ochair Ága, the Wolf of the Arans, is dead.\n\n"
@@ -102,7 +94,7 @@ def register(items, npcs):
             "(Type EAST to return to the hall, or type ONWARD to move forward in time.)"
         ),
         items=[],
-        npcs=[npcs["ailill"], npcs["beach_mother"], npcs["young_druid"]],
+        npcs=[npcs["beach_mother"], npcs["young_druid"]],
         exits={"east": "ailill_keep", "onward": "foster_village", "forward": "foster_village", "time": "foster_village"},
         on_enter=_beach_enter,
         ambient=lambda s: (
