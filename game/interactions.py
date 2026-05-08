@@ -909,6 +909,29 @@ _register_use("millstone_fragment", "millstone", _use_heavy_item_on_gears)
 _register_use("fiery_ash", "mill", _use_heavy_item_on_gears)
 _register_use("golden_apple", "mill", _use_heavy_item_on_gears)
 
+# ---- REVOLVING CASTLE PUZZLE ----
+def _use_revolving_key_on_castle(state, item, target):
+    if state.current_location != "island_revolving_castle":
+        return "You're not at the Revolving Castle."
+    if state.has_flag("castle_unlocked"):
+        return "The castle is already unlocked. The doors have frozen in place."
+    state.set_flag("castle_unlocked")
+    state.score += 3
+    return (
+        "You insert the Revolving Key into the lock of the Red Door just as it aligns with the platform.\\n\\n"
+        "The key turns with a satisfying CLICK. The castle shudders — a deep, groaning sound — "
+        "and slowly, ponderously, it stops revolving.\\n\\n"
+        "The Red Door swings open, revealing a dark entrance hallway beyond. The other doors freeze mid-position.\\n\\n"
+        "The castle is still. For the first time in centuries, the turning world has stopped.\\n\\n"
+        "Diurán whispers: 'You stopped a castle. That\\'s going in the poem.'\\n\\n"
+        "(+3 points. The Revolving Castle is now open.)"
+    )
+_register_use("revolving_key", "door", _use_revolving_key_on_castle)
+_register_use("revolving_key", "castle", _use_revolving_key_on_castle)
+_register_use("revolving_key", "gate", _use_revolving_key_on_castle)
+_register_use("revolving_key", "red door", _use_revolving_key_on_castle)
+_register_use("revolving_key", "keyhole", _use_revolving_key_on_castle)
+
 # Wall of Water — magic thread or silver bell
 _register_use("magic_thread", "mast", _use_magic_thread_on_mast_wall)
 _register_use("magic_thread", "wall", _use_magic_thread_on_mast_wall)
@@ -932,6 +955,149 @@ _register_use("speaking_feather", "oxen", _use_speaking_feather_on_oxen)
 _register_use("speaking_feather", "ox", _use_speaking_feather_on_oxen)
 _register_use("speaking_feather", "bull", _use_speaking_feather_on_oxen)
 _register_use("speaking_feather", "sacred oxen", _use_speaking_feather_on_oxen)
+
+# ---- MISSING ISLANDS 2 USE HANDLERS ----
+
+
+def _use_sharp_item_on_fish_belly(state, item, target):
+    """Cut your way out of the Great Fish using a sharp item."""
+    if state.has_flag("escaped_fish"):
+        return "You are already free of the Great Fish."
+    if state.current_location != "great_fish_belly":
+        return "There is no fish belly here to cut through."
+    state.set_flag("escaped_fish")
+    state.score += 4
+    from .levels._shared import items as shared_items
+    tooth = shared_items.get("fish_tooth")
+    if tooth and tooth not in state.inventory:
+        state.inventory.append(tooth)
+    return (
+        "You take the sharp item and drive it deep into the pulsing wall of the fish's belly!\\\\n\\\\n"
+        "The creature convulses. The walls contract around you, squeezing — but you hold on, "
+        "cutting, slashing, tearing through flesh and sinew.\\\\n\\\\n"
+        "Light pours through the wound — pale, grey, beautiful light. The sea. The sky. Freedom.\\\\n\\\\n"
+        "You tumble out onto the fish's back, gasping for air. Your crew follows, one by one, "
+        "covered in slime but alive.\\\\n\\\\n"
+        "Between the fish's gaping jaws, you spot a massive serrated tooth. You prise it free.\\\\n\\\\n"
+        "(+4 points. Gained: Fish Tooth. The Great Fish is dead; you are free.)"
+    )
+
+
+def _use_fiery_ash_on_fish_belly(state, item, target):
+    """Burn your way out of the Great Fish."""
+    if state.has_flag("escaped_fish"):
+        return "You are already free of the Great Fish."
+    if state.current_location != "great_fish_belly":
+        return "There is no fish belly here to burn."
+    state.set_flag("escaped_fish")
+    state.score += 4
+    from .levels._shared import items as shared_items
+    tooth = shared_items.get("fish_tooth")
+    if tooth and tooth not in state.inventory:
+        state.inventory.append(tooth)
+    return (
+        "You scatter the Fiery Ash against the fish's inner wall. The embers catch — "
+        "the wet flesh sizzles and blackens, then bursts into flame.\\\\n\\\\n"
+        "The fish shudders violently. The fire spreads, eating through the blubber and muscle. "
+        "Your crew presses against the far wall as the heat intensifies.\\\\n\\\\n"
+        "Then — a roar, a shudder, and the wall collapses outward. You fall through into daylight, "
+        "landing on the fish's smoldering back.\\\\n\\\\n"
+        "The Great Fish is dead, roasted from the inside. Its jaws hang open, revealing "
+        "a single massive tooth. You take it as a trophy.\\\\n\\\\n"
+        "(+4 points. Gained: Fish Tooth. You burned your way to freedom.)"
+    )
+
+
+def _use_fountain_water_on_crew(state, item, target):
+    """Heal a crew member using Fountain Water."""
+    if not state.total_crew_alive() == 3:
+        # Check if there are injured/dying crew to heal
+        pass
+    state.score += 3
+    state.set_flag("fountain_water_used")
+    return (
+        "You pour the milk-white Fountain Water onto the crew member's wounds. "
+        "The water glows brightly, and the injuries seal themselves — cuts close, "
+        "bruises fade, and the color returns to their face.\\\\n\\\\n"
+        "They sit up, blinking. 'What... what was that? I feel like I just slept "
+        "for a week. And had a really good dream about a cow.'\\\\n\\\\n"
+        "The Fountain Water has done its work. Your crew member is healed.\\\\n\\\\n"
+        "(+3 points. The Fountain Water works its healing magic.)"
+    )
+
+
+def _use_silent_bell_on_creature(state, item, target):
+    """Calm any creature with the Silent Bell."""
+    state.set_flag("bell_rang_silently")
+    state.score += 3
+    return (
+        "You ring the Silent Bell. No sound emerges — but everything around you STILLS.\\\\n\\\\n"
+        "The creature before you freezes mid-motion. Its eyes go wide, then soften. "
+        "Its aggression drains away like water from a cracked vessel.\\\\n\\\\n"
+        "It sits down, docile and calm, as if the very concept of violence has been "
+        "removed from its mind. It looks at you with something like gratitude.\\\\n\\\\n"
+        "The Silent Bell's power is strange — it does not silence sound, but silence "
+        "the will to fight.\\\\n\\\\n"
+        "(+3 points. The creature is calmed by the silent ringing.)"
+    )
+
+
+def _use_wind_of_return_on_ship(state, item, target):
+    """Trigger the homecoming with the Wind of Return."""
+    if state.has_flag("wind_used"):
+        return "The Wind of Return has already carried you home."
+    state.set_flag("wind_used")
+    state.score += 5
+    # Change location to the homecoming location
+    from .engine import LOCATIONS
+    if "homecoming" in LOCATIONS:
+        state.current_location = "homecoming"
+    return (
+        "You unseal the Wind of Return. The bottle's wax seal breaks with a soft pop, "
+        "and a warm, steady wind fills your sails. It carries a scent of turf smoke, "
+        "fresh bread, and rain on green grass.\\\\n\\\\n"
+        "The curragh leaps forward as if eager to be home. The grey sea blurs beneath you. "
+        "The islands of wonder and terror shrink behind you.\\\\n\\\\n"
+        "Your crew stands together at the prow, watching the horizon. Diurán is weeping. "
+        "Fergus is laughing. Conganchnes is trying to look stoic but failing.\\\\n\\\\n"
+        "The wind knows the way. The wind has always known the way.\\\\n\\\\n"
+        "You are going home.\\\\n\\\\n"
+        "(+5 points. The Wind of Return carries you homeward.)"
+    )
+
+
+# Register Level 06 USE combos
+_register_use("glass_shard", "fish_belly", _use_sharp_item_on_fish_belly)
+_register_use("glass_shard", "belly", _use_sharp_item_on_fish_belly)
+_register_use("glass_shard", "fish", _use_sharp_item_on_fish_belly)
+_register_use("magic_harpoon", "fish_belly", _use_sharp_item_on_fish_belly)
+_register_use("magic_harpoon", "belly", _use_sharp_item_on_fish_belly)
+_register_use("magic_harpoon", "fish", _use_sharp_item_on_fish_belly)
+_register_use("fiery_ash", "fish_belly", _use_fiery_ash_on_fish_belly)
+_register_use("fiery_ash", "belly", _use_fiery_ash_on_fish_belly)
+_register_use("fiery_ash", "fish", _use_fiery_ash_on_fish_belly)
+_register_use("fountain_water", "crew", _use_fountain_water_on_crew)
+_register_use("fountain_water", "diuran", _use_fountain_water_on_crew)
+_register_use("fountain_water", "conganchnes", _use_fountain_water_on_crew)
+_register_use("fountain_water", "fergus", _use_fountain_water_on_crew)
+_register_use("silent_bell", "sea_monsters", _use_silent_bell_on_creature)
+_register_use("silent_bell", "sea monster", _use_silent_bell_on_creature)
+_register_use("silent_bell", "monster", _use_silent_bell_on_creature)
+_register_use("silent_bell", "creature", _use_silent_bell_on_creature)
+_register_use("silent_bell", "beast", _use_silent_bell_on_creature)
+_register_use("silent_bell", "horse", _use_silent_bell_on_creature)
+_register_use("silent_bell", "horses", _use_silent_bell_on_creature)
+_register_use("silent_bell", "stallion", _use_silent_bell_on_creature)
+_register_use("silent_bell", "oxen", _use_silent_bell_on_creature)
+_register_use("silent_bell", "ox", _use_silent_bell_on_creature)
+_register_use("silent_bell", "serpent", _use_silent_bell_on_creature)
+_register_use("silent_bell", "snake", _use_silent_bell_on_creature)
+_register_use("silent_bell", "cat", _use_silent_bell_on_creature)
+_register_use("silent_bell", "pig", _use_silent_bell_on_creature)
+_register_use("wind_of_return", "ship", _use_wind_of_return_on_ship)
+_register_use("wind_of_return", "curragh", _use_wind_of_return_on_ship)
+_register_use("wind_of_return", "boat", _use_wind_of_return_on_ship)
+_register_use("wind_of_return", "mast", _use_wind_of_return_on_ship)
 
 
 # ---------------------------------------------------------------------------

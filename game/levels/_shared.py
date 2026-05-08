@@ -318,6 +318,42 @@ def _make_items():
         aliases=["grain", "golden grain", "ever grinding grain", "wheat", "magic grain"],
         takeable=True,
     )
+
+    # ---- MISSING ISLANDS 2 ITEMS (Level 06) ----
+
+    i["fish_tooth"] = Item(
+        "fish_tooth", "Fish Tooth",
+        "A serrated tooth the size of your hand, still warm from the belly of the Great Fish.",
+        examine_text="A massive, serrated tooth, curved like a dagger. It is still warm and slightly slick with digestive fluids. The edges are razor-sharp.",
+        aliases=["tooth", "fish tooth", "great fish tooth", "serrated tooth"],
+        takeable=True,
+    )
+
+    i["fountain_water"] = Item(
+        "fountain_water", "Fountain Water",
+        "Milk-white water from the Fountain Island. It shimmers with inner light.",
+        examine_text="A small flask of milky, luminescent water. It swirls gently with its own inner light, and the smell is sweet and honeyed.",
+        aliases=["water", "fountain water", "milk water", "healing water"],
+        takeable=True,
+        use_text="You drink the Fountain Water. A warm glow spreads through your body. You feel whole, rested, and healed.",
+    )
+
+    i["silent_bell"] = Item(
+        "silent_bell", "Silent Bell",
+        "An iron bell that makes no sound. When you ring it, everything around you stills.",
+        examine_text="A cold iron bell, perfectly still. When you shake it, you feel the clapper move, but no sound emerges. The silence around it seems to deepen.",
+        aliases=["bell", "silent bell", "iron bell", "mute bell"],
+        takeable=True,
+    )
+
+    i["wind_of_return"] = Item(
+        "wind_of_return", "Wind of Return",
+        "A sealed bottle holding a favourable wind. The guardian said it would take me home.",
+        examine_text="A small glass bottle sealed with wax. Inside, a tiny whirlwind spins endlessly, catching the light. When you hold it, you feel the pull of home - a direction, a longing, a certainty.",
+        aliases=["wind", "bottle", "wind bottle", "wind of return", "favourable wind"],
+        takeable=True,
+        use_text="You unseal the Wind of Return. A warm, steady wind fills your sails, carrying you homeward with unerring certainty.",
+    )
     items.update(i)
 
 
@@ -1215,6 +1251,65 @@ def _make_npcs():
                 '"I have lived with what I did every day. I see his face in my dreams \u2014 that laughing, impossible face. He haunts me, Mael Duin. Not because I regret it, but because he would have forgiven me if our positions were reversed. And I knew that even as I struck."\n\n'
                 '"If you can forgive me... then maybe the wolf can rest. Maybe we both can."\n\n'
                 'He extends his hand, palm open. No weapon. Just the hand of a tired, old warrior waiting for judgment.'
+            ),
+        }
+    )
+
+    # ---- MISSING ISLANDS 2 NPCS (Level 06) ----
+
+    n["silence_guardian"] = NPC(
+        "silence_guardian", "The Guardian of Silence",
+        "A tall, pale figure draped in flowing grey robes. Its face is smooth and featureless — no eyes, no mouth, no nose. When it speaks, the words do not come from its face, but from the air around it, as if the silence itself is parting to let sound through.",
+        aliases=["guardian", "silence guardian", "pale figure", "goddess", "grey figure", "guardian of silence"],
+        dialogue={
+            "greeting": (
+                "The grey figure does not move. It does not breathe. But the silence around it thickens, becomes heavier, like a blanket pressing down on your ears.\\n\\n"
+                "When it speaks, the words are cold and distant, as if coming from the bottom of a deep well:\\n\\n"
+                "'You have entered the domain of silence. Here, sound is forbidden. Music is forbidden. Laughter is forbidden. The world has enough noise. In my valley, there is only peace. Only stillness. Only silence.'\\n\\n"
+                "It pauses, and the silence becomes so complete you can hear your own blood moving.\\n\\n"
+                "'You may stay. But you must not break the silence. If you sing or laugh or speak above a whisper... there will be a price.'"
+            ),
+            "anger": (
+                "The Guardian of Silence turns its blank face toward you. The temperature drops.\\n\\n"
+                "'YOU HAVE BROKEN THE SILENCE. Sound is a wound upon the world, and you have opened a wound in my valley. You must pay tribute — give me something precious — and the silence will be restored.'\\n\\n"
+                "Its empty face waits. If you have something to offer, GIVE it to the guardian."
+            ),
+            "peace": (
+                "The Guardian of Silence bows its head slightly — a gesture of respect.\\n\\n"
+                "'You have kept the silence. You have walked softly in my valley. For this, you may take the Silent Bell. It will serve you well, for silence is the oldest magic — older than speech, older than song, older than the sea itself.'\\n\\n"
+                "It gestures toward the grove where the bell hangs."
+            ),
+            "tribute": (
+                "'Give me something precious. Something that holds sound — a memory of music, a word of power, a song you have forgotten. The silence must be restored.'"
+            ),
+        }
+    )
+
+    n["guardian_of_peace"] = NPC(
+        "guardian_of_peace", "The Guardian of Peace",
+        "A luminous figure in flowing white robes, surrounded by a soft golden light. Its face is kind and infinitely gentle, radiating a warmth that feels like coming home after a long journey. Its eyes hold the compassionate patience of something that has watched the ages turn.",
+        aliases=["guardian", "angel", "luminous figure", "being", "spirit", "guardian of peace"],
+        dialogue={
+            "greeting": (
+                "The Guardian of Peace opens its arms, and a wave of warmth washes over you.\\n\\n"
+                "'Welcome, Mael Duin. Welcome to the Land of Promise. You have crossed the edges of the known world, braved monsters and wonders, and now you stand at the threshold of peace itself.\\n\\n"
+                "'Here there is no pain, no sorrow, no hunger, no death. The rivers run with wine and honey. The trees bear fruit of pure gold. The air is warm and gentle. Stay with us forever. All you have to do is say yes.'\\n\\n"
+                "Its smile is radiant. The offer is sincere.\\n\\n"
+                "(Type YES to stay forever. Type NO to refuse and receive the Wind of Return.)"
+            ),
+            "stay": (
+                "'Stay. Rest. Be at peace. You have earned this. There is nothing waiting for you back there — no revenge worth taking, no love worth leaving. Stay in the land where all is well.'\\n\\n"
+                "The guardian's voice is hypnotic, gentle. The land behind it shimmers with impossible beauty."
+            ),
+            "leave": (
+                "The Guardian of Peace nods slowly, its expression unchanged — still warm, still kind.\\n\\n"
+                "'I understand. The world beyond calls to you. Your story is not yet finished. Your home is waiting.\\n\\n"
+                "'Take this Wind of Return — a bottle holding a favourable wind. When you are ready, use it to sail home. It will carry you across the sea with unerring certainty, to the shore where you belong.'\\n\\n"
+                "It places a sealed glass bottle in your hands. Inside, a tiny whirlwind spins endlessly.\\n\\n"
+                "'Go with my blessing, Mael Duin. And remember: you carry home with you now.'"
+            ),
+            "home": (
+                "'Your home is waiting. But you carry it with you now — in your heart, in your memories, in the weight of your father's ring on your thumb. The Promised Land is not a place. It is a feeling. And you have felt it all along.'"
             ),
         }
     )

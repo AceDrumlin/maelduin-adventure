@@ -267,10 +267,14 @@ def register(items, npcs):
         ),
         items=[],
         npcs=[],
-        exits={"northwest": "sea2", "back": "sea2"},
+        exits={"northwest": "sea2", "back": "sea2", "through": "sea3"},
         blocked={
             "northwest": (
                 "The wall of water thunders before you. You cannot leave until you find a way through.",
+                lambda s: not s.has_flag("wall_crossed")
+            ),
+            "through": (
+                "A towering wall of water blocks your path. You must calm the waters before you can pass through.",
                 lambda s: not s.has_flag("wall_crossed")
             ),
         },

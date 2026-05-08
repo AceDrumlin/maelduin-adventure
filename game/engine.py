@@ -269,6 +269,7 @@ def handle_go(state, direction):
         "deeper": "deeper", "deep": "deeper",
         "back": "back", "return": "back", "shallows": "shallows",
         "home": "home",
+        "homecoming": "homecoming",
         "in": "in", "inside": "in", "enter": "in",
         "cross": "cross", "bridge": "cross",
         "out": "out", "exit": "out", "leave": "out",
@@ -370,6 +371,22 @@ def handle_examine(state, target):
         npc = state.get_npc_at_location(target)
         if npc:
             return npc.description
+
+    # --- Location-specific examines ---
+    if loc and loc.id == "island_revolving_castle":
+        wall_targets = {"walls", "wall", "carvings", "stone", "masonry", "obsidian", "foundation"}
+        if target.lower().strip() in wall_targets:
+            if state.has_flag("castle_unlocked"):
+                return "The walls are smooth black obsidian. The entrance has already been opened."
+            state.set_flag("castle_unlocked")
+            return (
+                "You examine the outer walls of the Revolving Castle carefully. "
+                "The black obsidian is smooth, almost glassy, but near the base "
+                "you find a section where the stone has crumbled away.\n\n"
+                "Behind the broken stone, a narrow gap leads into the castle's foundations. "
+                "You squeeze through, emerging inside a dark entrance hall.\n\n"
+                "The secret entrance is revealed!"
+            )
 
     return f"You see nothing special about \"{target}\"."
 
@@ -520,6 +537,33 @@ def handle_use(state, args):
 
 def handle_wait(state, args):
     state.turns += 1
+    loc = state.get_location()
+
+    # --- Revolving Castle puzzle: wait for the right moment ---
+    if loc and loc.id == "island_revolving_castle" and not state.has_flag("castle_unlocked"):
+        waits = state.flags.get("castle_waits", 0) + 1
+        state.flags["castle_waits"] = waits
+        if waits >= 3:
+            state.set_flag("castle_unlocked")
+            return (
+                "You wait. The castle continues its slow, grinding rotation...\n\n"
+                "On the third pause, you notice the Red Door lingers at the platform just a little longer than the others. "
+                "Long enough for a quick-witted visitor to slip through.\n\n"
+                "You seize the moment and dart inside!"
+            )
+        door_names = ["Red", "Blue", "Green", "Black"]
+        return (
+            f"You wait. The great castle turns. The {door_names[(waits-1) % 4]} Door "
+            "aligns with the platform, pauses, then continues its eternal rotation.\n\n"
+            "You'll need to learn the rhythm if you want to get in."
+        )
+
+    # --- Generic location on_wait hook if available ---
+    if loc and hasattr(loc, 'on_wait') and loc.on_wait:
+        result = loc.on_wait(state)
+        if result:
+            return result
+
     return "Time passes..."
 
 
@@ -1026,6 +1070,7 @@ def parse_command(text):
         "deeper": "deeper", "deep": "deeper",
         "back": "back", "return": "back", "shallows": "shallows",
         "home": "home",
+        "homecoming": "homecoming",
         "in": "in", "inside": "in", "enter": "in",
         "cross": "cross", "bridge": "cross",
         "out": "out", "exit": "out", "leave": "out",

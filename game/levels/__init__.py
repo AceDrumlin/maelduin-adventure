@@ -14,6 +14,7 @@ from .level_02_sea2 import register as reg_02
 from .level_03_sea3 import register as reg_03
 from .level_04_homecoming import register as reg_04
 from .level_05_missing_islands import register as reg_05
+from .level_06_missing_islands_2 import register as reg_06
 
 
 def load_all():
@@ -26,6 +27,7 @@ def load_all():
     reg_03(items, npcs)
     reg_04(items, npcs)
     reg_05(items, npcs)
+    reg_06(items, npcs)
 
 
 from ._shared import items, npcs
