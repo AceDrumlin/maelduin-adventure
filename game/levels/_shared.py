@@ -298,9 +298,6 @@ npcs = {}
 
 def _smith_trade_handler(state, item):
     """Handle trading any item to the smith for the Magic Harpoon."""
-    from ..engine import items as game_items
-    from ._shared import items
-
     harpoon = items.get("magic_harpoon")
     if not harpoon or state.has_flag("got_harpoon"):
         return (
