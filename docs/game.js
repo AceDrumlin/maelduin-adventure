@@ -118,6 +118,7 @@ const DIR_MAP = {
   home:'home', in:'in', inside:'in', enter:'in',
   cross:'cross', bridge:'cross', out:'out', exit:'out', leave:'out',
   through:'through', climb:'climb', gold:'gold',
+  onward:'onward', forward:'onward', time:'onward', grow:'onward',
 };
 
 function getExitsText() {
@@ -665,6 +666,7 @@ function parseCommand(text) {
     home:'home', in:'in', inside:'in', enter:'in',
     cross:'cross', bridge:'cross', out:'out', exit:'out', leave:'out',
     through:'through', climb:'climb', gold:'gold',
+    onward:'onward', forward:'onward', time:'onward', grow:'onward',
   };
   if (dirAliases[first]) return [(_,a) => h_go(dirAliases[first]), ''];
 
