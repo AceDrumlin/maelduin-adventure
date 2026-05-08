@@ -332,6 +332,7 @@ The cat produces a shimmering Pearl from somewhere (you're not sure where) and d
 }
 
 function h_use(text) {
+  if (!text || !text.trim()) return 'Use what? Usage: USE [item] [with target]';
   const parts = text.split(/\s+(?:with|on|at|in)\s+/);
   const itemName = parts[0].trim();
   const targetName = parts.length > 1 ? parts[1].trim() : null;
@@ -385,9 +386,13 @@ function h_sail() {
   const loc = getLocation(STATE.location);
   if (!loc) return 'You are on land.';
   if (loc.id === 'home') return 'You are on land. You need to be at sea or on the shore to sail.';
-  if (loc.exits && loc.exits.sea) return h_go('sea');
-  if (hasFlag('sea')) return h_go('sea');
-  return "There's nowhere to sail from here.";
+
+  // Try to find any exit that leads back to sea
+  for (const [direction, target] of Object.entries(loc.exits || {})) {
+    if (target.startsWith('sea')) return h_go(direction);
+  }
+
+  return "There's nowhere to sail from here. Try a direction (north/south/east/west) to find the sea.";
 }
 
 function h_fight(target) {
@@ -667,6 +672,7 @@ function parseCommand(text) {
 }
 
 function processCommand(text) {
+  if (!text || !text.trim()) return "Type HELP for a list of commands, or just start exploring!";
   const [handler, args] = parseCommand(text);
   if (!handler) return h_unknown(text);
   return handler(STATE, args);
@@ -744,7 +750,14 @@ function initUI() {
 
     addMsg('> ' + text, 'sys');
 
-    const result = processCommand(text);
+    let result;
+    try {
+      result = processCommand(text);
+    } catch (e) {
+      addMsg('⚠ Error: ' + e.message, 'err');
+      console.error('Game error:', e);
+      return;
+    }
 
     if (result === '__RESTART__') {
       output.innerHTML = '';

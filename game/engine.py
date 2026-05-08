@@ -420,6 +420,8 @@ def handle_give(state, args):
 
 
 def handle_use(state, args):
+    if not args or not args.strip():
+        return "Use what? Usage: USE [item] [with target]"
     parts = re.split(r'\s+(?:with|on|at|in)\s+', args, maxsplit=1)
     item_name = parts[0].strip()
     target_name = parts[1].strip() if len(parts) > 1 else None
@@ -498,9 +500,13 @@ def handle_sail(state, args):
     loc = state.get_location()
     if not loc or loc.id == "home":
         return "You are on land. You need to be at sea or on the shore to sail."
-    if "sea" in loc.exits or "sea" in state.flags:
-        return handle_go(state, "sea")
-    return "There's nowhere to sail from here."
+
+    # Try to find any exit that leads back to sea
+    for direction, target in loc.exits.items():
+        if target.startswith("sea"):
+            return handle_go(state, direction)
+
+    return "There's nowhere to sail from here. Try a direction (north/south/east/west) to find the sea."
 
 
 def handle_fight(state, target):
@@ -953,6 +959,9 @@ def parse_command(text):
 
 def process_command(state, text):
     """Process a command and return response text."""
+    if not text or not text.strip():
+        return "Type HELP for a list of commands, or just start exploring!"
+
     handler, args = parse_command(text)
     if handler is None:
         return handle_unknown(state, args)

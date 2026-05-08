@@ -70,9 +70,18 @@ body{background:#0a0806;color:#c8b89a;font-family:'Special Elite','Courier New',
 .backdrop{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:18;display:none}
 .backdrop.show{display:block}
 @media(max-width:600px){
-  #title-row pre{font-size:5px}
-  #output{font-size:13px;padding:8px 12px}
-  #side-panel{width:260px;right:-280px}
+  #title-row pre{display:none}
+  .celtic{display:none}
+  #title-row{min-height:0;padding:0}
+  #status-bar span{font-size:9px;padding:1px 6px}
+  #output{font-size:12px;padding:6px 10px}
+  #cmd{font-size:12px;padding:5px 8px}
+  #side-panel{width:240px;right:-260px}
+}
+@media(max-width:380px){
+  #status-bar span{font-size:8px}
+  #prompt{font-size:12px;line-height:30px}
+  #input-row{padding:4px 6px}
 }
 </style>
 </head>
