@@ -296,6 +296,33 @@ _make_items()
 
 npcs = {}
 
+def _smith_trade_handler(state, item):
+    """Handle trading any item to the smith for the Magic Harpoon."""
+    from ..engine import items as game_items
+    from ._shared import items
+
+    harpoon = items.get("magic_harpoon")
+    if not harpoon or state.has_flag("got_harpoon"):
+        return (
+            f"The smith looks at the {item.name} and grunts. "
+            + '"Not bad. But I already made you a weapon. One per customer."'
+        )
+
+    state.set_flag("got_harpoon")
+    state.score += 3
+    state.inventory.append(harpoon)
+    return (
+        f"The smith takes the {item.name} and turns it in his massive hands."
+        + "\n\nHmm. Not bad at all. I can work with this."
+        + "\n\nHe tosses it into the forge and works the bellows. "
+        + "The ground shakes. Sparks fly. "
+        + "After an hour of hammering, he holds up a gleaming MAGIC HARPOON "
+        + "- dark iron etched with spirals, humming with power."
+        + '\n\n"This harpoon always returns to its thrower. '
+        + "Don't lose it. Well, you CAN lose it, but it'll come back."
+        + '"\n\n(+3 points. Gained: Magic Harpoon)'
+    )
+
 def _make_npcs():
     n = {}
 
@@ -460,6 +487,10 @@ def _make_npcs():
                 '"The bellows? Oh, that\'s just my bellows. When I pump them, it makes the weather. '
                 "Sorry about the storm — I was trying to stoke the fire. Gets cold this far north.\"",
             ),
+            "on_take": {
+                # Accept any item as trade payment, give the harpoon
+                "__any__": lambda state, item: _smith_trade_handler(state, item)
+            }
         }
     )
 

@@ -414,11 +414,19 @@ def handle_give(state, args):
     # Check if NPC has a take_item handler in dialogue
     if "on_take" in npc.dialogue:
         handler = npc.dialogue["on_take"]
-        if isinstance(handler, dict) and item.id in handler:
-            result = handler[item.id](state, item)
-            if result:
-                state.inventory.remove(item)
-                return result
+        if isinstance(handler, dict):
+            # Check for specific item match first
+            if item.id in handler:
+                result = handler[item.id](state, item)
+                if result:
+                    state.inventory.remove(item)
+                    return result
+            # Check for wildcard (any item)
+            if "__any__" in handler:
+                result = handler["__any__"](state, item)
+                if result:
+                    state.inventory.remove(item)
+                    return result
 
     # Fallback: interactions module for contextual responses
     try:
