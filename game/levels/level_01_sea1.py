@@ -245,6 +245,19 @@ def register(items, npcs):
         ),
     )
 
+    def _glass_palace_enter(state):
+        if state.has_flag("left_palace"):
+            return "The palace is empty now, but you feel lighter for having resisted."
+        if not state.has_flag("entered_palace"):
+            state.set_flag("entered_palace")
+            state.awaiting_choice = "palace_stay"
+            return (
+                "The woman beckons. 'Stay with me. Forget the sea, the quest, the revenge.'\n\n"
+                "Her voice is honey and razor wire. You feel your resolve weakening...\n\n"
+                "Type YES to stay. Type NO to leave."
+            )
+        return None
+
     l["glass_palace"] = Location(
         "glass_palace", "The Glass Palace",
         "A palace of crystal and light. Music plays from nowhere, and the air smells of honey.",
@@ -265,16 +278,7 @@ def register(items, npcs):
         items=[],
         npcs=[],
         exits={"back": "glass_bridge", "east": "glass_bridge"},
-        on_enter=lambda s: (
-            (s.set_flag("entered_palace") or True) and
-            ("The woman beckons. 'Stay with me. Forget the sea, the quest, the revenge.'\n\n"
-             "Her voice is honey and razor wire. You feel your resolve weakening...\n\n"
-             "Type YES to stay. Type NO to leave."
-             if not s.has_flag("entered_palace") else None) and
-            (setattr(s, "awaiting_choice", "palace_stay") or True)
-            if not s.has_flag("left_palace") else
-            "The palace is empty now, but you feel lighter for having resisted."
-        ),
+        on_enter=_glass_palace_enter,
     )
 
     # ═══════════════════════════════════════════

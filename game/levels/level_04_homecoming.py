@@ -405,7 +405,7 @@ def _on_choice_enter(state):
         text.append('"You have seen his face. You have heard his story. '
                      'He killed your father in a blood feud — a cycle as old as Ireland. '
                      'Your father killed his brother. His father killed your grandfather\'s man. '
-                     'The chain stretches back into darkness.\\n\\n')
+                     'The chain stretches back into darkness.\n\n')
         text.append('You can add another link. Or you can break it."')
     else:
         text.append('"You sailed the world and did not find him. Perhaps that is the sea\'s way of telling you '

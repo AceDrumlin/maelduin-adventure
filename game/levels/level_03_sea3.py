@@ -1,6 +1,6 @@
 """Level: 03 Sea3 — The Final Stretch"""
 
-from ..engine import Location
+from ..engine import Location, Item
 from ._shared import items, npcs
 
 
@@ -242,15 +242,15 @@ def register(items, npcs):
         "A castle made of black stone that slowly rotates on a central axis. Its doors spin past at regular intervals.",
         detailed_desc=(
             "A strange castle dominates this island — a fortress of black obsidian that turns slowly, "
-            "ceaselessly, like a great stone top. It has been turning for so long that the ground around it is worn into a perfect circle.\\n\\n"
+            "ceaselessly, like a great stone top. It has been turning for so long that the ground around it is worn into a perfect circle.\n\n"
             "It has four doors — each one a different color: Red, Blue, Green, and Black. "
             "As the castle revolves, each door passes a stone platform at the base, "
-            "staying aligned for only a few heartbeats before continuing its rotation.\\n\\n"
-            "The doors are locked. The keyhole on the Red Door turns restlessly, as if waiting for a matching key...\\n\\n"
+            "staying aligned for only a few heartbeats before continuing its rotation.\n\n"
+            "The doors are locked. The keyhole on the Red Door turns restlessly, as if waiting for a matching key...\n\n"
             "A stone plaque reads: 'Enter at the turning of the world. The right door at the right time. "
-            "Choose poorly, and the castle will never let you go.'\\n\\n"
+            "Choose poorly, and the castle will never let you go.'\n\n"
             "The castle GRINDS as it turns. It sounds almost alive. "
-            "Like a great stone beast, breathing in slow circles.\\n\\n"
+            "Like a great stone beast, breathing in slow circles.\n\n"
             "You could try to USE the REVOLVING KEY on the DOOR, "
             "or EXAMINE the WALLS for a secret entrance, "
             "or WAIT for the right moment."
@@ -271,14 +271,14 @@ def register(items, npcs):
             "The Red Door stands open, revealing a dark entrance hallway."
         ),
         on_enter=lambda s: (
-            "The castle looms before you, a fortress of black obsidian that turns slowly, ceaselessly.\\n\\n"
+            "The castle looms before you, a fortress of black obsidian that turns slowly, ceaselessly.\n\n"
             "Four doors — Red, Blue, Green, and Black — revolve past a stone platform at the base, "
-            "each aligned for only a few heartbeats before continuing their eternal rotation.\\n\\n"
-            "The Revolving Key in your pack vibrates eagerly. It wants to be turned.\\n\\n"
-            "Three ways in:\\n"
-            "  1. USE the REVOLVING KEY on the DOOR (the intended path)\\n"
-            "  2. EXAMINE the WALLS for a secret entrance\\n"
-            "  3. WAIT and time the doors (patience is a virtue)\\n\\n"
+            "each aligned for only a few heartbeats before continuing their eternal rotation.\n\n"
+            "The Revolving Key in your pack vibrates eagerly. It wants to be turned.\n\n"
+            "Three ways in:\n"
+            "  1. USE the REVOLVING KEY on the DOOR (the intended path)\n"
+            "  2. EXAMINE the WALLS for a secret entrance\n"
+            "  3. WAIT and time the doors (patience is a virtue)\n\n"
             "Or you could simply leave and explore other islands."
             if not s.has_flag("castle_unlocked") else None
         ),
@@ -290,16 +290,17 @@ def register(items, npcs):
         "A dark hallway of polished obsidian, lit by a faint red glow from a door at the far end.",
         detailed_desc=(
             "You step through the entrance into a dark hallway. The walls are polished black obsidian, "
-            "smooth as glass. A faint red glow emanates from a door at the far end — the Red Door, now open.\\n\\n"
-            "The air is still and cold. The grinding of the castle has stopped, and the silence is profound.\\n\\n"
-            "Carved into the wall beside you, an inscription reads:\\n\\n"
-            "'The heart of the castle beats in the Red Chamber. Enter, and claim what was left for you.'\\n\\n"
+            "smooth as glass. A faint red glow emanates from a door at the far end — the Red Door, now open.\n\n"
+            "The air is still and cold. The grinding of the castle has stopped, and the silence is profound.\n\n"
+            "Carved into the wall beside you, an inscription reads:\n\n"
+            "'The heart of the castle beats in the Red Chamber. Enter, and claim what was left for you.'\n\n"
             "The Red Door beckons."
         ),
         items=[],
         npcs=[],
         exits={"out": "island_revolving_castle", "back": "island_revolving_castle",
-               "red": "castle_red", "forward": "castle_red", "in": "castle_red"},
+               "red": "castle_red", "forward": "castle_red", "in": "castle_red",
+               "blue": "castle_blue", "green": "castle_green", "black": "castle_black"},
         ambient=lambda s: (
             "The silence is so complete you can hear your own heartbeat. "
             "The red glow pulses faintly, like a distant beacon."
@@ -314,24 +315,24 @@ def register(items, npcs):
             "The Red Door swings open with a groan of ancient hinges. You step into a circular chamber "
             "of polished black obsidian. The walls curve inward overhead, forming a dome. "
             "A single shaft of red light — from where, you cannot tell — illuminates a STONE PEDESTAL "
-            "at the exact center of the room.\\n\\n"
-            "On the pedestal rests a SILVER NET, finely woven, shimmering like moonlight on water.\\n\\n"
+            "at the exact center of the room.\n\n"
+            "On the pedestal rests a SILVER NET, finely woven, shimmering like moonlight on water.\n\n"
             "The castle shudders around you, as if acknowledging your presence. "
             "You have entered the heart of the turning world."
         ),
-        items=[items["silver_net"]],
+        items=[Item(items["silver_net"].id, items["silver_net"].name, items["silver_net"].description, items["silver_net"].examine_text, items["silver_net"].takeable, items["silver_net"].aliases)],
         npcs=[npcs["garbh"]],
         exits={"out": "castle_entrance", "back": "castle_entrance"},
         on_enter=lambda s: (
             s.set_flag("castle_entered") or
             s.set_flag("confronted_murderer") or
-            "The Red Door swings open with a groan of ancient hinges...\\n\\n"
+            "The Red Door swings open with a groan of ancient hinges...\n\n"
             "You step into the heart of the Revolving Castle. The room is circular, "
             "made of black obsidian polished to a mirror shine. A red shaft of light "
-            "illuminates a pedestal at the center.\\n\\n"
-            "On the pedestal: a Silver Net. This must be what you came for.\\n\\n"
+            "illuminates a pedestal at the center.\n\n"
+            "On the pedestal: a Silver Net. This must be what you came for.\n\n"
             "But you are not alone. A ONE-EYED WARRIOR sits on a stone bench in the shadows, "
-            "a drinking horn in his hand. He watches you with a tired, knowing gaze.\\n\\n"
+            "a drinking horn in his hand. He watches you with a tired, knowing gaze.\n\n"
             "This is Garbh. The man who killed your father."
             if not s.has_flag("castle_entered") else None
         ),
@@ -342,9 +343,9 @@ def register(items, npcs):
         "A room filled with howling wind and freezing rain. The floor is slick with ice.",
         detailed_desc=(
             "The Blue Door opens onto a tempest. Wind howls through the chamber, "
-            "whipping rain into your face. The floor is treacherous with black ice.\\n\\n"
+            "whipping rain into your face. The floor is treacherous with black ice.\n\n"
             "In the center of the storm, barely visible through the sleet, a pedestal "
-            "holds a single item: a pair of WAX EARPLUGS.\\n\\n"
+            "holds a single item: a pair of WAX EARPLUGS.\n\n"
             "The storm is too fierce. You cannot reach it without being frozen solid. "
             "This door was not meant for you."
         ),
@@ -364,9 +365,9 @@ def register(items, npcs):
         "A room that was once a garden. Petrified vines hang from the ceiling like frozen snakes.",
         detailed_desc=(
             "The Green Door opens onto what was once a lush garden. Everything — vines, flowers, "
-            "a small fountain — has turned to grey stone. The air is dry and still.\\n\\n"
+            "a small fountain — has turned to grey stone. The air is dry and still.\n\n"
             "In the center of the garden, a stone table holds a SCROLL etched in stone, "
-            "but the text is too weathered to read. Whatever wisdom was here has been lost to time.\\n\\n"
+            "but the text is too weathered to read. Whatever wisdom was here has been lost to time.\n\n"
             "This door, too, was sealed long ago. The Green path holds nothing for you now."
         ),
         items=[],
@@ -378,11 +379,11 @@ def register(items, npcs):
         "castle_black", "The Black Door — The Void",
         "Absolute darkness. The floor may or may not exist. You cannot tell.",
         detailed_desc=(
-            "You open the Black Door and step into — nothing.\\n\\n"
+            "You open the Black Door and step into — nothing.\n\n"
             "There is no light. No sound. No sensation of floor beneath your feet, "
-            "yet you do not fall. You simply... exist, in a space that has no dimensions.\\n\\n"
+            "yet you do not fall. You simply... exist, in a space that has no dimensions.\n\n"
             "A voice — perhaps your own thoughts — whispers: 'You were not meant to enter here. "
-            "The Black Door is the end of all journeys, not the middle. Go back.'\\n\\n"
+            "The Black Door is the end of all journeys, not the middle. Go back.'\n\n"
             "You step backward and find yourself outside again, shaken."
         ),
         items=[],

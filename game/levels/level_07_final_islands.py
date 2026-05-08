@@ -28,13 +28,13 @@ def register(items, npcs):
         detailed_desc=(
             "This island is little more than a jagged rock jutting from the sea — a single, "
             "steep-sided CLIFF that rises a hundred feet above the waves. The rock is dark basalt, "
-            "streaked with white where seabirds have nested for centuries.\\n\\n"
+            "streaked with white where seabirds have nested for centuries.\n\n"
             "At the top of the cliff, silhouetted against the grey sky, stands the GIANT. "
             "He is massive — twenty feet of crude muscle and malice — and beside him lies a pile "
             "of stones, each one large enough to crush a man. His shadow falls across the water "
-            "like a stain.\\n\\n"
+            "like a stain.\n\n"
             "The only way to approach is by sea, and the giant has already seen you. "
-            "His arm draws back. A stone is coming.\\n\\n"
+            "His arm draws back. A stone is coming.\n\n"
             "The shore is rocky but passable. A narrow path leads to the base of the cliff."
         ),
         items=[],
@@ -51,11 +51,11 @@ def register(items, npcs):
             (s.set_flag("giant_encountered") or
             "The giant spots your approach and ROARS! He hefts a stone the size of a man's head "
             "and hurls it with terrifying accuracy. It smashes into the side of your curragh, "
-            "splintering the frame. Your crew scrambles to keep the boat steady.\\n\\n"
+            "splintering the frame. Your crew scrambles to keep the boat steady.\n\n"
             "One of your crew — " + (s.lose_crew() or "a young man from the west").name
             + " — is struck by a flying splinter and falls, clutching his chest. "
-            "He does not rise again.\\n\\n"
-            "The giant bellows with laughter and reaches for another stone.\\n\\n"
+            "He does not rise again.\n\n"
+            "The giant bellows with laughter and reaches for another stone.\n\n"
             "You must act! TALK to the giant with the Speaking Feather, FIGHT with the Magic Harpoon, "
             "or GIVE him food (Everlasting Fruit, Crew Provisions) to distract him.")
             if not s.has_flag("giant_encountered") else None
@@ -72,12 +72,12 @@ def register(items, npcs):
         "A small, barren island with a single dark cave at its center. The mouth is blocked by a massive serpent coiled in the shadows.",
         detailed_desc=(
             "A small, barren island of grey stone and sparse grass. Nothing grows here — "
-            "the soil is too thin, the wind too harsh.\\n\\n"
+            "the soil is too thin, the wind too harsh.\n\n"
             "At the center of the island, a CAVE mouth yawns in the rock. It is dark inside, "
-            "but you can see a faint golden glow emanating from the depths — the glint of ancient treasure.\\n\\n"
+            "but you can see a faint golden glow emanating from the depths — the glint of ancient treasure.\n\n"
             "Coiled before the cave entrance is a massive SERPENT, its scales shimmering with "
             "a deep, oily green. It is the size of a small ship, and its body completely blocks "
-            "the way in. Its eyes — vertical slits of gold — open and fix on you with ancient hunger.\\n\\n"
+            "the way in. Its eyes — vertical slits of gold — open and fix on you with ancient hunger.\n\n"
             "It hisses, tasting the air. It knows what you want. It knows you will have to go through it."
         ),
         items=[],
@@ -104,9 +104,9 @@ def register(items, npcs):
         ),
         on_enter=lambda s: (
             (s.set_flag("serpent_encountered") or
-            "The serpent's head rises, blocking the cave completely.\\n\\n"
+            "The serpent's head rises, blocking the cave completely.\n\n"
             "'MINE,' it says, the word resonating deep in its throat. "
-            "'The gold is mine. The cave is mine. Turn back, little thief.'\\n\\n"
+            "'The gold is mine. The cave is mine. Turn back, little thief.'\n\n"
             "You catch a glimpse of gold beyond the serpent's coils. "
             "The treasure is close enough to touch — if you can get past the guardian.")
             if not s.has_flag("serpent_encountered") else None
@@ -123,13 +123,13 @@ def register(items, npcs):
         "A grassy mound rises from the sea. At its summit, a stone pedestal holds a gleaming silver torc. A massive hound lies beside it, ever watchful.",
         detailed_desc=(
             "A gentle, grassy island — a single green mound rising from the grey sea like the back of a "
-            "sleeping whale. The grass is soft and thick, and wildflowers grow in scattered patches.\\n\\n"
+            "sleeping whale. The grass is soft and thick, and wildflowers grow in scattered patches.\n\n"
             "At the summit of the mound stands a stone PEDESTAL, ancient and weathered. "
             "Upon it rests a SILVER TORC — a beautiful neck-ring of woven silver wire, "
-            "gleaming with the light of a thousand years. It is clearly a masterwork of ancient craftsmanship.\\n\\n"
+            "gleaming with the light of a thousand years. It is clearly a masterwork of ancient craftsmanship.\n\n"
             "Before the pedestal, curled like a guard who has never abandoned his post, lies a GREAT HOUND "
             "the size of a small horse. Its coat is iron-grey, and its eyes glow like banked embers. "
-            "It watches you approach with the patient stillness of a creature that has waited centuries.\\n\\n"
+            "It watches you approach with the patient stillness of a creature that has waited centuries.\n\n"
             "It does not attack. Not yet. But it makes it clear: the torc is not yours to take lightly."
         ),
         items=[items["silver_torc"]],
@@ -145,9 +145,9 @@ def register(items, npcs):
         ),
         on_enter=lambda s: (
             (s.set_flag("dog_encountered") or
-            "The Great Hound rises slowly, hackles raised. A low, rumbling growl issues from its chest.\\n\\n"
+            "The Great Hound rises slowly, hackles raised. A low, rumbling growl issues from its chest.\n\n"
             "It does not charge. It stands between you and the torc, watching, waiting. "
-            "This is not a beast of blind rage — this is a guardian of ancient purpose.\\n\\n"
+            "This is not a beast of blind rage — this is a guardian of ancient purpose.\n\n"
             "You could GIVE it food (Bowl of Milk, Everlasting Fruit) to earn passage, "
             "FIGHT it, or TALK to it with the Speaking Feather.")
             if not s.has_flag("dog_pacified") and not s.has_flag("dog_encountered") else None
@@ -164,14 +164,14 @@ def register(items, npcs):
         "A scrub-covered island with a large cave at its center. A mountain lion crouches before it, wounded and furious.",
         detailed_desc=(
             "A harsh island of scrub brush and sharp rocks. The wind whistles through the thorny bushes, "
-            "creating an eerie, keening sound.\\n\\n"
+            "creating an eerie, keening sound.\n\n"
             "At the center of the island, a wide CAVE mouth opens into the hillside. "
             "Before it, crouched in a posture of pure aggression, is a MOUNTAIN LION. "
             "Its coat is the colour of dried grass, and its muscles ripple beneath the skin "
-            "with coiled power.\\n\\n"
+            "with coiled power.\n\n"
             "But you notice something — a deep GASH along its flank, weeping and infected. "
             "The beast is in agony, and its fury is born of pain. Its roars are as much "
-            "anguish as anger.\\n\\n"
+            "anguish as anger.\n\n"
             "You could FIGHT it (with Magic Harpoon or Giant's Club), USE the Silver Bell to calm it, "
             "or TALK to it with the Speaking Feather to learn of its wound."
         ),
@@ -187,10 +187,10 @@ def register(items, npcs):
         on_enter=lambda s: (
             (s.set_flag("lion_encountered") or
             "The mountain lion roars — a raw, ragged sound that vibrates through your bones! "
-            "It bares its fangs and crouches, ready to spring.\\n\\n"
+            "It bares its fangs and crouches, ready to spring.\n\n"
             "But as it shifts its weight, the wound on its flank gapes open — "
             "a terrible, infected gash that oozes and smells of rot. "
-            "The beast is suffering. Its attacks are born of pain, not malice.\\n\\n"
+            "The beast is suffering. Its attacks are born of pain, not malice.\n\n"
             "You could FIGHT it (with Magic Harpoon, Giant's Club), USE the Silver Bell to calm it, "
             "or TALK to it with the Speaking Feather to learn more.")
             if not s.has_flag("lion_pacified") and not s.has_flag("lion_fought") and not s.has_flag("lion_encountered") else None
@@ -208,12 +208,12 @@ def register(items, npcs):
         detailed_desc=(
             "A solitary rock rises from the sea — barely large enough to be called an island. "
             "On it, a small CAVE has been worn into the stone by wind and wave. Inside, "
-            "a single CANDLE burns with a flame that does not flicker, though the wind howls outside.\\n\\n"
+            "a single CANDLE burns with a flame that does not flicker, though the wind howls outside.\n\n"
             "Sitting cross-legged at the mouth of the cave is a man in a simple grey robe. "
             "His face is weathered by decades of salt spray and contemplation. His eyes are calm — "
-            "the calm of someone who has stopped running. Beside him, a small wooden cross rests on a stone.\\n\\n"
+            "the calm of someone who has stopped running. Beside him, a small wooden cross rests on a stone.\n\n"
             "He looks up as you approach, and smiles — a warm, genuine smile that makes the grey day "
-            "feel brighter. The sea around the rock is unusually calm, as if the water itself respects his peace.\\n\\n"
+            "feel brighter. The sea around the rock is unusually calm, as if the water itself respects his peace.\n\n"
             "There is nothing to take here. No treasure. No puzzle. "
             "Only a man who has been waiting to speak with you."
         ),
@@ -226,10 +226,10 @@ def register(items, npcs):
         ),
         on_enter=lambda s: (
             (s.set_flag("met_anchorite") or
-            "The Anchorite looks up and smiles.\\n\\n"
-            "'Sit, Mael Duin. Rest. You have travelled far.\\n\\n"
+            "The Anchorite looks up and smiles.\n\n"
+            "'Sit, Mael Duin. Rest. You have travelled far.\n\n"
             "The sea has shown you many wonders. But the greatest wonder — the one you have been "
-            "sailing toward all along — is the one you carry inside you.\\n\\n"
+            "sailing toward all along — is the one you carry inside you.\n\n"
             "Let us talk.'")
             if not s.has_flag("met_anchorite") else None
         ),

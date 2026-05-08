@@ -272,7 +272,9 @@ def handle_go(state, direction):
         "homecoming": "homecoming",
         "in": "in", "inside": "in", "enter": "in",
         "cross": "cross", "bridge": "cross",
+        "ride": "ride", "mount": "ride",
         "out": "out", "exit": "out", "leave": "out",
+        "door": "out",
         "through": "through",
         "climb": "climb",
         "gold": "gold",
@@ -577,7 +579,7 @@ def handle_crew(state, args):
         lines.append("\n--- Lost ---")
         for c in dead:
             lines.append(f"  {c.name} - {c.role}")
-    lines.append(f"\n{alive} alive, {len(dead)} lost")
+    lines.append(f"\n{len(alive)} alive, {len(dead)} lost")
     return "\n".join(lines)
 
 
@@ -743,6 +745,38 @@ def handle_yes(state, args):
         state.set_flag("left_women")
         state.current_location = "sea1"
         return handle_look(state, [])
+    elif state.awaiting_choice == "palace_stay":
+        state.set_flag("stayed_in_palace")
+        state.days += 14
+        state.score += 1
+        return (
+            'You stay. "Yes," you whisper. "I will stay."\n\n'
+            "The woman's smile widens. The days blur into weeks. The enchantment wraps around you like silk...\n\n"
+            "But you were born of the sea, and the sea calls to you. You wake one morning, pack your things, "
+            "and leave before the woman wakes. Your crew follows, bleary-eyed but loyal.\n\n"
+            "You have lost time, but not your purpose. The voyage continues."
+        )
+    elif state.awaiting_choice == "promised_land":
+        state.set_flag("stayed_in_promised_land")
+        state.game_over = True
+        state.won = True
+        state.awaiting_choice = None
+        islands_visited = sum(1 for k in state.flags if k.endswith("_visited"))
+        state.score += islands_visited * 3
+        return (
+            'You say YES.\n\n'
+            "The Guardian of Peace smiles — a smile that contains the warmth of a thousand suns.\n\n"
+            "'You have chosen well, Mael Duin. You have crossed the edges of the world, "
+            "braved wonders and horrors, and now you have come home to the place that was always waiting for you.'\n\n"
+            "Your crew steps forward, one by one, and the shimmering land enfolds them.\n\n"
+            "There is no pain here. No hunger. No death. The rivers run with wine and honey.\n\n"
+            "You stay. Forever.\n\n"
+            "=== THE END ===\n"
+            "Thank you for playing The Voyage of Mael Duin.\n"
+            f"Final score: {state.score} | "
+            f"Islands visited: {islands_visited}\n\n"
+            '"The Promised Land is not a place. It is a decision."'
+        )
     return "Yes to what? There's no pending choice."
 
 
@@ -770,6 +804,36 @@ def handle_no(state, args):
         return "You have already made your choice. The path of forgiveness cannot be undone."
     elif state.awaiting_choice == "ending_vengeance":
         return "You have already made your choice. The path of vengeance cannot be undone."
+    elif state.awaiting_choice == "palace_stay":
+        state.set_flag("left_palace")
+        state.score += 3
+        state.awaiting_choice = None
+        return (
+            '"No," you say firmly. "I must continue my quest."\n\n'
+            "The woman's smile does not waver. 'As you wish, Mael Duin. "
+            "The palace will remember you.'\n\n"
+            "You turn and walk back across the glass bridge. "
+            "The wind is cold, but it is real. You are free."
+        )
+    elif state.awaiting_choice == "promised_land":
+        state.awaiting_choice = None
+        state.set_flag("refused_promised_land")
+        state.score += 5
+        from .levels._shared import items as items_mod
+        wind = items_mod.get("wind_of_return")
+        if wind and wind not in state.inventory:
+            state.inventory.append(wind)
+        return (
+            'You shake your head. "No," you say firmly. "I cannot stay. There is a life waiting for me — '
+            "a home, a people, a story that is not yet finished.'\n\n"
+            "The Guardian of Peace nods slowly, its expression unchanged — still warm, still kind.\n\n"
+            "'I understand. The world beyond calls to you. Your story is not yet finished. "
+            "Take this — the Wind of Return. When you are ready, use it to sail home. "
+            "It will carry you across the sea with unerring certainty.'\n\n"
+            "The Guardian places a sealed glass bottle in your hands. Inside, a tiny whirlwind spins endlessly.\n\n"
+            "'Go with my blessing, Mael Duin. And remember: you carry home with you now.'\n\n"
+            "(+5 points. Gained: Wind of Return)"
+        )
     return "No to what? There's no pending choice."
 
 
@@ -1073,7 +1137,9 @@ def parse_command(text):
         "homecoming": "homecoming",
         "in": "in", "inside": "in", "enter": "in",
         "cross": "cross", "bridge": "cross",
+        "ride": "ride", "mount": "ride",
         "out": "out", "exit": "out", "leave": "out",
+        "door": "out",
         "through": "through",
         "climb": "climb", "up": "up",
         "gold": "gold",

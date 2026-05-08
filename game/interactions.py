@@ -93,12 +93,12 @@ def _give_laughing_potion_to_king(state, item, npc):
     state.score += 2
     return (
         'You offer the Laughing Potion back to the king. His eyes light up — well, '
-        'they were already lit up, but now they sparkle like exploding stars.\\n\\n'
+        'they were already lit up, but now they sparkle like exploding stars.\n\n'
         '"OH! My own potion! I lost it ages ago! I\'ve been trying to laugh without it '
-        'and let me tell you — it\'s EXHAUSTING!"\\n\\n'
+        'and let me tell you — it\'s EXHAUSTING!"\n\n'
         'He uncorks it and takes a sip. Instantly, his laughter changes pitch — '
-        'it\'s now a perfect harmonised duet with itself. The entire island joins in.\\n\\n'
-        '"Take ANYTHING you want!" he wheezes. "Except my stool. I need the stool."\\n\\n'
+        'it\'s now a perfect harmonised duet with itself. The entire island joins in.\n\n'
+        '"Take ANYTHING you want!" he wheezes. "Except my stool. I need the stool."\n\n'
         "(+2 points. The king is eternally grateful.)"
     )
 
@@ -107,12 +107,12 @@ def _give_prophecy_scroll_to_druid(state, item, npc):
     state.score += 3
     return (
         'The druid reads the scroll and nods slowly. His milky eyes seem to focus '
-        'on something far beyond the parchment.\\n\\n'
+        'on something far beyond the parchment.\n\n'
         '"So... the prophetic boy confirms what the wind has been whispering. '
         'Your father\'s murderers are not the true quarry, Mael Duin. The real '
-        'treasure lies in what you become along the way."\\n\\n'
+        'treasure lies in what you become along the way."\n\n'
         'He hands the scroll back to you. "Keep it. Read it again when you reach '
-        'the end of your journey. The words will have changed by then."\\n\\n'
+        'the end of your journey. The words will have changed by then."\n\n'
         "(+3 points. The druid's cryptic wisdom intensifies.)"
     )
 
@@ -122,13 +122,13 @@ def _give_pearl_to_queen(state, item, npc):
     state.set_flag("pearl_given_to_queen")
     return (
         'The queen examines the pearl with cold interest. She holds it up to the '
-        'light, and for a moment the entire room glows with an inner luminescence.\\n\\n'
+        'light, and for a moment the entire room glows with an inner luminescence.\n\n'
         '"A sea pearl from the Cat\'s Island. How... thoughtful. The cat must have '
-        'liked you. It doesn\'t give these to just anyone."\\n\\n'
+        'liked you. It doesn\'t give these to just anyone."\n\n'
         'She slips it into a hidden pocket in her gown. "You may stay another night '
-        'if you wish. Or you may leave. The pearl has bought you freedom either way."\\n\\n'
+        'if you wish. Or you may leave. The pearl has bought you freedom either way."\n\n'
         'There is something sad in her voice now, as if the pearl reminded her of '
-        'a life she once had before the island.\\n\\n'
+        'a life she once had before the island.\n\n'
         "(+3 points. The queen is slightly less ominous now.)"
     )
 
@@ -137,13 +137,13 @@ def _give_magic_harpoon_to_smith(state, item, npc):
     state.score += 2
     return (
         'The smith admires his own work with the pride of a parent whose child just '
-        'won a footrace.\\n\\n'
+        'won a footrace.\n\n'
         '"Ah, the Magic Harpoon! I remember forging this. The trick was the quenching '
-        '— I used the tears of a sea monster. Gives it that... zing."\\n\\n'
+        '— I used the tears of a sea monster. Gives it that... zing."\n\n'
         'He tosses it back to you. "Keep it, little man. A weapon should be used, '
         'not admired. Though I do admire it. It\'s beautiful. Look at those spirals. '
-        'Perfection."\\n\\n'
-        'He wipes a tear from his soot-streaked cheek.\\n\\n'
+        'Perfection."\n\n'
+        'He wipes a tear from his soot-streaked cheek.\n\n'
         "(+2 points. The smith is emotionally moved by his own craftsmanship.)"
     )
 
@@ -152,13 +152,13 @@ def _give_silver_bell_to_hermit(state, item, npc):
     state.score += 2
     return (
         'The hermit rings the bell softly. A pure, clear tone washes across the '
-        'rock, and for a moment even the waves seem to hold their breath.\\n\\n'
+        'rock, and for a moment even the waves seem to hold their breath.\n\n'
         '"This bell was forged in the Island of the Culdees. Its ring carries the '
         'prayers of a hundred holy men. It calms not storms, but the heart that '
-        'braves them."\\n\\n'
+        'braves them."\n\n'
         'He hands it back. "Keep it. Ring it when the despair of your quest '
-        'threatens to drown you. The sound will remind you that you are not alone."\\n\\n'
-        'The otter at his feet chirps in agreement.\\n\\n'
+        'threatens to drown you. The sound will remind you that you are not alone."\n\n'
+        'The otter at his feet chirps in agreement.\n\n'
         "(+2 points. A moment of peace washes over you.)"
     )
 
@@ -168,12 +168,12 @@ def _give_glass_shard_to_cat(state, item, npc):
     return (
         'The cat bats at the shard like a toy, rolling it across the floor '
         'with a massive paw. The shard catches the light and throws rainbows '
-        'across the walls.\\n\\n'
+        'across the walls.\n\n'
         '"Ooooh. Shiny. Moving. Dangerous. This is the best thing a human has ever '
         'given me. I shall treasure it until I get bored, which will be in '
-        'approximately three minutes."\\n\\n'
+        'approximately three minutes."\n\n'
         'The cat stares at the shard, mesmerised. You take the opportunity to '
-        'back away slowly.\\n\\n'
+        'back away slowly.\n\n'
         "(+1 point. The cat is entertained. For now.)"
     )
 
@@ -183,15 +183,15 @@ def _give_golden_apple_to_pig(state, item, npc):
     state.set_flag("pig_pacified")
     return (
         'The pig wakes up and snorts, its massive nostrils flaring. It fixes '
-        'its beady eyes on the golden apple in your hand.\\n\\n'
+        'its beady eyes on the golden apple in your hand.\n\n'
         'For a moment, nothing happens. Then the pig charges — not at you, '
         'but past you, circling back with surprising grace for a creature of its bulk. '
         'It comes to a halt in front of you and sits, like a very large, very '
-        'menacing dog waiting for a treat.\\n\\n'
+        'menacing dog waiting for a treat.\n\n'
         'You toss the apple. The pig catches it in mid-air with a crunch that '
         'sounds like a tree falling. It chews happily, and golden juice drips '
-        'from its jowls.\\n\\n'
-        'When it finishes, it lies down and goes back to sleep, blocking nothing.\\n\\n'
+        'from its jowls.\n\n'
+        'When it finishes, it lies down and goes back to sleep, blocking nothing.\n\n'
         "(+3 points. The pig is content. You may pass freely.)"
     )
 
@@ -201,14 +201,14 @@ def _give_antidote_herb_to_serpent(state, item, npc):
     state.set_flag("serpent_calmed")
     return (
         'The serpent tastes the herb and relaxes. Its massive coiled body '
-        'unwinds slowly, like a rope being unravelled by a very careful god.\\n\\n'
+        'unwinds slowly, like a rope being unravelled by a very careful god.\n\n'
         'The serpent\'s forked tongue flicks out, sampling the air. Its eyes, '
         'which were slits of pure menace, soften into something almost resembling '
-        'gratitude.\\n\\n'
+        'gratitude.\n\n'
         '"The herb," it hisses, "is the only thing that grows on this island that '
         'I cannot digest. It is my weakness. You have shown me mercy. I will '
-        'remember this."\\n\\n'
-        'It slithers aside, clearing the path ahead.\\n\\n'
+        'remember this."\n\n'
+        'It slithers aside, clearing the path ahead.\n\n'
         "(+3 points. The great serpent is no longer your enemy.)"
     )
 
@@ -218,13 +218,13 @@ def _give_otter_pelt_to_hermit(state, item, npc):
     state.set_flag("otter_pelt_returned")
     return (
         'The hermit sadly accepts his otter\'s pelt, his hands trembling. '
-        'He holds it to his chest and closes his eyes.\\n\\n'
+        'He holds it to his chest and closes his eyes.\n\n'
         '"My companion... my friend. I thought I had lost him to the sea, '
-        'but it seems he simply... shed his old skin and moved on."\\n\\n'
+        'but it seems he simply... shed his old skin and moved on."\n\n'
         'He looks at you with wet eyes. "You have brought me closure, Mael Duin. '
         'It is a gift more precious than gold. The otter is in a better place now — '
-        'probably chasing fish in the Great Stream beyond the sky."\\n\\n'
-        'He wraps the pelt around his shoulders. It fits perfectly.\\n\\n'
+        'probably chasing fish in the Great Stream beyond the sky."\n\n'
+        'He wraps the pelt around his shoulders. It fits perfectly.\n\n'
         '(The hermit looks a little warmer now. And a little more at peace.)'
     )
 
@@ -234,9 +234,9 @@ def _give_everlasting_fruit_to_any(state, item, npc):
     return (
         f'You offer the Everlasting Fruit to {npc.name}. They take a bite. '
         'Nothing happens. They take another bite. Still nothing. '
-        f'They look at the fruit, then at you. "{npc.name} looks unimpressed."\\n\\n'
+        f'They look at the fruit, then at you. "{npc.name} looks unimpressed."\n\n'
         'They take a third bite. The fruit looks exactly the same as when you '
-        'offered it. They sigh and hand it back.\\n\\n'
+        'offered it. They sigh and hand it back.\n\n'
         '"It tastes like nothing," they say. "And yet, also like disappointment."'
     )
 
@@ -543,12 +543,12 @@ def _use_silver_net_on_fish(state, item, target):
     state.set_flag("golden_fish_caught")
     return (
         'You cast the Silver Net into the water, and it shimmers as it descends — '
-        'not sinking, but floating downward like a ghost made of moonlight.\\n\\n'
+        'not sinking, but floating downward like a ghost made of moonlight.\n\n'
         'The net catches the golden fish. It doesn\'t struggle. In fact, it '
         'seems almost relieved, as if being caught was the only thing it had '
-        'been waiting for.\\n\\n'
+        'been waiting for.\n\n'
         'You pull it up. The golden fish gleams in the sunlight, its scales '
-        'catching every colour of the rainbow. It\'s solid gold. Very, very heavy.\\n\\n'
+        'catching every colour of the rainbow. It\'s solid gold. Very, very heavy.\n\n'
         "(+2 points. The Golden Fish is yours! It's probably worth something.)"
     )
 
@@ -558,10 +558,10 @@ def _use_glass_shard_on_bridge(state, item, target):
     state.score += 2
     return (
         'You use the shard to test the glass bridge. Tapping it gently, you hear '
-        'a clear, resonant ping that echoes across the chasm. The bridge seems solid.\\n\\n'
+        'a clear, resonant ping that echoes across the chasm. The bridge seems solid.\n\n'
         'But as you watch, the shard suddenly vibrates in your hand and emits a '
-        'single word in a voice like breaking ice: "SAFE."\\n\\n'
-        'Then it goes quiet. The glass bridge glitters innocently.\\n\\n'
+        'single word in a voice like breaking ice: "SAFE."\n\n'
+        'Then it goes quiet. The glass bridge glitters innocently.\n\n'
         "(+2 points. The bridge is safe to cross. The shard has spoken.)"
     )
 
@@ -573,12 +573,12 @@ def _use_laughing_potion_on_water_horse(state, item, target):
         'The kelpie drinks the potion and starts laughing. At first it\'s a '
         'horse laugh — a whinnying, snorting thing. But then it grows deeper, '
         'more human, more unhinged. The Water Horse rolls onto its back, '
-        'hooves kicking the air, absolutely losing its equine mind.\\n\\n'
+        'hooves kicking the air, absolutely losing its equine mind.\n\n'
         '"I CAN\'T STOP! HA HA HA! I WAS GOING TO DROWN YOU AND EAT YOUR SOUL '
-        'BUT NOW I CAN\'T STOP LAUGHING! THIS IS THE BEST DAY OF MY AFTERLIFE!"\\n\\n'
+        'BUT NOW I CAN\'T STOP LAUGHING! THIS IS THE BEST DAY OF MY AFTERLIFE!"\n\n'
         'It laughs so hard that it can\'t maintain its magical footing and '
-        'sinks into the sea, still cackling. The waters quiet down.\\n\\n'
-        "The danger has passed — drowned in giggles.\\n\\n"
+        'sinks into the sea, still cackling. The waters quiet down.\n\n'
+        "The danger has passed — drowned in giggles.\n\n"
         "(+4 points. The Water Horse is neutralised by comedy.)"
     )
 
@@ -589,11 +589,11 @@ def _use_fiery_ash_on_pigs(state, item, target):
     return (
         'The pigs snort at the ash. They sniff it, snuffle it, and then — '
         'impossibly — they start rolling in it like dogs finding a particularly '
-        'delicious patch of mud.\\n\\n'
+        'delicious patch of mud.\n\n'
         'The Fiery Ash extinguishes their flaming bristles with a sizzle. '
         'One by one, the pigs go from "raging inferno" to "slightly warm pig" '
-        'to "confused, naked-looking pig."\\n\\n'
-        'They grunt contentedly and wander off to find a real mud puddle.\\n\\n'
+        'to "confused, naked-looking pig."\n\n'
+        'They grunt contentedly and wander off to find a real mud puddle.\n\n'
         "(+3 points. The pigs are no longer on fire. They seem grateful."
         " Or indifferent. It's hard to tell with pigs.)"
     )
@@ -631,11 +631,11 @@ def _use_magic_thread_on_mast(state, item, target):
     return (
         'You tie the Magic Thread to the mast, just as the druid instructed. '
         'It glows softly and begins to hum — a low, resonant note that seems '
-        'to harmonise with the wind itself.\\n\\n'
+        'to harmonise with the wind itself.\n\n'
         'The thread tightens, then points forward, like a compass needle made '
         'of silk and starlight. Fergus whistles. "That\'s not normal navigation, '
-        'Captain. That\'s... well, that\'s magic."\\n\\n'
-        'The ship glides forward as if guided by an invisible hand.\\n\\n'
+        'Captain. That\'s... well, that\'s magic."\n\n'
+        'The ship glides forward as if guided by an invisible hand.\n\n'
         "(+3 points. The Magic Thread will guide you through the mists.)"
     )
 
@@ -646,17 +646,17 @@ def _use_truth_ring_on_queen(state, item, target):
     return (
         'You present the Truth Ring to the Queen. The moment her finger touches '
         'the silver band, her eyes go wide. Her perfect composure cracks — '
-        'no, shatters.\\n\\n'
+        'no, shatters.\n\n'
         '"I... I can\'t... the ring forces me to speak truth. I know not what '
-        'I say!"\\n\\n'
-        'She tries to pull it off, but it won\'t budge. She takes a deep breath.\\n\\n'
+        'I say!"\n\n'
+        'She tries to pull it off, but it won\'t budge. She takes a deep breath.\n\n'
         '"Fine. You want the truth? This island is a prison. I am not a queen — '
         'I am a guardian. I keep travelers here because the sea beyond is '
         'more dangerous than any enchantment I could weave. The men who killed '
         'your father... they are not the monsters you seek. The real monsters '
-        'lie where the sun sets."\\n\\n'
+        'lie where the sun sets."\n\n'
         'She collapses into her throne, exhausted. The ring falls from her '
-        'finger, its work done.\\n\\n'
+        'finger, its work done.\n\n'
         "(+4 points. The truth is rarely pretty, but it's always useful.)"
     )
 
@@ -702,13 +702,13 @@ def _use_hermit_blessing_on_serpent(state, item, target):
     state.score += 3
     return (
         'You hold the Hermit\'s Blessing before the great serpent. It recoils '
-        'at first, hissing, but then — impossibly — it lowers its head.\\n\\n'
+        'at first, hissing, but then — impossibly — it lowers its head.\n\n'
         'The wooden cross glows with a soft, warm light. The serpent\'s '
         'venomous fangs retract. Its scales change from poisonous green to a '
-        'peaceful blue.\\n\\n'
+        'peaceful blue.\n\n'
         '"The blessing of the holy man," the serpent whispers. "I have not felt '
-        'its warmth since I was but a hatchling. Thank you, Mael Duin."\\n\\n'
-        'It coils peacefully and allows you to pass.\\n\\n'
+        'its warmth since I was but a hatchling. Thank you, Mael Duin."\n\n'
+        'It coils peacefully and allows you to pass.\n\n'
         "(+3 points. Even serpents need blessings sometimes.)"
     )
 
@@ -760,7 +760,7 @@ def _use_heavy_item_on_gears(state, item, target):
     if item.id not in heavy_items:
         return (
             f"You throw the {item.name} into the gears. The great wheels chew it up "
-            f"and grind on, unperturbed. Your item is destroyed.\\n\\n"
+            f"and grind on, unperturbed. Your item is destroyed.\n\n"
             "You need something heavier — something that can actually jam the mechanism."
         )
 
@@ -771,15 +771,15 @@ def _use_heavy_item_on_gears(state, item, target):
     if grain and grain not in state.inventory:
         state.inventory.append(grain)
     return (
-        f"You hurl the {item.name} into the massive gears! It strikes with a deafening CRUNCH.\\n\\n"
+        f"You hurl the {item.name} into the massive gears! It strikes with a deafening CRUNCH.\n\n"
         "The mill shudders. The great wheels grind to a halt, metal screaming against metal. "
-        "With a final, groaning sigh, the mill falls silent.\\n\\n"
+        "With a final, groaning sigh, the mill falls silent.\n\n"
         "The silence is profound. Your crew cheers. The old guardian emerges from the shadows, "
-        "tears streaming down his flour-dusted face.\\n\\n"
-        "'Sixty years,' he whispers. 'Sixty years of grinding. And now... silence.'\\n\\n"
+        "tears streaming down his flour-dusted face.\n\n"
+        "'Sixty years,' he whispers. 'Sixty years of grinding. And now... silence.'\n\n"
         "Where the millstone was grinding, a hidden compartment has been revealed — "
-        "a small alcove filled with golden grain. It glows with a soft, warm light.\\n\\n"
-        "You take a handful of the Ever-Grinding Grain — a grain that multiplies endlessly.\\n\\n"
+        "a small alcove filled with golden grain. It glows with a soft, warm light.\n\n"
+        "You take a handful of the Ever-Grinding Grain — a grain that multiplies endlessly.\n\n"
         f"(+5 points. Gained: Ever-Grinding Grain)"
     )
 
@@ -793,13 +793,13 @@ def _use_magic_thread_on_mast_wall(state, item, target):
     state.set_flag("wall_crossed")
     state.score += 3
     return (
-        "You untie the Magic Thread from the mast and hold it before the Wall of Water.\\n\\n"
+        "You untie the Magic Thread from the mast and hold it before the Wall of Water.\n\n"
         "The thread glows with sudden, brilliant light — a silver fire that pulses in rhythm with your heartbeat. "
-        "It stretches toward the wall, touching it gently.\\n\\n"
+        "It stretches toward the wall, touching it gently.\n\n"
         "For a moment, nothing happens. Then the wall begins to sing — a deep, resonant note "
-        "that vibrates in your chest. The water parts, drawing aside like a curtain.\\n\\n"
-        "A path opens through the wall. On the other side, the sea is calm and clear.\\n\\n"
-        "Your crew stares in awe. Fergus crosses himself. 'The druid's thread... it was meant for this.'\\n\\n"
+        "that vibrates in your chest. The water parts, drawing aside like a curtain.\n\n"
+        "A path opens through the wall. On the other side, the sea is calm and clear.\n\n"
+        "Your crew stares in awe. Fergus crosses himself. 'The druid's thread... it was meant for this.'\n\n"
         "(+3 points. The Wall of Water is parted. You may now pass.)"
     )
 
@@ -813,13 +813,13 @@ def _use_silver_bell_on_wall(state, item, target):
     state.set_flag("wall_crossed")
     state.score += 3
     return (
-        "You ring the Silver Bell before the Wall of Water. A pure, clear note rings out across the sea.\\n\\n"
+        "You ring the Silver Bell before the Wall of Water. A pure, clear note rings out across the sea.\n\n"
         "The wall shivers. Ripples race across its surface — thousands of them — like a struck gong made of water. "
-        "The humming changes pitch, rising higher and higher, until...\\n\\n"
+        "The humming changes pitch, rising higher and higher, until...\n\n"
         "The wall collapses. Not violently — but gently, gracefully, like a dancer bowing at the end of a performance. "
-        "Millions of tons of water fall into the sea, creating a wave that lifts your curragh and sets it down gently.\\n\\n"
-        "The sea is calm once more. The way is clear.\\n\\n"
-        "Diurán wipes his brow. 'I'll put that in the poem. Definitely.'\\n\\n"
+        "Millions of tons of water fall into the sea, creating a wave that lifts your curragh and sets it down gently.\n\n"
+        "The sea is calm once more. The way is clear.\n\n"
+        "Diurán wipes his brow. 'I'll put that in the poem. Definitely.'\n\n"
         "(+3 points. The Wall of Water is calmed.)"
     )
 
@@ -836,13 +836,13 @@ def _use_speaking_feather_on_oxen(state, item, target):
         state.inventory.append(horn)
     return (
         "You hold the Speaking Feather before the Sacred Oxen. It whispers — "
-        "and the oxen's ears pivot forward.\\n\\n"
-        "The larger ox lows, and the feather translates:\\n\\n"
+        "and the oxen's ears pivot forward.\n\n"
+        "The larger ox lows, and the feather translates:\n\n"
         "'You carry the voice of the ancient birds. You are welcome here, Mael Duin. "
         "We have guarded this horn since before your people learned to sail. "
         "But the time of guarding is over. Take it — use it wisely. When you blow the Golden Horn, "
-        "we will hear it, even across the sea.'\\n\\n"
-        "The ox lowers its head, and the golden horn slides free — a gift, willingly given.\\n\\n"
+        "we will hear it, even across the sea.'\n\n"
+        "The ox lowers its head, and the golden horn slides free — a gift, willingly given.\n\n"
         "(+3 points. Gained: Golden Horn)"
     )
 
@@ -856,15 +856,15 @@ def _use_silver_bell_on_horses(state, item, target):
     state.set_flag("horses_pacified")
     state.score += 3
     return (
-        "You ring the Silver Bell. A pure, clear note rings out across the island.\\n\\n"
+        "You ring the Silver Bell. A pure, clear note rings out across the island.\n\n"
         "The giant horses freeze. Their ears swivel toward the sound. The Stallion King "
-        "turns his massive head, and for a long moment, there is silence.\\n\\n"
+        "turns his massive head, and for a long moment, there is silence.\n\n"
         "Then the Stallion King walks toward you — not aggressively, but curiously. "
-        "He stops before you and bows his head. The herd follows suit, lowering their heads in unison.\\n\\n"
+        "He stops before you and bows his head. The herd follows suit, lowering their heads in unison.\n\n"
         "The Stallion King nuzzles your hand. You reach up and touch his mane — "
-        "and a single strand of it comes away in your hand, weaving itself into a bridle.\\n\\n"
+        "and a single strand of it comes away in your hand, weaving itself into a bridle.\n\n"
         "The Stallion King meets your eyes. His meaning is clear: 'Ride well, little one. "
-        "This bridle will carry you across the waves faster than any wind.'\\n\\n"
+        "This bridle will carry you across the waves faster than any wind.'\n\n"
         "(+3 points. Gained: Horsehair Bridle)"
     )
 
@@ -882,14 +882,14 @@ def _use_otter_pelt_on_horses(state, item, target):
     if bridle and bridle not in state.inventory:
         state.inventory.append(bridle)
     return (
-        "You hold out the Otter Pelt. The smell of sea and animal reaches the Stallion King's nostrils.\\n\\n"
+        "You hold out the Otter Pelt. The smell of sea and animal reaches the Stallion King's nostrils.\n\n"
         "He snorts — a sound that might be surprise, might be recognition. He walks toward you "
-        "and sniffs the pelt thoroughly. His ears relax. His stance softens.\\n\\n"
+        "and sniffs the pelt thoroughly. His ears relax. His stance softens.\n\n"
         "He lowers his head and, with surprising gentleness, rubs his cheek against the pelt. "
-        "The herd follows, snorting and stamping in what seems like approval.\\n\\n"
+        "The herd follows, snorting and stamping in what seems like approval.\n\n"
         "A single strand of the Stallion King's mane drifts down and weaves itself into a bridle "
-        "at your feet. A gift — freely given.\\n\\n"
-        "The Stallion King meets your eyes: 'You understand the old ways. This bridle is yours.'\\n\\n"
+        "at your feet. A gift — freely given.\n\n"
+        "The Stallion King meets your eyes: 'You understand the old ways. This bridle is yours.'\n\n"
         "(+3 points. Gained: Horsehair Bridle)"
     )
 
@@ -918,12 +918,12 @@ def _use_revolving_key_on_castle(state, item, target):
     state.set_flag("castle_unlocked")
     state.score += 3
     return (
-        "You insert the Revolving Key into the lock of the Red Door just as it aligns with the platform.\\n\\n"
+        "You insert the Revolving Key into the lock of the Red Door just as it aligns with the platform.\n\n"
         "The key turns with a satisfying CLICK. The castle shudders — a deep, groaning sound — "
-        "and slowly, ponderously, it stops revolving.\\n\\n"
-        "The Red Door swings open, revealing a dark entrance hallway beyond. The other doors freeze mid-position.\\n\\n"
-        "The castle is still. For the first time in centuries, the turning world has stopped.\\n\\n"
-        "Diurán whispers: 'You stopped a castle. That\\'s going in the poem.'\\n\\n"
+        "and slowly, ponderously, it stops revolving.\n\n"
+        "The Red Door swings open, revealing a dark entrance hallway beyond. The other doors freeze mid-position.\n\n"
+        "The castle is still. For the first time in centuries, the turning world has stopped.\n\n"
+        "Diurán whispers: 'You stopped a castle. That\\'s going in the poem.'\n\n"
         "(+3 points. The Revolving Castle is now open.)"
     )
 _register_use("revolving_key", "door", _use_revolving_key_on_castle)
@@ -967,18 +967,19 @@ def _use_sharp_item_on_fish_belly(state, item, target):
         return "There is no fish belly here to cut through."
     state.set_flag("escaped_fish")
     state.score += 4
+    state.current_location = "great_fish_carcass"
     from .levels._shared import items as shared_items
     tooth = shared_items.get("fish_tooth")
     if tooth and tooth not in state.inventory:
         state.inventory.append(tooth)
     return (
-        "You take the sharp item and drive it deep into the pulsing wall of the fish's belly!\\\\n\\\\n"
+        "You take the sharp item and drive it deep into the pulsing wall of the fish's belly!\\\n\\\n"
         "The creature convulses. The walls contract around you, squeezing — but you hold on, "
-        "cutting, slashing, tearing through flesh and sinew.\\\\n\\\\n"
-        "Light pours through the wound — pale, grey, beautiful light. The sea. The sky. Freedom.\\\\n\\\\n"
+        "cutting, slashing, tearing through flesh and sinew.\\\n\\\n"
+        "Light pours through the wound — pale, grey, beautiful light. The sea. The sky. Freedom.\\\n\\\n"
         "You tumble out onto the fish's back, gasping for air. Your crew follows, one by one, "
-        "covered in slime but alive.\\\\n\\\\n"
-        "Between the fish's gaping jaws, you spot a massive serrated tooth. You prise it free.\\\\n\\\\n"
+        "covered in slime but alive.\\\n\\\n"
+        "Between the fish's gaping jaws, you spot a massive serrated tooth. You prise it free.\\\n\\\n"
         "(+4 points. Gained: Fish Tooth. The Great Fish is dead; you are free.)"
     )
 
@@ -991,19 +992,20 @@ def _use_fiery_ash_on_fish_belly(state, item, target):
         return "There is no fish belly here to burn."
     state.set_flag("escaped_fish")
     state.score += 4
+    state.current_location = "great_fish_carcass"
     from .levels._shared import items as shared_items
     tooth = shared_items.get("fish_tooth")
     if tooth and tooth not in state.inventory:
         state.inventory.append(tooth)
     return (
         "You scatter the Fiery Ash against the fish's inner wall. The embers catch — "
-        "the wet flesh sizzles and blackens, then bursts into flame.\\\\n\\\\n"
+        "the wet flesh sizzles and blackens, then bursts into flame.\\\n\\\n"
         "The fish shudders violently. The fire spreads, eating through the blubber and muscle. "
-        "Your crew presses against the far wall as the heat intensifies.\\\\n\\\\n"
+        "Your crew presses against the far wall as the heat intensifies.\\\n\\\n"
         "Then — a roar, a shudder, and the wall collapses outward. You fall through into daylight, "
-        "landing on the fish's smoldering back.\\\\n\\\\n"
+        "landing on the fish's smoldering back.\\\n\\\n"
         "The Great Fish is dead, roasted from the inside. Its jaws hang open, revealing "
-        "a single massive tooth. You take it as a trophy.\\\\n\\\\n"
+        "a single massive tooth. You take it as a trophy.\\\n\\\n"
         "(+4 points. Gained: Fish Tooth. You burned your way to freedom.)"
     )
 
@@ -1018,10 +1020,10 @@ def _use_fountain_water_on_crew(state, item, target):
     return (
         "You pour the milk-white Fountain Water onto the crew member's wounds. "
         "The water glows brightly, and the injuries seal themselves — cuts close, "
-        "bruises fade, and the color returns to their face.\\\\n\\\\n"
+        "bruises fade, and the color returns to their face.\\\n\\\n"
         "They sit up, blinking. 'What... what was that? I feel like I just slept "
-        "for a week. And had a really good dream about a cow.'\\\\n\\\\n"
-        "The Fountain Water has done its work. Your crew member is healed.\\\\n\\\\n"
+        "for a week. And had a really good dream about a cow.'\\\n\\\n"
+        "The Fountain Water has done its work. Your crew member is healed.\\\n\\\n"
         "(+3 points. The Fountain Water works its healing magic.)"
     )
 
@@ -1031,13 +1033,13 @@ def _use_silent_bell_on_creature(state, item, target):
     state.set_flag("bell_rang_silently")
     state.score += 3
     return (
-        "You ring the Silent Bell. No sound emerges — but everything around you STILLS.\\\\n\\\\n"
+        "You ring the Silent Bell. No sound emerges — but everything around you STILLS.\\\n\\\n"
         "The creature before you freezes mid-motion. Its eyes go wide, then soften. "
-        "Its aggression drains away like water from a cracked vessel.\\\\n\\\\n"
+        "Its aggression drains away like water from a cracked vessel.\\\n\\\n"
         "It sits down, docile and calm, as if the very concept of violence has been "
-        "removed from its mind. It looks at you with something like gratitude.\\\\n\\\\n"
+        "removed from its mind. It looks at you with something like gratitude.\\\n\\\n"
         "The Silent Bell's power is strange — it does not silence sound, but silence "
-        "the will to fight.\\\\n\\\\n"
+        "the will to fight.\\\n\\\n"
         "(+3 points. The creature is calmed by the silent ringing.)"
     )
 
@@ -1055,13 +1057,13 @@ def _use_wind_of_return_on_ship(state, item, target):
     return (
         "You unseal the Wind of Return. The bottle's wax seal breaks with a soft pop, "
         "and a warm, steady wind fills your sails. It carries a scent of turf smoke, "
-        "fresh bread, and rain on green grass.\\\\n\\\\n"
+        "fresh bread, and rain on green grass.\\\n\\\n"
         "The curragh leaps forward as if eager to be home. The grey sea blurs beneath you. "
-        "The islands of wonder and terror shrink behind you.\\\\n\\\\n"
+        "The islands of wonder and terror shrink behind you.\\\n\\\n"
         "Your crew stands together at the prow, watching the horizon. Diurán is weeping. "
-        "Fergus is laughing. Conganchnes is trying to look stoic but failing.\\\\n\\\\n"
-        "The wind knows the way. The wind has always known the way.\\\\n\\\\n"
-        "You are going home.\\\\n\\\\n"
+        "Fergus is laughing. Conganchnes is trying to look stoic but failing.\\\n\\\n"
+        "The wind knows the way. The wind has always known the way.\\\n\\\n"
+        "You are going home.\\\n\\\n"
         "(+5 points. The Wind of Return carries you homeward.)"
     )
 
