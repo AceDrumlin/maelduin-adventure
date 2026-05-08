@@ -70,20 +70,20 @@ body{background:#0a0806;color:#c8b89a;font-family:'Special Elite','Courier New',
 .backdrop{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:18;display:none}
 .backdrop.show{display:block}
 @media(max-width:600px){
-  #header{padding:0!important;border-bottom:0!important}
+  #header{padding:2px 0!important}
   #title-row pre{display:none!important}
   .celtic{display:none!important}
-  #title-row{display:none!important}
-  #status-bar{font-size:7px!important;padding:1px 3px!important}
-  #status-bar span{font-size:7px!important}
-  #output{font-size:11px!important;padding:3px 6px!important}
-  #inventory-bar{min-height:0!important;max-height:16px!important;padding:1px 4px!important}
-  .inv-item{font-size:7px!important;padding:0 2px!important}
-  #input-row{padding:2px 4px!important;min-height:30px!important}
-  #cmd{font-size:11px!important;padding:3px 5px!important}
-  #send{font-size:10px!important;padding:3px 6px!important}
-  #prompt{font-size:10px!important;line-height:24px!important}
-  #side-panel{width:200px!important;right:-220px!important}
+  #title-row{min-height:0!important;padding:0!important}
+  #status-bar{font-size:11px!important;padding:2px 6px!important}
+  #status-bar span{font-size:11px!important}
+  #output{font-size:15px!important;padding:6px 10px!important}
+  #inventory-bar{min-height:20px!important;padding:2px 6px!important}
+  .inv-item{font-size:10px!important;padding:1px 4px!important}
+  #input-row{padding:6px 8px!important}
+  #cmd{font-size:16px!important;padding:8px 10px!important}
+  #send{font-size:14px!important;padding:8px 14px!important}
+  #prompt{font-size:16px!important;line-height:36px!important}
+  #side-panel{width:260px!important;right:-280px!important}
 }
   .celtic{display:none}
   #title-row{min-height:0;padding:0;height:0}
@@ -139,7 +139,7 @@ body{background:#0a0806;color:#c8b89a;font-family:'Special Elite','Courier New',
 <div id="input-row">
 <span id="prompt">&#9656;</span>
 <input type="text" id="cmd" autofocus placeholder="Type a command...">
-<button id="send">Sail</button>
+<button id="send">Go</button>
 </div>
 </div>
 <div id="side-toggle" title="Voyage Log">&#9776;</div>
