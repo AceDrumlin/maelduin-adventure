@@ -675,7 +675,7 @@ function processCommand(text) {
   if (!text || !text.trim()) return "Type HELP for a list of commands, or just start exploring!";
   const [handler, args] = parseCommand(text);
   if (!handler) return h_unknown(text);
-  return handler(STATE, args);
+  return handler(args);
 }
 
 // ─── UI ────────────────────────────────────────────────────────────────
