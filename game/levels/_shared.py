@@ -354,6 +354,40 @@ def _make_items():
         takeable=True,
         use_text="You unseal the Wind of Return. A warm, steady wind fills your sails, carrying you homeward with unerring certainty.",
     )
+    # ---- FINAL ISLANDS ITEMS (Level 07) ----
+
+    i["giants_club"] = Item(
+        "giants_club", "Giant's Club",
+        "A crude club of oak and stone, stolen from a dead giant. It is heavy enough to crush a skull with one swing.",
+        examine_text="A massive club of dark oak, bound with leather and studded with sharp stones. The head is stained dark — blood, long dried. It fits your grip perfectly, as if made for you.",
+        aliases=["club", "giant club", "giant's club", "oak club"],
+        takeable=True,
+    )
+
+    i["treasure_gold"] = Item(
+        "treasure_gold", "Ancient Gold",
+        "A hoard of golden coins, enough to buy a kingdom. They gleam with ancient, stolen light.",
+        examine_text="A small chest overflowing with ancient gold coins. Each one bears the face of a king you have never heard of — a king whose kingdom is now seaweed and memory. The gold is warm to the touch.",
+        aliases=["gold", "treasure", "coins", "ancient gold", "gold coins", "chest"],
+        takeable=True,
+    )
+
+    i["silver_torc"] = Item(
+        "silver_torc", "Silver Torc",
+        "A beautiful silver neck-ring, gleaming with ancient craftsmanship. It feels warm against your skin.",
+        examine_text="A delicate torc of woven silver wire, ending in two ornate knobs shaped like wolf heads. The metal is impossibly smooth — polished by centuries of wear. It hums faintly with old magic.",
+        aliases=["torc", "silver torc", "neck-ring", "neck ring", "silver ring"],
+        takeable=True,
+    )
+
+    i["lions_claw"] = Item(
+        "lions_claw", "Lion's Claw",
+        "A razor-sharp claw, still warm from the beast. It can be used as a tool or a weapon.",
+        examine_text="A single claw, curved like a scimitar, still warm and slightly wet at the base. The keratin gleams like amber. It is sharp enough to cut rope, leather, or flesh with equal ease.",
+        aliases=["claw", "lion claw", "lion's claw", "claw dagger"],
+        takeable=True,
+    )
+
     items.update(i)
 
 
@@ -1263,20 +1297,20 @@ def _make_npcs():
         aliases=["guardian", "silence guardian", "pale figure", "goddess", "grey figure", "guardian of silence"],
         dialogue={
             "greeting": (
-                "The grey figure does not move. It does not breathe. But the silence around it thickens, becomes heavier, like a blanket pressing down on your ears.\\n\\n"
-                "When it speaks, the words are cold and distant, as if coming from the bottom of a deep well:\\n\\n"
-                "'You have entered the domain of silence. Here, sound is forbidden. Music is forbidden. Laughter is forbidden. The world has enough noise. In my valley, there is only peace. Only stillness. Only silence.'\\n\\n"
-                "It pauses, and the silence becomes so complete you can hear your own blood moving.\\n\\n"
+                "The grey figure does not move. It does not breathe. But the silence around it thickens, becomes heavier, like a blanket pressing down on your ears.\n\n"
+                "When it speaks, the words are cold and distant, as if coming from the bottom of a deep well:\n\n"
+                "'You have entered the domain of silence. Here, sound is forbidden. Music is forbidden. Laughter is forbidden. The world has enough noise. In my valley, there is only peace. Only stillness. Only silence.'\n\n"
+                "It pauses, and the silence becomes so complete you can hear your own blood moving.\n\n"
                 "'You may stay. But you must not break the silence. If you sing or laugh or speak above a whisper... there will be a price.'"
             ),
             "anger": (
-                "The Guardian of Silence turns its blank face toward you. The temperature drops.\\n\\n"
-                "'YOU HAVE BROKEN THE SILENCE. Sound is a wound upon the world, and you have opened a wound in my valley. You must pay tribute — give me something precious — and the silence will be restored.'\\n\\n"
+                "The Guardian of Silence turns its blank face toward you. The temperature drops.\n\n"
+                "'YOU HAVE BROKEN THE SILENCE. Sound is a wound upon the world, and you have opened a wound in my valley. You must pay tribute — give me something precious — and the silence will be restored.'\n\n"
                 "Its empty face waits. If you have something to offer, GIVE it to the guardian."
             ),
             "peace": (
-                "The Guardian of Silence bows its head slightly — a gesture of respect.\\n\\n"
-                "'You have kept the silence. You have walked softly in my valley. For this, you may take the Silent Bell. It will serve you well, for silence is the oldest magic — older than speech, older than song, older than the sea itself.'\\n\\n"
+                "The Guardian of Silence bows its head slightly — a gesture of respect.\n\n"
+                "'You have kept the silence. You have walked softly in my valley. For this, you may take the Silent Bell. It will serve you well, for silence is the oldest magic — older than speech, older than song, older than the sea itself.'\n\n"
                 "It gestures toward the grove where the bell hangs."
             ),
             "tribute": (
@@ -1291,25 +1325,304 @@ def _make_npcs():
         aliases=["guardian", "angel", "luminous figure", "being", "spirit", "guardian of peace"],
         dialogue={
             "greeting": (
-                "The Guardian of Peace opens its arms, and a wave of warmth washes over you.\\n\\n"
-                "'Welcome, Mael Duin. Welcome to the Land of Promise. You have crossed the edges of the known world, braved monsters and wonders, and now you stand at the threshold of peace itself.\\n\\n"
-                "'Here there is no pain, no sorrow, no hunger, no death. The rivers run with wine and honey. The trees bear fruit of pure gold. The air is warm and gentle. Stay with us forever. All you have to do is say yes.'\\n\\n"
-                "Its smile is radiant. The offer is sincere.\\n\\n"
+                "The Guardian of Peace opens its arms, and a wave of warmth washes over you.\n\n"
+                "'Welcome, Mael Duin. Welcome to the Land of Promise. You have crossed the edges of the known world, braved monsters and wonders, and now you stand at the threshold of peace itself.\n\n"
+                "'Here there is no pain, no sorrow, no hunger, no death. The rivers run with wine and honey. The trees bear fruit of pure gold. The air is warm and gentle. Stay with us forever. All you have to do is say yes.'\n\n"
+                "Its smile is radiant. The offer is sincere.\n\n"
                 "(Type YES to stay forever. Type NO to refuse and receive the Wind of Return.)"
             ),
             "stay": (
-                "'Stay. Rest. Be at peace. You have earned this. There is nothing waiting for you back there — no revenge worth taking, no love worth leaving. Stay in the land where all is well.'\\n\\n"
+                "'Stay. Rest. Be at peace. You have earned this. There is nothing waiting for you back there — no revenge worth taking, no love worth leaving. Stay in the land where all is well.'\n\n"
                 "The guardian's voice is hypnotic, gentle. The land behind it shimmers with impossible beauty."
             ),
             "leave": (
-                "The Guardian of Peace nods slowly, its expression unchanged — still warm, still kind.\\n\\n"
-                "'I understand. The world beyond calls to you. Your story is not yet finished. Your home is waiting.\\n\\n"
-                "'Take this Wind of Return — a bottle holding a favourable wind. When you are ready, use it to sail home. It will carry you across the sea with unerring certainty, to the shore where you belong.'\\n\\n"
-                "It places a sealed glass bottle in your hands. Inside, a tiny whirlwind spins endlessly.\\n\\n"
+                "The Guardian of Peace nods slowly, its expression unchanged — still warm, still kind.\n\n"
+                "'I understand. The world beyond calls to you. Your story is not yet finished. Your home is waiting.\n\n"
+                "'Take this Wind of Return — a bottle holding a favourable wind. When you are ready, use it to sail home. It will carry you across the sea with unerring certainty, to the shore where you belong.'\n\n"
+                "It places a sealed glass bottle in your hands. Inside, a tiny whirlwind spins endlessly.\n\n"
                 "'Go with my blessing, Mael Duin. And remember: you carry home with you now.'"
             ),
             "home": (
                 "'Your home is waiting. But you carry it with you now — in your heart, in your memories, in the weight of your father's ring on your thumb. The Promised Land is not a place. It is a feeling. And you have felt it all along.'"
+            ),
+        }
+    )
+
+    # ---- FINAL ISLANDS NPCS (Level 07) ----
+
+    n["giant"] = NPC(
+        "giant", "The Giant",
+        "A monstrous giant perched on a high cliff, his skin the colour of lichen-covered stone. He is easily twenty feet tall, with arms like tree trunks and a face twisted by crude malice. Beside him, a pile of fist-sized stones waits to be hurled at passing ships.",
+        aliases=["giant", "ogre", "stone thrower", "cliff giant"],
+        dialogue={
+            "greeting": (
+                "The giant roars as he spots your approach! He hefts a stone the size of a man's head "
+                "and hurls it at your curragh with terrifying accuracy. The missile crashes into the hull, "
+                "splintering wood.\n\n"
+                "One of your crew — a young man from the west — is struck by a flying splinter and falls, "
+                "clutching his chest. He does not rise again.\n\n"
+                "You have lost a crew member. The giant bellows with laughter and reaches for another stone.\n\n"
+                "You must act quickly: FIGHT the giant with the Magic Harpoon, TALK to him with the Speaking Feather, "
+                "or GIVE him food (Everlasting Fruit, Crew Provisions) to distract him."
+            ),
+            "fight": (
+                "You hurl the Magic Harpoon at the giant. It strikes him square in the chest — "
+                "a blow that would kill any mortal man. The giant bellows in pain, tearing at the harpoon, "
+                "but the enchanted weapon returns to your hand before he can pull it free.\n\n"
+                "He stumbles backward, clutching his wound, and topples from the cliff. The ground shakes "
+                "as his body crashes onto the rocks below. The waves wash over him, and he is still.\n\n"
+                "At the base of the cliff, you find his GIANT'S CLUB — a crude weapon of oak and stone. "
+                "It is heavy, but you lift it. It may serve you yet.\n\n"
+                "(+3 points. Gained: Giant's Club)"
+            ),
+            "talk": (
+                "You hold up the Speaking Feather and address the giant in his own tongue.\n\n"
+                "The giant halts mid-throw, his brow furrowing with confusion. "
+                "'You speak the Old Tongue?' he rumbles. 'No man has spoken it in a hundred years.'\n\n"
+                "You negotiate. The giant was angry because the last ships that passed did not respect his territory. "
+                "You promise to leave his cliff alone and never return. He grunts, mollified.\n\n"
+                "'You are a strange little man,' he says. 'But you have honour. Take this — it fell from my tooth "
+                "last winter. I have no use for it.'\n\n"
+                "He tosses you a GIANT'S TOOTH — a massive, yellowed fang that could serve as a dagger or a trophy.\n\n"
+                "(+3 points. Gained: Giant's Tooth)"
+            ),
+            "give": (
+                "You offer food to the giant. He squints at it, sniffs suspiciously, "
+                "then snatches it from your hand and stuffs it into his mouth.\n\n"
+                "'Hmph,' he grunts, chewing noisily. 'Not bad. You may pass, little man. "
+                "But tell your friends to bring better food next time.'\n\n"
+                "The giant settles back onto his cliff, patting his belly with satisfaction. "
+                "He does not throw any more stones.\n\n"
+                "(+1 point. No crew lost.)"
+            ),
+            "father": (
+                "'Your father? Never met him. I crush everyone who sails past. "
+                "I don't stop to ask their family history.'\n\n"
+                "He throws another stone for emphasis."
+            ),
+        }
+    )
+
+    n["treasure_serpent"] = NPC(
+        "treasure_serpent", "The Treasure Serpent",
+        "A massive serpent coiled before the mouth of a dark cave. Its scales shimmer with a deep, oily green, and its eyes — vertical slits of gold — follow your every movement. It is the size of a small ship, and its body completely blocks the entrance to the cave.",
+        aliases=["serpent", "dragon", "snake", "guardian", "treasure serpent"],
+        dialogue={
+            "greeting": (
+                "The serpent hisses — a sound like steam escaping from a fissure. It raises its wedge-shaped head, "
+                "tasting the air with a forked tongue as long as your arm.\n\n"
+                "'Mine,' it says. The word is surprisingly clear, though it seems to come from somewhere deep "
+                "in its throat. 'The gold is mine. The cave is mine. Everything you see is mine. "
+                "Turn back, little thief, or become my next meal.'\n\n"
+                "The serpent coils tighter, blocking the cave entrance completely. Beyond it, you can glimpse "
+                "the glint of ancient gold.\n\n"
+                "You could FIGHT the serpent (dangerous), GIVE it the Antidote Herb (it is sick — the herb may heal it), "
+                "or GIVE it the Golden Apple or Everlasting Fruit as a bribe."
+            ),
+            "fight": (
+                "You draw your weapon and rush at the serpent! It strikes with blinding speed — "
+                "its fangs sink into your shoulder... but Conganchnes shoves you aside, taking the blow himself. "
+                "The fangs snap against his invulnerable skin!\n\n"
+                "The serpent recoils, hissing in confusion. In that moment of distraction, you land a blow "
+                "on its neck. It thrashes, knocking you both to the ground, and lashes out with its tail — "
+                "sending you tumbling out of the cave.\n\n"
+                "When you scramble back to your feet, the serpent has retreated deeper into the cave. "
+                "Its hiss echoes from the darkness: 'Fine. Take the gold. It brings nothing but greed and death anyway.'\n\n"
+                "You emerge with the treasure, battered but victorious. One crew member was wounded but will recover.\n\n"
+                "(+2 points. You may now take the treasure gold.)"
+            ),
+            "mercy": (
+                "You hold out the Antidote Herb. The serpent's head draws back, its nostrils flaring.\n\n"
+                "'That smell... I know that smell. It is the herb that grows on the Serpent's Island — "
+                "the one cure for the venom I have carried in my blood since I was wounded by a sea drake.\n\n"
+                "The serpent lowers its head. Its voice is softer now. 'Give it to me. Please. "
+                "I have been in pain for a hundred years. This gold is not worth the agony.'\n\n"
+                "You give the herb to the serpent. It swallows it whole, and a shudder runs through its massive body. "
+                "Its scales ripple, and the sickly yellow in its eyes fades to a healthy gold.\n\n"
+                "'The pain... is gone. Thank you, little one. The gold is yours. Take it all. "
+                "I will find a new cave, one without ancient curses in it.'\n\n"
+                "The serpent uncoils and slides past you into the sea, free at last.\n\n"
+                "(+3 points. You may now take the treasure gold.)"
+            ),
+            "give": (
+                "You offer the tribute to the serpent. It inspects the offering with its tongue, then — "
+                "slowly — uncoils a fraction of its body, revealing a narrow gap in the cave entrance.\n\n"
+                "'Payment accepted,' it hisses. 'The gold is in the back. Take what you can carry. "
+                "But hurry — my patience is as thin as my skin.'\n\n"
+                "You slip past the serpent into the cave. The treasure awaits.\n\n"
+                "(+1 point. You may now enter the cave.)"
+            ),
+        }
+    )
+
+    n["great_hound"] = NPC(
+        "great_hound", "The Great Hound",
+        "A hound the size of a small horse, with a coat of iron-grey fur and eyes that burn like embers. It lies before a stone pedestal, upon which rests a silver torc that gleams with ancient light. The hound's lips curl back to reveal teeth like ivory daggers.",
+        aliases=["dog", "hound", "wolf", "beast", "great hound", "guard dog"],
+        dialogue={
+            "greeting": (
+                "The Great Hound rises slowly, hackles raised. A low, rumbling growl issues from its chest — "
+                "a sound like falling rocks. Its eyes fix on you with unwavering intensity.\n\n"
+                "It does not attack. Not yet. It stands between you and the silver torc, guarding it with the "
+                "patience of a creature that has stood sentinel for centuries.\n\n"
+                "The torc gleams on its pedestal. It is clearly valuable — a masterpiece of ancient silversmithing.\n\n"
+                "You could GIVE the hound food (Bowl of Milk, Everlasting Fruit), FIGHT it, or TALK to it "
+                "with the Speaking Feather."
+            ),
+            "give": (
+                "You offer the food to the hound. Its ears perk up. The growling stops.\n\n"
+                "It sniffs the offering once, twice, then takes it gently from your hand with surprising delicacy. "
+                "It eats in three quick bites, then licks its chops — and its tail wags once.\n\n"
+                "Just once. A massive, heavy thump against the ground.\n\n"
+                "The hound steps aside and lies down, watching you with mild interest. You may take the torc.\n\n"
+                "(+1 point. The Silver Torc is yours.)"
+            ),
+            "fight": (
+                "You rush the hound with your weapon drawn. It meets your charge with terrifying speed — "
+                "knocking you flat and pinning you to the ground with one massive paw.\n\n"
+                "Its jaws close around your arm — but do not bite down. It holds you there, staring into your eyes, "
+                "breathing hot and wet on your face.\n\n"
+                "Then it releases you, steps back, and lies down again. It seems to be saying: "
+                "'I could have killed you. I chose not to. Try a different approach.'\n\n"
+                "You scramble to your feet, unharmed but humbled. The hound watches, unimpressed."
+            ),
+            "talk": (
+                "You hold up the Speaking Feather. The hound cocks its head, and you hear its voice "
+                "in your mind — rough, ancient, weary.\n\n"
+                "'You speak the language of beasts. Few do, these days.'\n\n"
+                "'This torc was placed here by my master a thousand years ago. He asked me to guard it until he returned. "
+                "He never did. I have waited. I have watched. I have kept my word.'\n\n"
+                "'But I am old now. My joints ache. My eyes grow dim. I would like to rest. "
+                "If you can give me something to ease my hunger and my vigil, the torc is yours.'\n\n"
+                "The hound's voice fades. You know what you must do.\n\n"
+                "(Talked to the hound. Give it food to complete the bargain.)"
+            ),
+            "master": (
+                "'My master was a king of this island. He sailed east a thousand years ago "
+                "and never returned. I have kept my promise. I hope he kept his.'\n\n"
+                "The hound whines softly and lays its head on its paws."
+            ),
+        }
+    )
+
+    n["mountain_lion"] = NPC(
+        "mountain_lion", "Mountain Lion",
+        "A great mountain lion, its coat the colour of dried grass, crouched before a cave on a scrub-covered island. Its muscles ripple beneath its skin, and its eyes are wild with pain and fury. A deep wound — a gash from some other predator — weeps along its flank.",
+        aliases=["lion", "beast", "mountain lion", "predator", "big cat"],
+        dialogue={
+            "greeting": (
+                "The mountain lion roars — a raw, guttural sound that vibrates through your bones. "
+                "It bares its fangs and crouches, ready to spring.\n\n"
+                "But as it shifts its weight, you see the wound on its flank — a terrible gash, "
+                "oozing and infected. The beast is in agony. Its attacks are born of pain, not malice.\n\n"
+                "You could FIGHT it (with Magic Harpoon or Giant's Club), USE the Silver Bell to calm it, "
+                "or TALK to it with the Speaking Feather to learn of its wound."
+            ),
+            "fight": (
+                "You brandish your weapon. The lion charges.\n\n"
+                "The battle is fierce — all claws and roars and blood. But your weapon finds its mark, "
+                "and after a desperate struggle, the beast is driven off. It limps into the cave, "
+                "growling, and does not emerge again.\n\n"
+                "Your crew cheers. The island is safe. You find a LION'S CLAW on the ground — "
+                "broken off in the fight. It is sharp and still warm.\n\n"
+                "(+2 points. Gained: Lion's Claw)"
+            ),
+            "calm": (
+                "You ring the Silver Bell. Its pure, clear tone cuts through the lion's fury.\n\n"
+                "The lion stops mid-crouch. Its ears swivel. The growling subsides.\n\n"
+                "It sits down heavily, blinking slowly. The pain is still in its eyes, but the rage "
+                "has drained away. It mews — a pathetic, broken sound from so mighty a creature.\n\n"
+                "You approach slowly. It lets you examine its wound. With gentle hands, "
+                "you clean it and bind it with cloth from your tunic. The lion licks your hand once — "
+                "a rough, warm thank you.\n\n"
+                "It rises and pads into the cave, returning with a LION'S CLAW in its mouth — "
+                "one it shed naturally. It drops it at your feet.\n\n"
+                "(+2 points. Gained: Lion's Claw. The lion is calm.)"
+            ),
+            "talk": (
+                "You hold up the Speaking Feather. The lion's ears flick forward. "
+                "A voice — ragged, pained — enters your mind.\n\n"
+                "'The feather-borne one... speaks. Few do. You are strange, little two-legs.'\n\n"
+                "'I am hurt. A sea serpent — a young one, foolish — caught me unawares. "
+                "Its venom festers in my blood. If you have something to heal me... "
+                "I would be grateful.'\n\n"
+                "The lion's eyes plead. If you have Fountain Water, you could USE it to heal the lion."
+            ),
+            "use": (
+                "You pour the Fountain Water onto the lion's wound. "
+                "The milky liquid sizzles, and the infection begins to recede. "
+                "The torn flesh knits together, slowly but surely.\n\n"
+                "The lion's eyes widen. It flexes its muscles, testing the healed limb. "
+                "A deep, rumbling purr fills the air — the first sound of contentment "
+                "the beast has made in weeks.\n\n"
+                "The lion presses its head against your hand, then pads into the cave. "
+                "It returns with a LION'S CLAW in its jaws — a gift, freely given.\n\n"
+                "'You have my gratitude, feather-borne one. Go in peace.'\n\n"
+                "(+3 points. Gained: Lion's Claw.)"
+            ),
+        }
+    )
+
+    n["anchorite"] = NPC(
+        "anchorite", "The Anchorite",
+        "A gaunt, serene man in a simple grey robe, sitting cross-legged in the mouth of a cave on a lonely rock. His face is weathered by wind and wisdom, and his eyes hold the quiet certainty of someone who has found what he was looking for. A small wooden cross hangs around his neck. A single candle burns beside him, though no one has lit it.",
+        aliases=["hermit", "anchorite", "holy man", "monk", "ascetic", "second hermit"],
+        dialogue={
+            "greeting": (
+                "The Anchorite looks up as you approach, and a gentle smile spreads across his face. "
+                "He gestures to a flat stone beside him.\n\n"
+                "'Sit, Mael Duin. I have been expecting you. The gulls told me you were coming. "
+                "They are terrible gossips, but their information is reliable.'\n\n"
+                "His voice is warm, like a fire after a long voyage. The sea seems quieter here. "
+                "The wind holds its breath.\n\n"
+                "'You have travelled far — further than you know. The islands you have visited were not "
+                "random specks on the sea. They were mirrors. Each one showed you a part of yourself. "
+                "The giant's rage. The serpent's greed. The hound's loyalty. The lion's wounded pride. "
+                "All of them were you. All of them were lessons.'\n\n"
+                "He falls silent, letting the words settle like sediment in clear water."
+            ),
+            "trials": (
+                "'Each island was a trial, yes. But not the kind you think. "
+                "The giant did not test your strength — he tested your choice of how to use it. "
+                "The serpent did not test your courage — she tested your compassion. "
+                "The hound tested your patience. The lion tested your mercy.\n\n"
+                "'And every time you chose wisely, you became more yourself.'\n\n"
+                "He nods slowly, as if confirming something to himself."
+            ),
+            "forgiveness": (
+                "The Anchorite's eyes grow deep and serious. He speaks slowly, choosing each word with care.\n\n"
+                "'The men who killed your father were given to you as a test — not a target. "
+                "The sea did not bring you to Garbh so you could spill his blood. "
+                "It brought you to him so you could choose not to.\n\n"
+                "'Forgiveness is not weakness, Mael Duin. It is the hardest kind of strength. "
+                "It is easy to kill a man. It is nearly impossible to let him live — "
+                "and to mean it when you say he is forgiven.\n\n"
+                "'Your father does not want revenge. He wants you to be free. "
+                "The chain that binds you is not made of iron. It is made of grief. "
+                "And only you can unlink it.'\n\n"
+                "The candle flickers, though there is no wind."
+            ),
+            "father": (
+                "'Ailill is at peace. He crossed the great sea before you, and he waits on the far shore. "
+                "He does not count the days. He does not hold a grudge. "
+                "He watches you with love and hope, as any father watches his son.\n\n"
+                "'The only one who is not at peace is you. And that peace is yours to claim — "
+                "whenever you are ready.'"
+            ),
+            "home": (
+                "'You will return when the wind is ready. And the wind is always ready — "
+                "it is you who are not.'\n\n"
+                "He smiles at your expression.\n\n"
+                "'You still have something to do, Mael Duin. One last island. One last choice. "
+                "But you already know what it is. You have always known.\n\n"
+                "'Home is not a direction. It is a decision. "
+                "When you make the right one, the wind will carry you there in a single breath.'"
+            ),
+            "death": (
+                "'Death is not the enemy, Mael Duin. It is the doorway. "
+                "Your father walked through it before you. You will walk through it after. "
+                "The only question is what you carry in your hands when you do.\n\n"
+                "'Will you carry a sword? Or will you carry peace?'"
             ),
         }
     )

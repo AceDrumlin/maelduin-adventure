@@ -1088,6 +1088,9 @@ def parse_command(text):
         "mill": "mill", "sheep": "sheep", "wall": "wall",
         "beach": "beach", "strand": "beach",
         "hill": "hill",
+        # Final islands (level 07)
+        "giant": "giant", "treasure": "treasure", "dog": "dog",
+        "lion": "lion", "anchorite": "anchorite",
     }
     if first_word in dir_aliases:
         return (lambda s, a: handle_go(s, dir_aliases[first_word]), "")
