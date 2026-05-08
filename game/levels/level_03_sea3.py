@@ -41,6 +41,7 @@ def register(items, npcs):
             "A single light glimmers on the horizon, then vanishes. "
             "Was it a star? A ship? A warning? Or just Fergus's lantern?"
         ),
+        npcs=[npcs["young_conganchnes"]],
     )
 
     # ═══════════════════════════════════════════
@@ -62,7 +63,7 @@ def register(items, npcs):
             "The serpent seems to be... guarding them? Or growing them?"
         ),
         items=[items["antidote_herb"]],
-        npcs=[],
+        npcs=[npcs["serpent"]],
         exits={"south": "sea3", "through": "serpent_island_center"},
         blocked={"through": ("the serpent blocks your way — it responds to the sound of silver",
                              lambda s: s.get_item_from_inventory("silver_bell") is None)},
@@ -111,7 +112,7 @@ def register(items, npcs):
             "There's a small footnote that says 'No, seriously. I will bite you.'"
         ),
         items=[items["golden_apple"]],
-        npcs=[],
+        npcs=[npcs["black_pig"]],
         exits={"west": "sea3"},
         ambient=lambda s: (
             "The pig snores. Each snore sounds like a small earthquake. "
@@ -293,15 +294,19 @@ def register(items, npcs):
             "You have entered the heart of the turning world."
         ),
         items=[items["silver_net"]],
-        npcs=[],
+        npcs=[npcs["garbh"]],
         exits={"out": "island_revolving_castle", "back": "island_revolving_castle"},
         on_enter=lambda s: (
             s.set_flag("castle_entered") or
+            s.set_flag("confronted_murderer") or
             "The Red Door swings open with a groan of ancient hinges...\n\n"
             "You step into the heart of the Revolving Castle. The room is circular, "
             "made of black obsidian polished to a mirror shine. A red shaft of light "
             "illuminates a pedestal at the center.\n\n"
-            "On the pedestal: a Silver Net. This must be what you came for."
+            "On the pedestal: a Silver Net. This must be what you came for.\n\n"
+            "But you are not alone. A ONE-EYED WARRIOR sits on a stone bench in the shadows, "
+            "a drinking horn in his hand. He watches you with a tired, knowing gaze.\n\n"
+            "This is Garbh. The man who killed your father."
             if not s.has_flag("castle_entered") else None
         ),
     )
@@ -376,18 +381,31 @@ def register(items, npcs):
             "The sound is the voice of the sea god's anger. "
             "Do not sound it unless you wish to drown all who hear.'\n\n"
             "But you notice something: there is a small CLOTH stuffed into the trumpet's bell. "
-            "Someone else was here before you, and they tried to muffle it. "
-            "Maybe they knew something you don't."
+            "Someone else was here before you, and they tried to muffle it.\n\n"
+            "There are also WAX EARPLUGS lying nearby. Whoever was here left in a hurry.\n\n"
+            "WARNING: The trumpet's bellows are filling again. If you try to leave without muffling "
+            "the trumpet, the blast will deafen your crew!"
         ),
         items=[items["earplugs"], items["trumpet_muffler"]],
         npcs=[],
         exits={"northwest": "sea3"},
+        blocked={"northwest": ("THE TRUMPET BLASTS as you try to leave! The sound is deafening! "
+                               "You stagger back, ears ringing. You need to muffle the trumpet first, "
+                               "or protect yourself with earplugs!",
+                               lambda s: not s.has_flag("trumpet_muffled")
+                               and not s.has_flag("earplugs_used"))},
         ambient=lambda s: (
-            "The trumpet gleams dully in the grey light. Wind whistles across its mouth, "
-            "producing a low, mournful hum. It sounds like a lament for ships that never returned."
+            "The bellows creak as they fill with air. The trumpet is almost ready to sound again... "
+            "You can feel the pressure building in the mechanism."
             if not s.has_flag("trumpet_muffled") else
             "The trumpet sits silent and harmless, its mouth stuffed with cloth. "
             "The wind no longer whistles through it. It is, for the first time in ages, truly quiet."
+        ),
+        on_enter=lambda s: (
+            "The ground trembles slightly. The bellows behind the trumpet are slowly filling with air. "
+            "You don't have much time before it sounds again.\n\n"
+            "Use the EARPLUGS to protect your ears, or use the MUFFLER on the TRUMPET to silence it permanently."
+            if not s.has_flag("trumpet_muffled") else None
         ),
     )
 

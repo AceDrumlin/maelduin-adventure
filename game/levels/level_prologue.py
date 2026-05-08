@@ -316,7 +316,7 @@ def register(items, npcs):
         ),
         items=[items["fathers_ring"]],
         npcs=[npcs["foster_mother"], npcs["druid"], npcs["young_diuran"], npcs["young_conganchnes"], npcs["young_fergus"]],
-        exits={"west": "sea1", "beach": "sea1", "sea": "sea1", "sail": "sea1"},
+        exits={"west": "sea1", "beach": "sea1", "sea": "sea1", "sail": "sea1", "home": "home"},
         on_enter=lambda s: (
             "The wind catches the sail. The curragh groans against the sand.\n\n"
             "Twenty-seven men. One boat. One quest.\n\n"

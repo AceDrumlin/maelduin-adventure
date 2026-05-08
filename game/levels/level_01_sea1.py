@@ -42,6 +42,7 @@ def register(items, npcs):
             "The sun breaks through the clouds for a moment, turning the sea to silver. "
             "A whale breaches in the distance. The crew oohs and aahs."
         ),
+        npcs=[npcs["young_diuran"]],
     )
 
     # ═══════════════════════════════════════════
@@ -215,21 +216,28 @@ def register(items, npcs):
             "had never heard the phrase 'safety first.'\n\n"
             "A beautiful woman stands on the far side of the bridge, beckoning.\n\n"
             '"Cross, brave sailor. I will not let you fall."\n\n'
-            "A single shard of glass lies at the base of the bridge, broken off from the edge."
+            "You notice two things that might help: a SHARD OF GLASS lies at the base of the bridge, "
+            "broken off from the edge. And in your heart, you feel the HERMIT'S BLESSING could "
+            "carry you across on faith alone.\n\n"
+            "Without either, the bridge is certain death."
         ),
         items=[items["glass_shard"]],
         npcs=[],
         exits={"north": "sea1", "cross": "glass_palace", "bridge": "glass_palace"},
+        blocked={"cross": ("the bridge is made of transparent glass over a bottomless chasm — you need the Glass Shard to test its strength or the Hermit's Blessing to cross on faith",
+                          lambda s: s.get_item_from_inventory("glass_shard") is None
+                          and s.get_item_from_inventory("hermit_blessing") is None)},
         on_enter=lambda s: (
-            "The glass groans under your weight. You realize halfway across that this bridge "
-            "was not meant for mortal feet. The glass creaks — a hairline crack spreads.\n\n"
-            "You dive forward and roll onto the far side just as the section behind you shatters "
-            "and falls into the abyss.\n\n"
-            "Your crew makes it across, but one of them is bleeding. "
-            "The glass is sharper than it looks.\n\n"
-            + (s.set_flag("crossed_bridge") or "")
-            if not s.has_flag("crossed_bridge") and s.get_item_from_inventory("otter_pelt") is None
-            else None
+            "The glass groans under your weight as you step onto the bridge...\n\n"
+            + (("You hold up the Glass Shard. It glows and the bridge solidifies beneath you, "
+                "turning from transparent to a milky white that you can walk on.\n\n"
+                "You cross safely, the shard showing you the way.")
+               if s.has_flag("bridge_tested") or s.get_item_from_inventory("glass_shard") else
+               ("You clutch the Hermit's Blessing. A warm light surrounds you, "
+                "and the bridge seems to become solid as faith itself.\n\n"
+                "You walk across, guided not by sight but by trust. The chasm below does not claim you."))
+            + "\n\nYour crew follows, awestruck."
+            if not s.has_flag("crossed_bridge") else None
         ),
         ambient=lambda s: (
             "The glass bridge shimmers in the light. It's beautiful and absolutely terrifying. "
@@ -243,17 +251,30 @@ def register(items, npcs):
         detailed_desc=(
             "You step into a palace that seems built from frozen light. "
             "Every surface reflects a thousand colors in a thousand different ways. "
-            "Music — harps and flutes — plays without any musician.\n\n"
+            "Music \u2014 harps and flutes \u2014 plays without any musician.\n\n"
             "A beautiful woman offers you a seat on cushions of silk. "
             '"Stay," she whispers. "Rest. You have traveled so far."\n\n'
             "This place feels like a dream. It also feels like a trap. "
-            "The floor is suspiciously transparent in places — you can see the chasm below. "
+            "The floor is suspiciously transparent in places \u2014 you can see the chasm below. "
             "The palace isn't built on the ground; it's suspended over the void.\n\n"
-            "The woman's smile never reaches her eyes."
+            "The woman's smile never reaches her eyes.\n\n"
+            "A voice in your head whispers: 'Stay and you will forget your quest. Leave and you will remember.'\n\n"
+            "Type YES to stay (lose time, risk losing a crew member).\n"
+            "Type NO to leave the palace behind."
         ),
         items=[],
         npcs=[],
         exits={"back": "glass_bridge", "east": "glass_bridge"},
+        on_enter=lambda s: (
+            (s.set_flag("entered_palace") or True) and
+            ("The woman beckons. 'Stay with me. Forget the sea, the quest, the revenge.'\n\n"
+             "Her voice is honey and razor wire. You feel your resolve weakening...\n\n"
+             "Type YES to stay. Type NO to leave."
+             if not s.has_flag("entered_palace") else None) and
+            (setattr(s, "awaiting_choice", "palace_stay") or True)
+            if not s.has_flag("left_palace") else
+            "The palace is empty now, but you feel lighter for having resisted."
+        ),
     )
 
     # ═══════════════════════════════════════════
@@ -349,4 +370,76 @@ def register(items, npcs):
         ),
     )
 
+    # Add crew dialogue that references prologue events
+    # These dialogues get triggered when talking to crew members at sea
+    
+    # We add sea-specific dialogue by updating existing NPC dialogue
+    # The NPC objects are shared, so we modify them after creation
+    
+    _add_sea_dialogue(npcs)
+
     LOCATIONS.update(l)
+
+
+def _add_sea_dialogue(npcs):
+    """Add sea-specific dialogue to crew NPCs that references prologue events."""
+    if "young_diuran" in npcs:
+        diuran = npcs["young_diuran"]
+        diuran.dialogue["sea"] = (
+            'Diur\u00e1n looks up from his parchment, quill still moving.\n\n'
+            '"Captain! I\'m writing a poem about that last island. '
+            'It\'s not going well. I keep rhyming \'sea\' with \'misery\' which is '
+            'technically accurate but poetically lazy.\n\n'
+            'Remember back in the training field, when I used to write epic poems '
+            'about battles we hadn\'t fought yet? Well, now we\'ve fought them, '
+            'and let me tell you: reality is much harder to rhyme than imagination."\n\n'
+            'He sighs dramatically and dips his quill again.'
+        )
+        diuran.dialogue["islands"] = (
+            'Diur\u00e1n flips through his increasingly thick sheaf of parchment.\n\n'
+            '"I\'ve been keeping a log of every island. The giant ants? Excellent material. '
+            'That cat? I wrote a haiku about it. '
+            'The Laughing King? I filled three pages and couldn\'t stop laughing long enough '
+            'to make them coherent.\n\n'
+            'This voyage will be the greatest epic ever told. '
+            'Assuming we survive to tell it."'
+        )
+
+    if "young_fergus" in npcs:
+        fergus = npcs["young_fergus"]
+        fergus.dialogue["sea"] = (
+            'Fergus squints at the horizon, then at the sky, then back at the horizon.\n\n'
+            '"The stars are different here, Captain. I don\'t recognise half of them. '
+            'Back home, I could name every star in the sky. Here? '
+            'I saw one that looked like a fish riding a horse. I don\'t know what that means.\n\n'
+            'But the Magic Thread is pulling true. Whatever the druid wove into that thread, '
+            'it knows where we\'re going better than any star chart."'
+        )
+        fergus.dialogue["navigation"] = (
+            'Fergus taps his nose. "I navigate by instinct now. '
+            'The old ways don\'t work in these waters. '
+            'The stars moved. The currents changed. The wind has a different smell.\n\n'
+            'But there\'s a rhythm to it. The sea has a heartbeat, '
+            'and if you listen long enough, you can feel where it wants you to go."'
+        )
+
+    if "young_conganchnes" in npcs:
+        conganchnes = npcs["young_conganchnes"]
+        conganchnes.dialogue["sea"] = (
+            'Conganchnes grins and flexes an arm the size of a mast timber.\n\n'
+            '"Still can\'t be cut, Captain. I tested it on that glass bridge shard. '
+            'The shard lost. I\'m starting to think I really am invulnerable.\n\n'
+            'Remember when we trained together back in the village? '
+            'You could barely lift a practice sword. Now look at you. '
+            'Leading twenty-seven men across the edge of the world. '
+            'Your father would be proud."\n\n'
+            'He claps you on the shoulder hard enough to stagger you.'
+        )
+        conganchnes.dialogue["fight"] = (
+            'Conganchnes draws his sword and inspects the edge.\n\n'
+            '"I\'m ready whenever you need me, Captain. '
+            'Monster, man, or god \u2014 I\'ll fight it. '
+            'That\'s what I\'m here for. That\'s what I\'ve always been here for.\n\n'
+            'The training field is a long way behind us now. '
+            'This is the real thing. And I wouldn\'t miss it for anything."'
+        )

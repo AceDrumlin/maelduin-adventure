@@ -258,6 +258,66 @@ def _make_items():
         examine_text="Grey ash with tiny red embers glowing within. It's warm but not hot enough to burn. It smells like a campfire and roasted acorns.",
         aliases=["ash", "fiery ash", "embers"],
     )
+
+    # ---- MISSING ISLANDS ITEMS ----
+
+    i["millstone_fragment"] = Item(
+        "millstone_fragment", "Millstone Fragment",
+        "A heavy fragment of a millstone, broken from the Mill of the Sea. One edge is sharp, the other smooth. It is dense and weighty.",
+        examine_text="A chunk of dark granite, curved on one side where it was once part of a great wheel. The grinding surface is still rough and abrasive.",
+        aliases=["millstone", "fragment", "stone", "millstone fragment"],
+        takeable=True,
+    )
+
+    i["fleece_of_change"] = Item(
+        "fleece_of_change", "Fleece of Change",
+        "A shimmering fleece that shifts between black and white depending on how you look at it. It feels warm and alive, as if it remembers being a sheep.",
+        examine_text="The fleece ripples with color - black one moment, white the next. When you hold it still, it settles into a soft, silvery grey. It seems to contain both darkness and light.",
+        aliases=["fleece", "sheep fleece", "fleece of change", "wool", "shimmering fleece"],
+        takeable=True,
+    )
+
+    i["horsehair_bridle"] = Item(
+        "horsehair_bridle", "Horsehair Bridle",
+        "A bridle woven from the mane of the Stallion King. It thrums with wild energy, eager for a gallop across the waves.",
+        examine_text="A bridle of braided white and black horsehair, studded with sea-shells. When you hold it, you feel the urge to ride fast - impossibly fast - across the open sea.",
+        aliases=["bridle", "horsehair bridle", "reins", "horse reins"],
+        takeable=True,
+    )
+
+    i["sunstone"] = Item(
+        "sunstone", "Sunstone",
+        "A golden crystal that glows with captured sunlight. It illuminates the darkest places and warms the coldest chambers.",
+        examine_text="A hexagonal crystal of pale gold, warm to the touch. Light swirls within it like honey, casting a soft, golden glow in every direction. It pulses gently, like a heartbeat made of sunshine.",
+        aliases=["sunstone", "crystal", "golden crystal", "sun crystal", "light stone"],
+        takeable=True,
+    )
+
+    i["golden_horn"] = Item(
+        "golden_horn", "Golden Horn",
+        "A magnificent horn of pure gold, curved and polished, taken from one of the Sacred Oxen. When blown, it produces a sound that carries across worlds.",
+        examine_text="A perfect golden horn, warm and heavy. Etched with spirals and ancient symbols. The mouthpiece is worn smooth from centuries of use by beings older than mankind.",
+        aliases=["horn", "golden horn", "ox horn", "war horn"],
+        takeable=True,
+        use_text="You raise the Golden Horn to your lips and blow. A deep, resonant note rolls across the sea - a sound that seems to answer a question you did not know you were asking. Somewhere, something ancient stirs in response.",
+    )
+
+    i["water_of_vision"] = Item(
+        "water_of_vision", "Water of Vision",
+        "A vial of shimmering water from the Well of Sight. Drink to see what is hidden.",
+        examine_text="A small glass vial filled with water that glows with an inner, silvery light. When you hold it up, you can see reflections of things that are not in front of you - doorways, paths, secrets.",
+        aliases=["water", "vision water", "well water", "water of vision", "vial"],
+        takeable=True,
+        use_text="You drink the Water of Vision. For a moment, the world goes silver. Veils peel away from reality - you see the hidden paths between islands, the true nature of the Revolving Castle doors, and the face of your father, smiling at you from across the sea. The vision fades, but you remember everything.",
+    )
+
+    i["ever_grinding_grain"] = Item(
+        "ever_grinding_grain", "Ever-Grinding Grain",
+        "A handful of golden grain from the Mill of the Sea. It multiplies when you are not looking - one grain becomes two, two become four, four become eight.",
+        examine_text="A handful of golden wheat grains that seem to multiply while you watch. The pile grows slowly, inexorably, like time itself. You will never go hungry again.",
+        aliases=["grain", "golden grain", "ever grinding grain", "wheat", "magic grain"],
+        takeable=True,
+    )
     items.update(i)
 
 
@@ -727,6 +787,39 @@ def _make_npcs():
                 '"Death? I\'ve been dead so long I\'m thinking of applying for a second career. '
                 "The afterlife is mostly waiting, interspersed with brief moments of existential dread.\""
             ),
+            "father": (
+                'The skull\'s eye sockets seem to deepen as it speaks.\n\n'
+                '"Your father\'s murderer is closer than you think. '
+                'He drinks and laughs in a castle that turns like the world — '
+                'the Revolving Castle. He is a one-eyed man named Garbh, '
+                'and he carries the scar of your father\'s last blow on his face.\n\n'
+                'I see him in the fragments of memory the wind brings me. '
+                'He does not laugh with joy. He laughs to forget.\n\n'
+                'Seek him if you must. But know this: the dead do not thank the living for revenge."\n\n'
+                'The skull falls silent, its words hanging in the air like smoke.'
+            ),
+            "revenge": (
+                'The skull rattles, almost laughing.\n\n'
+                '"Vengeance is a cup that empties the drinker. The hermit knows this. '
+                'The druid knows this. Even this bush knows this, and it\'s a bush.\n\n'
+                'You have sailed across the edge of the world, Mael Duin. '
+                'You have seen wonders that no other Irishman has seen. '
+                'And still you carry the same stone in your heart that you carried when you left.\n\n'
+                'Kill Garbh, and the blood feud lives on. Forgive him, and the feud dies with you.\n\n'
+                'The choice is yours. But make it with open eyes, not a closed fist."\n\n'
+                'The skull\'s teeth chatter once, sharply, as if emphasizing the point.'
+            ),
+            "home": (
+                'The skull\'s voice softens, becoming almost gentle.\n\n'
+                '"You will return when the wind forgives you. Not before.\n\n'
+                'Home is not a place, Mael Duin. It is a moment. A feeling. '
+                'The smell of turf smoke. The sound of your foster mother\'s voice. '
+                'The weight of your father\'s ring on your thumb.\n\n'
+                'You carry home with you. You always have. '
+                'You will find it again when you stop looking for it.\n\n'
+                'The sea gives back what it takes, but only when the taking is done."\n\n'
+                'A wind rustles the bush, and for a moment the skull\'s jaw hangs slack, as if exhausted by the effort of wisdom.'
+            ),
         }
     )
 
@@ -762,7 +855,7 @@ def _make_npcs():
         dialogue={
             "greeting": (
                 'The Demon Smith looks up from his forge. The heat is intense.\n\n'
-                '\"A mortal. How... bold. Most sailors see the smoke and turn back. \"\n'
+                '"A mortal. How... bold. Most sailors see the smoke and turn back. "\n'
                 "But you came closer. Either you have great courage or a poor sense of self-preservation. "
                 "I respect both.\"\n\n"
                 "He gestures to a pile of iron coins on a stone table.\n\n"
@@ -783,6 +876,168 @@ def _make_npcs():
             "soul": (
                 '"Your soul? Please. I have a warehouse full of souls. They\'re the most overrated currency in the universe. "\n'
                 "Give me something interesting instead.\""
+            ),
+        }
+    )
+
+    n["black_pig"] = NPC(
+        "black_pig", "The Black Pig", "A massive black boar the size of a cow, with tusks like daggers and eyes like burning coals. It guards the golden apple tree with unwavering vigilance. Drool — liquid gold — pools beneath its snout.",
+        aliases=["pig", "black pig", "boar", "black boar"],
+        dialogue={
+            "greeting": (
+                "The black pig snorts and stamps a massive hoof, making the ground tremble.\n\n"
+                "\"GRUNFF. You are not welcome here, little man. This tree is mine. "
+                "These apples are mine. This island is mine. Everything you see is mine.\"\n\n"
+                "It lowers its tusks and glares at you. The message is clear: come closer and get gored."
+            ),
+            "apple": (
+                "\"The golden apples? MINE. Every single one. I've been guarding this tree "
+                "since before your grandfather's grandfather was born. You think I'm going "
+                "to let some scrawny sailor waltz in and take one? GRUNFF. Think again.\""
+            ),
+            "fight": (
+                "\"You want to fight? HA! I've fought wolves, bears, and a dragon once. "
+                "The dragon ran away crying. I ate its lunch. You don't stand a chance, "
+                "but I'd be happy to add your bones to my collection.\"\n\n"
+                "It snorts aggressively and scrapes the ground with its hooves."
+            ),
+            "food": (
+                "The pig's ears perk up slightly at the word 'food'.\n\n"
+                "\"Food? What kind of food? I like apples. Golden ones. "
+                "If you have something edible... I MIGHT listen. MIGHT. "
+                "No promises. I'm a pig of my word. Which means I change my mind a lot.\""
+            ),
+        }
+    )
+
+    n["serpent"] = NPC(
+        "serpent", "The Great Serpent", "An enormous serpent that encircles the entire island, its body forming a continuous ring. Its scales are the size of shields, shimmering in shades of purple and green. Its head is large enough to swallow a boat whole.",
+        aliases=["serpent", "snake", "great serpent", "dragon"],
+        dialogue={
+            "greeting": (
+                "The great serpent raises its head, towering above you. Its forked tongue flickers, tasting the air. Its eyes narrow to slits.\n\n"
+                "\"You enter my domain, little one. Few who come here leave again. "
+                "The herb you seek is mine to guard, and I do not part with it willingly. "
+                "State your purpose, or be gone before I lose my patience.\""
+            ),
+            "herb": (
+                "\"The antidote herb? It grows here, in the center of my ring. "
+                "It is the only thing on this island I cannot digest — my one weakness. "
+                "Do you think I would simply let you take it? I guard it because it guards the world from me.\""
+            ),
+            "mercy": (
+                "The serpent's head lowers slightly. Its voice softens.\n\n"
+                "\"Mercy... an interesting word from a creature who came here to take what is mine. "
+                "But I am not unreasonable. I have been alone for a long time. "
+                "Perhaps there is a way we can both leave this island satisfied. "
+                "Show me something I have not seen before, and I may be persuaded.\""
+            ),
+            "poison": (
+                "\"My venom is the deadliest in all the seas. One drop can kill a whale. "
+                "Two drops can kill a god. Three drops... well, I've never tried three drops. "
+                "The island would probably dissolve. The herb you seek is the only antidote. "
+                "Funny, isn't it? The cure grows beside the poison.\""
+            ),
+        }
+    )
+
+    # ---- MISSING ISLANDS NPCS ----
+
+    n["mill_guardian"] = NPC(
+        "mill_guardian", "The Mill Guardian",
+        "An old, stooped man with flour-dusted skin and ears like cauliflowers — half-deaf from decades of grinding noise. He shuffles in circles around the mill, muttering to himself in a repetitive, grinding cadence.",
+        aliases=["guardian", "old man", "mill keeper", "miller", "mill guardian"],
+        dialogue={
+            "greeting": (
+                "The old man does not seem to notice you at first. He keeps shuffling, grinding, grinding. When he finally looks up, his eyes are pale and milky.\n\n"
+                "Grind... grind... grind... The sea must be ground. The sea is too full. Too much water. Too many ships. The mill grinds them all down, down, down into foam.\n\n"
+                "He taps his ear. 'Speak up, lad. These old ears have heard nothing but stone-on-stone for sixty years. What was that? Speak up!'"
+            ),
+            "mill": (
+                "The mill? Oh, it grinds the sea. Always has. Always will. Salt and stone, stone and salt. That is all there is. That is all there ever was. Grind... grind... grind...\n\n"
+                "He pauses. 'Sometimes I dream of silence. But the mill does not dream. The mill only grinds.'"
+            ),
+            "stop": (
+                "Stop the mill? STOP THE MILL?!\n\n"
+                "He cackles, a dry wheezing sound. 'If you could stop it, boy, you would be the first in a thousand years. The gears are older than Ireland. The stones were cut from the bones of the world. You cannot stop it. You can only... feed it.'"
+            ),
+            "gears": (
+                "Gears within gears, lad. Great wheels of bronze and iron, turning since before your grandfather's grandfather was a gleam in his father's eye. They catch the sea and crush it. You can hear them groaning if you press your ear to the stone."
+            ),
+        }
+    )
+
+    n["ghostly_shepherd"] = NPC(
+        "ghostly_shepherd", "The Ghostly Shepherd",
+        "A translucent figure in a tattered wool cloak, leaning on a crook. He seems to exist in two places at once — solid one moment, mist the next. His eyes are the color of twilight — neither black nor white, but something in between.",
+        aliases=["shepherd", "ghost", "ghostly shepherd", "old shepherd", "phantom"],
+        dialogue={
+            "greeting": (
+                "The Ghostly Shepherd turns to face you, and for a moment you see the sky through his chest. He speaks in a voice like wind through dry grass.\n\n"
+                "'Welcome, traveler. You have come to the fields of change, where black becomes white and white becomes black, and nothing stays as it was.\n\n"
+                "My sheep know the secret. They cross between the fields and are transformed. They are neither black nor white when they walk the middle path — they are both. They are the space between.'\n\n"
+                "He smiles, and his smile is grey."
+            ),
+            "riddle": (
+                "'The riddle is simple, traveler. I am neither black nor white, yet I contain both. Walk with me, and you shall pass. What am I?'"
+            ),
+            "answer": (
+                "'The shadow. The twilight. The place between. Yes, you understand. You may cross the fields of change unchanged. Go with my blessing.'"
+            ),
+            "sheep": (
+                "'The sheep are not sheep, traveler. They are souls — caught between one life and the next. When they cross the black field, they forget. When they cross the white field, they remember. They spend eternity forgetting and remembering, and that is their penance.'"
+            ),
+        }
+    )
+
+    n["stallion_king"] = NPC(
+        "stallion_king", "The Stallion King",
+        "A magnificent white stallion, larger than any horse you have ever seen, with a mane that flows like sea-foam and eyes that burn with wild intelligence. He stands proudly on the shore, hooves planted as if he owns the island and everything beyond it.",
+        aliases=["stallion", "horse", "stallion king", "white stallion", "king of horses"],
+        dialogue={
+            "greeting": (
+                "The Stallion King snorts and stamps the ground. The earth trembles.\n\n"
+                "He does not speak — not in words you can understand — but his meaning is clear: You are not welcome here, little two-legs. These are MY pastures. MY mares. MY island. Turn back before I teach you the meaning of speed."
+            ),
+            "calm": (
+                "The horse's ears pivot forward. Its stance softens, just slightly. It regards you with something like curiosity now — a predator sizing up an unusually interesting piece of prey."
+            ),
+        }
+    )
+
+    n["little_cat"] = NPC(
+        "little_cat", "The Little Cat",
+        "A tiny, scruffy kitten, no larger than your fist, with fur the color of rust and eyes like twin emeralds. It purrs constantly, a sound like a tiny engine. It is utterly unafraid of you.",
+        aliases=["cat", "kitten", "little cat", "small cat", "kitty"],
+        dialogue={
+            "greeting": (
+                "The little cat looks up at you, blinks slowly, and lets out a tiny 'mew.' It rubs against your ankle, leaving a trail of warm fur. Its purring intensifies.\n\n"
+                "There is something ancient in those green eyes — something that knows more than it should. But for now, it just wants to be petted."
+            ),
+            "pet": (
+                "You reach down and scratch behind its ears. The cat leans into your hand, purring so hard it vibrates. It looks up at you with something like gratitude.\n\n"
+                "Then it bites your finger — gently — and darts away, looking back as if to say: 'That's enough of that. Now give me what I really want.'"
+            ),
+            "tribute": (
+                "The cat's ears perk up. Its tail twitches. 'Mew?' it says, with obvious interest. It looks at you expectantly, then glances at a small alcove behind it where a golden glow emanates from a crystal."
+            ),
+        }
+    )
+
+    n["sacred_oxen"] = NPC(
+        "sacred_oxen", "The Sacred Oxen",
+        "Two magnificent white oxen with horns of pure gold that gleam even in the dimmest light. They stand motionless as statues, their breath forming clouds in the cool air. Their eyes are deep, dark pools — ancient, patient, knowing.",
+        aliases=["oxen", "ox", "sacred oxen", "white oxen", "golden-horned oxen", "bulls", "bull"],
+        dialogue={
+            "greeting": (
+                "The golden-horned oxen turn their massive heads to regard you. One of them lowss — a sound so deep it vibrates in your bones. They do not seem hostile, but they do not seem welcoming either. They simply... observe.\n\n"
+                "The larger of the two takes a step forward and lowers its head, presenting its golden horn as if offering it. Or challenging you to take it."
+            ),
+            "horn": (
+                "The ox's golden horn gleams in the grey light. It is magnificent — a spiral of pure gold, warm and alive. The ox stands still, waiting. It seems to be offering a choice."
+            ),
+            "peace": (
+                "The larger ox lowers its head and makes a sound like a contented sigh. The smaller one nuzzles its flank. They seem to be saying: 'We have been here a long time. We do not wish for violence. Take what you need, but take no more.'"
             ),
         }
     )
@@ -921,6 +1176,49 @@ def _make_npcs():
             ),
         }
     )
+
+    # ---- REVOLVING CASTLE NPCS ----
+
+    n["garbh"] = NPC(
+        "garbh", "Garbh the Raider",
+        "A one-eyed warrior with a face carved by a lifetime of violence. A long, jagged scar runs from his forehead across his missing eye and down to his jaw \u2014 the last gift your father gave him. He sits on a stone bench in the red-lit chamber, a drinking horn in his hand. When he sees you, he does not reach for his sword. He simply waits.",
+        aliases=["garbh", "garbh the raider", "one-eyed man", "one-eyed", "raider", "murderer"],
+        dialogue={
+            "greeting": (
+                'Garbh looks up from his drinking horn. His one good eye fixes you with a gaze that is neither hostile nor kind \u2014 just... tired.\n\n'
+                '"So. The Wolf\'s cub comes to the castle that turns. I\'ve been expecting you."\n\n'
+                'He takes a long drink and sets the horn down. The scar across his face gleams in the red light.\n\n'
+                '"I knew you would come, sooner or later. The sea always brings what it owes."'
+            ),
+            "father": (
+                'Garbh\'s face hardens. He touches the scar on his face.\n\n'
+                '"Ailill. Your father. The Wolf of the Arans."\n\n'
+                'He pauses, staring at the red-lit wall as if seeing something far away.\n\n'
+                '"It was a blood feud, not a murder. His raiders had killed my brother \u2014 burned his village, took his head as a trophy. I did what any man would do. I came for blood."\n\n'
+                '"We met on the strand at dawn. He was the finest fighter I ever faced. He took my eye \u2014 this scar is his signature, his last message to the world."\n\n'
+                '"But I was faster that morning. One thrust under the arm, where the mail gapes. He fell looking me in the eye, and he was... smiling. Laughing, even. That\'s the worst part. He didn\'t hate me. He respected me."\n\n'
+                'Garbh shakes his head slowly.\n\n'
+                '"It was not personal, Mael Duin. It was the way of things. Your father knew it. That\'s why he could laugh."'
+            ),
+            "revenge": (
+                'Garbh meets your gaze steadily.\n\n'
+                '"Kill me and you become me. Another man in a long line of dead men, passing the sword from hand to hand."\n\n'
+                '"Your father\'s blood is on my hands. My brother\'s blood is on his. Where does it end?"\n\n'
+                'He leans forward, his voice dropping.\n\n'
+                '"If you kill me, my sons will come for you. And if they fail, their sons will come. And your sons will kill them, and their sons will come for your grandsons. It never stops \u2014 unless someone decides it stops here."\n\n'
+                '"The question is not whether you can kill me. The question is whether you should."'
+            ),
+            "forgiveness": (
+                'Garbh\'s shoulders sag slightly. His voice softens.\n\n'
+                '"You are a better man than your father. And he was a good man."\n\n'
+                'He looks away, his one eye glistening.\n\n'
+                '"I have lived with what I did every day. I see his face in my dreams \u2014 that laughing, impossible face. He haunts me, Mael Duin. Not because I regret it, but because he would have forgiven me if our positions were reversed. And I knew that even as I struck."\n\n'
+                '"If you can forgive me... then maybe the wolf can rest. Maybe we both can."\n\n'
+                'He extends his hand, palm open. No weapon. Just the hand of a tired, old warrior waiting for judgment.'
+            ),
+        }
+    )
+
     npcs.update(n)
 
 

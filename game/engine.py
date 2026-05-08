@@ -373,12 +373,30 @@ def handle_examine(state, target):
     return f"You see nothing special about \"{target}\"."
 
 
-def handle_talk(state, npc_name):
+def handle_talk(state, npc_name, topic=None):
     if not npc_name:
         return "Talk to whom?"
+
+    # Support "talk to <npc> about <topic>" via inline parsing
+    if topic is None and " about " in npc_name.lower():
+        parts = npc_name.lower().split(" about ", 1)
+        npc_name = parts[0].strip()
+        topic = parts[1].strip()
+
     npc = state.get_npc_at_location(npc_name)
     if not npc:
         return f"There's no one named \"{npc_name}\" here to talk to."
+
+    # If topic was provided, try to get topic-specific dialogue
+    if topic:
+        try:
+            from .interactions import get_talk_topic_response
+            topic_result = get_talk_topic_response(state, npc, topic)
+            if topic_result is not None:
+                return topic_result
+            # Topic not found — fall through to greeting
+        except (ImportError, Exception):
+            pass  # Fall through to greeting
 
     if "greeting" in npc.dialogue:
         result = npc.dialogue["greeting"]
@@ -661,8 +679,13 @@ def handle_yes(state, args):
     """Handle YES response to a choice."""
     if state.awaiting_choice == "queen_stay":
         return _queen_stay_choice(state)
-    elif state.awaiting_choice == "ending":
+    elif state.awaiting_choice == "ending" or state.awaiting_choice == "ending_forgiven":
+        if state.awaiting_choice == "ending_forgiven":
+            state.set_flag("ending_decided")
         return _ending_forgive_choice(state)
+    elif state.awaiting_choice == "ending_vengeance":
+        state.set_flag("ending_decided")
+        return _ending_vengeance_choice(state)
     elif state.awaiting_choice == "homecoming_leave":
         state.set_flag("left_women")
         state.current_location = "sea1"
@@ -689,6 +712,11 @@ def handle_no(state, args):
         )
     elif state.awaiting_choice == "ending":
         return _ending_vengeance_choice(state)
+    elif state.awaiting_choice == "ending_forgiven":
+        # Already chose forgiveness at the castle — can't undo that now
+        return "You have already made your choice. The path of forgiveness cannot be undone."
+    elif state.awaiting_choice == "ending_vengeance":
+        return "You have already made your choice. The path of vengeance cannot be undone."
     return "No to what? There's no pending choice."
 
 

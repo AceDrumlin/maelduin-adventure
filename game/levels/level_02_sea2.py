@@ -43,6 +43,7 @@ def register(items, npcs):
             "A strange fog rolls in. In the mist, you see shapes that might be islands "
             "or might be something else. They don't hold still long enough to tell."
         ),
+        npcs=[npcs["young_fergus"]],
     )
 
     # ═══════════════════════════════════════════

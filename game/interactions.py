@@ -44,7 +44,7 @@ MATERIAL_ITEMS = {
 
 # NPC personality groups
 WISE_NPCS = {"druid", "hermit", "prophet_boy"}
-DANGEROUS_NPCS = {"cat", "laughing_king", "water_horse", "demon_smith", "skull"}
+DANGEROUS_NPCS = {"cat", "laughing_king", "water_horse", "demon_smith", "skull", "black_pig", "serpent"}
 SOCIAL_NPCS = {"queen", "smith", "diuran_npc", "conganchnes_npc", "fergus_npc"}
 NEUTRAL_NPCS = set()  # any not in the above
 
@@ -482,16 +482,59 @@ def _register_use(item_id, target_id, fn):
 
 
 def _use_earplugs_on_trumpet(state, item, target):
-    state.set_flag("trumpet_muffled")
+    state.set_flag("earplugs_used")
     state.score += 3
     return (
         'You stuff the earplugs into your ears just as the giant trumpet '
         'blasts at full volume. The sound is still earth-shaking, but your '
         'eardrums remain intact. The ground trembles, trees sway, and a '
-        'nearby bird turns inside out from the sheer force of the note.\\n\\n'
+        'nearby bird turns inside out from the sheer force of the note.\n\n'
         'When the blast subsides, you remove the earplugs. Your ears are ringing, '
-        'but you can still hear. The trumpet lies silent, its fury spent — for now.\\n\\n'
-        "(+3 points. Not deaf. That's a win.)"
+        'but you can still hear. The trumpet has sounded \u2014 but you survived.\n\n'
+        "WARNING: The bellows are filling again. You can leave safely now, "
+        "but the next visitor won't be so lucky."
+        " (+3 points. Not deaf. That's a win.)"
+    )
+
+
+def _use_trumpet_muffler_on_trumpet(state, item, target):
+    state.set_flag("trumpet_muffled")
+    state.score += 4
+    return (
+        'You take the Trumpet Muffler \u2014 that strange cloth of layered otter fur and waxed linen \u2014 '
+        'and stuff it deep into the trumpet\'s bell. It fits perfectly, as if it was made for this purpose.\n\n'
+        'The trumpet groans. A low, bassy note tries to escape but dies in the cloth, '
+        'emerging as little more than a flatulent whisper. The mechanism behind the bellows '
+        'winds down with a sad sigh.\n\n'
+        '"Well," says Diur\u00e1n, "that\'s the least dramatic defeat of a magical instrument I\'ve ever seen."\n\n'
+        'The trumpet is permanently muffled. Your crew can come and go safely.\n\n'
+        "(+4 points. The trumpet is silenced for good.)"
+    )
+
+
+def _use_silver_net_on_salmon(state, item, target):
+    state.set_flag("caught_salmon")
+    state.score += 4
+    from .levels._shared import items as shared_items
+    salmon = shared_items.get("wisdom_salmon")
+    if salmon and salmon not in state.inventory:
+        state.inventory.append(salmon)
+    return (
+        'You cast the Silver Net into the crystal stream. It shimmers as it sinks, glowing '
+        'like moonlight trapped in water.\n\n'
+        'The salmon are not fooled. They dart away, laughing \u2014 actually laughing \u2014 '
+        'as the net descends.\n\n'
+        'But one salmon \u2014 the oldest, the wisest, the one with eyes that hold the age of the world \u2014 '
+        'swims directly into the net. It does not struggle.\n\n'
+        '"Finally," it says. "I was wondering when someone would bring the right tool. '
+        'Being the wisest fish in the sea is exhausting. Every other fish asks me for advice. '
+        'Constant questions. \'Is this current safe?\' \'Should I swim upstream or downstream?\' '
+        '\'Do I look fat in these scales?\' I need a vacation."\n\n'
+        'You pull the net up. The Wisdom Salmon flops into your hands, sighs deeply, '
+        'and says: "Fine. Eat me. Gain all knowledge. Just... let me finish my thought first. '
+        'I was composing a poem about the meaning of existence. It was going to be magnificent."\n\n'
+        'The Salmon of Wisdom is now in your inventory. You feel smarter just holding it.\n\n'
+        '(+4 points. The Wisdom Salmon is yours.)'
     )
 
 
@@ -559,13 +602,25 @@ def _use_fiery_ash_on_pigs(state, item, target):
 def _use_silver_bell_on_storm(state, item, target):
     state.set_flag("storm_calmed")
     state.score += 3
+    # Also works on sea monsters
+    if hasattr(target, 'id') and target.id == "sea_monsters" or (isinstance(target, str) and "monster" in target.lower()):
+        state.set_flag("sea_monster_defeated")
+        return (
+            'You ring the Silver Bell. Its pure, clear tone rings across the water. '
+            'The monstrous hand pauses. The creature beneath the surface stirs, '
+            'then slowly, impossibly, releases the boat.\n\n'
+            'A massive head surfaces \u2014 a face of ancient scales and sorrowful eyes. '
+            'It looks at you, blinks once, and sinks back into the depths without a sound.\n\n'
+            'The sea is calm. The monster is gone. Your crew exhales as one.\n\n'
+            "(+3 points. The sea monster was soothed by the bell's tone.)"
+        )
     return (
         'You ring the Silver Bell. Its pure tone cuts through the howling wind '
         'like a blade through butter. The storm clouds part. The waves subside. '
-        'The wind drops to a gentle breeze.\\n\\n'
+        'The wind drops to a gentle breeze.\n\n'
         'Your crew stares at you in amazement. Conganchnes mutters, "Wish I\'d '
-        'had one of those in the great storm of \'82."\\n\\n'
-        'The sea is calm. For now.\\n\\n'
+        'had one of those in the great storm of \'82."\n\n'
+        'The sea is calm. For now.\n\n'
         "(+3 points. You have temporarily befriended the weather.)"
     )
 
@@ -606,17 +661,39 @@ def _use_truth_ring_on_queen(state, item, target):
     )
 
 
+def _use_speaking_feather_on_sea_monster(state, item, target):
+    state.set_flag("sea_monster_defeated")
+    state.score += 5
+    return (
+        'You hold the Speaking Feather above the water and speak the words it whispers to you.\n\n'
+        'The feather translates your speech into the ancient tongue of the deep ones. '
+        'The monstrous hand pauses mid-grab. A huge, ancient face rises from the depths '
+        '\u2014 eyes the size of shields, barnacles like old scars.\n\n'
+        '"You speak?" it rumbles. The voice is like boulders rolling in an underwater cave. '
+        '"No sailor has spoken to me in centuries. They always try to stab me first. '
+        'It is... refreshing."\n\n'
+        'You negotiate. The creature reveals it was driven here by a larger predator. '
+        'You promise to ring the Silver Bell \u2014 if you had one \u2014 to mark safe passage. '
+        'The monster agrees to let you pass.\n\n'
+        '"Go, little speaker. The deep knows your name now. That is a rare thing."\n\n'
+        'The creature sinks into the depths. The sea is calm once more.\n\n'
+        "(+5 points. You spoke the language of the deep. The monster remembers you.)"
+    )
+
+
 def _use_speaking_feather_on_skull(state, item, target):
+    state.set_flag("skull_questioned")
     state.score += 2
     return (
         'You hold the Speaking Feather to the Talking Skull\'s ear-hole. '
-        'The feather whispers something — a sound so faint you can\'t quite catch it.\\n\\n'
-        'But the skull can. Its jaw drops open.\\n\\n'
+        'The feather whispers something \u2014 a sound so faint you can\'t quite catch it.\n\n'
+        'But the skull can. Its jaw drops open.\n\n'
         '"By the gods! That\'s the password! I\'VE BEEN WAITING CENTURIES FOR SOMEONE '
-        'TO SAY THAT!"\\n\\n'
-        'The skull clatters its teeth in what might be a grin. "Ask me ONE question. '
-        'Just one. I\'ll answer truthfully. Then I can finally rest."\\n\\n'
-        '(You sense this is a moment for... asking something important.)'
+        'TO SAY THAT!"\n\n'
+        'The skull clatters its teeth in what might be a grin. "Ask me about your FATHER, '
+        'about REVENGE, or about HOME. I\'ll answer truthfully. Then I can finally rest."\n\n'
+        '(Try: TALK TO SKULL ABOUT FATHER, TALK TO SKULL ABOUT REVENGE, '
+        'or TALK TO SKULL ABOUT HOME)'
     )
 
 
@@ -639,7 +716,11 @@ def _use_hermit_blessing_on_serpent(state, item, target):
 # --- Register specific use combos ---
 
 _register_use("earplugs", "trumpet", _use_earplugs_on_trumpet)
+_register_use("trumpet_muffler", "trumpet", _use_trumpet_muffler_on_trumpet)
+_register_use("trumpet_muffler", "giant trumpet", _use_trumpet_muffler_on_trumpet)
 _register_use("silver_net", "crystal_pillar_fish", _use_silver_net_on_fish)
+_register_use("silver_net", "salmon", _use_silver_net_on_salmon)
+_register_use("silver_net", "wisdom salmon", _use_silver_net_on_salmon)
 _register_use("glass_shard", "glass_bridge", _use_glass_shard_on_bridge)
 _register_use("laughing_potion", "water_horse", _use_laughing_potion_on_water_horse)
 _register_use("fiery_ash", "fiery_pigs", _use_fiery_ash_on_pigs)
@@ -648,6 +729,10 @@ _register_use("magic_thread", "mast", _use_magic_thread_on_mast)
 _register_use("truth_ring", "queen", _use_truth_ring_on_queen)
 _register_use("speaking_feather", "skull", _use_speaking_feather_on_skull)
 _register_use("hermit_blessing", "serpent", _use_hermit_blessing_on_serpent)
+_register_use("silver_bell", "sea_monsters", _use_silver_bell_on_storm)
+_register_use("silver_bell", "sea monster", _use_silver_bell_on_storm)
+_register_use("speaking_feather", "sea_monsters", _use_speaking_feather_on_sea_monster)
+_register_use("speaking_feather", "sea monster", _use_speaking_feather_on_sea_monster)
 
 # Also allow use by display name
 _register_use("earplugs", "giant trumpet", _use_earplugs_on_trumpet)
@@ -661,6 +746,192 @@ _register_use("truth_ring", "the queen", _use_truth_ring_on_queen)
 _register_use("speaking_feather", "the talking skull", _use_speaking_feather_on_skull)
 _register_use("hermit_blessing", "the great serpent", _use_hermit_blessing_on_serpent)
 _register_use("hermit_blessing", "giant serpent", _use_hermit_blessing_on_serpent)
+
+# ---- MISSING ISLANDS USE HANDLERS ----
+
+
+def _use_heavy_item_on_gears(state, item, target):
+    """Stop the Mill of the Sea by jamming a heavy item into the gears."""
+    if state.has_flag("mill_stopped"):
+        return "The mill is already stopped. The gears are frozen in place, a heavy object wedged between their teeth."
+
+    # Heavy items that can jam the gears
+    heavy_items = {"millstone_fragment", "fiery_ash", "golden_apple", "crystal_pillar_fish", "dragon_tooth", "demon_coin"}
+    if item.id not in heavy_items:
+        return (
+            f"You throw the {item.name} into the gears. The great wheels chew it up "
+            f"and grind on, unperturbed. Your item is destroyed.\\n\\n"
+            "You need something heavier — something that can actually jam the mechanism."
+        )
+
+    state.set_flag("mill_stopped")
+    state.score += 5
+    from .levels._shared import items as shared_items
+    grain = shared_items.get("ever_grinding_grain")
+    if grain and grain not in state.inventory:
+        state.inventory.append(grain)
+    return (
+        f"You hurl the {item.name} into the massive gears! It strikes with a deafening CRUNCH.\\n\\n"
+        "The mill shudders. The great wheels grind to a halt, metal screaming against metal. "
+        "With a final, groaning sigh, the mill falls silent.\\n\\n"
+        "The silence is profound. Your crew cheers. The old guardian emerges from the shadows, "
+        "tears streaming down his flour-dusted face.\\n\\n"
+        "'Sixty years,' he whispers. 'Sixty years of grinding. And now... silence.'\\n\\n"
+        "Where the millstone was grinding, a hidden compartment has been revealed — "
+        "a small alcove filled with golden grain. It glows with a soft, warm light.\\n\\n"
+        "You take a handful of the Ever-Grinding Grain — a grain that multiplies endlessly.\\n\\n"
+        f"(+5 points. Gained: Ever-Grinding Grain)"
+    )
+
+
+def _use_magic_thread_on_mast_wall(state, item, target):
+    """Use the Magic Thread on the mast to calm the Wall of Water."""
+    if state.has_flag("wall_crossed"):
+        return "The wall has already collapsed. The sea is calm."
+    if state.current_location != "wall_of_water":
+        return "You are not at the Wall of Water."
+    state.set_flag("wall_crossed")
+    state.score += 3
+    return (
+        "You untie the Magic Thread from the mast and hold it before the Wall of Water.\\n\\n"
+        "The thread glows with sudden, brilliant light — a silver fire that pulses in rhythm with your heartbeat. "
+        "It stretches toward the wall, touching it gently.\\n\\n"
+        "For a moment, nothing happens. Then the wall begins to sing — a deep, resonant note "
+        "that vibrates in your chest. The water parts, drawing aside like a curtain.\\n\\n"
+        "A path opens through the wall. On the other side, the sea is calm and clear.\\n\\n"
+        "Your crew stares in awe. Fergus crosses himself. 'The druid's thread... it was meant for this.'\\n\\n"
+        "(+3 points. The Wall of Water is parted. You may now pass.)"
+    )
+
+
+def _use_silver_bell_on_wall(state, item, target):
+    """Use the Silver Bell to calm the Wall of Water."""
+    if state.has_flag("wall_crossed"):
+        return "The wall has already collapsed. The sea is calm."
+    if state.current_location != "wall_of_water":
+        return "You are not at the Wall of Water."
+    state.set_flag("wall_crossed")
+    state.score += 3
+    return (
+        "You ring the Silver Bell before the Wall of Water. A pure, clear note rings out across the sea.\\n\\n"
+        "The wall shivers. Ripples race across its surface — thousands of them — like a struck gong made of water. "
+        "The humming changes pitch, rising higher and higher, until...\\n\\n"
+        "The wall collapses. Not violently — but gently, gracefully, like a dancer bowing at the end of a performance. "
+        "Millions of tons of water fall into the sea, creating a wave that lifts your curragh and sets it down gently.\\n\\n"
+        "The sea is calm once more. The way is clear.\\n\\n"
+        "Diurán wipes his brow. 'I'll put that in the poem. Definitely.'\\n\\n"
+        "(+3 points. The Wall of Water is calmed.)"
+    )
+
+
+def _use_speaking_feather_on_oxen(state, item, target):
+    """Use the Speaking Feather to communicate with the Sacred Oxen."""
+    if state.has_flag("oxen_peaceful") or state.has_flag("oxen_slaughtered"):
+        return "The oxen have already given their answer."
+    state.set_flag("oxen_peaceful")
+    state.score += 3
+    from .levels._shared import items as shared_items
+    horn = shared_items.get("golden_horn")
+    if horn and horn not in state.inventory:
+        state.inventory.append(horn)
+    return (
+        "You hold the Speaking Feather before the Sacred Oxen. It whispers — "
+        "and the oxen's ears pivot forward.\\n\\n"
+        "The larger ox lows, and the feather translates:\\n\\n"
+        "'You carry the voice of the ancient birds. You are welcome here, Mael Duin. "
+        "We have guarded this horn since before your people learned to sail. "
+        "But the time of guarding is over. Take it — use it wisely. When you blow the Golden Horn, "
+        "we will hear it, even across the sea.'\\n\\n"
+        "The ox lowers its head, and the golden horn slides free — a gift, willingly given.\\n\\n"
+        "(+3 points. Gained: Golden Horn)"
+    )
+
+
+def _use_silver_bell_on_horses(state, item, target):
+    """Use the Silver Bell to calm the Giant Horses."""
+    if state.has_flag("horses_pacified"):
+        return "The horses are already calm."
+    if state.current_location != "island_horses":
+        return "There are no giant horses here."
+    state.set_flag("horses_pacified")
+    state.score += 3
+    return (
+        "You ring the Silver Bell. A pure, clear note rings out across the island.\\n\\n"
+        "The giant horses freeze. Their ears swivel toward the sound. The Stallion King "
+        "turns his massive head, and for a long moment, there is silence.\\n\\n"
+        "Then the Stallion King walks toward you — not aggressively, but curiously. "
+        "He stops before you and bows his head. The herd follows suit, lowering their heads in unison.\\n\\n"
+        "The Stallion King nuzzles your hand. You reach up and touch his mane — "
+        "and a single strand of it comes away in your hand, weaving itself into a bridle.\\n\\n"
+        "The Stallion King meets your eyes. His meaning is clear: 'Ride well, little one. "
+        "This bridle will carry you across the waves faster than any wind.'\\n\\n"
+        "(+3 points. Gained: Horsehair Bridle)"
+    )
+
+
+def _use_otter_pelt_on_horses(state, item, target):
+    """Use the Otter Pelt to earn the trust of the Giant Horses."""
+    if state.has_flag("horses_pacified"):
+        return "The horses are already calm."
+    if state.current_location != "island_horses":
+        return "There are no giant horses here."
+    state.set_flag("horses_pacified")
+    state.score += 3
+    from .levels._shared import items as shared_items
+    bridle = shared_items.get("horsehair_bridle")
+    if bridle and bridle not in state.inventory:
+        state.inventory.append(bridle)
+    return (
+        "You hold out the Otter Pelt. The smell of sea and animal reaches the Stallion King's nostrils.\\n\\n"
+        "He snorts — a sound that might be surprise, might be recognition. He walks toward you "
+        "and sniffs the pelt thoroughly. His ears relax. His stance softens.\\n\\n"
+        "He lowers his head and, with surprising gentleness, rubs his cheek against the pelt. "
+        "The herd follows, snorting and stamping in what seems like approval.\\n\\n"
+        "A single strand of the Stallion King's mane drifts down and weaves itself into a bridle "
+        "at your feet. A gift — freely given.\\n\\n"
+        "The Stallion King meets your eyes: 'You understand the old ways. This bridle is yours.'\\n\\n"
+        "(+3 points. Gained: Horsehair Bridle)"
+    )
+
+
+# ---- MISSING ISLANDS USE REGISTRATIONS ----
+# Mill of the Sea — heavy items on gears
+_register_use("millstone_fragment", "gears", _use_heavy_item_on_gears)
+_register_use("fiery_ash", "gears", _use_heavy_item_on_gears)
+_register_use("golden_apple", "gears", _use_heavy_item_on_gears)
+_register_use("crystal_pillar_fish", "gears", _use_heavy_item_on_gears)
+_register_use("dragon_tooth", "gears", _use_heavy_item_on_gears)
+_register_use("demon_coin", "gears", _use_heavy_item_on_gears)
+_register_use("millstone_fragment", "mill", _use_heavy_item_on_gears)
+_register_use("millstone_fragment", "wheel", _use_heavy_item_on_gears)
+_register_use("millstone_fragment", "millstone", _use_heavy_item_on_gears)
+# Also use on the millstone by name
+_register_use("fiery_ash", "mill", _use_heavy_item_on_gears)
+_register_use("golden_apple", "mill", _use_heavy_item_on_gears)
+
+# Wall of Water — magic thread or silver bell
+_register_use("magic_thread", "mast", _use_magic_thread_on_mast_wall)
+_register_use("magic_thread", "wall", _use_magic_thread_on_mast_wall)
+_register_use("magic_thread", "water", _use_magic_thread_on_mast_wall)
+_register_use("silver_bell", "wall", _use_silver_bell_on_wall)
+_register_use("silver_bell", "water", _use_silver_bell_on_wall)
+_register_use("magic_thread", "curragh", _use_magic_thread_on_mast_wall)
+_register_use("magic_thread", "ship", _use_magic_thread_on_mast_wall)
+
+# Giant Horses — silver bell or otter pelt
+_register_use("silver_bell", "horses", _use_silver_bell_on_horses)
+_register_use("silver_bell", "stallion", _use_silver_bell_on_horses)
+_register_use("silver_bell", "king", _use_silver_bell_on_horses)
+_register_use("silver_bell", "horse", _use_silver_bell_on_horses)
+_register_use("otter_pelt", "horses", _use_otter_pelt_on_horses)
+_register_use("otter_pelt", "stallion", _use_otter_pelt_on_horses)
+_register_use("otter_pelt", "horse", _use_otter_pelt_on_horses)
+
+# Sacred Oxen — speaking feather
+_register_use("speaking_feather", "oxen", _use_speaking_feather_on_oxen)
+_register_use("speaking_feather", "ox", _use_speaking_feather_on_oxen)
+_register_use("speaking_feather", "bull", _use_speaking_feather_on_oxen)
+_register_use("speaking_feather", "sacred oxen", _use_speaking_feather_on_oxen)
 
 
 # ---------------------------------------------------------------------------
@@ -1195,12 +1466,26 @@ def get_use_response(state, item, target):
 def get_talk_topic_response(state, npc, topic):
     """Return a string describing what the NPC says about a given topic.
 
+    Checks:
+      1. NPC's own dialogue dict (topic key).
+      2. Specific (npc_id, topic_category) in _TOPIC_FALLBACKS.
+      3. Personality-based fallback.
+
     Returns None if there's no topic-based response (caller should fall back to
     the NPC's default greeting or the engine's default behaviour).
     """
+    topic_lower = topic.lower().strip()
+
+    # 1. Check NPC's own dialogue for a direct topic match
+    if topic_lower in npc.dialogue:
+        result = npc.dialogue[topic_lower]
+        if callable(result):
+            return result(state, None)
+        return result
+
+    # 2. Check the topic categorisation system
     result = _topic_response_for_npc(npc.id, topic)
     if result is not None:
-        # Some responses are callables (lazy evaluation)
         if callable(result):
             return result()
         return result

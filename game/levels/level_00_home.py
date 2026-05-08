@@ -27,7 +27,7 @@ def register(items, npcs):
         ),
         items=[items["crew_provisions"], items["magic_thread"]],
         npcs=[npcs["druid"]],
-        exits={"west": "sea1", "beach": "sea1", "sea": "sea1"},
+        exits={"west": "sea1", "beach": "sea1", "sea": "sea1", "harbor": "village_harbor", "east": "village_harbor"},
         ambient=lambda s: (
             "A seabird cries overhead. The wind whispers through the grass. "
             "Somewhere, a blacksmith's hammer rings against iron."
