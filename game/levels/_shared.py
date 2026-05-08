@@ -23,6 +23,11 @@ def load_shared():
                 'Either way, you\'re welcome at my table. Pull up a bench!\n\n'
                 'The mead is sweet and the company is finer. What brings you to my hall?"'
             ),
+            "dead": (
+                'Ailill lies still on the cold sand. His eyes are open, staring at the grey sky. '
+                'The tide washes over his feet, and his sword — Wolf\'s Fang — is still clasped in his dead hand.\n\n'
+                'He does not answer. He cannot. The Wolf of the Arans is gone.'
+            ),
             "father": (
                 '"My son? Mael Duin? He\'s asleep by the fire. Barely a year old and already '
                 'he has the grip of a warrior. He grabbed my finger today and would not let go. '
@@ -269,6 +274,20 @@ items["fathers_ring"] = Item(
     "A heavy silver ring, worn smooth by years of wear. The crest of the Wolf of the Arans is still visible — a wolf's head, howling at a crescent moon.",
     examine_text="A band of tarnished silver, set with a carnelian stone carved into a wolf's head. The wolf is howling. You wonder if it was howling in victory or grief. The ring fits your thumb perfectly.",
     aliases=["ring", "signet ring", "silver ring", "father's ring"],
+)
+
+items["bronze_brooch"] = Item(
+    "bronze_brooch", "Bronze Brooch",
+    "A beautifully crafted bronze brooch from the Ancient Bird's nest, shaped like a spiral. It must be centuries old.",
+    examine_text="A bronze brooch in the shape of an unbroken spiral, the symbol of eternity. The craftsmanship is exquisite — every curve is perfect. It would fetch a good price in any market.",
+    aliases=["brooch", "bronze brooch", "spiral"],
+)
+
+items["dragon_tooth"] = Item(
+    "dragon_tooth", "Dragon's Tooth",
+    "A massive tooth from some ancient beast, found in the Bird's nest. It's as long as your forearm and still sharp at the tip.",
+    examine_text="A fossilised tooth, black with age. The root is worn smooth, but the tip could still pierce hide. Serrated edges run along one side. Whatever this belonged to, you're glad it's dead.",
+    aliases=["tooth", "dragon tooth", "fang"],
 )
 
 
@@ -558,6 +577,101 @@ def _make_npcs():
 
     # ---- NEW NPCs ----
 
+    n["ancient_bird"] = NPC(
+        "ancient_bird", "The Ancient Bird", "An enormous old bird perched on a nest of silver twigs and gold. Its eyes are milky with age, but they miss nothing. It shifts with the slow dignity of something that has seen empires rise and fall.",
+        aliases=["bird", "ancient bird", "old bird", "elder"],
+        dialogue={
+            "greeting": (
+                'The Ancient Bird fixes you with one milky eye.\n\n'
+                '"Mael Duin," it says. Its voice is like old parchment being folded. '
+                '"I have been expecting you. Well, not you specifically. I\'ve been expecting someone. '
+                'It\'s been a long time since anyone climbed up here. My legs don\'t work like they used to."\n\n'
+                'It shifts on its nest, revealing a stash of shiny objects — coins, buttons, '
+                'a thimble, a bronze brooch, and what looks like a dragon\'s tooth.\n\n'
+                '"Take what you need," it says. "I\'m too old to guard treasure. '
+                'I mostly just nap and complain about the weather."'
+            ),
+            "treasure": (
+                '"Take what you want from the nest. Coins, trinkets, an old dragon tooth. '
+                'They mean nothing to me. I\'ve had them so long they feel like clutter."'
+            ),
+            "weather": (
+                '"The weather? Terrible. Always terrible. When I was young, the sun was warmer '
+                'and the fish were fatter. Now it\'s all mist and cold and young birds who don\'t '
+                'know respect."'
+            ),
+        }
+    )
+
+    n["speaking_bird"] = NPC(
+        "speaking_bird", "A Chatty Bird", "A small, iridescent bird perched on a rocky ledge, tilting its head at you with obvious curiosity. Its feathers shimmer with every colour of the rainbow.",
+        aliases=["bird", "speaking bird", "chatty bird", "red bird"],
+        dialogue={
+            "greeting": (
+                'The bird hops closer and cocks its head.\n\n'
+                '"Welcome, hairless one! We don\'t get many visitors. '
+                'Most sailors hear us talking and think it\'s the wind playing tricks. '
+                'But you came ashore. That takes guts. Or poor judgment. Both, probably!"\n\n'
+                'It chirps what sounds like laughter.'
+            ),
+            "feather": (
+                '"Looking for a feather? The old one up top sheds them sometimes. '
+                'They\'re magic, you know. Whisper secrets when you hold them to your ear. '
+                'I\'d give you one of mine but... I\'m using them."'
+            ),
+            "salmon": (
+                '"Salmon are the philosophers of the sea. They swim upstream for years, '
+                'thinking deep thoughts, then get eaten by bears. It\'s a metaphor for something. '
+                'I forget what."'
+            ),
+        }
+    )
+
+    n["queen_ant"] = NPC(
+        "queen_ant", "The Queen Ant", "A massive ant the size of a house, sitting regally upon a throne of woven branches and golden fruit. Her compound eyes reflect the world in a thousand fragments. She regards you with ancient, patient stillness.",
+        aliases=["queen", "queen ant", "ant queen", "giant ant"],
+        dialogue={
+            "greeting": (
+                'The queen ant clicks her mandibles three times. The sound echoes like a gong. '
+                'She tilts her head, examining you from every angle with her compound eyes.\n\n'
+                'She does not speak — not in words — but you understand her meaning nonetheless: '
+                '"You are strange. You are not ant. But you are not enemy either. What brings you to my grove?"\n\n'
+                'A worker ant approaches, holding a golden fruit in its jaws. It offers it to you.\n\n'
+                'The queen waits. The gift is offered. Whether you take it or not is your choice.'
+            ),
+            "fruit": (
+                'The queen ant gestures with a feeler toward the golden fruit. '
+                'It is an offering — a gesture of peace from the colony to the strange hairless ones.',
+            ),
+        }
+    )
+
+    n["beach_mother"] = NPC(
+        "beach_mother", "Your Mother", "A woman kneeling in the wet sand, her hands covered in her husband's blood. She does not weep — she is past weeping. She holds a lock of his hair in her hand and stares at the grey sea as if it has stolen everything she loved.",
+        aliases=["mother", "woman", "wife", "ailill's wife"],
+        dialogue={
+            "greeting": (
+                'She does not look up at you. Her voice is barely a whisper.\n\n'
+                '"He\'s gone. The Wolf is gone. I told him — I told him a hundred times — '
+                'the raiders would come back. But he just laughed. He always laughed.\n\n'
+                'Now he lies in the sand, and our son will grow up without a father, '
+                'and I will grow old alone on this grey shore.\n\n'
+                'There is nothing you can say. Nothing anyone can say. '
+                'The sea has taken everything."\n\n'
+                'She falls silent. The tide continues its slow work.'
+            ),
+            "ailill": (
+                '"He was the best of us. Brave, foolish, kind. He died with a sword in his hand '
+                'and a curse on his lips. That was Ailill — always fighting, always laughing, '
+                'even at the end."'
+            ),
+            "baby": (
+                '"Mael Duin. My son. He is so small. He will not remember any of this. '
+                'Perhaps that is a mercy. Perhaps it is a cruelty. I do not know which."'
+            ),
+        }
+    )
+
     n["skull"] = NPC(
         "skull", "The Talking Skull", "A human skull impaled on a thornbush. Its jaw clatters as it speaks, and its empty eye sockets somehow convey a look of profound boredom.",
         aliases=["skull", "talking skull", "skull", "head", "jaw"],
@@ -765,7 +879,7 @@ def _make_npcs():
 
     n["young_druid"] = NPC(
         "young_druid", "The Druid (Younger)", "The same druid, but years younger. He still moves like an old man, though. Some people are born ancient.",
-        aliases=["druid", "old man", "wise man"],
+        aliases=["young druid", "old man", "wise man"],
         dialogue={
             "greeting": (
                 'The druid looks at you with knowing eyes.\n\n'

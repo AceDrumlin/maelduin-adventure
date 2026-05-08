@@ -301,9 +301,9 @@ class GameHandler(BaseHTTPRequestHandler):
 def main():
     port = int(os.environ.get("PORT", 5000))
     server = HTTPServer(("0.0.0.0", port), GameHandler)
-    print(f"\n  \uD83C\uDF0A The Voyage of Mael Duin \u2014 Web Edition")
-    print(f"  \uD83D\uDCD6  http://localhost:{port}")
-    print(f"  \u2693  Press Ctrl+C to stop\n")
+    print(f"\n  The Voyage of Mael Duin -- Web Edition")
+    print(f"  http://localhost:{port}")
+    print(f"  Press Ctrl+C to stop\n")
     try: server.serve_forever()
     except KeyboardInterrupt: print("\nFarewell, voyager!"); server.server_close()
 

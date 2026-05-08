@@ -87,7 +87,7 @@ def register(items, npcs):
             "Even the wind holds its breath."
         ),
         items=[items["everlasting_fruit"]],
-        npcs=[],
+        npcs=[npcs["queen_ant"]],
         exits={"out": "island_ants", "east": "island_ants"},
         on_enter=lambda s: (
             "The queen ant clicks her mandibles three times. The sound echoes like a gong. "
@@ -115,7 +115,7 @@ def register(items, npcs):
             "A single, iridescent feather lies at the base of the cliff, humming faintly."
         ),
         items=[items["speaking_feather"]],
-        npcs=[],
+        npcs=[npcs["speaking_bird"]],
         exits={"south": "sea1", "up": "birds_nest", "climb": "birds_nest"},
         ambient=lambda s: (
             "The birds are arguing about the meaning of life. One of them makes an excellent point about salmon. "
@@ -136,10 +136,10 @@ def register(items, npcs):
             "It shifts on its nest, revealing a stash of shiny objects — coins, buttons, "
             "a thimble, a bronze brooch, and what looks like a dragon's tooth.\n\n"
             '"Take what you need," it says. "I\'m too old to guard treasure. '
-            "I mostly just nap and complain about the weather.\""
+            'I mostly just nap and complain about the weather."'
         ),
-        items=[],
-        npcs=[],
+        items=[items["bronze_brooch"], items["dragon_tooth"]],
+        npcs=[npcs["ancient_bird"]],
         exits={"down": "island_birds"},
     )
 
@@ -222,11 +222,12 @@ def register(items, npcs):
         exits={"north": "sea1", "cross": "glass_palace", "bridge": "glass_palace"},
         on_enter=lambda s: (
             "The glass groans under your weight. You realize halfway across that this bridge "
-            "was not meant for mortal feet. The glass creaks \u2014 a hairline crack spreads.\n\n"
+            "was not meant for mortal feet. The glass creaks — a hairline crack spreads.\n\n"
             "You dive forward and roll onto the far side just as the section behind you shatters "
             "and falls into the abyss.\n\n"
             "Your crew makes it across, but one of them is bleeding. "
-            "The glass is sharper than it looks."
+            "The glass is sharper than it looks.\n\n"
+            + (s.set_flag("crossed_bridge") or "")
             if not s.has_flag("crossed_bridge") and s.get_item_from_inventory("otter_pelt") is None
             else None
         ),

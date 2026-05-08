@@ -1,18 +1,21 @@
 """Level: Prologue — The Wolf's Son
 The full backstory: Ailill's death, Mael Duin's childhood, the taunting, the crew."""
 
-from ..engine import Location
+from ..engine import Location, LOCATIONS
 from ._shared import items, npcs
 
 
 def register(items, npcs):
     """Register the epic prologue locations."""
-    from ..engine import LOCATIONS
     l = {}
 
     # ────────────────────────────────────────────────────────────
     # SCENE 1: AILILL'S KEEP — The Night of the Wolf
     # ────────────────────────────────────────────────────────────
+    
+    # Store reference to the keep location for runtime NPC management
+    ailill_keep_ref = {}
+    
     l["ailill_keep"] = Location(
         "ailill_keep", "Ailill's Keep — The Night of the Wolf",
         "The great hall of Ailill Ochair Ága, the Wolf of the Arans. Torchlight. Feasting. The last night of peace.",
@@ -23,9 +26,9 @@ def register(items, npcs):
             "At the head of the hall sits AILILL himself — a giant of a man with a beard like rusted iron "
             "and arms thick as mast timbers. He is laughing, his head thrown back, a drinking horn "
             "in his fist. His sword — the famous 'Wolf's Fang' — leans against his throne.\n\n"
-            "\"Tonight we feast!\" he roars, and the hall cheers. \"Tomorrow we plan the next raid! "
-            "But tonight — tonight we drink to the sea that gives us life, the earth that feeds us, "
-            "and the enemies who make victory so sweet!\"\n\n"
+            '"Tonight we feast!" he roars, and the hall cheers. "Tomorrow we plan the next raid! '
+            'But tonight — tonight we drink to the sea that gives us life, the earth that feeds us, '
+            'and the enemies who make victory so sweet!"\n\n'
             "In a cradle near the fire, an INFANT sleeps — his newborn son, Mael Duin. "
             "Ailill's wife watches over him, her hand resting on the cradle. "
             "She does not laugh. She has not laughed all night.\n\n"
@@ -46,14 +49,36 @@ def register(items, npcs):
             "You are a ghost in this hall — a witness to history. "
             "This is the story of how your father died, and how you came to be.\n\n"
             "Watch. Remember.\n\n"
-            "(Type NORTH or GO to the beach to see what happens next.)"
+            "(Type WEST or OUT to go to the beach to see what happens next.)"
             if not s.has_flag("started_prologue") else None
         ),
     )
+    # Store reference for runtime NPC manipulation
+    ailill_keep_ref["loc_id"] = "ailill_keep"
 
     # ────────────────────────────────────────────────────────────
     # SCENE 2: THE BEACH — Ailill's Last Stand
     # ────────────────────────────────────────────────────────────
+    
+    def _beach_enter(s):
+        """Handle entering the beach: remove Ailill from both locations, set death witness flag."""
+        if not s.has_flag("witnessed_death"):
+            s.set_flag("witnessed_death")
+            # Remove Ailill from the keep's NPC list (he's dead)
+            keep_loc = LOCATIONS.get("ailill_keep")
+            if keep_loc:
+                keep_loc.npcs = [n for n in keep_loc.npcs if n.id != "ailill"]
+            # Remove Ailill from beach NPCs too (he's a corpse, not an interactable NPC)
+            beach_loc = LOCATIONS.get("ailill_beach")
+            if beach_loc:
+                beach_loc.npcs = [n for n in beach_loc.npcs if n.id != "ailill"]
+            return (
+                "The salt spray stings your eyes. Or perhaps it's something else.\n\n"
+                "Ailill Ochair Ága, the Wolf of the Arans, is dead.\n\n"
+                "You are one year old. You will not remember this. But it will shape everything."
+            )
+        return None
+
     l["ailill_beach"] = Location(
         "ailill_beach", "The Strand — Where the Wolf Fell",
         "A grey beach under a grey sky. The tide is coming in, washing over the body of a warrior.",
@@ -71,20 +96,15 @@ def register(items, npcs):
             "She holds a lock of his hair in her hand.\n\n"
             "A DRUID stands nearby, holding the infant Mael Duin. The baby is crying. He doesn't know why.\n\n"
             "The druid looks at you — through you — and speaks to the ghost you are:\n\n"
-            "\"You will grow up not knowing this moment. But it will live in your blood. "
+            '"You will grow up not knowing this moment. But it will live in your blood. '
             "It will call you to the sea one day. And when it does, you will not return "
             "the same man who left.\"\n\n"
             "(Type EAST to return to the hall, or type ONWARD to move forward in time.)"
         ),
         items=[],
-        npcs=[npcs["ailill"], npcs["mother"], npcs["young_druid"]],
+        npcs=[npcs["ailill"], npcs["beach_mother"], npcs["young_druid"]],
         exits={"east": "ailill_keep", "onward": "foster_village", "forward": "foster_village", "time": "foster_village"},
-        on_enter=lambda s: (
-            "The salt spray stings your eyes. Or perhaps it's something else.\n\n"
-            "Ailill Ochair Ága, the Wolf of the Arans, is dead.\n\n"
-            "You are one year old. You will not remember this. But it will shape everything."
-            if not s.has_flag("witnessed_death") else None
-        ),
+        on_enter=_beach_enter,
         ambient=lambda s: (
             "The tide continues its slow work. Waves erase footprints. The sea does not remember."
             if not s.has_flag("witnessed_death") else
@@ -106,11 +126,11 @@ def register(items, npcs):
             "One of them is YOU — Mael Duin, aged ten. You are small for your age, but quick. "
             "You have your father's eyes and your mother's silence. You do not know about Ailill. "
             "You have been told your father was a fisherman who drowned.\n\n"
-            "Your FOSTER MOTHER — the woman who found Ailill's body — watches from the door of her hut. "
+            'Your FOSTER MOTHER — the woman who found Ailill\'s body — watches from the door of her hut. '
             "She is kind, but her eyes hold a secret. She looks at you sometimes and her face twists "
             "with something you don't understand. Grief. Guilt. Love.\n\n"
             "An old DRUID visits the village often. He brings herbs and wisdom. He always stops to talk to you.\n\n"
-            "\"You have the look of a man who will cross the sea,\" he tells you. \"You just don't know it yet.\"\n\n"
+            '"You have the look of a man who will cross the sea," he tells you. "You just don\'t know it yet."\n\n'
             "(Type ONWARD to grow older. Type TALK TO to speak with people.)"
         ),
         items=[items["childhood_toy"]],
@@ -148,10 +168,10 @@ def register(items, npcs):
             "it feels natural in your hand — as if it remembers something your mind does not.\n\n"
             "You train with CONGANCHNES, a young warrior with a legendary gift: his skin cannot be cut. "
             "He is your best friend and your fiercest rival. He beats you every time, but you're getting closer.\n\n"
-            "\"You're improving,\" he says, knocking your sword out of your hand. \"You only lasted five seconds "
-            "longer than last week. Soon you'll last almost a minute.\" He grins.\n\n"
+            '"You\'re improving," he says, knocking your sword out of your hand. "You only lasted five seconds '
+            'longer than last week. Soon you\'ll last almost a minute." He grins.\n\n'
             "FERGUS, the navigator, sits on a rock, studying the stars even though it's daytime. "
-            "\"The stars say there's a storm coming,\" he mutters. \"Also that I should have eaten less cheese.\"\n\n"
+            '"The stars say there\'s a storm coming," he mutters. "Also that I should have eaten less cheese."\n\n'
             "DIURÁN, the poet's apprentice, sits under a tree, composing verses about the battle "
             "he's imagining you'll have one day.\n\n"
             "Your foster mother watches from the edge of the field. She looks proud. And sad.\n\n"
@@ -194,13 +214,13 @@ def register(items, npcs):
             "And then a man speaks.\n\n"
             "He is a warrior from a neighboring territory — drunk, jealous, mean-spirited. "
             "His name is LORCÁN. He has been watching you all night.\n\n"
-            "\"So,\" he says, loud enough for the hall to hear, \"here sits Mael Duin, the great warrior. "
-            "The man with no father. The bastard of Inishmore.\"\n\n"
+            '"So," he says, loud enough for the hall to hear, "here sits Mael Duin, the great warrior. '
+            'The man with no father. The bastard of Inishmore."\n\n'
             "The hall goes silent.\n\n"
             "Your friends tense. Conganchnes reaches for his sword. Diurán stops writing.\n\n"
-            "\"You don't know, do you?\" Lorcán grins. \"They never told you. "
-            "Your father wasn't a fisherman. Your father was Ailill Ochair Ága — the Wolf of the Arans. "
-            "And he was murdered. Slain on the beach like a dog. While you slept in your cradle.\"\n\n"
+            '"You don\'t know, do you?" Lorcán grins. "They never told you. '
+            'Your father wasn\'t a fisherman. Your father was Ailill Ochair Ága — the Wolf of the Arans. '
+            'And he was murdered. Slain on the beach like a dog. While you slept in your cradle."\n\n'
             "The world stops.\n\n"
             "Your blood burns. Your hand finds your sword. The hall holds its breath."
         ),
@@ -222,40 +242,51 @@ def register(items, npcs):
     # ────────────────────────────────────────────────────────────
     # SCENE 6: THE DRUID'S SANCTUARY — The Truth
     # ────────────────────────────────────────────────────────────
+    def _druid_enter(s):
+        """Auto-give the Magic Thread when entering the sanctuary for the first time."""
+        if not s.has_flag("learned_truth"):
+            s.set_flag("learned_truth")
+            # Auto-add magic thread to inventory
+            magic_thread = items.get("magic_thread")
+            if magic_thread and magic_thread not in s.inventory:
+                s.inventory.append(magic_thread)
+            return (
+                "The fire crackles. The druid's eyes are ancient — older than the hills, older than grief.\n\n"
+                '"Sit," he says. "Eat. Listen. The truth is a heavy meal. You should not take it on an empty stomach."'
+            )
+        return None
+
     l["druid_sanctuary"] = Location(
         "druid_sanctuary", "The Druid's Sanctuary",
         "A hidden grove where an old druid lives. The air smells of herbs and old secrets.",
         detailed_desc=(
             "You burst into the druid's grove like a storm. The old man is sitting by his fire, "
             "stirring a pot. He does not look surprised to see you.\n\n"
-            "\"I was wondering when you'd come,\" he says.\n\n"
-            "\"Is it true?\" You can barely speak. Your hands are shaking. \"Is Ailill Ochair Ága my father?\"\n\n"
+            '"I was wondering when you\'d come," he says.\n\n'
+            '"Is it true?" You can barely speak. Your hands are shaking. "Is Ailill Ochair Ága my father?"\n\n'
             "The druid is silent for a long time. Then he nods.\n\n"
-            "\"Yes. Ailill was your father. And he was murdered — by raiders from the Northern Isles, "
-            "men who had a blood feud with his family stretching back three generations. "
-            "They came in the night, burned his hall, and killed him on the beach.\"\n\n"
-            "\"Why didn't you tell me?\"\n\n"
-            "\"Because I wanted you to live your own life,\" the druid says. \"Not the life of a dead man's revenge. "
-            "But I see now that the sea will call you, whether I wish it or not. "
-            "The blood of the Wolf runs in your veins. And wolves do not stay in their dens when there is "
-            "hunting to be done.\"\n\n"
+            '"Yes. Ailill was your father. And he was murdered — by raiders from the Northern Isles, '
+            'men who had a blood feud with his family stretching back three generations. '
+            'They came in the night, burned his hall, and killed him on the beach."\n\n'
+            '"Why didn\'t you tell me?"\n\n'
+            '"Because I wanted you to live your own life," the druid says. "Not the life of a dead man\'s revenge. '
+            'But I see now that the sea will call you, whether I wish it or not. '
+            'The blood of the Wolf runs in your veins. And wolves do not stay in their dens when there is '
+            'hunting to be done."\n\n'
             "He reaches into his robe and pulls out a shimmering SILKEN THREAD.\n\n"
-            "\"Take this. Tie it to your mast. It will guide you through the mists. "
-            "And take exactly three times nine men — no more, no less. "
-            "Twenty-seven souls. Not twenty-six. Not twenty-eight. Twenty-seven.\"\n\n"
-            "\"Is there anything else?\" you ask.\n\n"
-            "\"Yes,\" the druid says. \"When you find the men who killed your father... "
-            "you may find that killing them is not what you truly want.\"\n\n"
-            "He presses the thread into your hand. It glows faintly, warm as a living thing."
+            '"Take this. Tie it to your mast. It will guide you through the mists. '
+            'And take exactly three times nine men — no more, no less. '
+            'Twenty-seven souls. Not twenty-six. Not twenty-eight. Twenty-seven."\n\n'
+            '"Is there anything else?" you ask.\n\n'
+            '"Yes," the druid says. "When you find the men who killed your father... '
+            'you may find that killing them is not what you truly want."\n\n'
+            "He presses the thread into your hand. It glows faintly, warm as a living thing.\n\n"
+            "(The Magic Thread has been added to your inventory.)"
         ),
-        items=[items["magic_thread"]],
+        items=[],
         npcs=[npcs["druid"]],
         exits={"east": "village_harbor", "out": "village_harbor", "harbor": "village_harbor"},
-        on_enter=lambda s: (
-            "The fire crackles. The druid's eyes are ancient — older than the hills, older than grief.\n\n"
-            "\"Sit,\" he says. \"Eat. Listen. The truth is a heavy meal. You should not take it on an empty stomach.\""
-            if not s.has_flag("learned_truth") else None
-        ),
+        on_enter=_druid_enter,
         ambient=lambda s: (
             "The fire pops. An owl calls somewhere in the dark. "
             "The druid hums an old song — a lament, older than the Christian bells."
@@ -276,17 +307,17 @@ def register(items, npcs):
             "in a fever of preparation. It will carry twenty-seven men. Not one more. Not one less.\n\n"
             "Your CREW assembles on the sand:\n\n"
             "DIURÁN, the poet, carrying more parchment than provisions. \"I will make this voyage "
-            "into an epic that will be sung for a thousand years,\" he announces. \"Assuming we survive it.\"\n\n"
+            'into an epic that will be sung for a thousand years," he announces. "Assuming we survive it."\n\n'
             "CONGANCHNES, the invulnerable, sharpening his sword with slow, deliberate strokes. "
-            "\"I've been waiting for a real fight,\" he says. \"The practice field is getting boring.\"\n\n"
+            '"I\'ve been waiting for a real fight," he says. "The practice field is getting boring."\n\n'
             "FERGUS, the navigator, staring at the sky. \"The stars say we'll have fair winds. "
-            "They also say I should have brought a warmer cloak.\"\n\n"
+            'They also say I should have brought a warmer cloak."\n\n'
             "Twenty-four other men — farmers, fishermen, warriors — each with their own reasons "
             "for following you across the edge of the world.\n\n"
             "Your FOSTER MOTHER stands apart from the crowd. She does not weep. She has done enough "
             "weeping for one lifetime. She holds out a small leather pouch — your father's signet ring, "
             "kept hidden all these years.\n\n"
-            "\"He would be proud of you,\" she says. \"Now go. And come back alive.\"\n\n"
+            '"He would be proud of you," she says. "Now go. And come back alive."\n\n'
             "The druid raises his hand in blessing. The sun breaks through the clouds.\n\n"
             "The tide is turning. The sea is waiting.\n\n"
             "(Type WEST to set sail. Type TALK TO to speak with your crew.)"
@@ -321,7 +352,7 @@ def register(items, npcs):
             "You place your hand on the cairn. The stones are cold. The wind is cold. "
             "But somewhere beneath the chill, you feel warmth — the last ember of a fire that "
             "burned brighter than most.\n\n"
-            "\"I will find them,\" you say. \"And I will do what must be done.\"\n\n"
+            '"I will find them," you say. "And I will do what must be done."\n\n'
             "The wind answers with silence. The sea answers with waves. "
             "The stones answer with stillness.\n\n"
             "You turn and walk back to the harbor."
