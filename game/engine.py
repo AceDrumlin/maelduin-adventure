@@ -3,6 +3,7 @@
 import random
 import re
 import textwrap
+from .drink_handler import handle_drink
 
 
 class Item:
@@ -487,6 +488,14 @@ def handle_use(state, args):
         if not target:
             target = state.get_npc_at_location(target_name)
         if not target:
+            # Before giving up, try registered USE combos from interactions.py
+            try:
+                from .interactions import get_use_response
+                result = get_use_response(state, item, target_name)
+                if result:
+                    return result
+            except (ImportError, Exception):
+                pass
             return f"You don't see \"{target_name}\" here."
 
     if item.usable_with and target:
@@ -892,6 +901,7 @@ VERBS = {
     "use": ("use", handle_use),
     "wait": ("wait", handle_wait),
     "z": ("wait", handle_wait),
+    "drink": ("drink", handle_drink),
     "crew": ("crew", handle_crew),
     "score": ("score", handle_score),
     "quit": ("quit", handle_quit),
@@ -1027,6 +1037,12 @@ def parse_command(text):
         "crystal": "crystal",
         "red": "red", "blue": "blue", "green": "green", "black": "black",
         "onward": "onward", "forward": "onward", "time": "onward", "grow": "onward",
+        # New island navigation (from original immram)
+        "harbor": "harbor", "village": "harbor",
+        "horses": "horses", "cat": "cat", "oxen": "oxen", "well": "well",
+        "mill": "mill", "sheep": "sheep", "wall": "wall",
+        "beach": "beach", "strand": "beach",
+        "hill": "hill",
     }
     if first_word in dir_aliases:
         return (lambda s, a: handle_go(s, dir_aliases[first_word]), "")
