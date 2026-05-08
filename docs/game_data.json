@@ -699,6 +699,44 @@
         "greeting": "The druid looks at you with knowing eyes.\n\n\"You have questions. Good. Questions are how we grow.\n\nYou want to know about your father. I can see it in your eyes. But I cannot tell you yet. You are not ready. The truth would break you, and a broken boy cannot become the man he needs to be.\n\nWhen you are ready, I will tell you everything. Until then, learn to fight. Learn to read the stars. Learn to be kind when kindness is hard. These will serve you better than any secret.\""
       },
       "state": {}
+    },
+    "ailill": {
+      "id": "ailill",
+      "name": "Ailill Ochair Ága",
+      "description": "A giant of a man with a beard like rusted iron and arms thick as mast timbers. He is laughing — always laughing — with a drinking horn in his fist. His sword, Wolf's Fang, leans against his throne. He is the Wolf of the Arans, and he does not know this is his last night alive.",
+      "aliases": [
+        "ailill",
+        "father",
+        "wolf",
+        "ailill ochair ága",
+        "the wolf"
+      ],
+      "dialogue": {
+        "greeting": "Ailill looks up and grins. His teeth are white against his beard.\n\n\"Well, well! A visitor! Come, sit, drink! The night is young and so are we — well, I'm not young, but I'm still here, and that's what counts!\n\nYou have the look of a storyteller. Or a spy. Or a storyteller who is also a spy. Either way, you're welcome at my table. Pull up a bench!\n\nThe mead is sweet and the company is finer. What brings you to my hall?\"",
+        "father": "\"My son? Mael Duin? He's asleep by the fire. Barely a year old and already he has the grip of a warrior. He grabbed my finger today and would not let go. I told his mother: this one will be a fighter.\n\nI hope he grows up strong. I hope he grows up kind. I hope he grows up to be a better man than his father. That's all any father can wish for.\"",
+        "war": "\"War? War is a young man's game, and I am no longer young. But I am still good at it. The Northern Isles sent a raiding party last month. I sent them back in pieces. They will think twice before crossing the Wolf again.\n\nBut tonight? Tonight we feast. War can wait until morning.\"",
+        "wife": "\"My wife? She is the best of me. She keeps me grounded, keeps me human. Without her, I would be just another brute with a sword. With her, I am... something more.\n\nShe worries. That is her job. My job is to make sure she has nothing to worry about.\""
+      },
+      "state": {}
+    },
+    "mother": {
+      "id": "mother",
+      "name": "Your Mother",
+      "description": "A woman with tired eyes and a gentle face. She sits by the cradle, her hand resting on it as if she is afraid to let go. She has not laughed all night. She knows something is wrong.",
+      "aliases": [
+        "mother",
+        "mother",
+        "woman",
+        "your mother",
+        "ailill's wife",
+        "wife"
+      ],
+      "dialogue": {
+        "greeting": "She looks up at you with eyes that have seen too much.\n\n\"Shh. The baby is sleeping. He is so small, so fragile. I look at him and I see his father — the same stubborn chin, the same way of furrowing his brow.\n\nI hope he grows up to be a better man than Ailill. I hope he grows up at all.\n\nThe world is cruel and the sea is crueler. But perhaps... perhaps there is hope for him yet.\"",
+        "ailill": "\"He does not know when to stop. The feasting, the fighting, the laughing. He lives every day as if it is his last. And one day, it will be.\n\nI have told him a hundred times: the Northern raiders will come back. They always do. But he just laughs and says, \"Let them come. I will be waiting.\"\n\nI fear he will wait for them once too often.\"",
+        "baby": "\"Mael Duin. My son. He has his father's strength but — I pray — none of his recklessness. I look at him and I see a future I will not live to witness. But that is the way of things. Mothers give birth to children who will bury them. That is the natural order.\n\nI just hope he remembers me. When I am gone. I hope he knows I loved him.\""
+      },
+      "state": {}
     }
   },
   "locations": {
@@ -708,7 +746,11 @@
       "description": "The great hall of Ailill Ochair Ága, the Wolf of the Arans. Torchlight. Feasting. The last night of peace.",
       "detailed_desc": "The great hall of Ailill Ochair Ága blazes with torchlight. Warriors line the benches, their faces red with firelight and mead. A whole pig roasts on a spit the size of a small tree. The air smells of woodsmoke, roasted meat, and the salt of the sea.\n\nAt the head of the hall sits AILILL himself — a giant of a man with a beard like rusted iron and arms thick as mast timbers. He is laughing, his head thrown back, a drinking horn in his fist. His sword — the famous 'Wolf's Fang' — leans against his throne.\n\n\"Tonight we feast!\" he roars, and the hall cheers. \"Tomorrow we plan the next raid! But tonight — tonight we drink to the sea that gives us life, the earth that feeds us, and the enemies who make victory so sweet!\"\n\nIn a cradle near the fire, an INFANT sleeps — his newborn son, Mael Duin. Ailill's wife watches over him, her hand resting on the cradle. She does not laugh. She has not laughed all night.\n\nA DRUID sits in the shadows, his eyes on the flames. He has not touched his food.\n\nOutside, the wind howls. But it is not the wind. It is the sound of oars in the night.",
       "items": [],
-      "npcs": [],
+      "npcs": [
+        "ailill",
+        "mother",
+        "young_druid"
+      ],
       "exits": {
         "west": "ailill_beach",
         "out": "ailill_beach",
@@ -722,7 +764,11 @@
       "description": "A grey beach under a grey sky. The tide is coming in, washing over the body of a warrior.",
       "detailed_desc": "You step out of the hall and into a world that has changed.\n\nThe raiders came in the night — men from the Northern Isles, their boats painted with the skulls of their enemies. They came not for plunder, but for blood. A blood feud, older than anyone remembers, older than the stones of this island.\n\nAilill fought them on the beach, his back to the sea, Wolf's Fang singing in his hands. He took seven of them with him before they brought him down. The last raider — a grey-bearded man with one eye — drove a spear through his heart.\n\nNow Ailill lies on the strand, the tide washing his feet. His sword is still in his hand. His eyes are open, staring at the grey sky. He looks almost peaceful.\n\nA WOMAN kneels beside him — his wife, your mother. She does not weep. She is past weeping. She holds a lock of his hair in her hand.\n\nA DRUID stands nearby, holding the infant Mael Duin. The baby is crying. He doesn't know why.\n\nThe druid looks at you — through you — and speaks to the ghost you are:\n\n\"You will grow up not knowing this moment. But it will live in your blood. It will call you to the sea one day. And when it does, you will not return the same man who left.\"\n\n(Type EAST to return to the hall, or type ONWARD to move forward in time.)",
       "items": [],
-      "npcs": [],
+      "npcs": [
+        "ailill",
+        "mother",
+        "young_druid"
+      ],
       "exits": {
         "east": "ailill_keep",
         "onward": "foster_village",

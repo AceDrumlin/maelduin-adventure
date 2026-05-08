@@ -8,6 +8,70 @@ npcs = {}
 def load_shared():
     """Populate all shared items and NPCs."""
     _make_items()
+
+    # ---- PROLOGUE NPCS (interactive at Keep and Beach) ----
+
+    npcs["ailill"] = NPC(
+        "ailill", "Ailill Ochair Ága", "A giant of a man with a beard like rusted iron and arms thick as mast timbers. He is laughing — always laughing — with a drinking horn in his fist. His sword, Wolf's Fang, leans against his throne. He is the Wolf of the Arans, and he does not know this is his last night alive.",
+        aliases=["ailill", "father", "wolf", "ailill ochair ága", "the wolf"],
+        dialogue={
+            "greeting": (
+                'Ailill looks up and grins. His teeth are white against his beard.\n\n'
+                '"Well, well! A visitor! Come, sit, drink! The night is young and so are we — '
+                'well, I\'m not young, but I\'m still here, and that\'s what counts!\n\n'
+                'You have the look of a storyteller. Or a spy. Or a storyteller who is also a spy. '
+                'Either way, you\'re welcome at my table. Pull up a bench!\n\n'
+                'The mead is sweet and the company is finer. What brings you to my hall?"'
+            ),
+            "father": (
+                '"My son? Mael Duin? He\'s asleep by the fire. Barely a year old and already '
+                'he has the grip of a warrior. He grabbed my finger today and would not let go. '
+                'I told his mother: this one will be a fighter.\n\n'
+                'I hope he grows up strong. I hope he grows up kind. I hope he grows up to be '
+                'a better man than his father. That\'s all any father can wish for."'
+            ),
+            "war": (
+                '"War? War is a young man\'s game, and I am no longer young. But I am still '
+                'good at it. The Northern Isles sent a raiding party last month. I sent them back '
+                'in pieces. They will think twice before crossing the Wolf again.\n\n'
+                'But tonight? Tonight we feast. War can wait until morning."'
+            ),
+            "wife": (
+                '"My wife? She is the best of me. She keeps me grounded, keeps me human. '
+                'Without her, I would be just another brute with a sword. With her, I am... '
+                'something more.\n\n'
+                'She worries. That is her job. My job is to make sure she has nothing to worry about."'
+            ),
+        }
+    )
+
+    npcs["mother"] = NPC(
+        "mother", "Your Mother", "A woman with tired eyes and a gentle face. She sits by the cradle, her hand resting on it as if she is afraid to let go. She has not laughed all night. She knows something is wrong.",
+        aliases=["mother", "mother", "woman", "your mother", "ailill's wife", "wife"],
+        dialogue={
+            "greeting": (
+                'She looks up at you with eyes that have seen too much.\n\n'
+                '"Shh. The baby is sleeping. He is so small, so fragile. I look at him and I see '
+                'his father — the same stubborn chin, the same way of furrowing his brow.\n\n'
+                'I hope he grows up to be a better man than Ailill. I hope he grows up at all.\n\n'
+                'The world is cruel and the sea is crueler. But perhaps... perhaps there is hope for him yet."'
+            ),
+            "ailill": (
+                '"He does not know when to stop. The feasting, the fighting, the laughing. '
+                'He lives every day as if it is his last. And one day, it will be.\n\n'
+                'I have told him a hundred times: the Northern raiders will come back. They always do. '
+                'But he just laughs and says, \"Let them come. I will be waiting.\"\n\n'
+                'I fear he will wait for them once too often."'
+            ),
+            "baby": (
+                '"Mael Duin. My son. He has his father\'s strength but — I pray — none of his recklessness. '
+                'I look at him and I see a future I will not live to witness. But that is the way of things. '
+                'Mothers give birth to children who will bury them. That is the natural order.\n\n'
+                'I just hope he remembers me. When I am gone. I hope he knows I loved him."'
+            ),
+        }
+    )
+
     _make_npcs()
 
 

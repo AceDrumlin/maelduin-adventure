@@ -33,7 +33,7 @@ def register(items, npcs):
             "Outside, the wind howls. But it is not the wind. It is the sound of oars in the night."
         ),
         items=[],
-        npcs=[],
+        npcs=[npcs["ailill"], npcs["mother"], npcs["young_druid"]],
         exits={"west": "ailill_beach", "out": "ailill_beach", "door": "ailill_beach"},
         ambient=lambda s: (
             "The hall roars with laughter and song. A warrior is telling a joke about a sea serpent "
@@ -77,7 +77,7 @@ def register(items, npcs):
             "(Type EAST to return to the hall, or type ONWARD to move forward in time.)"
         ),
         items=[],
-        npcs=[],
+        npcs=[npcs["ailill"], npcs["mother"], npcs["young_druid"]],
         exits={"east": "ailill_keep", "onward": "foster_village", "forward": "foster_village", "time": "foster_village"},
         on_enter=lambda s: (
             "The salt spray stings your eyes. Or perhaps it's something else.\n\n"
