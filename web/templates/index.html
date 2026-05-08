@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Voyage of Mael Duin</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="game-container">
+        <div id="header">
+            <pre id="ascii-title">
+  _______ _   _  ___    _   ___   __
+ |__   __| | | || _ \  / | /_\ \ / /
+    | |  | |_| ||  _/  | |/ _ \ V /
+    |_|   \___/ |_|    |_/_/ \_\_/
+
+    The Voyage of Mael Duin
+            </pre>
+            <div id="status-bar">
+                <span id="loc-display">Location: —</span>
+                <span id="score-display">Score: 0</span>
+                <span id="turn-display">Turn: 0</span>
+            </div>
+        </div>
+
+        <div id="output-area">
+            <div id="output-content"></div>
+        </div>
+
+        <div id="input-area">
+            <span id="prompt">&gt;</span>
+            <input type="text" id="command-input" autofocus placeholder="Type a command...">
+            <button id="send-btn" title="Send command">→</button>
+        </div>
+
+        <div id="panel-toggle" title="Toggle inventory/help">☰</div>
+
+        <div id="side-panel">
+            <div id="inventory-panel">
+                <h3>🧳 Inventory</h3>
+                <ul id="inventory-list"><li>Empty</li></ul>
+            </div>
+            <div id="help-panel">
+                <h3>❓ Quick Help</h3>
+                <ul>
+                    <li><b>look</b> / <b>l</b></li>
+                    <li><b>n</b>, <b>s</b>, <b>e</b>, <b>w</b></li>
+                    <li><b>take</b> [item]</li>
+                    <li><b>examine</b> / <b>x</b></li>
+                    <li><b>inventory</b> / <b>i</b></li>
+                    <li><b>talk to</b> [npc]</li>
+                    <li><b>give</b> [item] to [npc]</li>
+                    <li><b>use</b> [item]</li>
+                    <li><b>sail</b></li>
+                    <li><b>crew</b></li>
+                    <li><b>score</b></li>
+                </ul>
+            </div>
+            <button id="restart-btn">🔄 New Voyage</button>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
