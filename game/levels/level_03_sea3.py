@@ -31,6 +31,7 @@ def register(items, npcs):
             "west": "speaking_skull", "south": "island_water_horse",
             "northeast": "island_fiery_pigs", "northwest": "island_revolving_castle",
             "southeast": "island_trumpet", "southwest": "island_demons",
+            "gold": "island_golden_pillar",
             "home": "homecoming",
         },
         ambient=lambda s: (

@@ -268,6 +268,12 @@ def handle_go(state, direction):
         "deeper": "deeper", "deep": "deeper",
         "back": "back", "return": "back", "shallows": "shallows",
         "home": "home",
+        "in": "in", "inside": "in", "enter": "in",
+        "cross": "cross", "bridge": "cross",
+        "out": "out", "exit": "out", "leave": "out",
+        "through": "through",
+        "climb": "climb",
+        "gold": "gold",
     }
 
     direction = dir_map.get(direction, direction)
@@ -370,7 +376,15 @@ def handle_talk(state, npc_name):
         return f"There's no one named \"{npc_name}\" here to talk to."
 
     if "greeting" in npc.dialogue:
-        return npc.dialogue["greeting"]
+        result = npc.dialogue["greeting"]
+
+        # Special: queen's greeting sets up the stay/leave choice
+        if npc.id == "queen" and not state.has_flag("queen_choice_offered"):
+            state.set_flag("queen_choice_offered")
+            state.awaiting_choice = "queen_stay"
+            result += "\n\n(Type YES to stay. Type NO to resist and leave.)"
+
+        return result
     return f"{npc.name} looks at you but says nothing."
 
 
@@ -848,6 +862,9 @@ def parse_command(text):
         r'^talk to\s+(.+)$', r'^talk with\s+(.+)$',
         r'^speak to\s+(.+)$', r'^speak with\s+(.+)$',
     ]
+    # Also check for bare "talk to" with no target
+    if lower in ('talk to', 'speak to', 'talk with', 'speak with'):
+        return lambda s, a: 'Talk to whom?', ""
     for pat in talk_patterns:
         m = re.match(pat, lower)
         if m:
@@ -921,6 +938,12 @@ def parse_command(text):
         "deeper": "deeper", "deep": "deeper",
         "back": "back", "return": "back", "shallows": "shallows",
         "home": "home",
+        "in": "in", "inside": "in", "enter": "in",
+        "cross": "cross", "bridge": "cross",
+        "out": "out", "exit": "out", "leave": "out",
+        "through": "through",
+        "climb": "climb", "up": "up",
+        "gold": "gold",
     }
     if first_word in dir_aliases:
         return (lambda s, a: handle_go(s, dir_aliases[first_word]), "")
