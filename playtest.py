@@ -32,6 +32,11 @@ def has_text(text):
         return text.lower() in result.lower()
     return check
 
+def has_any_text(*texts):
+    def check(result, state):
+        return any(t.lower() in result.lower() for t in texts)
+    return check
+
 def at_location(loc_name):
     def check(result, state):
         return state.current_location == loc_name
@@ -84,7 +89,7 @@ test("Go to harbor", "harbor", has_text("curragh"))
 print("\n--- ACT 2: SEA1 — ISLANDS ---")
 
 test("Sail west to sea1", "west", at_location("sea1"))
-test("Crew at sea — Diuran", "talk to diuran", has_text("poem") or has_text("chapter"))
+test("Crew at sea — Diuran", "talk to diuran", has_any_text('poem', 'chapter'))
 
 # Home visit (new: home is now reachable)
 test("Visit home village", "east", has_text("Aran"))
@@ -104,7 +109,7 @@ test("Return to sea1", "south", at_location("sea1"))
 # Cat island
 test("Go to cat island", "northeast", at_location("island_cat"))
 test("Take bowl of milk", "take milk", has_text("Bowl of Milk"))
-test("Give milk to cat", "give milk to cat", has_text("pearl") or has_text("acceptable"))
+test("Give milk to cat", "give milk to cat", has_any_text('pearl', 'acceptable'))
 test("Cat pacified", "look", has_flag("cat_pacified"))
 test("Sea pearl in inventory", "i", has_text("Sea Pearl"))
 test("Return to sea1", "southwest", at_location("sea1"))
@@ -112,14 +117,14 @@ test("Return to sea1", "southwest", at_location("sea1"))
 # Glass bridge
 test("Go to glass bridge", "south", at_location("glass_bridge"))
 test("Take glass shard", "take shard", has_text("Glass Shard"))
-test("Cross bridge (with shard)", "cross", has_text("palace") or has_text("Palace"))
+test("Cross bridge (with shard)", "cross", has_any_text('palace', 'Palace'))
 test("Return to bridge", "back", at_location("glass_bridge"))
 test("Return to sea1", "north", at_location("sea1"))
 
 # Laughing island
 test("Go to laughing island", "east", at_location("island_laughing"))
-test("Talk to king", "talk to king", has_text("LAUGH") or has_text("joke"))
-test("Tell joke to king", "joke why did the salmon cross the ocean", has_text("potion") or has_text("laughing"))
+test("Talk to king", "talk to king", has_any_text('LAUGH', 'joke'))
+test("Tell joke to king", "joke why did the salmon cross the ocean", has_any_text('potion', 'laughing'))
 test("King pacified", "look", has_flag("king_pacified"))
 test("Return to sea1", "west", at_location("sea1"))
 
@@ -133,13 +138,13 @@ test("Return to sea1", "southeast", at_location("sea1"))
 # Women island
 test("Go to women island", "southeast", at_location("island_women"))
 test("Talk to queen", "talk to queen", has_text("stay"))
-test("Resist queen", "no", has_text("resisted") or has_text("No"))
+test("Resist queen", "no", has_any_text('resisted', 'No'))
 test("Queen resisted", "look", has_flag("resisted_queen"))
 test("Return to sea1", "northwest", at_location("sea1"))
 
 # Sea monsters (without harpoon test)
 test("Go to sea monsters", "southwest", at_location("sea_monsters"))
-test("Try sword on monster", "fight monster", has_text("better weapon") or has_text("bounces"))
+test("Try sword on monster", "fight monster", has_any_text('better weapon', 'bounces'))
 test("Return to sea1", "northeast", at_location("sea1"))
 
 # ============================
@@ -148,37 +153,37 @@ test("Return to sea1", "northeast", at_location("sea1"))
 print("\n--- ACT 3: SEA2 — DEEPER WATERS ---")
 
 test("Sail deeper to sea2", "deeper", at_location("sea2"))
-test("Crew at sea2 — Fergus", "talk to fergus", has_text("star") or has_text("route"))
+test("Crew at sea2 — Fergus", "talk to fergus", has_any_text('star', 'route'))
 
 # NEW ISLAND: Wall of Water
 test("Go to wall of water", "southeast", at_location("wall_of_water"))
-test("Use thread on mast", "use thread on mast", has_text("wall") or has_text("calm") or has_text("Magic"))
+test("Use thread on mast", "use thread on mast", has_any_text('wall', 'calm', 'Magic'))
 test("Return to sea2", "northwest", at_location("sea2"))
 
 # NEW ISLAND: Mill of the Sea
 test("Go to mill exterior", "northeast", at_location("mill_exterior"))
-test("Talk to mill guardian", "talk to guardian", has_text("mill") or has_text("grind"))
+test("Talk to mill guardian", "talk to guardian", has_any_text('mill', 'grind'))
 test("Enter mill interior", "in", at_location("mill_interior"))
 test("Return to sea2", "southwest", at_location("sea2"))
 
 # NEW ISLAND: Black & White Sheep
 test("Go to sheep island", "southwest", at_location("island_sheep"))
-test("Talk to ghostly shepherd", "talk to shepherd", has_text("riddle") or has_text("field"))
+test("Talk to ghostly shepherd", "talk to shepherd", has_any_text('riddle', 'field'))
 test("Return to sea2", "northeast", at_location("sea2"))
 
 # NEW ISLAND: Giant Horses
 test("Go to horse island", "horses", at_location("island_horses"))
-test("Talk to stallion king", "talk to stallion", has_text("prove") or has_text("calm"))
-test("Use bell to calm horses", "use bell", has_text("calm") or has_text("bell"))
+test("Talk to stallion king", "talk to stallion", has_any_text('prove', 'calm'))
+test("Use bell to calm horses", "use bell", has_any_text('calm', 'bell'))
 test("Return to sea2", "southeast", at_location("sea2"))
 
 # Existing islands — hermit
 test("Go to hermit rock", "east", at_location("hermit_rock"))
-test("Talk to hermit", "talk to hermit", has_text("blessing") or has_text("forgiveness"))
+test("Talk to hermit", "talk to hermit", has_any_text('blessing', 'forgiveness'))
 test("Talk hermit about father", "talk to hermit about father", has_text("peace"))
 test("Talk hermit about forgiveness", "talk to hermit about forgiveness", has_text("feud"))
 test("Take otter pelt", "take pelt", has_text("Otter Pelt"))
-test("Give pelt to hermit", "give pelt to hermit", has_text("peace") or has_text("pelt"))
+test("Give pelt to hermit", "give pelt to hermit", has_any_text('peace', 'pelt'))
 test("Return to sea2", "west", at_location("sea2"))
 
 # Culdees monastery
@@ -188,14 +193,14 @@ test("Return to sea2", "south", at_location("sea2"))
 
 # Prophecy tower
 test("Go to prophecy tower", "south", at_location("prophecy_tower"))
-test("Talk to prophet boy", "talk to boy", has_text("wondering") or has_text("early"))
+test("Talk to prophet boy", "talk to boy", has_any_text('wondering', 'early'))
 test("Take prophecy scroll", "take scroll", has_text("Prophecy Scroll"))
 test("Return to sea2", "north", at_location("sea2"))
 
 # Four fences
 test("Go to four fences", "west", at_location("island_four_fences"))
-test("Try gold fence (wrong)", "gold", has_text("lose") or has_text("trap") or has_text("nothing"))
-test("Try copper fence (correct)", "copper", has_text("key") or has_text("Revolving Key") or has_text("correct"))
+test("Try gold fence (wrong)", "gold", has_any_text('lose', 'trap', 'nothing'))
+test("Try copper fence (correct)", "copper", has_any_text('key', 'Revolving Key', 'correct'))
 test("Revolving key obtained", "i", has_text("Revolving Key"))
 test("Return to sea2", "east", at_location("sea2"))
 
@@ -209,11 +214,11 @@ test("Return to sea2", "southeast", at_location("sea2"))
 print("\n--- ACT 4: SEA3 — FINAL STRETCH ---")
 
 test("Sail deeper to sea3", "deeper", at_location("sea3"))
-test("Crew at sea3 — Conganchnes", "talk to conganchnes", has_text("fight") or has_text("sharp") or has_text("Conganchnes"))
+test("Crew at sea3 — Conganchnes", "talk to conganchnes", has_any_text('fight', 'sharp', 'Conganchnes'))
 
 # NEW ISLAND: Flaming Cat
 test("Go to flaming cat", "cat", at_location("island_flaming_cat"))
-test("Give milk to cat", "give milk to cat", has_text("purr") or has_text("acceptable") or has_text("tribute"))
+test("Give milk to cat", "give milk to cat", has_any_text('purr', 'acceptable', 'tribute'))
 test("Return to sea3", "west", at_location("sea3"))
 
 # NEW ISLAND: Sacred Oxen
@@ -223,7 +228,7 @@ test("Return to sea3", "north", at_location("sea3"))
 
 # NEW ISLAND: Freshwater Well
 test("Go to freshwater well", "well", at_location("freshwater_well"))
-test("Drink from well", "drink", has_text("vision") or has_text("water"))
+test("Drink from well", "drink", has_any_text('vision', 'water'))
 test("Return to sea3", "east", at_location("sea3"))
 
 # Serpent island
@@ -238,15 +243,15 @@ test("Return to sea3", "west", at_location("sea3"))
 
 # Speaking skull
 test("Go to speaking skull", "west", at_location("speaking_skull"))
-test("Talk to skull", "talk to skull", has_text("visitor") or has_text("boredom"))
-test("Ask skull about father", "talk to skull about father", has_text("Garbh") or has_text("murderer"))
-test("Ask skull about revenge", "talk to skull about revenge", has_text("vengeance") or has_text("cup"))
-test("Ask skull about home", "talk to skull about home", has_text("return") or has_text("home"))
+test("Talk to skull", "talk to skull", has_any_text('visitor', 'boredom'))
+test("Ask skull about father", "talk to skull about father", has_any_text('Garbh', 'murderer'))
+test("Ask skull about revenge", "talk to skull about revenge", has_any_text('vengeance', 'cup'))
+test("Ask skull about home", "talk to skull about home", has_any_text('return', 'home'))
 test("Return to sea3", "east", at_location("sea3"))
 
 # Water horse
 test("Go to water horse", "south", at_location("island_water_horse"))
-test("Talk to water horse", "talk to horse", has_text("ride") or has_text("climb"))
+test("Talk to water horse", "talk to horse", has_any_text('ride', 'climb'))
 test("Return to sea3", "north", at_location("sea3"))
 
 # Fiery pigs
@@ -257,12 +262,12 @@ test("Return to sea3", "southwest", at_location("sea3"))
 test("Go to revolving castle", "northwest", at_location("island_revolving_castle"))
 
 # Test Garbh NPC
-test("Enter red room (Garbh)", "north", has_text("Garbh") or has_text("red") or at_location("castle_red"))
+test("Enter red room (Garbh)", "north", has_any_text('Garbh', 'red') or at_location("castle_red"))
 if state.current_location == "castle_red":
-    test("Talk to Garbh", "talk to garbh", has_text("Wolf") or has_text("expected"))
-    test("Talk Garbh about father", "talk to garbh about father", has_text("Ailill") or has_text("blood feud"))
-    test("Talk Garbh about revenge", "talk to garbh about revenge", has_text("become me") or has_text("kill me"))
-    test("Talk Garbh about forgiveness", "talk to garbh about forgiveness", has_text("better man") or has_text("forgive"))
+    test("Talk to Garbh", "talk to garbh", has_any_text('Wolf', 'expected'))
+    test("Talk Garbh about father", "talk to garbh about father", has_any_text('Ailill', 'blood feud'))
+    test("Talk Garbh about revenge", "talk to garbh about revenge", has_any_text('become me', 'kill me'))
+    test("Talk Garbh about forgiveness", "talk to garbh about forgiveness", has_any_text('better man', 'forgive'))
 else:
     test("Enter red room (fallback)", "look", always())
 test("Return to sea3", "southeast", at_location("sea3"))
@@ -271,7 +276,7 @@ test("Return to sea3", "southeast", at_location("sea3"))
 test("Go to trumpet island", "southeast", at_location("island_trumpet"))
 test("Take earplugs", "take earplugs", has_text("Earplugs"))
 test("Take muffler", "take muffler", has_text("Muffler"))
-test("Use muffler on trumpet", "use muffler on trumpet", has_text("muffle") or has_text("silence"))
+test("Use muffler on trumpet", "use muffler on trumpet", has_any_text('muffle', 'silence'))
 test("Return to sea3", "northwest", at_location("sea3"))
 
 # Demon island
@@ -294,17 +299,17 @@ test("Go home from village_harbor", "home", at_location("home"))
 
 test("Head to homecoming", "homecoming", has_text("Home") or at_location("homecoming_beach"))
 if state.current_location == "homecoming_beach":
-    test("Druid arrival speech", "look", has_text("druid") or has_text("returned"))
+    test("Druid arrival speech", "look", has_any_text('druid', 'returned'))
     test("Go to hill", "up", at_location("homecoming_hill"))
-    test("Hill reflection", "look", has_text("cairn") or has_text("Ailill"))
+    test("Hill reflection", "look", has_any_text('cairn', 'Ailill'))
     test("Go to choice point", "east", at_location("homecoming_choice"))
-    test("Final moment text", "look", has_text("YES") or has_text("forgive") or has_text("NO"))
+    test("Final moment text", "look", has_any_text('YES', 'forgive', 'NO'))
 else:
     # Fallback — old homecoming path
-    test("Look at homecoming", "look", has_text("YES") or has_text("forgive"))
+    test("Look at homecoming", "look", has_any_text('YES', 'forgive'))
 
 # Test forgiveness ending
-test("Choose forgiveness", "yes", has_text("lower") or has_text("forgiveness") or has_text("end") or has_text("voyage"))
+test("Choose forgiveness", "yes", has_any_text('lower', 'forgiveness', 'end', 'voyage'))
 
 # ============================
 # EDGE CASES (fresh state)
@@ -326,11 +331,11 @@ test("Go non-existent direction", "xyz", has_text("don't understand"))
 # New edge cases
 s3 = GameState()
 s3.current_location = "home"
-test("Talk druid about unknown topic", "talk to druid about blorple", has_text("greeting") or has_text("Magic Thread") or has_text("druid"))
+test("Talk druid about unknown topic", "talk to druid about blorple", has_any_text('greeting', 'Magic Thread', 'druid'))
 test("Use nothing", "use", has_text("Use what"))
 test("Drop nothing", "drop", has_text("Drop what"))
-test("Crew command", "crew", has_text("CREW") or has_text("Diur"))
-test("Score command", "score", has_text("Score") or has_text("score"))
+test("Crew command", "crew", has_any_text('CREW', 'Diur'))
+test("Score command", "score", has_any_text('Score', 'score'))
 
 # ============================
 # SUMMARY

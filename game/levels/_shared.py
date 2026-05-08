@@ -355,7 +355,15 @@ def _make_items():
         use_text="You unseal the Wind of Return. A warm, steady wind fills your sails, carrying you homeward with unerring certainty.",
     )
     # ---- FINAL ISLANDS ITEMS (Level 07) ----
+    i["kelpie_scale"] = Item(
+        "kelpie_scale", "Kelpie Scale",
+        "An iridescent scale from the Water Horse of the deep. It pulses with a warm, gentle light and smells faintly of salt and secrets.",
+        examine_text="A single scale, shimmering with all the colours of a sunken rainbow. It is warm to the touch, as if still alive. When you hold it to your ear, you can hear the distant sound of waves.",
+        aliases=["scale", "kelpie scale", "water horse scale", "iridescent scale"],
+        takeable=True,
+    )
 
+    # ---- FINAL ISLANDS ITEMS (Level 07) ----
     i["giants_club"] = Item(
         "giants_club", "Giant's Club",
         "A crude club of oak and stone, stolen from a dead giant. It is heavy enough to crush a skull with one swing.",

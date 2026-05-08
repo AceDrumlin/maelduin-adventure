@@ -584,7 +584,7 @@ def _use_laughing_potion_on_water_horse(state, item, target):
 
 
 def _use_fiery_ash_on_pigs(state, item, target):
-    state.set_flag("pigs_calmed")
+    state.set_flag("fiery_pigs_pacified")
     state.score += 3
     return (
         'The pigs snort at the ash. They sniff it, snuffle it, and then — '
@@ -724,6 +724,8 @@ _register_use("silver_net", "wisdom salmon", _use_silver_net_on_salmon)
 _register_use("glass_shard", "glass_bridge", _use_glass_shard_on_bridge)
 _register_use("laughing_potion", "water_horse", _use_laughing_potion_on_water_horse)
 _register_use("fiery_ash", "fiery_pigs", _use_fiery_ash_on_pigs)
+_register_use("fiery_ash", "pigs", _use_fiery_ash_on_pigs)
+_register_use("fiery_ash", "pig", _use_fiery_ash_on_pigs)
 _register_use("silver_bell", "storm", _use_silver_bell_on_storm)
 _register_use("magic_thread", "mast", _use_magic_thread_on_mast)
 _register_use("truth_ring", "queen", _use_truth_ring_on_queen)

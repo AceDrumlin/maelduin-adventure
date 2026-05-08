@@ -193,6 +193,30 @@ def register(items, npcs):
         ),
     )
 
+    # ── Water Horse Doom (the kelpie is outsmarted) ──
+    l["water_horse_doom"] = Location(
+        "water_horse_doom", "The Kelpie's Domain",
+        "A shimmering underwater realm where the kelpie's true form flickers between horse and shadow.",
+        detailed_desc=(
+            "You pull out the Truth Ring and hold it before the Water Horse's eyes. "
+            "Its reflection in the polished silver shows the creature's true form — a shadowy, "
+            "ancient spirit of the deep, its too-many teeth part of a grin that stretches into eternity.\n\n"
+            '"You carry the ring of truth," it hisses, its voice now a chorus of drowning whispers. '
+            '"Very well, mortal. You have seen me for what I am. I will not drag you to the depths — '
+            "that pleasure belongs only to the deceived.\"\n\n"
+            "The kelpie rears back and vanishes into the sea with a splash that soaks your crew. "
+            "When the spray clears, a single iridescent scale floats on the water — a token of your victory.\n\n"
+            "You take the scale. It pulses with a warm, gentle light.\n\n"
+            "(+3 points. The Water Horse has been outsmarted.)"
+        ),
+        items=[items["kelpie_scale"]],
+        npcs=[],
+        exits={"back": "island_water_horse", "out": "island_water_horse", "return": "sea3"},
+        on_enter=lambda s: (
+            s.set_flag("kelpie_tricked") or None
+        ),
+    )
+
     # ═══════════════════════════════════════════
     # ISLAND OF THE FIERY PIGS
     # ═══════════════════════════════════════════
