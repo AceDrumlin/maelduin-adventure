@@ -89,7 +89,7 @@ class CrewMember:
 
 class GameState:
     def __init__(self):
-        self.current_location = "home"
+        self.current_location = "ailill_keep"
         self.inventory = []
         self.flags = {}
         self.score = 0
@@ -274,6 +274,7 @@ def handle_go(state, direction):
         "through": "through",
         "climb": "climb",
         "gold": "gold",
+        "onward": "onward", "forward": "onward", "time": "onward", "grow": "onward",
     }
 
     direction = dir_map.get(direction, direction)
@@ -964,6 +965,7 @@ def parse_command(text):
         "through": "through",
         "climb": "climb", "up": "up",
         "gold": "gold",
+        "onward": "onward", "forward": "onward", "time": "onward", "grow": "onward",
     }
     if first_word in dir_aliases:
         return (lambda s, a: handle_go(s, dir_aliases[first_word]), "")

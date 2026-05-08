@@ -189,8 +189,24 @@ def _make_items():
         examine_text="Grey ash with tiny red embers glowing within. It's warm but not hot enough to burn. It smells like a campfire and roasted acorns.",
         aliases=["ash", "fiery ash", "embers"],
     )
-
     items.update(i)
+
+
+    # ---- PROLOGUE ITEMS ----
+items["childhood_toy"] = Item(
+    "childhood_toy", "Carved Wooden Horse",
+    "A small wooden horse, carved by your father before you were born. Your foster mother kept it all these years.",
+    examine_text="A simple horse, carved from oak. The craftsmanship is rough but loving. One of the legs is slightly shorter than the others, making it rock when you set it down. Your father's hands made this. You can feel it.",
+    aliases=["horse", "wooden horse", "toy", "carving"],
+)
+
+items["fathers_ring"] = Item(
+    "fathers_ring", "Ailill's Signet Ring",
+    "A heavy silver ring, worn smooth by years of wear. The crest of the Wolf of the Arans is still visible — a wolf's head, howling at a crescent moon.",
+    examine_text="A band of tarnished silver, set with a carnelian stone carved into a wolf's head. The wolf is howling. You wonder if it was howling in victory or grief. The ring fits your thumb perfectly.",
+    aliases=["ring", "signet ring", "silver ring", "father's ring"],
+)
+
 
 _make_items()
 
@@ -565,7 +581,143 @@ def _make_npcs():
         }
     )
 
+    
+
+    # ---- PROLOGUE NPCS ----
+
+    n["foster_mother"] = NPC(
+        "foster_mother", "Your Foster Mother", "A woman in her fifties, her face weathered by wind and grief. Her hands are gentle but strong. She has raised you as her own since you were a baby, and she has carried the secret of your father's death like a stone in her chest for twenty years.",
+        aliases=["mother", "foster mother", "woman", "foster mother"],
+        dialogue={
+            "greeting": (
+                'Your foster mother looks at you with eyes that have seen too much and loved too deeply.\n\n'
+                '"You have the look of your father," she says softly. "More every day. '
+                'I see him in the way you stand, the way you laugh, the way you stare at the sea.\n\n'
+                'I knew him, you know. Before you were born. Before any of this. '
+                'He was the kindest man I ever knew, and the fiercest. '
+                'He would sing to the goats. He would fight a dozen men without blinking. '
+                'He was not a simple man. He was a storm in human shape.\n\n'
+                'And you are his son. Never forget that."'
+            ),
+            "father": (
+                '"Ailill. Your father. He was the Wolf of the Arans. '
+                'He led the raids against the Northern Isles. He was feared and loved in equal measure.\n\n'
+                'The night he died... I found him on the beach at dawn. The tide was washing his feet. '
+                'His sword was still in his hand. He had killed seven of them before they brought him down.\n\n'
+                'I never told you because I wanted you to be free. '
+                'A man who knows his father was murdered is never free."'
+            ),
+            "voyage": (
+                '"I knew this day would come. From the moment you could walk, you were drawn to the sea. '
+                'I used to find you standing on the beach, staring at the horizon, as if you could see something '
+                'the rest of us couldn\'t.\n\n'
+                'Go. Find them. Do what you must. But come back alive, Mael Duin. Come back alive."'
+            ),
+            "ring": (
+                '"Your father\'s ring. I kept it hidden all these years. '
+                'I was going to give it to you on your wedding day. But I think you need it more now.\n\n'
+                'He wore it on his thumb. It will fit yours the same way. '
+                'It\'s not magic. It won\'t protect you from swords or storms. '
+                'But it will remind you that you are not alone. You carry him with you."'
+            ),
+        }
+    )
+
+    n["lorcan"] = NPC(
+        "lorcan", "Lorcán the Taunter", "A broad-shouldered warrior with a scar across his cheek and mead on his breath. He is the kind of man who starts fights he can't finish and tells truths he doesn't understand.",
+        aliases=["lorcan", "taunter", "warrior", "drunk"],
+        dialogue={
+            "greeting": (
+                'Lorcán sneers at you, swaying slightly.\n\n'
+                '"So. The bastard returns. I see you\'ve heard the truth about your daddy. '
+                'The great Ailill Ochair Ága. The Wolf of the Arans. '
+                'Slain on the beach like a dog while his wife watched.\n\n'
+                'What are you going to do about it, boy? Cry? Run to the druid? '
+                'Or are you going to do something a real man would do?"'
+            ),
+            "apology": (
+                '"An apology? You want an apology from me?\n\n'
+                'Look, I was drunk. I say things when I\'m drunk. '
+                'But I didn\'t lie. Everything I said was true. '
+                'The truth doesn\'t need an apology.\n\n'
+                'But if it makes you feel better... I\'m sorry I said it in front of everyone. '
+                'That was cruel. I\'m not a cruel man. Just a drunk one."'
+            ),
+        }
+    )
+
+    n["young_conganchnes"] = NPC(
+        "young_conganchnes", "Conganchnes (Young)", "A young warrior with the build of a bear and skin that cannot be cut. He grins at you with the confidence of someone who has never lost a fight and doesn't intend to start now.",
+        aliases=["conganchnes", "congan", "young warrior", "champion"],
+        dialogue={
+            "greeting": (
+                'Conganchnes grins and claps you on the shoulder — hard.\n\n'
+                '"There you are! I was beginning to think you\'d changed your mind. '
+                'Don\'t tell me you\'re having second thoughts. '
+                'I\'ve already sharpened my sword three times in anticipation.\n\n'
+                'We\'re going to see wonders, you and I. Monsters to fight. Islands to explore. '
+                'Treasure to find. And at the end of it all, the men who killed your father.\n\n'
+                'I wouldn\'t miss this for anything."'
+            ),
+            "fight": (
+                '"You want to fight? Now? We\'re about to sail across the ocean! '
+                'Fine. One round. Don\'t blame me when I knock you on your backside."'
+            ),
+        }
+    )
+
+    n["young_fergus"] = NPC(
+        "young_fergus", "Fergus (Young)", "A thin young man with eyes that are always looking at something far away. He is already the best navigator on the islands, and he knows it.",
+        aliases=["fergus", "navigator", "young fergus"],
+        dialogue={
+            "greeting": (
+                'Fergus looks up from his star charts.\n\n'
+                '"Ah, Captain. I\'ve been calculating our route. '
+                'If we sail west-northwest from the harbor, we\'ll hit the Gulf Stream, '
+                'which will carry us past the first cluster of islands. '
+                'After that... well, the maps stop. There be monsters, as they say.\n\n'
+                'But I\'ve been reading the stars, and they say something interesting. '
+                'They say this journey will change everything. Every single thing.\n\n'
+                'Also that I should have worn a warmer cloak. But it\'s too late for that now."'
+            ),
+        }
+    )
+
+    n["young_diuran"] = NPC(
+        "young_diuran", "Diurán (Young)", "A young man with ink-stained fingers and a scroll case perpetually tucked under his arm. He sees poetry in everything, especially danger.",
+        aliases=["diuran", "poet", "scribe", "young diuran"],
+        dialogue={
+            "greeting": (
+                'Diurán looks up from his writing, quill poised.\n\n'
+                '"Captain! I\'ve already written the first chapter. '
+                'I call it "The Wolf\'s Awakening." It\'s about a young hero who discovers his father was '
+                'murdered and sets sail across the sea for revenge. It\'s very dramatic.\n\n'
+                'I\'m going to make this voyage into the greatest epic ever sung. '
+                'Assuming we survive, of course. A tragic ending would sell more copies, '
+                'but I\'d prefer a happy one. For friendship. And also because I\'d like to keep living."'
+            ),
+        }
+    )
+
+    n["young_druid"] = NPC(
+        "young_druid", "The Druid (Younger)", "The same druid, but years younger. He still moves like an old man, though. Some people are born ancient.",
+        aliases=["druid", "old man", "wise man"],
+        dialogue={
+            "greeting": (
+                'The druid looks at you with knowing eyes.\n\n'
+                '"You have questions. Good. Questions are how we grow.\n\n'
+                'You want to know about your father. I can see it in your eyes. '
+                'But I cannot tell you yet. You are not ready. The truth would break you, '
+                'and a broken boy cannot become the man he needs to be.\n\n'
+                'When you are ready, I will tell you everything. '
+                'Until then, learn to fight. Learn to read the stars. '
+                'Learn to be kind when kindness is hard. These will serve you better than any secret."'
+            ),
+        }
+    )
     npcs.update(n)
+
+
 
 _make_npcs()
 

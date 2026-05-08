@@ -1,6 +1,36 @@
 {
   "version": "1.0",
   "items": {
+    "childhood_toy": {
+      "id": "childhood_toy",
+      "name": "Carved Wooden Horse",
+      "description": "A small wooden horse, carved by your father before you were born. Your foster mother kept it all these years.",
+      "examine": "A simple horse, carved from oak. The craftsmanship is rough but loving. One of the legs is slightly shorter than the others, making it rock when you set it down. Your father's hands made this. You can feel it.",
+      "takeable": true,
+      "aliases": [
+        "horse",
+        "wooden horse",
+        "toy",
+        "carving"
+      ],
+      "usable_with": [],
+      "use_text": null
+    },
+    "fathers_ring": {
+      "id": "fathers_ring",
+      "name": "Ailill's Signet Ring",
+      "description": "A heavy silver ring, worn smooth by years of wear. The crest of the Wolf of the Arans is still visible — a wolf's head, howling at a crescent moon.",
+      "examine": "A band of tarnished silver, set with a carnelian stone carved into a wolf's head. The wolf is howling. You wonder if it was howling in victory or grief. The ring fits your thumb perfectly.",
+      "takeable": true,
+      "aliases": [
+        "ring",
+        "signet ring",
+        "silver ring",
+        "father's ring"
+      ],
+      "usable_with": [],
+      "use_text": null
+    },
     "magic_thread": {
       "id": "magic_thread",
       "name": "Magic Thread",
@@ -576,9 +606,242 @@
         "soul": "\"Your soul? Please. I have a warehouse full of souls. They're the most overrated currency in the universe. \"\nGive me something interesting instead.\""
       },
       "state": {}
+    },
+    "foster_mother": {
+      "id": "foster_mother",
+      "name": "Your Foster Mother",
+      "description": "A woman in her fifties, her face weathered by wind and grief. Her hands are gentle but strong. She has raised you as her own since you were a baby, and she has carried the secret of your father's death like a stone in her chest for twenty years.",
+      "aliases": [
+        "mother",
+        "foster mother",
+        "woman",
+        "foster mother"
+      ],
+      "dialogue": {
+        "greeting": "Your foster mother looks at you with eyes that have seen too much and loved too deeply.\n\n\"You have the look of your father,\" she says softly. \"More every day. I see him in the way you stand, the way you laugh, the way you stare at the sea.\n\nI knew him, you know. Before you were born. Before any of this. He was the kindest man I ever knew, and the fiercest. He would sing to the goats. He would fight a dozen men without blinking. He was not a simple man. He was a storm in human shape.\n\nAnd you are his son. Never forget that.\"",
+        "father": "\"Ailill. Your father. He was the Wolf of the Arans. He led the raids against the Northern Isles. He was feared and loved in equal measure.\n\nThe night he died... I found him on the beach at dawn. The tide was washing his feet. His sword was still in his hand. He had killed seven of them before they brought him down.\n\nI never told you because I wanted you to be free. A man who knows his father was murdered is never free.\"",
+        "voyage": "\"I knew this day would come. From the moment you could walk, you were drawn to the sea. I used to find you standing on the beach, staring at the horizon, as if you could see something the rest of us couldn't.\n\nGo. Find them. Do what you must. But come back alive, Mael Duin. Come back alive.\"",
+        "ring": "\"Your father's ring. I kept it hidden all these years. I was going to give it to you on your wedding day. But I think you need it more now.\n\nHe wore it on his thumb. It will fit yours the same way. It's not magic. It won't protect you from swords or storms. But it will remind you that you are not alone. You carry him with you.\""
+      },
+      "state": {}
+    },
+    "lorcan": {
+      "id": "lorcan",
+      "name": "Lorcán the Taunter",
+      "description": "A broad-shouldered warrior with a scar across his cheek and mead on his breath. He is the kind of man who starts fights he can't finish and tells truths he doesn't understand.",
+      "aliases": [
+        "lorcan",
+        "taunter",
+        "warrior",
+        "drunk"
+      ],
+      "dialogue": {
+        "greeting": "Lorcán sneers at you, swaying slightly.\n\n\"So. The bastard returns. I see you've heard the truth about your daddy. The great Ailill Ochair Ága. The Wolf of the Arans. Slain on the beach like a dog while his wife watched.\n\nWhat are you going to do about it, boy? Cry? Run to the druid? Or are you going to do something a real man would do?\"",
+        "apology": "\"An apology? You want an apology from me?\n\nLook, I was drunk. I say things when I'm drunk. But I didn't lie. Everything I said was true. The truth doesn't need an apology.\n\nBut if it makes you feel better... I'm sorry I said it in front of everyone. That was cruel. I'm not a cruel man. Just a drunk one.\""
+      },
+      "state": {}
+    },
+    "young_conganchnes": {
+      "id": "young_conganchnes",
+      "name": "Conganchnes (Young)",
+      "description": "A young warrior with the build of a bear and skin that cannot be cut. He grins at you with the confidence of someone who has never lost a fight and doesn't intend to start now.",
+      "aliases": [
+        "conganchnes",
+        "congan",
+        "young warrior",
+        "champion"
+      ],
+      "dialogue": {
+        "greeting": "Conganchnes grins and claps you on the shoulder — hard.\n\n\"There you are! I was beginning to think you'd changed your mind. Don't tell me you're having second thoughts. I've already sharpened my sword three times in anticipation.\n\nWe're going to see wonders, you and I. Monsters to fight. Islands to explore. Treasure to find. And at the end of it all, the men who killed your father.\n\nI wouldn't miss this for anything.\"",
+        "fight": "\"You want to fight? Now? We're about to sail across the ocean! Fine. One round. Don't blame me when I knock you on your backside.\""
+      },
+      "state": {}
+    },
+    "young_fergus": {
+      "id": "young_fergus",
+      "name": "Fergus (Young)",
+      "description": "A thin young man with eyes that are always looking at something far away. He is already the best navigator on the islands, and he knows it.",
+      "aliases": [
+        "fergus",
+        "navigator",
+        "young fergus"
+      ],
+      "dialogue": {
+        "greeting": "Fergus looks up from his star charts.\n\n\"Ah, Captain. I've been calculating our route. If we sail west-northwest from the harbor, we'll hit the Gulf Stream, which will carry us past the first cluster of islands. After that... well, the maps stop. There be monsters, as they say.\n\nBut I've been reading the stars, and they say something interesting. They say this journey will change everything. Every single thing.\n\nAlso that I should have worn a warmer cloak. But it's too late for that now.\""
+      },
+      "state": {}
+    },
+    "young_diuran": {
+      "id": "young_diuran",
+      "name": "Diurán (Young)",
+      "description": "A young man with ink-stained fingers and a scroll case perpetually tucked under his arm. He sees poetry in everything, especially danger.",
+      "aliases": [
+        "diuran",
+        "poet",
+        "scribe",
+        "young diuran"
+      ],
+      "dialogue": {
+        "greeting": "Diurán looks up from his writing, quill poised.\n\n\"Captain! I've already written the first chapter. I call it \"The Wolf's Awakening.\" It's about a young hero who discovers his father was murdered and sets sail across the sea for revenge. It's very dramatic.\n\nI'm going to make this voyage into the greatest epic ever sung. Assuming we survive, of course. A tragic ending would sell more copies, but I'd prefer a happy one. For friendship. And also because I'd like to keep living.\""
+      },
+      "state": {}
+    },
+    "young_druid": {
+      "id": "young_druid",
+      "name": "The Druid (Younger)",
+      "description": "The same druid, but years younger. He still moves like an old man, though. Some people are born ancient.",
+      "aliases": [
+        "druid",
+        "old man",
+        "wise man"
+      ],
+      "dialogue": {
+        "greeting": "The druid looks at you with knowing eyes.\n\n\"You have questions. Good. Questions are how we grow.\n\nYou want to know about your father. I can see it in your eyes. But I cannot tell you yet. You are not ready. The truth would break you, and a broken boy cannot become the man he needs to be.\n\nWhen you are ready, I will tell you everything. Until then, learn to fight. Learn to read the stars. Learn to be kind when kindness is hard. These will serve you better than any secret.\""
+      },
+      "state": {}
     }
   },
   "locations": {
+    "ailill_keep": {
+      "id": "ailill_keep",
+      "name": "Ailill's Keep — The Night of the Wolf",
+      "description": "The great hall of Ailill Ochair Ága, the Wolf of the Arans. Torchlight. Feasting. The last night of peace.",
+      "detailed_desc": "The great hall of Ailill Ochair Ága blazes with torchlight. Warriors line the benches, their faces red with firelight and mead. A whole pig roasts on a spit the size of a small tree. The air smells of woodsmoke, roasted meat, and the salt of the sea.\n\nAt the head of the hall sits AILILL himself — a giant of a man with a beard like rusted iron and arms thick as mast timbers. He is laughing, his head thrown back, a drinking horn in his fist. His sword — the famous 'Wolf's Fang' — leans against his throne.\n\n\"Tonight we feast!\" he roars, and the hall cheers. \"Tomorrow we plan the next raid! But tonight — tonight we drink to the sea that gives us life, the earth that feeds us, and the enemies who make victory so sweet!\"\n\nIn a cradle near the fire, an INFANT sleeps — his newborn son, Mael Duin. Ailill's wife watches over him, her hand resting on the cradle. She does not laugh. She has not laughed all night.\n\nA DRUID sits in the shadows, his eyes on the flames. He has not touched his food.\n\nOutside, the wind howls. But it is not the wind. It is the sound of oars in the night.",
+      "items": [],
+      "npcs": [],
+      "exits": {
+        "west": "ailill_beach",
+        "out": "ailill_beach",
+        "door": "ailill_beach"
+      },
+      "blocked": {}
+    },
+    "ailill_beach": {
+      "id": "ailill_beach",
+      "name": "The Strand — Where the Wolf Fell",
+      "description": "A grey beach under a grey sky. The tide is coming in, washing over the body of a warrior.",
+      "detailed_desc": "You step out of the hall and into a world that has changed.\n\nThe raiders came in the night — men from the Northern Isles, their boats painted with the skulls of their enemies. They came not for plunder, but for blood. A blood feud, older than anyone remembers, older than the stones of this island.\n\nAilill fought them on the beach, his back to the sea, Wolf's Fang singing in his hands. He took seven of them with him before they brought him down. The last raider — a grey-bearded man with one eye — drove a spear through his heart.\n\nNow Ailill lies on the strand, the tide washing his feet. His sword is still in his hand. His eyes are open, staring at the grey sky. He looks almost peaceful.\n\nA WOMAN kneels beside him — his wife, your mother. She does not weep. She is past weeping. She holds a lock of his hair in her hand.\n\nA DRUID stands nearby, holding the infant Mael Duin. The baby is crying. He doesn't know why.\n\nThe druid looks at you — through you — and speaks to the ghost you are:\n\n\"You will grow up not knowing this moment. But it will live in your blood. It will call you to the sea one day. And when it does, you will not return the same man who left.\"\n\n(Type EAST to return to the hall, or type ONWARD to move forward in time.)",
+      "items": [],
+      "npcs": [],
+      "exits": {
+        "east": "ailill_keep",
+        "onward": "foster_village",
+        "forward": "foster_village",
+        "time": "foster_village"
+      },
+      "blocked": {}
+    },
+    "foster_village": {
+      "id": "foster_village",
+      "name": "The Foster Village — Ten Years Later",
+      "description": "A small village on the Aran Islands. Children play in the dirt. Goats wander freely. Life continues.",
+      "detailed_desc": "Ten years have passed. The world has moved on.\n\nYou stand at the edge of a small village — not the great keep of your father, but a humble cluster of stone huts. Goats wander the lanes. A dog sleeps in the sun. Children chase each other with sticks, pretending to be warriors.\n\nOne of them is YOU — Mael Duin, aged ten. You are small for your age, but quick. You have your father's eyes and your mother's silence. You do not know about Ailill. You have been told your father was a fisherman who drowned.\n\nYour FOSTER MOTHER — the woman who found Ailill's body — watches from the door of her hut. She is kind, but her eyes hold a secret. She looks at you sometimes and her face twists with something you don't understand. Grief. Guilt. Love.\n\nAn old DRUID visits the village often. He brings herbs and wisdom. He always stops to talk to you.\n\n\"You have the look of a man who will cross the sea,\" he tells you. \"You just don't know it yet.\"\n\n(Type ONWARD to grow older. Type TALK TO to speak with people.)",
+      "items": [
+        "childhood_toy"
+      ],
+      "npcs": [
+        "foster_mother",
+        "young_druid"
+      ],
+      "exits": {
+        "onward": "training_field",
+        "forward": "training_field",
+        "grow": "training_field"
+      },
+      "blocked": {}
+    },
+    "training_field": {
+      "id": "training_field",
+      "name": "The Training Field — Five Years Later",
+      "description": "A grassy field by the sea. Wooden swords lie scattered on the ground. Young men train here.",
+      "detailed_desc": "Five more years have passed. Fifteen summers. Fifteen winters. You are no longer a child.\n\nThe training field overlooks the sea. Here, the young men of the village learn to fight — not because they expect war, but because the sea is cruel and the world is crueler.\n\nYou have grown tall. Your shoulders have broadened. When you pick up a practice sword, it feels natural in your hand — as if it remembers something your mind does not.\n\nYou train with CONGANCHNES, a young warrior with a legendary gift: his skin cannot be cut. He is your best friend and your fiercest rival. He beats you every time, but you're getting closer.\n\n\"You're improving,\" he says, knocking your sword out of your hand. \"You only lasted five seconds longer than last week. Soon you'll last almost a minute.\" He grins.\n\nFERGUS, the navigator, sits on a rock, studying the stars even though it's daytime. \"The stars say there's a storm coming,\" he mutters. \"Also that I should have eaten less cheese.\"\n\nDIURÁN, the poet's apprentice, sits under a tree, composing verses about the battle he's imagining you'll have one day.\n\nYour foster mother watches from the edge of the field. She looks proud. And sad.\n\n(Type ONWARD to the next chapter. Type TALK TO to speak with your companions.)",
+      "items": [],
+      "npcs": [
+        "young_conganchnes",
+        "young_fergus",
+        "young_diuran",
+        "foster_mother"
+      ],
+      "exits": {
+        "onward": "feast_hall",
+        "forward": "feast_hall",
+        "grow": "feast_hall"
+      },
+      "blocked": {}
+    },
+    "feast_hall": {
+      "id": "feast_hall",
+      "name": "The Feast Hall — Twenty Years Old",
+      "description": "The same hall where Ailill once feasted. Different faces. Different songs. But the same silence beneath the laughter.",
+      "detailed_desc": "Twenty years old. A man, by every measure that matters.\n\nYou stand in the great hall of the Aran Islands — the same hall where your father drank and laughed on the last night of his life. You don't know that. But something about this place has always felt strange to you. Familiar. Haunted.\n\nThe hall is full tonight. Warriors, farmers, their wives and children. A feast to celebrate the summer solstice. The mead flows freely. Stories are told. Songs are sung. You sit among your companions — Conganchnes, Fergus, Diurán — laughing at a joke that isn't very funny.\n\nAnd then a man speaks.\n\nHe is a warrior from a neighboring territory — drunk, jealous, mean-spirited. His name is LORCÁN. He has been watching you all night.\n\n\"So,\" he says, loud enough for the hall to hear, \"here sits Mael Duin, the great warrior. The man with no father. The bastard of Inishmore.\"\n\nThe hall goes silent.\n\nYour friends tense. Conganchnes reaches for his sword. Diurán stops writing.\n\n\"You don't know, do you?\" Lorcán grins. \"They never told you. Your father wasn't a fisherman. Your father was Ailill Ochair Ága — the Wolf of the Arans. And he was murdered. Slain on the beach like a dog. While you slept in your cradle.\"\n\nThe world stops.\n\nYour blood burns. Your hand finds your sword. The hall holds its breath.",
+      "items": [],
+      "npcs": [
+        "lorcan",
+        "young_diuran",
+        "young_conganchnes",
+        "young_fergus"
+      ],
+      "exits": {
+        "out": "druid_sanctuary",
+        "door": "druid_sanctuary",
+        "north": "druid_sanctuary"
+      },
+      "blocked": {}
+    },
+    "druid_sanctuary": {
+      "id": "druid_sanctuary",
+      "name": "The Druid's Sanctuary",
+      "description": "A hidden grove where an old druid lives. The air smells of herbs and old secrets.",
+      "detailed_desc": "You burst into the druid's grove like a storm. The old man is sitting by his fire, stirring a pot. He does not look surprised to see you.\n\n\"I was wondering when you'd come,\" he says.\n\n\"Is it true?\" You can barely speak. Your hands are shaking. \"Is Ailill Ochair Ága my father?\"\n\nThe druid is silent for a long time. Then he nods.\n\n\"Yes. Ailill was your father. And he was murdered — by raiders from the Northern Isles, men who had a blood feud with his family stretching back three generations. They came in the night, burned his hall, and killed him on the beach.\"\n\n\"Why didn't you tell me?\"\n\n\"Because I wanted you to live your own life,\" the druid says. \"Not the life of a dead man's revenge. But I see now that the sea will call you, whether I wish it or not. The blood of the Wolf runs in your veins. And wolves do not stay in their dens when there is hunting to be done.\"\n\nHe reaches into his robe and pulls out a shimmering SILKEN THREAD.\n\n\"Take this. Tie it to your mast. It will guide you through the mists. And take exactly three times nine men — no more, no less. Twenty-seven souls. Not twenty-six. Not twenty-eight. Twenty-seven.\"\n\n\"Is there anything else?\" you ask.\n\n\"Yes,\" the druid says. \"When you find the men who killed your father... you may find that killing them is not what you truly want.\"\n\nHe presses the thread into your hand. It glows faintly, warm as a living thing.",
+      "items": [
+        "magic_thread"
+      ],
+      "npcs": [
+        "druid"
+      ],
+      "exits": {
+        "east": "village_harbor",
+        "out": "village_harbor",
+        "harbor": "village_harbor"
+      },
+      "blocked": {}
+    },
+    "village_harbor": {
+      "id": "village_harbor",
+      "name": "The Harbor — The Day of Departure",
+      "description": "A grey morning. A curragh on the beach. Twenty-seven men. The start of the voyage.",
+      "detailed_desc": "Three days later, you stand on the beach where your father died. The tide is low, and the sand is wet and hard beneath your feet.\n\nBefore you, a CURRAGH — a boat of wicker and hide, built for the open sea. It is larger than any curragh you've ever seen, built by the village's best shipwrights in a fever of preparation. It will carry twenty-seven men. Not one more. Not one less.\n\nYour CREW assembles on the sand:\n\nDIURÁN, the poet, carrying more parchment than provisions. \"I will make this voyage into an epic that will be sung for a thousand years,\" he announces. \"Assuming we survive it.\"\n\nCONGANCHNES, the invulnerable, sharpening his sword with slow, deliberate strokes. \"I've been waiting for a real fight,\" he says. \"The practice field is getting boring.\"\n\nFERGUS, the navigator, staring at the sky. \"The stars say we'll have fair winds. They also say I should have brought a warmer cloak.\"\n\nTwenty-four other men — farmers, fishermen, warriors — each with their own reasons for following you across the edge of the world.\n\nYour FOSTER MOTHER stands apart from the crowd. She does not weep. She has done enough weeping for one lifetime. She holds out a small leather pouch — your father's signet ring, kept hidden all these years.\n\n\"He would be proud of you,\" she says. \"Now go. And come back alive.\"\n\nThe druid raises his hand in blessing. The sun breaks through the clouds.\n\nThe tide is turning. The sea is waiting.\n\n(Type WEST to set sail. Type TALK TO to speak with your crew.)",
+      "items": [
+        "fathers_ring"
+      ],
+      "npcs": [
+        "foster_mother",
+        "druid",
+        "young_diuran",
+        "young_conganchnes",
+        "young_fergus"
+      ],
+      "exits": {
+        "west": "sea1",
+        "beach": "sea1",
+        "sea": "sea1",
+        "sail": "sea1"
+      },
+      "blocked": {}
+    },
+    "fathers_tomb": {
+      "id": "fathers_tomb",
+      "name": "Ailill's Cairn",
+      "description": "A pile of stones on a windswept hill, overlooking the sea. A warrior's grave.",
+      "detailed_desc": "Before you leave, you climb the hill alone.\n\nA cairn of grey stones marks the place where Ailill Ochair Ága was laid to rest. No inscription. No marker. Just stones. The sea wind whistles through the gaps.\n\nYou place your hand on the cairn. The stones are cold. The wind is cold. But somewhere beneath the chill, you feel warmth — the last ember of a fire that burned brighter than most.\n\n\"I will find them,\" you say. \"And I will do what must be done.\"\n\nThe wind answers with silence. The sea answers with waves. The stones answer with stillness.\n\nYou turn and walk back to the harbor.",
+      "items": [],
+      "npcs": [],
+      "exits": {
+        "down": "village_harbor",
+        "back": "village_harbor"
+      },
+      "blocked": {}
+    },
     "home": {
       "id": "home",
       "name": "Your Village — The Aran Islands",
