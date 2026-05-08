@@ -205,7 +205,7 @@ def _make_items():
         "earplugs", "Wax Earplugs",
         "A pair of earplugs made from beeswax. Perfect for blocking out loud noises.",
         examine_text="Two small, pliable balls of beeswax, carefully shaped to fit in your ears. They smell faintly of honey.",
-        aliases=["earplugs", "wax plugs", "beeswax", "wax earplugs"],
+        aliases=["earplugs", "wax plugs", "beeswax", "wax earplugs", "plugs"],
     )
 
     i["wisdom_salmon"] = Item(
