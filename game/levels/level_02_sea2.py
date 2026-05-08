@@ -249,8 +249,12 @@ def register(items, npcs):
         items=[items["revolving_key"]], npcs=[], exits={"back": "island_four_fences", "east": "island_four_fences"},
         on_enter=lambda s: (
             (s.set_flag("four_fences_solved") or True) and
-            "The copper fence crumbles to dust. The path is clear. "
-            "The key hums in your hand, eager to be used."
+            (s.inventory.append(items["revolving_key"]) if items["revolving_key"] not in s.inventory else None) and
+            (LOCATIONS["four_fences_copper"].items.remove(items["revolving_key"]) if items["revolving_key"] in LOCATIONS["four_fences_copper"].items else None) and
+            True and
+            "The copper fence crumbles to dust. The path is clear.\n\n"
+            "You reach out and take the bronze key. It hums in your hand, turning of its own accord, "
+            "eager to be used. The key to the turning world is yours."
             if not s.has_flag("four_fences_solved") else None
         ),
     )

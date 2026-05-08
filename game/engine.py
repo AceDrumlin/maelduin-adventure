@@ -277,6 +277,7 @@ def handle_go(state, direction):
         "silver": "silver",
         "copper": "copper",
         "crystal": "crystal",
+        "red": "red", "blue": "blue", "green": "green", "black": "black",
         "onward": "onward", "forward": "onward", "time": "onward", "grow": "onward",
     }
 
@@ -971,6 +972,7 @@ def parse_command(text):
         "silver": "silver",
         "copper": "copper",
         "crystal": "crystal",
+        "red": "red", "blue": "blue", "green": "green", "black": "black",
         "onward": "onward", "forward": "onward", "time": "onward", "grow": "onward",
     }
     if first_word in dir_aliases:
