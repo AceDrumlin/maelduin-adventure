@@ -87,7 +87,21 @@ function getLocItems() {
 function getLocNpcs() {
   const loc = getLocation(STATE.location);
   if (!loc) return [];
-  return (loc.npcs || []).map(id => getNpc(id)).filter(Boolean);
+  return (loc.npcs || [])
+    .map(id => getNpc(id))
+    .filter(Boolean)
+    .filter(npc => isNpcVisible(npc));
+}
+
+/** Check if an NPC should be visible based on state */
+function isNpcVisible(npc) {
+  if (!npc.visible_if) return true; // No condition = always visible
+  const cond = npc.visible_if;
+  if (cond.flag) return hasFlag(cond.flag);
+  if (cond.not_flag) return !hasFlag(cond.not_flag);
+  if (cond.not_any) return !cond.not_any.some(f => hasFlag(f));
+  if (cond.has_all) return cond.has_all.every(f => hasFlag(f));
+  return true;
 }
 
 function getInvItem(text) {
@@ -258,6 +272,30 @@ function h_go(direction) {
   }
   if (newLocId === 'sea_monsters' && !hasFlag('sea_monster_defeated')) {
     result += `A monstrous hand erupts from the water, clutching the gunwale of your curragh! The boat lurches violently. Crew members grab for their swords.\n\nYou have a moment to act! FIGHT it with your sword, or use an item!\n\n`;
+  }
+  if (newLocId === 'ailill_beach' && !hasFlag('witnessed_death')) {
+    setFlag('witnessed_death');
+    result += `The salt spray stings your eyes. Or perhaps it's something else.\n\nAilill Ochair Ága, the Wolf of the Arans, is dead.\n\nYou are one year old. You will not remember this. But it will shape everything.\n\n`;
+  }
+  if (newLocId === 'ailill_keep' && !hasFlag('started_prologue')) {
+    setFlag('started_prologue');
+    result += `You are not Mael Duin. Not yet.\n\nYou are a ghost in this hall — a witness to history. This is the story of how your father died, and how you came to be.\n\nWatch. Remember.\n\n(Type WEST or OUT to go to the beach to see what happens next.)\n\n`;
+  }
+  if (newLocId === 'foster_village' && !hasFlag('childhood_seen')) {
+    setFlag('childhood_seen');
+    result += `A dog barks. A child laughs. The world is simple when you're ten.\n\nYou don't know that your father was a hero. You don't know about the blood on the beach. You only know that the sea is grey and the sky is grey and somewhere, out beyond the waves, there is something waiting for you.\n\n`;
+  }
+  if (newLocId === 'training_field' && !hasFlag('training_seen')) {
+    setFlag('training_seen');
+    result += `The sea glitters in the afternoon light. For a moment, everything is perfect.\n\nYou have friends. You have a home. You have purpose.\n\nIt will not last.\n\n`;
+  }
+  if (newLocId === 'feast_hall' && !hasFlag('taunting_seen')) {
+    setFlag('taunting_seen');
+    result += `The fire crackles. The mead is sweet. But there is poison in this hall tonight.\n\nYou are about to learn the truth. And once you learn it, nothing will ever be the same.\n\n`;
+  }
+  if (newLocId === 'druid_sanctuary' && !hasFlag('learned_truth')) {
+    setFlag('learned_truth');
+    result += `The fire crackles. The druid's eyes are ancient — older than the hills, older than grief.\n\n"Sit," he says. "Eat. Listen. The truth is a heavy meal. You should not take it on an empty stomach."\n\n`;
   }
   if (newLocId === 'homecoming' && !hasFlag('confronted')) {
     result += `The wind carries the smell of home. Your crew stands behind you, weapons drawn.\n\nThis is the moment your voyage was meant to end. But how?\n\n`;

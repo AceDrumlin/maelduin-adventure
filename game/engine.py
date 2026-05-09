@@ -41,7 +41,8 @@ class Item:
 
 class NPC:
     def __init__(self, id, name, description, dialogue=None,
-                 aliases=None, state=None, visible_if=None):
+                 aliases=None, state=None, visible_if=None,
+                 visible_condition=None):
         self.id = id
         self.name = name
         self.description = description
@@ -49,6 +50,7 @@ class NPC:
         self.aliases = aliases or []
         self.state = state or {}
         self.visible_if = visible_if  # callable(state) -> bool; None = always visible
+        self.visible_condition = visible_condition  # JSON-serializable condition dict
 
     def is_visible(self, state):
         if self.visible_if is None:

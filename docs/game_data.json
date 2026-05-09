@@ -31,6 +31,34 @@
       "usable_with": [],
       "use_text": null
     },
+    "bronze_brooch": {
+      "id": "bronze_brooch",
+      "name": "Bronze Brooch",
+      "description": "A beautifully crafted bronze brooch from the Ancient Bird's nest, shaped like a spiral. It must be centuries old.",
+      "examine": "A bronze brooch in the shape of an unbroken spiral, the symbol of eternity. The craftsmanship is exquisite — every curve is perfect. It would fetch a good price in any market.",
+      "takeable": true,
+      "aliases": [
+        "brooch",
+        "bronze brooch",
+        "spiral"
+      ],
+      "usable_with": [],
+      "use_text": null
+    },
+    "dragon_tooth": {
+      "id": "dragon_tooth",
+      "name": "Dragon's Tooth",
+      "description": "A massive tooth from some ancient beast, found in the Bird's nest. It's as long as your forearm and still sharp at the tip.",
+      "examine": "A fossilised tooth, black with age. The root is worn smooth, but the tip could still pierce hide. Serrated edges run along one side. Whatever this belonged to, you're glad it's dead.",
+      "takeable": true,
+      "aliases": [
+        "tooth",
+        "dragon tooth",
+        "fang"
+      ],
+      "usable_with": [],
+      "use_text": null
+    },
     "magic_thread": {
       "id": "magic_thread",
       "name": "Magic Thread",
@@ -261,7 +289,8 @@
         "earplugs",
         "wax plugs",
         "beeswax",
-        "wax earplugs"
+        "wax earplugs",
+        "plugs"
       ],
       "usable_with": [],
       "use_text": null
@@ -364,6 +393,254 @@
       ],
       "usable_with": [],
       "use_text": null
+    },
+    "millstone_fragment": {
+      "id": "millstone_fragment",
+      "name": "Millstone Fragment",
+      "description": "A heavy fragment of a millstone, broken from the Mill of the Sea. One edge is sharp, the other smooth. It is dense and weighty.",
+      "examine": "A chunk of dark granite, curved on one side where it was once part of a great wheel. The grinding surface is still rough and abrasive.",
+      "takeable": true,
+      "aliases": [
+        "millstone",
+        "fragment",
+        "stone",
+        "millstone fragment"
+      ],
+      "usable_with": [],
+      "use_text": null
+    },
+    "fleece_of_change": {
+      "id": "fleece_of_change",
+      "name": "Fleece of Change",
+      "description": "A shimmering fleece that shifts between black and white depending on how you look at it. It feels warm and alive, as if it remembers being a sheep.",
+      "examine": "The fleece ripples with color - black one moment, white the next. When you hold it still, it settles into a soft, silvery grey. It seems to contain both darkness and light.",
+      "takeable": true,
+      "aliases": [
+        "fleece",
+        "sheep fleece",
+        "fleece of change",
+        "wool",
+        "shimmering fleece"
+      ],
+      "usable_with": [],
+      "use_text": null
+    },
+    "horsehair_bridle": {
+      "id": "horsehair_bridle",
+      "name": "Horsehair Bridle",
+      "description": "A bridle woven from the mane of the Stallion King. It thrums with wild energy, eager for a gallop across the waves.",
+      "examine": "A bridle of braided white and black horsehair, studded with sea-shells. When you hold it, you feel the urge to ride fast - impossibly fast - across the open sea.",
+      "takeable": true,
+      "aliases": [
+        "bridle",
+        "horsehair bridle",
+        "reins",
+        "horse reins"
+      ],
+      "usable_with": [],
+      "use_text": "You hold the Horsehair Bridle up to the wind. It thrumms with energy, and for a moment you feel the Stallion King's presence beside you — a herd of giant horses galloping across the waves. The bridle glows warmly, eager to be used on a worthy steed.\n\n(Perhaps you can use it on the Water Horse? Try: USE BRIDLE ON WATER HORSE)"
+    },
+    "sunstone": {
+      "id": "sunstone",
+      "name": "Sunstone",
+      "description": "A golden crystal that glows with captured sunlight. It illuminates the darkest places and warms the coldest chambers.",
+      "examine": "A hexagonal crystal of pale gold, warm to the touch. Light swirls within it like honey, casting a soft, golden glow in every direction. It pulses gently, like a heartbeat made of sunshine.",
+      "takeable": true,
+      "aliases": [
+        "sunstone",
+        "crystal",
+        "golden crystal",
+        "sun crystal",
+        "light stone"
+      ],
+      "usable_with": [],
+      "use_text": null
+    },
+    "golden_horn": {
+      "id": "golden_horn",
+      "name": "Golden Horn",
+      "description": "A magnificent horn of pure gold, curved and polished, taken from one of the Sacred Oxen. When blown, it produces a sound that carries across worlds.",
+      "examine": "A perfect golden horn, warm and heavy. Etched with spirals and ancient symbols. The mouthpiece is worn smooth from centuries of use by beings older than mankind.",
+      "takeable": true,
+      "aliases": [
+        "horn",
+        "golden horn",
+        "ox horn",
+        "war horn"
+      ],
+      "usable_with": [],
+      "use_text": "You raise the Golden Horn to your lips and blow. A deep, resonant note rolls across the sea - a sound that seems to answer a question you did not know you were asking. Somewhere, something ancient stirs in response."
+    },
+    "water_of_vision": {
+      "id": "water_of_vision",
+      "name": "Water of Vision",
+      "description": "A vial of shimmering water from the Well of Sight. Drink to see what is hidden.",
+      "examine": "A small glass vial filled with water that glows with an inner, silvery light. When you hold it up, you can see reflections of things that are not in front of you - doorways, paths, secrets.",
+      "takeable": true,
+      "aliases": [
+        "water",
+        "vision water",
+        "well water",
+        "water of vision",
+        "vial"
+      ],
+      "usable_with": [],
+      "use_text": "You drink the Water of Vision. For a moment, the world goes silver. Veils peel away from reality - you see the hidden paths between islands, the true nature of the Revolving Castle doors, and the face of your father, smiling at you from across the sea. The vision fades, but you remember everything."
+    },
+    "ever_grinding_grain": {
+      "id": "ever_grinding_grain",
+      "name": "Ever-Grinding Grain",
+      "description": "A handful of golden grain from the Mill of the Sea. It multiplies when you are not looking - one grain becomes two, two become four, four become eight.",
+      "examine": "A handful of golden wheat grains that seem to multiply while you watch. The pile grows slowly, inexorably, like time itself. You will never go hungry again.",
+      "takeable": true,
+      "aliases": [
+        "grain",
+        "golden grain",
+        "ever grinding grain",
+        "wheat",
+        "magic grain"
+      ],
+      "usable_with": [],
+      "use_text": null
+    },
+    "fish_tooth": {
+      "id": "fish_tooth",
+      "name": "Fish Tooth",
+      "description": "A serrated tooth the size of your hand, still warm from the belly of the Great Fish.",
+      "examine": "A massive, serrated tooth, curved like a dagger. It is still warm and slightly slick with digestive fluids. The edges are razor-sharp.",
+      "takeable": true,
+      "aliases": [
+        "tooth",
+        "fish tooth",
+        "great fish tooth",
+        "serrated tooth"
+      ],
+      "usable_with": [],
+      "use_text": null
+    },
+    "fountain_water": {
+      "id": "fountain_water",
+      "name": "Fountain Water",
+      "description": "Milk-white water from the Fountain Island. It shimmers with inner light.",
+      "examine": "A small flask of milky, luminescent water. It swirls gently with its own inner light, and the smell is sweet and honeyed.",
+      "takeable": true,
+      "aliases": [
+        "water",
+        "fountain water",
+        "milk water",
+        "healing water"
+      ],
+      "usable_with": [],
+      "use_text": "You drink the Fountain Water. A warm glow spreads through your body. You feel whole, rested, and healed."
+    },
+    "silent_bell": {
+      "id": "silent_bell",
+      "name": "Silent Bell",
+      "description": "An iron bell that makes no sound. When you ring it, everything around you stills.",
+      "examine": "A cold iron bell, perfectly still. When you shake it, you feel the clapper move, but no sound emerges. The silence around it seems to deepen.",
+      "takeable": true,
+      "aliases": [
+        "bell",
+        "silent bell",
+        "iron bell",
+        "mute bell"
+      ],
+      "usable_with": [],
+      "use_text": null
+    },
+    "wind_of_return": {
+      "id": "wind_of_return",
+      "name": "Wind of Return",
+      "description": "A sealed bottle holding a favourable wind. The guardian said it would take me home.",
+      "examine": "A small glass bottle sealed with wax. Inside, a tiny whirlwind spins endlessly, catching the light. When you hold it, you feel the pull of home - a direction, a longing, a certainty.",
+      "takeable": true,
+      "aliases": [
+        "wind",
+        "bottle",
+        "wind bottle",
+        "wind of return",
+        "favourable wind"
+      ],
+      "usable_with": [],
+      "use_text": "You unseal the Wind of Return. A warm, steady wind fills your sails, carrying you homeward with unerring certainty."
+    },
+    "kelpie_scale": {
+      "id": "kelpie_scale",
+      "name": "Kelpie Scale",
+      "description": "An iridescent scale from the Water Horse of the deep. It pulses with a warm, gentle light and smells faintly of salt and secrets.",
+      "examine": "A single scale, shimmering with all the colours of a sunken rainbow. It is warm to the touch, as if still alive. When you hold it to your ear, you can hear the distant sound of waves.",
+      "takeable": true,
+      "aliases": [
+        "scale",
+        "kelpie scale",
+        "water horse scale",
+        "iridescent scale"
+      ],
+      "usable_with": [],
+      "use_text": null
+    },
+    "giants_club": {
+      "id": "giants_club",
+      "name": "Giant's Club",
+      "description": "A crude club of oak and stone, stolen from a dead giant. It is heavy enough to crush a skull with one swing.",
+      "examine": "A massive club of dark oak, bound with leather and studded with sharp stones. The head is stained dark — blood, long dried. It fits your grip perfectly, as if made for you.",
+      "takeable": true,
+      "aliases": [
+        "club",
+        "giant club",
+        "giant's club",
+        "oak club"
+      ],
+      "usable_with": [],
+      "use_text": null
+    },
+    "treasure_gold": {
+      "id": "treasure_gold",
+      "name": "Ancient Gold",
+      "description": "A hoard of golden coins, enough to buy a kingdom. They gleam with ancient, stolen light.",
+      "examine": "A small chest overflowing with ancient gold coins. Each one bears the face of a king you have never heard of — a king whose kingdom is now seaweed and memory. The gold is warm to the touch.",
+      "takeable": true,
+      "aliases": [
+        "gold",
+        "treasure",
+        "coins",
+        "ancient gold",
+        "gold coins",
+        "chest"
+      ],
+      "usable_with": [],
+      "use_text": null
+    },
+    "silver_torc": {
+      "id": "silver_torc",
+      "name": "Silver Torc",
+      "description": "A beautiful silver neck-ring, gleaming with ancient craftsmanship. It feels warm against your skin.",
+      "examine": "A delicate torc of woven silver wire, ending in two ornate knobs shaped like wolf heads. The metal is impossibly smooth — polished by centuries of wear. It hums faintly with old magic.",
+      "takeable": true,
+      "aliases": [
+        "torc",
+        "silver torc",
+        "neck-ring",
+        "neck ring",
+        "silver ring"
+      ],
+      "usable_with": [],
+      "use_text": null
+    },
+    "lions_claw": {
+      "id": "lions_claw",
+      "name": "Lion's Claw",
+      "description": "A razor-sharp claw, still warm from the beast. It can be used as a tool or a weapon.",
+      "examine": "A single claw, curved like a scimitar, still warm and slightly wet at the base. The keratin gleams like amber. It is sharp enough to cut rope, leather, or flesh with equal ease.",
+      "takeable": true,
+      "aliases": [
+        "claw",
+        "lion claw",
+        "lion's claw",
+        "claw dagger"
+      ],
+      "usable_with": [],
+      "use_text": null
     }
   },
   "npcs": {
@@ -378,12 +655,14 @@
       ],
       "dialogue": {
         "greeting": "The druid strokes his long beard and speaks in a voice like rustling leaves:\n\n\"Ah, Mael Duin. I have been expecting you. You have learned of your father's murder, and vengeance burns in your heart. But be warned — the path of revenge is a twisted one, and the sea holds many mysteries.\n\nTake this Magic Thread. Tie it to your mast, and it will guide you through the mists. Take exactly three times nine men — no more, no less — and set sail to the west.\n\nWhen you find what you seek... you may find it is not what you expected.\"\n\nHe presses a shimmering thread into your hand.",
+        "greeting_if_learned_truth": "The druid nods slowly, a hint of a smile on his ancient face.\n\n\"So. You know. The truth sits heavy in your chest, doesn't it? Good. That means you are ready.\n\nThe magic thread will guide you. The sea will test you. And when you return, you will not be the man who left.\n\nNow go. The tide waits for no man, not even one with vengeance in his heart.\"",
         "murder": "\"Your father, Ailill Ochair Ága. Slain by raiders from the Northern Isles. They came in the night, burned your village, and left his body on the strand. Your foster mother found him at dawn, the tide washing his feet.\"",
         "father": "\"Ailill was a great warrior. His name meant 'noble wolf' and he earned it. He fell with his sword in his hand and his enemies' blood on his blade. The manner of his death was not shameful — it is revenge that may be.\"",
         "vengeance": "\"Vengeance is like drinking poison and expecting the other man to die. But I see you will not be swayed by philosophy. Very well — go, seek your revenge. The sea will teach you what I cannot.\"",
         "sea": "\"The sea is a living thing, Mael Duin. It has moods, memories, and a sense of humor. Respect it, and it may let you live. Mock it, and it will show you depths you never wished to see.\""
       },
-      "state": {}
+      "state": {},
+      "visible_if": null
     },
     "cat": {
       "id": "cat",
@@ -398,6 +677,7 @@
       ],
       "dialogue": {
         "greeting": "The enormous cat blinks slowly, then speaks in a voice like gravel rolling downhill:\n\n\"You are in my house. Few humans visit. Fewer still leave without giving me something I want. I smell... milk. Do you have milk for me?\"\n\nThe cat's tail twitches expectantly.",
+        "greeting_if_cat_pacified": "The enormous cat is sprawled across its golden throne, purring like a dozen bees in a barrel.\n\n\"Ah. The milk-bringer. You may approach. I have deemed you... acceptable.\n\nYou may pass through my island whenever you wish. Consider yourself one of the few humans I don't actively despise. Don't let it go to your head.\"\n\nIt closes its eyes and resumes purring.",
         "milk": "\"Milk. Yes. I like milk. Do you have milk?\"",
         "riddle": "\"Very well, a riddle. Answer and you may pass:\n\n\"I speak without a mouth and hear without ears. I have no body, but I come alive with the wind. What am I?\"\n\nThe cat's whiskers twitch.",
         "answer": "\"An echo! Correct. You are smarter than you look, for a human. You may pass.\"",
@@ -406,7 +686,8 @@
           "talking_cat_tribute": true
         }
       },
-      "state": {}
+      "state": {},
+      "visible_if": null
     },
     "queen": {
       "id": "queen",
@@ -419,12 +700,14 @@
       ],
       "dialogue": {
         "greeting": "The Queen of the Women's Island smiles radiantly and opens her arms.\n\n\"Welcome, weary voyagers! Stay with us. Eat, drink, be merry. There is no sorrow here, no hunger, no pain. Only pleasure, forever and ever.\"\n\nAround you, beautiful women laugh and dance. The smell of roasting meat fills the air. Your crew looks at you with hopeful eyes.\n\nWill you stay, Mael Duin?",
+        "greeting_if_resisted_queen": "The Queen watches you from her throne, her smile cold and precise.\n\n\"You're back. I didn't think you would be. Most men who leave do not return — they cannot bear to see what they have refused.\n\nBut you are not most men, are you, Mael Duin? You have the Wolf's blood in you. Stubborn. Foolish. Brave.\n\nI respect you for it. But do not mistake respect for warmth. My island is no longer open to you. Leave before I change my mind.\"",
         "stay": "\"Stay with us forever. What is there to return to? A cold village, a blood feud, a grave you cannot fill with vengeance? Here, there is only warmth.\"",
         "leave": "\"Leave? But you've only just arrived! Stay a little longer. One more day. One more feast. What harm could one more day do?\"",
         "time": "\"Time? What is time but a cage, Mael Duin? Here, there is no time. Only now.\"",
         "husband": "\"My husband? Gone. Lost at sea. Like so many. Like your father. We are the same, you and I.\""
       },
-      "state": {}
+      "state": {},
+      "visible_if": null
     },
     "hermit": {
       "id": "hermit",
@@ -438,12 +721,14 @@
       ],
       "dialogue": {
         "greeting": "The hermit looks at you with eyes that have seen too much and want nothing.\n\n\"You have traveled far, Mael Duin. And yet you have not traveled at all. The sea you cross is the sea within you — stormy, deep, full of monsters you have yet to name.\n\nSit with me. The otter will share his fish. And I will tell you what the waves have been whispering.\"",
+        "greeting_if_otter_pelt_returned": "The hermit is sitting on his rock, the otter pelt wrapped around his shoulders. He looks warmer now. More at peace.\n\n\"Mael Duin. You returned my companion's pelt. I cannot thank you enough.\n\nIt's funny — I thought the otter was gone forever. But he never really left. He was just waiting to come home in a different form.\n\nYou carry the same burden I carried — the weight of a father lost. But you carry it forward. That takes strength.\"",
         "father": "\"Your father is at peace. He does not ask for revenge. He asks that you live.\"",
         "voyage": "\"Every island you visit is a part of yourself you have not yet met. The giant ants are your anger. The laughing people are your fear. The silent cat is your conscience. When you have met them all, you will be whole.\"",
         "blessing": "\"I have little to give, but what I have is yours.\"\n\nHe hands you a small wooden cross, made of two twigs bound with grass.\n\n\"This will bring you peace when you need it most.\"",
         "forgiveness": "\"The men who killed your father — they were following a blood feud older than your father's father. If you kill them, you do not end the feud. You feed it. And your sons will sail this sea after you.\""
       },
-      "state": {}
+      "state": {},
+      "visible_if": null
     },
     "smith": {
       "id": "smith",
@@ -457,12 +742,17 @@
       ],
       "dialogue": {
         "greeting": "The giant smith bellows over the roar of his forge:\n\n\"HO, LITTLE MAN! You've come to the forge at the edge of the world! Most people sail right past — they hear the hammering and think it's thunder. But you came closer. That takes guts. Or stupidity. Both, probably.\"\n\nHe laughs, and the ground shakes.",
+        "greeting_if_got_harpoon": "The smith looks up from his work and grins, his face lit by the glow of the forge.\n\n\"Back again, little man? I hope you're not looking for another harpoon — one masterpiece per customer is my rule.\n\nBut if you've got something shiny to trade, I'm always listening. A smith's work is never done.\"",
         "weapon": "\"A weapon, eh? I forged the sword that hangs at the sun's belt. I made the spear that killed the first boar. I can make you something... special.\n\nBut I'll need payment. I don't work for free. What have you got?\"",
         "trade": "\"Something shiny? Something rare? Something that hasn't been forged before? Show me what you have, and I'll tell you if it's worth my time.\"",
         "forgiveness": "\"Forgiveness? I don't forge that, little man. That you have to make yourself. And it's the hardest thing you'll ever make.\"",
-        "storm": "\"The bellows? Oh, that's just my bellows. When I pump them, it makes the weather. Sorry about the storm — I was trying to stoke the fire. Gets cold this far north.\""
+        "storm": "\"The bellows? Oh, that's just my bellows. When I pump them, it makes the weather. Sorry about the storm — I was trying to stoke the fire. Gets cold this far north.\"",
+        "on_take": {
+          "__any__": true
+        }
       },
-      "state": {}
+      "state": {},
+      "visible_if": null
     },
     "prophet_boy": {
       "id": "prophet_boy",
@@ -482,7 +772,8 @@
         "home": "\"You will return home. But home will not be the same, because you will not be the same. And that, Mael Duin, is the whole point.\"",
         "death": "\"Everyone dies. Even islands die. Even stories die. But some stories get reborn as adventures.\""
       },
-      "state": {}
+      "state": {},
+      "visible_if": null
     },
     "laughing_king": {
       "id": "laughing_king",
@@ -495,12 +786,14 @@
       ],
       "dialogue": {
         "greeting": "The Laughing King points at you and HOWLS with laughter.\n\n\"HA HA HA HA! Your FACE! The way you LOOK! So SERIOUS! Like you've never laughed in your LIFE! Oh, this is the BEST day!\"\n\nHe laughs so hard he falls off his stool, gets up, and keeps laughing.",
+        "greeting_if_king_pacified": "The Laughing King wipes a tear from his eye and lets out a long, contented sigh.\n\n\"Ahhh. That was a good laugh. The BEST laugh.\n\nHe smiles a genuine, peaceful smile.\n\n\"You know, I'd forgotten what silence sounds like. It's... nice. Still funny, though. Everything is still funny. Just... quieter.\"\n\nHe hums contentedly, tapping his fingers on his one-legged stool.",
         "serious": "\"Serious? SERIOUS?! Why would anyone be serious when you can LAUGH?! HA HA HA! Look at the OCEAN! It's SO WET! That's HILARIOUS!\"",
         "help": "\"Help? HA! We don't need help! We need MORE JOKES! Tell me a joke, sailor! If it's funny, I'll give you anything! If it's not... HA HA! I'll laugh anyway!\"",
         "joke": "You tell the king a joke. He freezes for a moment, then erupts with renewed laughter.\n\n\"THAT'S the one! THAT'S the best joke I've ever heard! Here, take this!\"\n\nHe tosses you a bubbling vial of golden liquid.\n\n(+1 point, gained: Laughing Potion)",
         "answer": "\"Oh, you didn't tell a joke! You ANSWERED a question! That's even BETTER! Wait, no, that doesn't make sense, HA HA HA!\""
       },
-      "state": {}
+      "state": {},
+      "visible_if": null
     },
     "diuran_npc": {
       "id": "diuran_npc",
@@ -516,7 +809,8 @@
         "advice": "\"My mother always said: when in doubt, talk to the cat. She was a strange woman.\"",
         "poem": "\"I've composed a verse for our journey:\n\n\"The waves like greyhounds leap and bound,\nThe sky is cold and grey,\nWe've left our homes on Irish ground,\nAnd no one knows the way.\"\n\nIt's a work in progress.\""
       },
-      "state": {}
+      "state": {},
+      "visible_if": null
     },
     "conganchnes_npc": {
       "id": "conganchnes_npc",
@@ -532,7 +826,8 @@
         "greeting": "Conganchnes grunts. \"Captain. We ready for a fight whenever you are. I've been practicing. The sea is a poor sparring partner — it doesn't hit back.\"",
         "fight": "\"I was born for battle, Captain. My skin cannot be pierced, my bones cannot be broken. The only thing I fear is... paperwork.\""
       },
-      "state": {}
+      "state": {},
+      "visible_if": null
     },
     "fergus_npc": {
       "id": "fergus_npc",
@@ -546,7 +841,83 @@
         "greeting": "Fergus squints at the sky. \"Captain. I've been reading the stars. They say we're heading in the right direction. They also say I should've become a farmer.\"",
         "directions": "\"The stars tell me we're far from home. But I can get us back — provided we don't sail off the edge of the world. Some say there's a waterfall there.\""
       },
-      "state": {}
+      "state": {},
+      "visible_if": null
+    },
+    "ancient_bird": {
+      "id": "ancient_bird",
+      "name": "The Ancient Bird",
+      "description": "An enormous old bird perched on a nest of silver twigs and gold. Its eyes are milky with age, but they miss nothing. It shifts with the slow dignity of something that has seen empires rise and fall.",
+      "aliases": [
+        "bird",
+        "ancient bird",
+        "old bird",
+        "elder"
+      ],
+      "dialogue": {
+        "greeting": "The Ancient Bird fixes you with one milky eye.\n\n\"Mael Duin,\" it says. Its voice is like old parchment being folded. \"I have been expecting you. Well, not you specifically. I've been expecting someone. It's been a long time since anyone climbed up here. My legs don't work like they used to.\"\n\nIt shifts on its nest, revealing a stash of shiny objects — coins, buttons, a thimble, a bronze brooch, and what looks like a dragon's tooth.\n\n\"Take what you need,\" it says. \"I'm too old to guard treasure. I mostly just nap and complain about the weather.\"",
+        "treasure": "\"Take what you want from the nest. Coins, trinkets, an old dragon tooth. They mean nothing to me. I've had them so long they feel like clutter.\"",
+        "weather": "\"The weather? Terrible. Always terrible. When I was young, the sun was warmer and the fish were fatter. Now it's all mist and cold and young birds who don't know respect.\""
+      },
+      "state": {},
+      "visible_if": null
+    },
+    "speaking_bird": {
+      "id": "speaking_bird",
+      "name": "A Chatty Bird",
+      "description": "A small, iridescent bird perched on a rocky ledge, tilting its head at you with obvious curiosity. Its feathers shimmer with every colour of the rainbow.",
+      "aliases": [
+        "bird",
+        "speaking bird",
+        "chatty bird",
+        "red bird"
+      ],
+      "dialogue": {
+        "greeting": "The bird hops closer and cocks its head.\n\n\"Welcome, hairless one! We don't get many visitors. Most sailors hear us talking and think it's the wind playing tricks. But you came ashore. That takes guts. Or poor judgment. Both, probably!\"\n\nIt chirps what sounds like laughter.",
+        "greeting_if_feather_taken": "The chatty bird hops closer, eyeing your pack.\n\n\"I see you found the old one's feather. Those things are special.\n\n\"Mine don't do that, by the way. I'm using mine for flying.\"",
+        "feather": "\"Looking for a feather? The old one up top sheds them sometimes. They're magic, you know. Whisper secrets when you hold them to your ear. I'd give you one of mine but... I'm using them.\"",
+        "salmon": "\"Salmon are the philosophers of the sea. They swim upstream for years, thinking deep thoughts, then get eaten by bears. It's a metaphor for something. I forget what.\""
+      },
+      "state": {},
+      "visible_if": null
+    },
+    "queen_ant": {
+      "id": "queen_ant",
+      "name": "The Queen Ant",
+      "description": "A massive ant the size of a house, sitting regally upon a throne of woven branches and golden fruit. Her compound eyes reflect the world in a thousand fragments. She regards you with ancient, patient stillness.",
+      "aliases": [
+        "queen",
+        "queen ant",
+        "ant queen",
+        "giant ant"
+      ],
+      "dialogue": {
+        "greeting": "The queen ant clicks her mandibles three times. The sound echoes like a gong. She tilts her head, examining you from every angle with her compound eyes.\n\nShe does not speak — not in words — but you understand her meaning nonetheless: \"You are strange. You are not ant. But you are not enemy either. What brings you to my grove?\"\n\nA worker ant approaches, holding a golden fruit in its jaws. It offers it to you.\n\nThe queen waits. The gift is offered. Whether you take it or not is your choice.",
+        "greeting_if_took_fruit": "The Queen Ant clicks her mandibles slowly as you approach. The worker ants continue their labours, carrying golden fruit to and fro.\n\nShe tilts her head, regarding you with her compound eyes. You sense neither hostility nor welcome — just acknowledgment. You took the fruit. That is what ants do.\n\nA worker ant pauses beside you, holding another golden fruit in its jaws. The Queen waits. The offer still stands.",
+        "fruit": "The queen ant gestures with a feeler toward the golden fruit. It is an offering — a gesture of peace from the colony to the strange hairless ones."
+      },
+      "state": {},
+      "visible_if": null
+    },
+    "beach_mother": {
+      "id": "beach_mother",
+      "name": "Your Mother",
+      "description": "A woman kneeling in the wet sand, her hands covered in her husband's blood. She does not weep — she is past weeping. She holds a lock of his hair in her hand and stares at the grey sea as if it has stolen everything she loved.",
+      "aliases": [
+        "mother",
+        "woman",
+        "wife",
+        "ailill's wife"
+      ],
+      "dialogue": {
+        "greeting": "She does not look up at you. Her voice is barely a whisper.\n\n\"He's gone. The Wolf is gone. I told him — I told him a hundred times — the raiders would come back. But he just laughed. He always laughed.\n\nNow he lies in the sand, and our son will grow up without a father, and I will grow old alone on this grey shore.\n\nThere is nothing you can say. Nothing anyone can say. The sea has taken everything.\"\n\nShe falls silent. The tide continues its slow work.",
+        "ailill": "\"He was the best of us. Brave, foolish, kind. He died with a sword in his hand and a curse on his lips. That was Ailill — always fighting, always laughing, even at the end.\"",
+        "baby": "\"Mael Duin. My son. He is so small. He will not remember any of this. Perhaps that is a mercy. Perhaps it is a cruelty. I do not know which.\""
+      },
+      "state": {},
+      "visible_if": {
+        "flag": "witnessed_death"
+      }
     },
     "skull": {
       "id": "skull",
@@ -555,18 +926,22 @@
       "aliases": [
         "skull",
         "talking skull",
-        "skull",
         "head",
         "jaw"
       ],
       "dialogue": {
         "greeting": "The skull clacks its teeth together before speaking:\n\n\"Well, well, well. A visitor! Do you have any idea how long I've been sitting here? Decades! Centuries! And let me tell you, the view doesn't improve. Just bushes. Bushes and more bushes.\"\n\nThe skull's jaw hangs open in what might be a sigh.",
+        "greeting_if_visited_revolving_castle": "The skull clacks its teeth together as you approach.\n\n\"Back again? You have the look of someone who has seen the Revolving Castle. I can smell the sour mead on you. Did you find Garbh?\n\nThe skull's jaw clatters.\n\nYou are still breathing, so I assume he didn't kill you. That is either very good or very bad. Time will tell.\"",
         "bush": "\"Thornbush. Singular. There's only the one. It's spiritual, apparently. I think it's just a bush that got lucky.\"",
         "story": "\"How I ended up here? That's a long story involving a shipwreck, a bad decision, and a seagull with a grudge. The short version: don't trust seagulls.\"",
         "advice": "\"My advice? Get off this island. There's nothing here but me and this bush, and I'm not much for conversation after the first century.\"",
-        "death": "\"Death? I've been dead so long I'm thinking of applying for a second career. The afterlife is mostly waiting, interspersed with brief moments of existential dread.\""
+        "death": "\"Death? I've been dead so long I'm thinking of applying for a second career. The afterlife is mostly waiting, interspersed with brief moments of existential dread.\"",
+        "father": "The skull's eye sockets seem to deepen as it speaks.\n\n\"Your father's murderer is closer than you think. He drinks and laughs in a castle that turns like the world — the Revolving Castle. He is a one-eyed man named Garbh, and he carries the scar of your father's last blow on his face.\n\nI see him in the fragments of memory the wind brings me. He does not laugh with joy. He laughs to forget.\n\nSeek him if you must. But know this: the dead do not thank the living for revenge.\"\n\nThe skull falls silent, its words hanging in the air like smoke.",
+        "revenge": "The skull rattles, almost laughing.\n\n\"Vengeance is a cup that empties the drinker. The hermit knows this. The druid knows this. Even this bush knows this, and it's a bush.\n\nYou have sailed across the edge of the world, Mael Duin. You have seen wonders that no other Irishman has seen. And still you carry the same stone in your heart that you carried when you left.\n\nKill Garbh, and the blood feud lives on. Forgive him, and the feud dies with you.\n\nThe choice is yours. But make it with open eyes, not a closed fist.\"\n\nThe skull's teeth chatter once, sharply, as if emphasizing the point.",
+        "home": "The skull's voice softens, becoming almost gentle.\n\n\"You will return when the wind forgives you. Not before.\n\nHome is not a place, Mael Duin. It is a moment. A feeling. The smell of turf smoke. The sound of your foster mother's voice. The weight of your father's ring on your thumb.\n\nYou carry home with you. You always have. You will find it again when you stop looking for it.\n\nThe sea gives back what it takes, but only when the taking is done.\"\n\nA wind rustles the bush, and for a moment the skull's jaw hangs slack, as if exhausted by the effort of wisdom."
       },
-      "state": {}
+      "state": {},
+      "visible_if": null
     },
     "water_horse": {
       "id": "water_horse",
@@ -581,11 +956,13 @@
       ],
       "dialogue": {
         "greeting": "The Water Horse tosses its mane and speaks in a voice like waves on a shingle beach:\n\n\"Well met, traveler! I am the Water Horse of the Western Sea. I can carry you across the ocean faster than any curragh. I can take you anywhere you wish to go.\"\n\nIt stamps a hoof, and the water ripples outward in perfect circles.\n\n\"Climb on. I promise you a ride you'll never forget.\"",
+        "greeting_if_kelpie_tricked": "The Water Horse eyes you warily as you approach. Its ears flatten.\n\n\"You. I remember you. You tricked me once.\"\n\nIt stamps a hoof, and the water ripples.\n\n\"Say what you need to say, and be gone.\"",
         "ride": "\"Climb on my back. I'll take you across the sea. I won't even drown you. Much.\"",
         "trick": "The horse snorts. \"Trick? Me? I'm a horse of my word. Mostly.\"",
         "forgiveness": "\"Forgiveness? I know nothing of that. I am a creature of the moment. The past is like water under the bridge — gone, forgotten, and probably damp.\""
       },
-      "state": {}
+      "state": {},
+      "visible_if": null
     },
     "demon_smith": {
       "id": "demon_smith",
@@ -600,12 +977,157 @@
       ],
       "dialogue": {
         "greeting": "The Demon Smith looks up from his forge. The heat is intense.\n\n\"A mortal. How... bold. Most sailors see the smoke and turn back. \"\nBut you came closer. Either you have great courage or a poor sense of self-preservation. I respect both.\"\n\nHe gestures to a pile of iron coins on a stone table.\n\n\"I forge coins here. Coins of power. Coins of pain. Coins that buy things no mortal merchant can offer. Would you like to make a trade?\"",
+        "greeting_if_traded_with_demon": "The Demon Smith looks up from his forge, embers glowing in his cracked skin.\n\n\"The mortal returns. And you still have your soul. Impressive.\n\nHe gestures to the coin pile.\n\n\"Care to do business again?\"",
         "trade": "\"I trade in souls, memories, and shiny objects. What do you have to offer?\"",
         "coins": "\"These coins are forged from the tears of bankers and the screams of auditors. They spend anywhere — including places where money has no meaning.\"",
         "fire": "\"The fire? That's not ordinary fire. That's the first fire — the spark Prometheus stole. \"\nI bought it from him. He was short on rent that month.\"",
         "soul": "\"Your soul? Please. I have a warehouse full of souls. They're the most overrated currency in the universe. \"\nGive me something interesting instead.\""
       },
-      "state": {}
+      "state": {},
+      "visible_if": null
+    },
+    "black_pig": {
+      "id": "black_pig",
+      "name": "The Black Pig",
+      "description": "A massive black boar the size of a cow, with tusks like daggers and eyes like burning coals. It guards the golden apple tree with unwavering vigilance. Drool — liquid gold — pools beneath its snout.",
+      "aliases": [
+        "pig",
+        "black pig",
+        "boar",
+        "black boar"
+      ],
+      "dialogue": {
+        "greeting": "The black pig snorts and stamps a massive hoof, making the ground tremble.\n\n\"GRUNFF. You are not welcome here, little man. This tree is mine. These apples are mine. This island is mine. Everything you see is mine.\"\n\nIt lowers its tusks and glares at you. The message is clear: come closer and get gored.",
+        "apple": "\"The golden apples? MINE. Every single one. I've been guarding this tree since before your grandfather's grandfather was born. You think I'm going to let some scrawny sailor waltz in and take one? GRUNFF. Think again.\"",
+        "fight": "\"You want to fight? HA! I've fought wolves, bears, and a dragon once. The dragon ran away crying. I ate its lunch. You don't stand a chance, but I'd be happy to add your bones to my collection.\"\n\nIt snorts aggressively and scrapes the ground with its hooves.",
+        "food": "The pig's ears perk up slightly at the word 'food'.\n\n\"Food? What kind of food? I like apples. Golden ones. If you have something edible... I MIGHT listen. MIGHT. No promises. I'm a pig of my word. Which means I change my mind a lot.\"",
+        "greeting_if_apple_taken": "The black pig snorts furiously as you approach, its tusks gleaming.\n\n\"GRUNFF! The apple thief! I know what you did!\"\n\nIt circles you, snorting and stamping.\n\n\"That apple was MINE! Centuries I guarded that tree!\"\n\nIt stops and fixes you with a beady eye.\n\n\"...It was a good apple, was it?\""
+      },
+      "state": {},
+      "visible_if": {
+        "not_flag": "pig_pacified"
+      }
+    },
+    "serpent": {
+      "id": "serpent",
+      "name": "The Great Serpent",
+      "description": "An enormous serpent that encircles the entire island, its body forming a continuous ring. Its scales are the size of shields, shimmering in shades of purple and green. Its head is large enough to swallow a boat whole.",
+      "aliases": [
+        "serpent",
+        "snake",
+        "great serpent",
+        "dragon"
+      ],
+      "dialogue": {
+        "greeting": "The great serpent raises its head, towering above you. Its forked tongue flickers, tasting the air. Its eyes narrow to slits.\n\n\"You enter my domain, little one. Few who come here leave again. The herb you seek is mine to guard, and I do not part with it willingly. State your purpose, or be gone before I lose my patience.\"",
+        "herb": "\"The antidote herb? It grows here, in the center of my ring. It is the only thing on this island I cannot digest — my one weakness. Do you think I would simply let you take it? I guard it because it guards the world from me.\"",
+        "greeting_if_serpent_calmed": "The great serpent raises its head as you approach. Its eyes are no longer hostile.\n\n\"You again, little one. You have already taken what you came for.\n\nIts tongue flicks out, tasting the air.\n\n\"Most mortals take the herb and flee. But you came back.\n\nIt lowers its head to your level.\n\n\"You are welcome here, little friend.\"",
+        "mercy": "The serpent's head lowers slightly. Its voice softens.\n\n\"Mercy... an interesting word from a creature who came here to take what is mine. But I am not unreasonable. I have been alone for a long time. Perhaps there is a way we can both leave this island satisfied. Show me something I have not seen before, and I may be persuaded.\"",
+        "poison": "\"My venom is the deadliest in all the seas. One drop can kill a whale. Two drops can kill a god. Three drops... well, I've never tried three drops. The island would probably dissolve. The herb you seek is the only antidote. Funny, isn't it? The cure grows beside the poison.\""
+      },
+      "state": {},
+      "visible_if": {
+        "not_flag": "serpent_calmed"
+      }
+    },
+    "mill_guardian": {
+      "id": "mill_guardian",
+      "name": "The Mill Guardian",
+      "description": "An old, stooped man with flour-dusted skin and ears like cauliflowers — half-deaf from decades of grinding noise. He shuffles in circles around the mill, muttering to himself in a repetitive, grinding cadence.",
+      "aliases": [
+        "guardian",
+        "old man",
+        "mill keeper",
+        "miller",
+        "mill guardian"
+      ],
+      "dialogue": {
+        "greeting": "The old man does not seem to notice you at first. He keeps shuffling, grinding, grinding. When he finally looks up, his eyes are pale and milky.\n\nGrind... grind... grind... The sea must be ground. The sea is too full. Too much water. Too many ships. The mill grinds them all down, down, down into foam.\n\nHe taps his ear. 'Speak up, lad. These old ears have heard nothing but stone-on-stone for sixty years. What was that? Speak up!'",
+        "mill": "The mill? Oh, it grinds the sea. Always has. Always will. Salt and stone, stone and salt. That is all there is. That is all there ever was. Grind... grind... grind...\n\nHe pauses. 'Sometimes I dream of silence. But the mill does not dream. The mill only grinds.'",
+        "stop": "Stop the mill? STOP THE MILL?!\n\nHe cackles, a dry wheezing sound. 'If you could stop it, boy, you would be the first in a thousand years. The gears are older than Ireland. The stones were cut from the bones of the world. You cannot stop it. You can only... feed it.'",
+        "gears": "Gears within gears, lad. Great wheels of bronze and iron, turning since before your grandfather's grandfather was a gleam in his father's eye. They catch the sea and crush it. You can hear them groaning if you press your ear to the stone."
+      },
+      "state": {},
+      "visible_if": null
+    },
+    "ghostly_shepherd": {
+      "id": "ghostly_shepherd",
+      "name": "The Ghostly Shepherd",
+      "description": "A translucent figure in a tattered wool cloak, leaning on a crook. He seems to exist in two places at once — solid one moment, mist the next. His eyes are the color of twilight — neither black nor white, but something in between.",
+      "aliases": [
+        "shepherd",
+        "ghost",
+        "ghostly shepherd",
+        "old shepherd",
+        "phantom"
+      ],
+      "dialogue": {
+        "greeting": "The Ghostly Shepherd turns to face you, and for a moment you see the sky through his chest. He speaks in a voice like wind through dry grass.\n\n'Welcome, traveler. You have come to the fields of change, where black becomes white and white becomes black, and nothing stays as it was.\n\nMy sheep know the secret. They cross between the fields and are transformed. They are neither black nor white when they walk the middle path — they are both. They are the space between.'\n\nHe smiles, and his smile is grey.",
+        "riddle": "'The riddle is simple, traveler. I am neither black nor white, yet I contain both. Walk with me, and you shall pass. What am I?'",
+        "answer": "'The shadow. The twilight. The place between. Yes, you understand. You may cross the fields of change unchanged. Go with my blessing.'",
+        "sheep": "'The sheep are not sheep, traveler. They are souls — caught between one life and the next. When they cross the black field, they forget. When they cross the white field, they remember. They spend eternity forgetting and remembering, and that is their penance.'"
+      },
+      "state": {},
+      "visible_if": null
+    },
+    "stallion_king": {
+      "id": "stallion_king",
+      "name": "The Stallion King",
+      "description": "A magnificent white stallion, larger than any horse you have ever seen, with a mane that flows like sea-foam and eyes that burn with wild intelligence. He stands proudly on the shore, hooves planted as if he owns the island and everything beyond it.",
+      "aliases": [
+        "stallion",
+        "horse",
+        "stallion king",
+        "white stallion",
+        "king of horses"
+      ],
+      "dialogue": {
+        "greeting": "The Stallion King snorts and stamps the ground. The earth trembles.\n\nHe does not speak — not in words you can understand — but his meaning is clear: You are not welcome here, little two-legs. These are MY pastures. MY mares. MY island. Turn back before I teach you the meaning of speed.",
+        "calm": "The horse's ears pivot forward. Its stance softens, just slightly. It regards you with something like curiosity now — a predator sizing up an unusually interesting piece of prey."
+      },
+      "state": {},
+      "visible_if": null
+    },
+    "little_cat": {
+      "id": "little_cat",
+      "name": "The Little Cat",
+      "description": "A tiny, scruffy kitten, no larger than your fist, with fur the color of rust and eyes like twin emeralds. It purrs constantly, a sound like a tiny engine. It is utterly unafraid of you.",
+      "aliases": [
+        "cat",
+        "kitten",
+        "little cat",
+        "small cat",
+        "kitty",
+        "flaming cat"
+      ],
+      "dialogue": {
+        "greeting": "The little cat looks up at you, blinks slowly, and lets out a tiny 'mew.' It rubs against your ankle, leaving a trail of warm fur. Its purring intensifies.\n\nThere is something ancient in those green eyes — something that knows more than it should. But for now, it just wants to be petted.",
+        "pet": "You reach down and scratch behind its ears. The cat leans into your hand, purring so hard it vibrates. It looks up at you with something like gratitude.\n\nThen it bites your finger — gently — and darts away, looking back as if to say: 'That's enough of that. Now give me what I really want.'",
+        "tribute": "The cat's ears perk up. Its tail twitches. 'Mew?' it says, with obvious interest. It looks at you expectantly, then glances at a small alcove behind it where a golden glow emanates from a crystal."
+      },
+      "state": {},
+      "visible_if": null
+    },
+    "sacred_oxen": {
+      "id": "sacred_oxen",
+      "name": "The Sacred Oxen",
+      "description": "Two magnificent white oxen with horns of pure gold that gleam even in the dimmest light. They stand motionless as statues, their breath forming clouds in the cool air. Their eyes are deep, dark pools — ancient, patient, knowing.",
+      "aliases": [
+        "oxen",
+        "ox",
+        "sacred oxen",
+        "white oxen",
+        "golden-horned oxen",
+        "bulls",
+        "bull"
+      ],
+      "dialogue": {
+        "greeting": "The golden-horned oxen turn their massive heads to regard you. One of them lowss — a sound so deep it vibrates in your bones. They do not seem hostile, but they do not seem welcoming either. They simply... observe.\n\nThe larger of the two takes a step forward and lowers its head, presenting its golden horn as if offering it. Or challenging you to take it.",
+        "horn": "The ox's golden horn gleams in the grey light. It is magnificent — a spiral of pure gold, warm and alive. The ox stands still, waiting. It seems to be offering a choice.",
+        "peace": "The larger ox lowers its head and makes a sound like a contented sigh. The smaller one nuzzles its flank. They seem to be saying: 'We have been here a long time. We do not wish for violence. Take what you need, but take no more.'"
+      },
+      "state": {},
+      "visible_if": null
     },
     "foster_mother": {
       "id": "foster_mother",
@@ -614,16 +1136,17 @@
       "aliases": [
         "mother",
         "foster mother",
-        "woman",
-        "foster mother"
+        "woman"
       ],
       "dialogue": {
         "greeting": "Your foster mother looks at you with eyes that have seen too much and loved too deeply.\n\n\"You have the look of your father,\" she says softly. \"More every day. I see him in the way you stand, the way you laugh, the way you stare at the sea.\n\nI knew him, you know. Before you were born. Before any of this. He was the kindest man I ever knew, and the fiercest. He would sing to the goats. He would fight a dozen men without blinking. He was not a simple man. He was a storm in human shape.\n\nAnd you are his son. Never forget that.\"",
+        "greeting_if_training_seen": "Your foster mother watches you with proud, sad eyes.\n\n\"Look at you. A warrior now. I remember when you were so small you fit in the crook of my arm.\n\nShe steps closer and adjusts your collar, a gesture from childhood.\n\n\"Your father's ring. I kept it all these years. He would want you to have it. You have his strength, Mael Duin.\"",
         "father": "\"Ailill. Your father. He was the Wolf of the Arans. He led the raids against the Northern Isles. He was feared and loved in equal measure.\n\nThe night he died... I found him on the beach at dawn. The tide was washing his feet. His sword was still in his hand. He had killed seven of them before they brought him down.\n\nI never told you because I wanted you to be free. A man who knows his father was murdered is never free.\"",
         "voyage": "\"I knew this day would come. From the moment you could walk, you were drawn to the sea. I used to find you standing on the beach, staring at the horizon, as if you could see something the rest of us couldn't.\n\nGo. Find them. Do what you must. But come back alive, Mael Duin. Come back alive.\"",
         "ring": "\"Your father's ring. I kept it hidden all these years. I was going to give it to you on your wedding day. But I think you need it more now.\n\nHe wore it on his thumb. It will fit yours the same way. It's not magic. It won't protect you from swords or storms. But it will remind you that you are not alone. You carry him with you.\""
       },
-      "state": {}
+      "state": {},
+      "visible_if": null
     },
     "lorcan": {
       "id": "lorcan",
@@ -637,9 +1160,11 @@
       ],
       "dialogue": {
         "greeting": "Lorcán sneers at you, swaying slightly.\n\n\"So. The bastard returns. I see you've heard the truth about your daddy. The great Ailill Ochair Ága. The Wolf of the Arans. Slain on the beach like a dog while his wife watched.\n\nWhat are you going to do about it, boy? Cry? Run to the druid? Or are you going to do something a real man would do?\"",
+        "greeting_if_taunting_seen": "Lorcán looks up as you approach, his face flushing. He does not meet your eyes.\n\n\"Look... about what I said. I was drunk. That's not an excuse.\n\nHe shifts uncomfortably.\n\n\"Your father was a great man. If you sail after those raiders, I hope you find them. And I hope you come back.\"",
         "apology": "\"An apology? You want an apology from me?\n\nLook, I was drunk. I say things when I'm drunk. But I didn't lie. Everything I said was true. The truth doesn't need an apology.\n\nBut if it makes you feel better... I'm sorry I said it in front of everyone. That was cruel. I'm not a cruel man. Just a drunk one.\""
       },
-      "state": {}
+      "state": {},
+      "visible_if": null
     },
     "young_conganchnes": {
       "id": "young_conganchnes",
@@ -653,9 +1178,14 @@
       ],
       "dialogue": {
         "greeting": "Conganchnes grins and claps you on the shoulder — hard.\n\n\"There you are! I was beginning to think you'd changed your mind. Don't tell me you're having second thoughts. I've already sharpened my sword three times in anticipation.\n\nWe're going to see wonders, you and I. Monsters to fight. Islands to explore. Treasure to find. And at the end of it all, the men who killed your father.\n\nI wouldn't miss this for anything.\"",
-        "fight": "\"You want to fight? Now? We're about to sail across the ocean! Fine. One round. Don't blame me when I knock you on your backside.\""
+        "fight": "Conganchnes draws his sword and inspects the edge.\n\n\"I'm ready whenever you need me, Captain. Monster, man, or god — I'll fight it. That's what I'm here for. That's what I've always been here for.\n\nThe training field is a long way behind us now. This is the real thing. And I wouldn't miss it for anything.\"",
+        "recruit": "Conganchnes slaps you on the back, nearly knocking the wind out of you.\n\n\"Join your crew? I thought you'd never ask! I've been sharpening my sword for exactly this. Lead on, Captain — I'll follow you to the ends of the earth. And the ends of anyone who gets in our way.\"\n\n(Type YES to welcome Conganchnes into your crew.)",
+        "sea": "Conganchnes grins and flexes an arm the size of a mast timber.\n\n\"Still can't be cut, Captain. I tested it on that glass bridge shard. The shard lost. I'm starting to think I really am invulnerable.\n\nRemember when we trained together back in the village? You could barely lift a practice sword. Now look at you. Leading twenty-seven men across the edge of the world. Your father would be proud.\"\n\nHe claps you on the shoulder hard enough to stagger you."
       },
-      "state": {}
+      "state": {},
+      "visible_if": {
+        "not_flag": "recruited_young_conganchnes"
+      }
     },
     "young_fergus": {
       "id": "young_fergus",
@@ -667,9 +1197,15 @@
         "young fergus"
       ],
       "dialogue": {
-        "greeting": "Fergus looks up from his star charts.\n\n\"Ah, Captain. I've been calculating our route. If we sail west-northwest from the harbor, we'll hit the Gulf Stream, which will carry us past the first cluster of islands. After that... well, the maps stop. There be monsters, as they say.\n\nBut I've been reading the stars, and they say something interesting. They say this journey will change everything. Every single thing.\n\nAlso that I should have worn a warmer cloak. But it's too late for that now.\""
+        "greeting": "Fergus looks up from his star charts.\n\n\"Ah, Captain. I've been calculating our route. If we sail west-northwest from the harbor, we'll hit the Gulf Stream, which will carry us past the first cluster of islands. After that... well, the maps stop. There be monsters, as they say.\n\nBut I've been reading the stars, and they say something interesting. They say this journey will change everything. Every single thing.\n\nAlso that I should have worn a warmer cloak. But it's too late for that now.\"",
+        "recruit": "Fergus folds his star charts with careful precision.\n\n\"Join your crew? I've already charted the course. The stars have been telling me for years that I'd sail with you one day. I just didn't know when you'd finally ask.\n\nI can navigate us through any storm, read any sky, and find our way home when all seems lost. You need me, Captain. And I... I need this voyage.\"\n\n(Type YES to welcome Fergus into your crew.)",
+        "sea": "Fergus squints at the horizon, then at the sky, then back at the horizon.\n\n\"The stars are different here, Captain. I don't recognise half of them. Back home, I could name every star in the sky. Here? I saw one that looked like a fish riding a horse. I don't know what that means.\n\nBut the Magic Thread is pulling true. Whatever the druid wove into that thread, it knows where we're going better than any star chart.\"",
+        "navigation": "Fergus taps his nose. \"I navigate by instinct now. The old ways don't work in these waters. The stars moved. The currents changed. The wind has a different smell.\n\nBut there's a rhythm to it. The sea has a heartbeat, and if you listen long enough, you can feel where it wants you to go.\""
       },
-      "state": {}
+      "state": {},
+      "visible_if": {
+        "not_flag": "recruited_young_fergus"
+      }
     },
     "young_diuran": {
       "id": "young_diuran",
@@ -682,9 +1218,15 @@
         "young diuran"
       ],
       "dialogue": {
-        "greeting": "Diurán looks up from his writing, quill poised.\n\n\"Captain! I've already written the first chapter. I call it \"The Wolf's Awakening.\" It's about a young hero who discovers his father was murdered and sets sail across the sea for revenge. It's very dramatic.\n\nI'm going to make this voyage into the greatest epic ever sung. Assuming we survive, of course. A tragic ending would sell more copies, but I'd prefer a happy one. For friendship. And also because I'd like to keep living.\""
+        "greeting": "Diurán looks up from his writing, quill poised.\n\n\"Captain! I've already written the first chapter. I call it \"The Wolf's Awakening.\" It's about a young hero who discovers his father was murdered and sets sail across the sea for revenge. It's very dramatic.\n\nI'm going to make this voyage into the greatest epic ever sung. Assuming we survive, of course. A tragic ending would sell more copies, but I'd prefer a happy one. For friendship. And also because I'd like to keep living.\"",
+        "recruit": "Diurán sets down his quill and smiles.\n\n\"Join your crew? Captain, I've been writing this story in my head since the day we met. Every chapter, every verse, every song — they all lead to this moment.\n\nI will chronicle every island, every monster, every miracle. When we return, the world will know the name Mael Duin. And they'll know it because I wrote it down.\"\n\n(Type YES to welcome Diurán into your crew.)",
+        "sea": "Diurán looks up from his parchment, quill still moving.\n\n\"Captain! I'm writing a poem about that last island. It's not going well. I keep rhyming 'sea' with 'misery' which is technically accurate but poetically lazy.\n\nRemember back in the training field, when I used to write epic poems about battles we hadn't fought yet? Well, now we've fought them, and let me tell you: reality is much harder to rhyme than imagination.\"\n\nHe sighs dramatically and dips his quill again.",
+        "islands": "Diurán flips through his increasingly thick sheaf of parchment.\n\n\"I've been keeping a log of every island. The giant ants? Excellent material. That cat? I wrote a haiku about it. The Laughing King? I filled three pages and couldn't stop laughing long enough to make them coherent.\n\nThis voyage will be the greatest epic ever told. Assuming we survive to tell it.\""
       },
-      "state": {}
+      "state": {},
+      "visible_if": {
+        "not_flag": "recruited_young_diuran"
+      }
     },
     "young_druid": {
       "id": "young_druid",
@@ -692,13 +1234,202 @@
       "description": "The same druid, but years younger. He still moves like an old man, though. Some people are born ancient.",
       "aliases": [
         "druid",
-        "old man",
-        "wise man"
+        "young druid",
+        "young"
       ],
       "dialogue": {
         "greeting": "The druid looks at you with knowing eyes.\n\n\"You have questions. Good. Questions are how we grow.\n\nYou want to know about your father. I can see it in your eyes. But I cannot tell you yet. You are not ready. The truth would break you, and a broken boy cannot become the man he needs to be.\n\nWhen you are ready, I will tell you everything. Until then, learn to fight. Learn to read the stars. Learn to be kind when kindness is hard. These will serve you better than any secret.\""
       },
-      "state": {}
+      "state": {},
+      "visible_if": null
+    },
+    "garbh": {
+      "id": "garbh",
+      "name": "Garbh the Raider",
+      "description": "A one-eyed warrior with a face carved by a lifetime of violence. A long, jagged scar runs from his forehead across his missing eye and down to his jaw — the last gift your father gave him. He sits on a stone bench in the red-lit chamber, a drinking horn in his hand. When he sees you, he does not reach for his sword. He simply waits.",
+      "aliases": [
+        "garbh",
+        "garbh the raider",
+        "one-eyed man",
+        "one-eyed",
+        "raider",
+        "murderer"
+      ],
+      "dialogue": {
+        "greeting": "Garbh looks up from his drinking horn. His one good eye fixes you with a gaze that is neither hostile nor kind — just... tired.\n\n\"So. The Wolf's cub comes to the castle that turns. I've been expecting you.\"\n\nHe takes a long drink and sets the horn down. The scar across his face gleams in the red light.\n\n\"I knew you would come, sooner or later. The sea always brings what it owes.\"",
+        "father": "Garbh's face hardens. He touches the scar on his face.\n\n\"Ailill. Your father. The Wolf of the Arans.\"\n\nHe pauses, staring at the red-lit wall as if seeing something far away.\n\n\"It was a blood feud, not a murder. His raiders had killed my brother — burned his village, took his head as a trophy. I did what any man would do. I came for blood.\"\n\n\"We met on the strand at dawn. He was the finest fighter I ever faced. He took my eye — this scar is his signature, his last message to the world.\"\n\n\"But I was faster that morning. One thrust under the arm, where the mail gapes. He fell looking me in the eye, and he was... smiling. Laughing, even. That's the worst part. He didn't hate me. He respected me.\"\n\nGarbh shakes his head slowly.\n\n\"It was not personal, Mael Duin. It was the way of things. Your father knew it. That's why he could laugh.\"",
+        "revenge": "Garbh meets your gaze steadily.\n\n\"Kill me and you become me. Another man in a long line of dead men, passing the sword from hand to hand.\"\n\n\"Your father's blood is on my hands. My brother's blood is on his. Where does it end?\"\n\nHe leans forward, his voice dropping.\n\n\"If you kill me, my sons will come for you. And if they fail, their sons will come. And your sons will kill them, and their sons will come for your grandsons. It never stops — unless someone decides it stops here.\"\n\n\"The question is not whether you can kill me. The question is whether you should.\"",
+        "forgiveness": "Garbh's shoulders sag slightly. His voice softens.\n\n\"You are a better man than your father. And he was a good man.\"\n\nHe looks away, his one eye glistening.\n\n\"I have lived with what I did every day. I see his face in my dreams — that laughing, impossible face. He haunts me, Mael Duin. Not because I regret it, but because he would have forgiven me if our positions were reversed. And I knew that even as I struck.\"\n\n\"If you can forgive me... then maybe the wolf can rest. Maybe we both can.\"\n\nHe extends his hand, palm open. No weapon. Just the hand of a tired, old warrior waiting for judgment.",
+        "greeting_if_forgave_garbh": "Garbh looks up as you enter. His one eye softens.\n\n\"You came back. After everything... you came back.\"\n\nHe sets down his drinking horn and stands.\n\n\"I don't know what to call a man who forgives his father's killer. But the wolf can rest now. And so can I.\"\n\nHe extends his hand. This time, it is not a challenge. It is a greeting."
+      },
+      "state": {},
+      "visible_if": null
+    },
+    "silence_guardian": {
+      "id": "silence_guardian",
+      "name": "The Guardian of Silence",
+      "description": "A tall, pale figure draped in flowing grey robes. Its face is smooth and featureless — no eyes, no mouth, no nose. When it speaks, the words do not come from its face, but from the air around it, as if the silence itself is parting to let sound through.",
+      "aliases": [
+        "guardian",
+        "silence guardian",
+        "pale figure",
+        "goddess",
+        "grey figure",
+        "guardian of silence"
+      ],
+      "dialogue": {
+        "greeting": "The grey figure does not move. It does not breathe. But the silence around it thickens, becomes heavier, like a blanket pressing down on your ears.\n\nWhen it speaks, the words are cold and distant, as if coming from the bottom of a deep well:\n\n'You have entered the domain of silence. Here, sound is forbidden. Music is forbidden. Laughter is forbidden. The world has enough noise. In my valley, there is only peace. Only stillness. Only silence.'\n\nIt pauses, and the silence becomes so complete you can hear your own blood moving.\n\n'You may stay. But you must not break the silence. If you sing or laugh or speak above a whisper... there will be a price.'",
+        "greeting_if_got_silent_bell": "The grey figure stands motionless, its blank face turned toward the empty grove.\n\n\"You have taken the bell. The silence is complete now.\n\nYou may pass freely. The valley has nothing left to teach you.\"",
+        "anger": "The Guardian of Silence turns its blank face toward you. The temperature drops.\n\n'YOU HAVE BROKEN THE SILENCE. Sound is a wound upon the world, and you have opened a wound in my valley. You must pay tribute — give me something precious — and the silence will be restored.'\n\nIts empty face waits. If you have something to offer, GIVE it to the guardian.",
+        "peace": "The Guardian of Silence bows its head slightly — a gesture of respect.\n\n'You have kept the silence. You have walked softly in my valley. For this, you may take the Silent Bell. It will serve you well, for silence is the oldest magic — older than speech, older than song, older than the sea itself.'\n\nIt gestures toward the grove where the bell hangs.",
+        "tribute": "'Give me something precious. Something that holds sound — a memory of music, a word of power, a song you have forgotten. The silence must be restored.'"
+      },
+      "state": {},
+      "visible_if": null
+    },
+    "guardian_of_peace": {
+      "id": "guardian_of_peace",
+      "name": "The Guardian of Peace",
+      "description": "A luminous figure in flowing white robes, surrounded by a soft golden light. Its face is kind and infinitely gentle, radiating a warmth that feels like coming home after a long journey. Its eyes hold the compassionate patience of something that has watched the ages turn.",
+      "aliases": [
+        "guardian",
+        "angel",
+        "luminous figure",
+        "being",
+        "spirit",
+        "guardian of peace",
+        "peace"
+      ],
+      "dialogue": {
+        "greeting": "The Guardian of Peace opens its arms, and a wave of warmth washes over you.\n\n'Welcome, Mael Duin. Welcome to the Land of Promise. You have crossed the edges of the known world, braved monsters and wonders, and now you stand at the threshold of peace itself.\n\n'Here there is no pain, no sorrow, no hunger, no death. The rivers run with wine and honey. The trees bear fruit of pure gold. The air is warm and gentle. Stay with us forever. All you have to do is say yes.'\n\nIts smile is radiant. The offer is sincere.\n\n(Type YES to stay forever. Type NO to refuse and receive the Wind of Return.)",
+        "greeting_if_stayed_in_promised_land": "The Guardian of Peace smiles warmly.\n\n\"You chose peace. The land welcomes you home.\"",
+        "stay": "'Stay. Rest. Be at peace. You have earned this. There is nothing waiting for you back there — no revenge worth taking, no love worth leaving. Stay in the land where all is well.'\n\nThe guardian's voice is hypnotic, gentle. The land behind it shimmers with impossible beauty.",
+        "leave": "The Guardian of Peace nods slowly, its expression unchanged — still warm, still kind.\n\n'I understand. The world beyond calls to you. Your story is not yet finished. Your home is waiting.\n\n'Take this Wind of Return — a bottle holding a favourable wind. When you are ready, use it to sail home. It will carry you across the sea with unerring certainty, to the shore where you belong.'\n\nIt places a sealed glass bottle in your hands. Inside, a tiny whirlwind spins endlessly.\n\n'Go with my blessing, Mael Duin. And remember: you carry home with you now.'",
+        "home": "'Your home is waiting. But you carry it with you now — in your heart, in your memories, in the weight of your father's ring on your thumb. The Promised Land is not a place. It is a feeling. And you have felt it all along.'"
+      },
+      "state": {},
+      "visible_if": null
+    },
+    "giant": {
+      "id": "giant",
+      "name": "The Giant",
+      "description": "A monstrous giant perched on a high cliff, his skin the colour of lichen-covered stone. He is easily twenty feet tall, with arms like tree trunks and a face twisted by crude malice. Beside him, a pile of fist-sized stones waits to be hurled at passing ships.",
+      "aliases": [
+        "giant",
+        "ogre",
+        "stone thrower",
+        "cliff giant"
+      ],
+      "dialogue": {
+        "greeting": "The giant roars as he spots your approach! He hefts a stone the size of a man's head and hurls it at your curragh with terrifying accuracy. The missile crashes into the hull, splintering wood.\n\nOne of your crew — a young man from the west — is struck by a flying splinter and falls, clutching his chest. He does not rise again.\n\nYou have lost a crew member. The giant bellows with laughter and reaches for another stone.\n\nYou must act quickly: FIGHT the giant with the Magic Harpoon, TALK to him with the Speaking Feather, or GIVE him food (Everlasting Fruit, Crew Provisions) to distract him.",
+        "fight": "You hurl the Magic Harpoon at the giant. It strikes him square in the chest — a blow that would kill any mortal man. The giant bellows in pain, tearing at the harpoon, but the enchanted weapon returns to your hand before he can pull it free.\n\nHe stumbles backward, clutching his wound, and topples from the cliff. The ground shakes as his body crashes onto the rocks below. The waves wash over him, and he is still.\n\nAt the base of the cliff, you find his GIANT'S CLUB — a crude weapon of oak and stone. It is heavy, but you lift it. It may serve you yet.\n\n(+3 points. Gained: Giant's Club)",
+        "talk": "You hold up the Speaking Feather and address the giant in his own tongue.\n\nThe giant halts mid-throw, his brow furrowing with confusion. 'You speak the Old Tongue?' he rumbles. 'No man has spoken it in a hundred years.'\n\nYou negotiate. The giant was angry because the last ships that passed did not respect his territory. You promise to leave his cliff alone and never return. He grunts, mollified.\n\n'You are a strange little man,' he says. 'But you have honour. Take this — it fell from my tooth last winter. I have no use for it.'\n\nHe tosses you a GIANT'S TOOTH — a massive, yellowed fang that could serve as a dagger or a trophy.\n\n(+3 points. Gained: Giant's Tooth)",
+        "give": "You offer food to the giant. He squints at it, sniffs suspiciously, then snatches it from your hand and stuffs it into his mouth.\n\n'Hmph,' he grunts, chewing noisily. 'Not bad. You may pass, little man. But tell your friends to bring better food next time.'\n\nThe giant settles back onto his cliff, patting his belly with satisfaction. He does not throw any more stones.\n\n(+1 point. No crew lost.)",
+        "father": "'Your father? Never met him. I crush everyone who sails past. I don't stop to ask their family history.'\n\nHe throws another stone for emphasis."
+      },
+      "state": {},
+      "visible_if": {
+        "not_any": [
+          "giant_defeated",
+          "giant_mollified"
+        ]
+      }
+    },
+    "treasure_serpent": {
+      "id": "treasure_serpent",
+      "name": "The Treasure Serpent",
+      "description": "A massive serpent coiled before the mouth of a dark cave. Its scales shimmer with a deep, oily green, and its eyes — vertical slits of gold — follow your every movement. It is the size of a small ship, and its body completely blocks the entrance to the cave.",
+      "aliases": [
+        "serpent",
+        "dragon",
+        "snake",
+        "guardian",
+        "treasure serpent"
+      ],
+      "dialogue": {
+        "greeting": "The serpent hisses — a sound like steam escaping from a fissure. It raises its wedge-shaped head, tasting the air with a forked tongue as long as your arm.\n\n'Mine,' it says. The word is surprisingly clear, though it seems to come from somewhere deep in its throat. 'The gold is mine. The cave is mine. Everything you see is mine. Turn back, little thief, or become my next meal.'\n\nThe serpent coils tighter, blocking the cave entrance completely. Beyond it, you can glimpse the glint of ancient gold.\n\nYou could FIGHT the serpent (dangerous), GIVE it the Antidote Herb (it is sick — the herb may heal it), or GIVE it the Golden Apple or Everlasting Fruit as a bribe.",
+        "fight": "You draw your weapon and rush at the serpent! It strikes with blinding speed — its fangs sink into your shoulder... but Conganchnes shoves you aside, taking the blow himself. The fangs snap against his invulnerable skin!\n\nThe serpent recoils, hissing in confusion. In that moment of distraction, you land a blow on its neck. It thrashes, knocking you both to the ground, and lashes out with its tail — sending you tumbling out of the cave.\n\nWhen you scramble back to your feet, the serpent has retreated deeper into the cave. Its hiss echoes from the darkness: 'Fine. Take the gold. It brings nothing but greed and death anyway.'\n\nYou emerge with the treasure, battered but victorious. One crew member was wounded but will recover.\n\n(+2 points. You may now take the treasure gold.)",
+        "mercy": "You hold out the Antidote Herb. The serpent's head draws back, its nostrils flaring.\n\n'That smell... I know that smell. It is the herb that grows on the Serpent's Island — the one cure for the venom I have carried in my blood since I was wounded by a sea drake.\n\nThe serpent lowers its head. Its voice is softer now. 'Give it to me. Please. I have been in pain for a hundred years. This gold is not worth the agony.'\n\nYou give the herb to the serpent. It swallows it whole, and a shudder runs through its massive body. Its scales ripple, and the sickly yellow in its eyes fades to a healthy gold.\n\n'The pain... is gone. Thank you, little one. The gold is yours. Take it all. I will find a new cave, one without ancient curses in it.'\n\nThe serpent uncoils and slides past you into the sea, free at last.\n\n(+3 points. You may now take the treasure gold.)",
+        "give": "You offer the tribute to the serpent. It inspects the offering with its tongue, then — slowly — uncoils a fraction of its body, revealing a narrow gap in the cave entrance.\n\n'Payment accepted,' it hisses. 'The gold is in the back. Take what you can carry. But hurry — my patience is as thin as my skin.'\n\nYou slip past the serpent into the cave. The treasure awaits.\n\n(+1 point. You may now enter the cave.)"
+      },
+      "state": {},
+      "visible_if": {
+        "not_flag": "serpent_passed"
+      }
+    },
+    "great_hound": {
+      "id": "great_hound",
+      "name": "The Great Hound",
+      "description": "A hound the size of a small horse, with a coat of iron-grey fur and eyes that burn like embers. It lies before a stone pedestal, upon which rests a silver torc that gleams with ancient light. The hound's lips curl back to reveal teeth like ivory daggers.",
+      "aliases": [
+        "dog",
+        "hound",
+        "wolf",
+        "beast",
+        "great hound",
+        "guard dog"
+      ],
+      "dialogue": {
+        "greeting": "The Great Hound rises slowly, hackles raised. A low, rumbling growl issues from its chest — a sound like falling rocks. Its eyes fix on you with unwavering intensity.\n\nIt does not attack. Not yet. It stands between you and the silver torc, guarding it with the patience of a creature that has stood sentinel for centuries.\n\nThe torc gleams on its pedestal. It is clearly valuable — a masterpiece of ancient silversmithing.\n\nYou could GIVE the hound food (Bowl of Milk, Everlasting Fruit), FIGHT it, or TALK to it with the Speaking Feather.",
+        "give": "You offer the food to the hound. Its ears perk up. The growling stops.\n\nIt sniffs the offering once, twice, then takes it gently from your hand with surprising delicacy. It eats in three quick bites, then licks its chops — and its tail wags once.\n\nJust once. A massive, heavy thump against the ground.\n\nThe hound steps aside and lies down, watching you with mild interest. You may take the torc.\n\n(+1 point. The Silver Torc is yours.)",
+        "fight": "You rush the hound with your weapon drawn. It meets your charge with terrifying speed — knocking you flat and pinning you to the ground with one massive paw.\n\nIts jaws close around your arm — but do not bite down. It holds you there, staring into your eyes, breathing hot and wet on your face.\n\nThen it releases you, steps back, and lies down again. It seems to be saying: 'I could have killed you. I chose not to. Try a different approach.'\n\nYou scramble to your feet, unharmed but humbled. The hound watches, unimpressed.",
+        "talk": "You hold up the Speaking Feather. The hound cocks its head, and you hear its voice in your mind — rough, ancient, weary.\n\n'You speak the language of beasts. Few do, these days.'\n\n'This torc was placed here by my master a thousand years ago. He asked me to guard it until he returned. He never did. I have waited. I have watched. I have kept my word.'\n\n'But I am old now. My joints ache. My eyes grow dim. I would like to rest. If you can give me something to ease my hunger and my vigil, the torc is yours.'\n\nThe hound's voice fades. You know what you must do.\n\n(Talked to the hound. Give it food to complete the bargain.)",
+        "master": "'My master was a king of this island. He sailed east a thousand years ago and never returned. I have kept my promise. I hope he kept his.'\n\nThe hound whines softly and lays its head on its paws."
+      },
+      "state": {},
+      "visible_if": {
+        "not_flag": "dog_pacified"
+      }
+    },
+    "mountain_lion": {
+      "id": "mountain_lion",
+      "name": "Mountain Lion",
+      "description": "A great mountain lion, its coat the colour of dried grass, crouched before a cave on a scrub-covered island. Its muscles ripple beneath its skin, and its eyes are wild with pain and fury. A deep wound — a gash from some other predator — weeps along its flank.",
+      "aliases": [
+        "lion",
+        "beast",
+        "mountain lion",
+        "predator",
+        "big cat"
+      ],
+      "dialogue": {
+        "greeting": "The mountain lion roars — a raw, guttural sound that vibrates through your bones. It bares its fangs and crouches, ready to spring.\n\nBut as it shifts its weight, you see the wound on its flank — a terrible gash, oozing and infected. The beast is in agony. Its attacks are born of pain, not malice.\n\nYou could FIGHT it (with Magic Harpoon or Giant's Club), USE the Silver Bell to calm it, or TALK to it with the Speaking Feather to learn of its wound.",
+        "fight": "You brandish your weapon. The lion charges.\n\nThe battle is fierce — all claws and roars and blood. But your weapon finds its mark, and after a desperate struggle, the beast is driven off. It limps into the cave, growling, and does not emerge again.\n\nYour crew cheers. The island is safe. You find a LION'S CLAW on the ground — broken off in the fight. It is sharp and still warm.\n\n(+2 points. Gained: Lion's Claw)",
+        "calm": "You ring the Silver Bell. Its pure, clear tone cuts through the lion's fury.\n\nThe lion stops mid-crouch. Its ears swivel. The growling subsides.\n\nIt sits down heavily, blinking slowly. The pain is still in its eyes, but the rage has drained away. It mews — a pathetic, broken sound from so mighty a creature.\n\nYou approach slowly. It lets you examine its wound. With gentle hands, you clean it and bind it with cloth from your tunic. The lion licks your hand once — a rough, warm thank you.\n\nIt rises and pads into the cave, returning with a LION'S CLAW in its mouth — one it shed naturally. It drops it at your feet.\n\n(+2 points. Gained: Lion's Claw. The lion is calm.)",
+        "talk": "You hold up the Speaking Feather. The lion's ears flick forward. A voice — ragged, pained — enters your mind.\n\n'The feather-borne one... speaks. Few do. You are strange, little two-legs.'\n\n'I am hurt. A sea serpent — a young one, foolish — caught me unawares. Its venom festers in my blood. If you have something to heal me... I would be grateful.'\n\nThe lion's eyes plead. If you have Fountain Water, you could USE it to heal the lion.",
+        "use": "You pour the Fountain Water onto the lion's wound. The milky liquid sizzles, and the infection begins to recede. The torn flesh knits together, slowly but surely.\n\nThe lion's eyes widen. It flexes its muscles, testing the healed limb. A deep, rumbling purr fills the air — the first sound of contentment the beast has made in weeks.\n\nThe lion presses its head against your hand, then pads into the cave. It returns with a LION'S CLAW in its jaws — a gift, freely given.\n\n'You have my gratitude, feather-borne one. Go in peace.'\n\n(+3 points. Gained: Lion's Claw.)"
+      },
+      "state": {},
+      "visible_if": {
+        "not_any": [
+          "lion_fought",
+          "lion_pacified"
+        ]
+      }
+    },
+    "anchorite": {
+      "id": "anchorite",
+      "name": "The Anchorite",
+      "description": "A gaunt, serene man in a simple grey robe, sitting cross-legged in the mouth of a cave on a lonely rock. His face is weathered by wind and wisdom, and his eyes hold the quiet certainty of someone who has found what he was looking for. A small wooden cross hangs around his neck. A single candle burns beside him, though no one has lit it.",
+      "aliases": [
+        "hermit",
+        "anchorite",
+        "holy man",
+        "monk",
+        "ascetic",
+        "second hermit"
+      ],
+      "dialogue": {
+        "greeting": "The Anchorite looks up as you approach, and a gentle smile spreads across his face. He gestures to a flat stone beside him.\n\n'Sit, Mael Duin. I have been expecting you. The gulls told me you were coming. They are terrible gossips, but their information is reliable.'\n\nHis voice is warm, like a fire after a long voyage. The sea seems quieter here. The wind holds its breath.\n\n'You have travelled far — further than you know. The islands you have visited were not random specks on the sea. They were mirrors. Each one showed you a part of yourself. The giant's rage. The serpent's greed. The hound's loyalty. The lion's wounded pride. All of them were you. All of them were lessons.'\n\nHe falls silent, letting the words settle like sediment in clear water.",
+        "trials": "'Each island was a trial, yes. But not the kind you think. The giant did not test your strength — he tested your choice of how to use it. The serpent did not test your courage — she tested your compassion. The hound tested your patience. The lion tested your mercy.\n\n'And every time you chose wisely, you became more yourself.'\n\nHe nods slowly, as if confirming something to himself.",
+        "forgiveness": "The Anchorite's eyes grow deep and serious. He speaks slowly, choosing each word with care.\n\n'The men who killed your father were given to you as a test — not a target. The sea did not bring you to Garbh so you could spill his blood. It brought you to him so you could choose not to.\n\n'Forgiveness is not weakness, Mael Duin. It is the hardest kind of strength. It is easy to kill a man. It is nearly impossible to let him live — and to mean it when you say he is forgiven.\n\n'Your father does not want revenge. He wants you to be free. The chain that binds you is not made of iron. It is made of grief. And only you can unlink it.'\n\nThe candle flickers, though there is no wind.",
+        "father": "'Ailill is at peace. He crossed the great sea before you, and he waits on the far shore. He does not count the days. He does not hold a grudge. He watches you with love and hope, as any father watches his son.\n\n'The only one who is not at peace is you. And that peace is yours to claim — whenever you are ready.'",
+        "home": "'You will return when the wind is ready. And the wind is always ready — it is you who are not.'\n\nHe smiles at your expression.\n\n'You have not yet finished your voyage. But you will. And when you do, you will find that home was never a place — it was a feeling. And that feeling has been with you all along.'",
+        "sea": "'The sea is God's breath upon the water,' he says softly. 'It is older than the mountains, older than sin, older than memory. It carries prayers in its currents and secrets in its depths.\n\n'You have sailed upon it for three years, Mael Duin. You have learned its language — the rhythm of the tides, the warnings in the clouds, the songs in the creaking of your curragh's timbers.\n\n'The sea has changed you. It has washed away what was not essential. Look at your hands. They are the same hands that pushed off from the Aran shore. But the man they belong to is not the same.\n\n'That is what the sea does. It is a mirror, and it shows you who you truly are.'",
+        "death": "'Death is not the enemy, Mael Duin. It is the doorway. Your father walked through it before you. You will walk through it after. The only question is what you carry in your hands when you do.\n\n'Will you carry a sword? Or will you carry peace?'"
+      },
+      "state": {},
+      "visible_if": null
     },
     "ailill": {
       "id": "ailill",
@@ -713,18 +1444,22 @@
       ],
       "dialogue": {
         "greeting": "Ailill looks up and grins. His teeth are white against his beard.\n\n\"Well, well! A visitor! Come, sit, drink! The night is young and so are we — well, I'm not young, but I'm still here, and that's what counts!\n\nYou have the look of a storyteller. Or a spy. Or a storyteller who is also a spy. Either way, you're welcome at my table. Pull up a bench!\n\nThe mead is sweet and the company is finer. What brings you to my hall?\"",
+        "dead": "Ailill lies still on the cold sand. His eyes are open, staring at the grey sky. The tide washes over his feet, and his sword — Wolf's Fang — is still clasped in his dead hand.\n\nHe does not answer. He cannot. The Wolf of the Arans is gone.",
+        "death": "Ailill lies still on the cold sand. His eyes are open, staring at the grey sky. The tide washes over his feet, and his sword — Wolf's Fang — is still clasped in his dead hand.\n\nHe does not answer. He cannot. The Wolf of the Arans is gone.",
         "father": "\"My son? Mael Duin? He's asleep by the fire. Barely a year old and already he has the grip of a warrior. He grabbed my finger today and would not let go. I told his mother: this one will be a fighter.\n\nI hope he grows up strong. I hope he grows up kind. I hope he grows up to be a better man than his father. That's all any father can wish for.\"",
         "war": "\"War? War is a young man's game, and I am no longer young. But I am still good at it. The Northern Isles sent a raiding party last month. I sent them back in pieces. They will think twice before crossing the Wolf again.\n\nBut tonight? Tonight we feast. War can wait until morning.\"",
         "wife": "\"My wife? She is the best of me. She keeps me grounded, keeps me human. Without her, I would be just another brute with a sword. With her, I am... something more.\n\nShe worries. That is her job. My job is to make sure she has nothing to worry about.\""
       },
-      "state": {}
+      "state": {},
+      "visible_if": {
+        "not_flag": "witnessed_death"
+      }
     },
     "mother": {
       "id": "mother",
       "name": "Your Mother",
       "description": "A woman with tired eyes and a gentle face. She sits by the cradle, her hand resting on it as if she is afraid to let go. She has not laughed all night. She knows something is wrong.",
       "aliases": [
-        "mother",
         "mother",
         "woman",
         "your mother",
@@ -736,7 +1471,10 @@
         "ailill": "\"He does not know when to stop. The feasting, the fighting, the laughing. He lives every day as if it is his last. And one day, it will be.\n\nI have told him a hundred times: the Northern raiders will come back. They always do. But he just laughs and says, \"Let them come. I will be waiting.\"\n\nI fear he will wait for them once too often.\"",
         "baby": "\"Mael Duin. My son. He has his father's strength but — I pray — none of his recklessness. I look at him and I see a future I will not live to witness. But that is the way of things. Mothers give birth to children who will bury them. That is the natural order.\n\nI just hope he remembers me. When I am gone. I hope he knows I loved him.\""
       },
-      "state": {}
+      "state": {},
+      "visible_if": {
+        "not_flag": "witnessed_death"
+      }
     }
   },
   "locations": {
@@ -765,8 +1503,7 @@
       "detailed_desc": "You step out of the hall and into a world that has changed.\n\nThe raiders came in the night — men from the Northern Isles, their boats painted with the skulls of their enemies. They came not for plunder, but for blood. A blood feud, older than anyone remembers, older than the stones of this island.\n\nAilill fought them on the beach, his back to the sea, Wolf's Fang singing in his hands. He took seven of them with him before they brought him down. The last raider — a grey-bearded man with one eye — drove a spear through his heart.\n\nNow Ailill lies on the strand, the tide washing his feet. His sword is still in his hand. His eyes are open, staring at the grey sky. He looks almost peaceful.\n\nA WOMAN kneels beside him — his wife, your mother. She does not weep. She is past weeping. She holds a lock of his hair in her hand.\n\nA DRUID stands nearby, holding the infant Mael Duin. The baby is crying. He doesn't know why.\n\nThe druid looks at you — through you — and speaks to the ghost you are:\n\n\"You will grow up not knowing this moment. But it will live in your blood. It will call you to the sea one day. And when it does, you will not return the same man who left.\"\n\n(Type EAST to return to the hall, or type ONWARD to move forward in time.)",
       "items": [],
       "npcs": [
-        "ailill",
-        "mother",
+        "beach_mother",
         "young_druid"
       ],
       "exits": {
@@ -838,10 +1575,8 @@
       "id": "druid_sanctuary",
       "name": "The Druid's Sanctuary",
       "description": "A hidden grove where an old druid lives. The air smells of herbs and old secrets.",
-      "detailed_desc": "You burst into the druid's grove like a storm. The old man is sitting by his fire, stirring a pot. He does not look surprised to see you.\n\n\"I was wondering when you'd come,\" he says.\n\n\"Is it true?\" You can barely speak. Your hands are shaking. \"Is Ailill Ochair Ága my father?\"\n\nThe druid is silent for a long time. Then he nods.\n\n\"Yes. Ailill was your father. And he was murdered — by raiders from the Northern Isles, men who had a blood feud with his family stretching back three generations. They came in the night, burned his hall, and killed him on the beach.\"\n\n\"Why didn't you tell me?\"\n\n\"Because I wanted you to live your own life,\" the druid says. \"Not the life of a dead man's revenge. But I see now that the sea will call you, whether I wish it or not. The blood of the Wolf runs in your veins. And wolves do not stay in their dens when there is hunting to be done.\"\n\nHe reaches into his robe and pulls out a shimmering SILKEN THREAD.\n\n\"Take this. Tie it to your mast. It will guide you through the mists. And take exactly three times nine men — no more, no less. Twenty-seven souls. Not twenty-six. Not twenty-eight. Twenty-seven.\"\n\n\"Is there anything else?\" you ask.\n\n\"Yes,\" the druid says. \"When you find the men who killed your father... you may find that killing them is not what you truly want.\"\n\nHe presses the thread into your hand. It glows faintly, warm as a living thing.",
-      "items": [
-        "magic_thread"
-      ],
+      "detailed_desc": "You burst into the druid's grove like a storm. The old man is sitting by his fire, stirring a pot. He does not look surprised to see you.\n\n\"I was wondering when you'd come,\" he says.\n\n\"Is it true?\" You can barely speak. Your hands are shaking. \"Is Ailill Ochair Ága my father?\"\n\nThe druid is silent for a long time. Then he nods.\n\n\"Yes. Ailill was your father. And he was murdered — by raiders from the Northern Isles, men who had a blood feud with his family stretching back three generations. They came in the night, burned his hall, and killed him on the beach.\"\n\n\"Why didn't you tell me?\"\n\n\"Because I wanted you to live your own life,\" the druid says. \"Not the life of a dead man's revenge. But I see now that the sea will call you, whether I wish it or not. The blood of the Wolf runs in your veins. And wolves do not stay in their dens when there is hunting to be done.\"\n\nHe reaches into his robe and pulls out a shimmering SILKEN THREAD.\n\n\"Take this. Tie it to your mast. It will guide you through the mists. And take exactly three times nine men — no more, no less. Twenty-seven souls. Not twenty-six. Not twenty-eight. Twenty-seven.\"\n\n\"Is there anything else?\" you ask.\n\n\"Yes,\" the druid says. \"When you find the men who killed your father... you may find that killing them is not what you truly want.\"\n\nHe presses the thread into your hand. It glows faintly, warm as a living thing.\n\n(The Magic Thread has been added to your inventory.)",
+      "items": [],
       "npcs": [
         "druid"
       ],
@@ -871,9 +1606,16 @@
         "west": "sea1",
         "beach": "sea1",
         "sea": "sea1",
-        "sail": "sea1"
+        "sail": "sea1",
+        "home": "home"
       },
-      "blocked": {}
+      "blocked": {
+        "west": "You need to recruit your companions first! They are waiting at the training field or feast hall.",
+        "beach": "You need to recruit your companions first! They are waiting at the training field or feast hall.",
+        "sea": "You need to recruit your companions first! They are waiting at the training field or feast hall.",
+        "sail": "You need to recruit your companions first! They are waiting at the training field or feast hall.",
+        "home": "You need to recruit your companions before you can return home. They are waiting at the training field or feast hall."
+      }
     },
     "fathers_tomb": {
       "id": "fathers_tomb",
@@ -894,8 +1636,7 @@
       "description": "Your village on the Aran Islands. The stone huts huddle against the wind, and the grey Atlantic stretches to the horizon.",
       "detailed_desc": "You stand at the edge of your village on Inishmore, the largest of the Aran Islands. The stone walls of your people's huts are worn smooth by centuries of Atlantic wind. Salt-spray hangs in the air. Somewhere, a dog barks. A child laughs.\n\nTo the west, the endless grey ocean stretches toward the edge of the known world. To the east, the fields of Ireland are a distant green smudge.\n\nYour CURRAGH — a sturdy boat of wicker and hide — is pulled up on the beach, ready to sail. It smells of fish, salt, and adventure.\n\nThe memory of your father's murder burns in your chest like a hot coal. Your hand drifts to your sword-hilt before you catch yourself.\n\nAn old DRUID sits by a fire near the village center. He is stirring a pot that smells like boiled nettles and regret.",
       "items": [
-        "crew_provisions",
-        "magic_thread"
+        "crew_provisions"
       ],
       "npcs": [
         "druid"
@@ -903,7 +1644,9 @@
       "exits": {
         "west": "sea1",
         "beach": "sea1",
-        "sea": "sea1"
+        "sea": "sea1",
+        "harbor": "village_harbor",
+        "east": "village_harbor"
       },
       "blocked": {}
     },
@@ -913,7 +1656,9 @@
       "description": "Your curragh rises and falls on the grey Atlantic. The coast of Ireland is a fading line behind you.",
       "detailed_desc": "The wind fills your square-rigged sail. Your crew of 27 men man the oars, their faces set with determination — and a hint of seasickness.\n\nThe druid's Magic Thread flutters from the mast, pulling gently to the west as if guided by an invisible hand.\n\nAhead, the sea stretches endlessly. Diurán the poet is already writing about the experience. Conganchnes the invulnerable stands at the prow, scanning for enemies. Fergus mutters to himself, counting stars he can't yet see.\n\nIslands dot the horizon in every direction. Each one promises strangeness.",
       "items": [],
-      "npcs": [],
+      "npcs": [
+        "young_diuran"
+      ],
       "exits": {
         "west": "island_ants",
         "north": "island_birds",
@@ -924,7 +1669,9 @@
         "southeast": "island_women",
         "southwest": "sea_monsters",
         "deeper": "sea2",
-        "far": "sea2"
+        "far": "sea2",
+        "treasure": "treasure_cave",
+        "dog": "island_dog"
       },
       "blocked": {}
     },
@@ -954,7 +1701,9 @@
       "items": [
         "everlasting_fruit"
       ],
-      "npcs": [],
+      "npcs": [
+        "queen_ant"
+      ],
       "exits": {
         "out": "island_ants",
         "east": "island_ants"
@@ -969,7 +1718,9 @@
       "items": [
         "speaking_feather"
       ],
-      "npcs": [],
+      "npcs": [
+        "speaking_bird"
+      ],
       "exits": {
         "south": "sea1",
         "up": "birds_nest",
@@ -982,8 +1733,13 @@
       "name": "The Ancient Bird's Perch",
       "description": "The nest of the Ancient Bird, built from silver twigs and lined with gold.",
       "detailed_desc": "The Ancient Bird fixes you with one milky eye.\n\n\"Mael Duin,\" it says. Its voice is like old parchment being folded. \"I have been expecting you. Well, not you specifically. I've been expecting someone. It's been a long time since anyone climbed up here. My legs don't work like they used to.\"\n\nIt shifts on its nest, revealing a stash of shiny objects — coins, buttons, a thimble, a bronze brooch, and what looks like a dragon's tooth.\n\n\"Take what you need,\" it says. \"I'm too old to guard treasure. I mostly just nap and complain about the weather.\"",
-      "items": [],
-      "npcs": [],
+      "items": [
+        "bronze_brooch",
+        "dragon_tooth"
+      ],
+      "npcs": [
+        "ancient_bird"
+      ],
       "exits": {
         "down": "island_birds"
       },
@@ -1023,7 +1779,7 @@
       "id": "glass_bridge",
       "name": "Island of the Glass Bridge",
       "description": "A glittering island with a bridge made entirely of crystal, leading to a palace beyond.",
-      "detailed_desc": "A palace of white marble gleams in the distance. But to reach it, you must cross a BRIDGE made entirely of transparent glass, suspended over a chasm of swirling mist.\n\nThe glass is perfectly clear. You can see straight through it to the jagged rocks below. The bridge is about a hundred feet long and looks like it was made by someone who had never heard the phrase 'safety first.'\n\nA beautiful woman stands on the far side of the bridge, beckoning.\n\n\"Cross, brave sailor. I will not let you fall.\"\n\nA single shard of glass lies at the base of the bridge, broken off from the edge.",
+      "detailed_desc": "A palace of white marble gleams in the distance. But to reach it, you must cross a BRIDGE made entirely of transparent glass, suspended over a chasm of swirling mist.\n\nThe glass is perfectly clear. You can see straight through it to the jagged rocks below. The bridge is about a hundred feet long and looks like it was made by someone who had never heard the phrase 'safety first.'\n\nA beautiful woman stands on the far side of the bridge, beckoning.\n\n\"Cross, brave sailor. I will not let you fall.\"\n\nYou notice two things that might help: a SHARD OF GLASS lies at the base of the bridge, broken off from the edge. And in your heart, you feel the HERMIT'S BLESSING could carry you across on faith alone.\n\nWithout either, the bridge is certain death.",
       "items": [
         "glass_shard"
       ],
@@ -1033,13 +1789,15 @@
         "cross": "glass_palace",
         "bridge": "glass_palace"
       },
-      "blocked": {}
+      "blocked": {
+        "cross": "the bridge is made of transparent glass over a bottomless chasm — you need the Glass Shard to test its strength or the Hermit's Blessing to cross on faith"
+      }
     },
     "glass_palace": {
       "id": "glass_palace",
       "name": "The Glass Palace",
       "description": "A palace of crystal and light. Music plays from nowhere, and the air smells of honey.",
-      "detailed_desc": "You step into a palace that seems built from frozen light. Every surface reflects a thousand colors in a thousand different ways. Music — harps and flutes — plays without any musician.\n\nA beautiful woman offers you a seat on cushions of silk. \"Stay,\" she whispers. \"Rest. You have traveled so far.\"\n\nThis place feels like a dream. It also feels like a trap. The floor is suspiciously transparent in places — you can see the chasm below. The palace isn't built on the ground; it's suspended over the void.\n\nThe woman's smile never reaches her eyes.",
+      "detailed_desc": "You step into a palace that seems built from frozen light. Every surface reflects a thousand colors in a thousand different ways. Music — harps and flutes — plays without any musician.\n\nA beautiful woman offers you a seat on cushions of silk. \"Stay,\" she whispers. \"Rest. You have traveled so far.\"\n\nThis place feels like a dream. It also feels like a trap. The floor is suspiciously transparent in places — you can see the chasm below. The palace isn't built on the ground; it's suspended over the void.\n\nThe woman's smile never reaches her eyes.\n\nA voice in your head whispers: 'Stay and you will forget your quest. Leave and you will remember.'\n\nType YES to stay (lose time, risk losing a crew member).\nType NO to leave the palace behind.",
       "items": [],
       "npcs": [],
       "exits": {
@@ -1069,7 +1827,9 @@
       "name": "Island of Women",
       "description": "An island of perpetual sunset, where beautiful women feast, dance, and sing endlessly.",
       "detailed_desc": "You step onto an island that seems untouched by time. The sun is always just setting, painting everything in gold and rose. The air is warm and smells of honey and jasmine.\n\nBeautiful women in silken gowns approach, offering trays of roasted meats, fresh bread, and honeyed wine. Music — a harp and a flute — floats on the warm air.\n\nYour crew is already drooling. Diurán is composing poetry. Conganchnes is blushing. Fergus has forgotten how to navigate.\n\nAt the center of the feast, a QUEEN sits on a throne of flowers. She smiles at you — a smile that promises everything and costs nothing.",
-      "items": [],
+      "items": [
+        "truth_ring"
+      ],
       "npcs": [
         "queen"
       ],
@@ -1098,7 +1858,9 @@
       "description": "The water has changed color — a deep, midnight blue. Strange lights flicker beneath the surface.",
       "detailed_desc": "You have sailed beyond the familiar waters into the deeper sea. The coastline of Ireland is long gone. The sky is a different shade of grey here — somehow older, more ancient, as if this sky was hung before humans learned to name things.\n\nThe druid's Magic Thread pulls steadily westward. The wind has a different voice — it whispers names you don't recognize in a language that sounds almost like Irish but isn't.\n\nFergus squints at the horizon. 'We're in uncharted waters now, Captain. The stars are different here. They have... stranger names. Also, I think that cloud just waved at me.'\n\nBioluminescent creatures drift past the boat, trailing sparks of cold fire. The water glows where your oars dip in, leaving trails of light.",
       "items": [],
-      "npcs": [],
+      "npcs": [
+        "young_fergus"
+      ],
       "exits": {
         "north": "island_culdees",
         "south": "prophecy_tower",
@@ -1107,7 +1869,14 @@
         "northwest": "island_salmon",
         "deeper": "sea3",
         "far": "sea3",
-        "back": "sea1"
+        "back": "sea1",
+        "northeast": "mill_exterior",
+        "southwest": "island_sheep",
+        "horses": "island_horses",
+        "southeast": "wall_of_water",
+        "giant": "island_giant",
+        "lion": "island_lion",
+        "anchorite": "anchorite_cave"
       },
       "blocked": {}
     },
@@ -1149,7 +1918,8 @@
       "description": "A bare rock in the middle of the ocean. A holy man stands upon it, one with the elements.",
       "detailed_desc": "You approach a solitary ROCK jutting from the sea. It is no larger than your curragh. The waves crash against it with furious regularity, yet the man standing on top does not so much as sway.\n\nUpon it stands a HERMIT, soaked by spray, lashed by wind, his eyes closed in prayer. His beard moves in the breeze like a living thing. His robes are patched in a dozen colors.\n\nAt his feet, an OTTER sits, holding a fish in its mouth. The otter looks at you with an expression that clearly says 'This is my fish. Get your own.'\n\nThe hermit opens his eyes and looks directly at you. His gaze is unsettling — it feels like he's looking through you, not at you.\n\n\"I was wondering when you'd get here,\" he says. \"The otter caught a large one today — there's enough for everyone. Sit. Eat. Tell me why you're really here.\"",
       "items": [
-        "otter_pelt"
+        "otter_pelt",
+        "hermit_blessing"
       ],
       "npcs": [
         "hermit"
@@ -1180,7 +1950,9 @@
       "name": "Island of the Wisdom Salmon",
       "description": "An island with a single stream running through it, filled with silver salmon that leap against the current.",
       "detailed_desc": "A small, green island with a crystal-clear stream running from a spring in the center to the sea.\n\nThe stream is FULL of salmon — fat, silver, magnificent fish that leap against the current with incredible determination. They move like thoughts — quick, purposeful, elusive.\n\nBut these are no ordinary salmon. When you look into their eyes, you see... understanding. They look back at you with the patient wisdom of creatures who have seen civilizations rise and fall.\n\nA small sign on the bank reads: 'He who eats of the Salmon of Wisdom gains the knowledge of all things. But catching one requires cunning, for they are wiser than any fish has a right to be.'\n\nThe salmon look at you smugly. They know you don't have a fishing rod. One of them flicks its tail and says — actually says, in a clear voice — 'Nice try, land-walker.'",
-      "items": [],
+      "items": [
+        "wisdom_salmon"
+      ],
       "npcs": [],
       "exits": {
         "southeast": "sea2"
@@ -1247,7 +2019,9 @@
       "description": "The water is black as ink. The sky swirls with colors you've never seen. The end is near.",
       "detailed_desc": "This is the edge of the known world. The sea here is dark and still — no fish, no birds, no wind. Just your breath and the creak of the curragh.\n\nThe Magic Thread glows brightly, pulling with purpose. You feel that your journey is almost at an end. The air tastes different here — older, like a room that's been sealed for centuries.\n\nDiurán has stopped writing. He stares at the horizon, pale. 'Captain... I think we're close. I can feel it in my bones. Also, my quill just wrote 'DEATH' on its own. Probably a coincidence.'\n\nIslands dot the darkness like scattered jewels. One of them must be the home of your father's killers. Or it might be another wonder. At this point, you're not sure which is which.",
       "items": [],
-      "npcs": [],
+      "npcs": [
+        "young_conganchnes"
+      ],
       "exits": {
         "north": "serpent_island",
         "east": "black_pig",
@@ -1258,7 +2032,15 @@
         "southeast": "island_trumpet",
         "southwest": "island_demons",
         "gold": "island_golden_pillar",
-        "home": "homecoming"
+        "homecoming": "homecoming_beach",
+        "home": "homecoming_beach",
+        "cat": "island_flaming_cat",
+        "oxen": "island_oxen",
+        "well": "freshwater_well",
+        "fish": "great_fish_belly",
+        "fountain": "island_fountain",
+        "silence": "island_silence",
+        "promised": "promised_land"
       },
       "blocked": {}
     },
@@ -1270,7 +2052,9 @@
       "items": [
         "antidote_herb"
       ],
-      "npcs": [],
+      "npcs": [
+        "serpent"
+      ],
       "exits": {
         "south": "sea3",
         "through": "serpent_island_center"
@@ -1301,7 +2085,9 @@
       "items": [
         "golden_apple"
       ],
-      "npcs": [],
+      "npcs": [
+        "black_pig"
+      ],
       "exits": {
         "west": "sea3"
       },
@@ -1339,6 +2125,22 @@
         "ride": "the kelpie's eyes are hypnotic — you need something to break its spell"
       }
     },
+    "water_horse_doom": {
+      "id": "water_horse_doom",
+      "name": "The Kelpie's Domain",
+      "description": "A shimmering underwater realm where the kelpie's true form flickers between horse and shadow.",
+      "detailed_desc": "You pull out the Truth Ring and hold it before the Water Horse's eyes. Its reflection in the polished silver shows the creature's true form — a shadowy, ancient spirit of the deep, its too-many teeth part of a grin that stretches into eternity.\n\n\"You carry the ring of truth,\" it hisses, its voice now a chorus of drowning whispers. \"Very well, mortal. You have seen me for what I am. I will not drag you to the depths — that pleasure belongs only to the deceived.\"\n\nThe kelpie rears back and vanishes into the sea with a splash that soaks your crew. When the spray clears, a single iridescent scale floats on the water — a token of your victory.\n\nYou take the scale. It pulses with a warm, gentle light.\n\n(+3 points. The Water Horse has been outsmarted.)",
+      "items": [
+        "kelpie_scale"
+      ],
+      "npcs": [],
+      "exits": {
+        "back": "island_water_horse",
+        "out": "island_water_horse",
+        "return": "sea3"
+      },
+      "blocked": {}
+    },
     "island_fiery_pigs": {
       "id": "island_fiery_pigs",
       "name": "Island of the Fiery Pigs",
@@ -1359,28 +2161,99 @@
       "id": "island_revolving_castle",
       "name": "Island of the Revolving Castle",
       "description": "A castle made of black stone that slowly rotates on a central axis. Its doors spin past at regular intervals.",
-      "detailed_desc": "A strange castle dominates this island — a fortress of black obsidian that turns slowly, ceaselessly, like a great stone top. It has been turning for so long that the ground around it is worn into a perfect circle.\n\nIt has four doors — each one a different color: Red, Blue, Green, and Black. As the castle revolves, each door passes a stone platform at the base, staying aligned for only a few heartbeats before continuing its rotation.\n\nThe doors are locked. Or rather... each door has a keyhole, but the key must match the moment.\n\nA stone plaque reads: 'Enter at the turning of the world. The right door at the right time. Choose poorly, and the castle will never let you go.'\n\nThe castle GRINDS as it turns. It sounds almost alive. Like a great stone beast, breathing in slow circles.",
+      "detailed_desc": "A strange castle dominates this island — a fortress of black obsidian that turns slowly, ceaselessly, like a great stone top. It has been turning for so long that the ground around it is worn into a perfect circle.\n\nIt has four doors — each one a different color: Red, Blue, Green, and Black. As the castle revolves, each door passes a stone platform at the base, staying aligned for only a few heartbeats before continuing its rotation.\n\nThe doors are locked. The keyhole on the Red Door turns restlessly, as if waiting for a matching key...\n\nA stone plaque reads: 'Enter at the turning of the world. The right door at the right time. Choose poorly, and the castle will never let you go.'\n\nThe castle GRINDS as it turns. It sounds almost alive. Like a great stone beast, breathing in slow circles.\n\nYou could try to USE the REVOLVING KEY on the DOOR, or EXAMINE the WALLS for a secret entrance, or WAIT for the right moment.",
       "items": [],
       "npcs": [],
       "exits": {
         "southeast": "sea3",
+        "enter": "castle_entrance",
+        "in": "castle_entrance"
+      },
+      "blocked": {
+        "enter": "the castle is still revolving — the doors spin past too quickly to enter",
+        "in": "the castle is still revolving — the doors spin past too quickly to enter"
+      }
+    },
+    "castle_entrance": {
+      "id": "castle_entrance",
+      "name": "The Castle Entrance",
+      "description": "A dark hallway of polished obsidian, lit by a faint red glow from a door at the far end.",
+      "detailed_desc": "You step through the entrance into a dark hallway. The walls are polished black obsidian, smooth as glass. A faint red glow emanates from a door at the far end — the Red Door, now open.\n\nThe air is still and cold. The grinding of the castle has stopped, and the silence is profound.\n\nCarved into the wall beside you, an inscription reads:\n\n'The heart of the castle beats in the Red Chamber. Enter, and claim what was left for you.'\n\nThe Red Door beckons.",
+      "items": [],
+      "npcs": [],
+      "exits": {
+        "out": "island_revolving_castle",
+        "back": "island_revolving_castle",
         "red": "castle_red",
+        "forward": "castle_red",
+        "in": "castle_red",
         "blue": "castle_blue",
         "green": "castle_green",
         "black": "castle_black"
       },
-      "blocked": {
-        "red": "the Red Door is locked — a keyhole turns restlessly",
-        "blue": "the Blue Door is sealed — no keyhole, just a smooth surface",
-        "green": "the Green Door is frozen shut",
-        "black": "the Black Door is a void — you sense nothing but emptiness beyond"
-      }
+      "blocked": {}
+    },
+    "castle_red": {
+      "id": "castle_red",
+      "name": "The Red Door — Heart of the Castle",
+      "description": "A circular chamber of black obsidian. A single shaft of red light illuminates a stone pedestal at the center.",
+      "detailed_desc": "The Red Door swings open with a groan of ancient hinges. You step into a circular chamber of polished black obsidian. The walls curve inward overhead, forming a dome. A single shaft of red light — from where, you cannot tell — illuminates a STONE PEDESTAL at the exact center of the room.\n\nOn the pedestal rests a SILVER NET, finely woven, shimmering like moonlight on water.\n\nThe castle shudders around you, as if acknowledging your presence. You have entered the heart of the turning world.",
+      "items": [
+        "silver_net"
+      ],
+      "npcs": [
+        "garbh"
+      ],
+      "exits": {
+        "out": "castle_entrance",
+        "back": "castle_entrance"
+      },
+      "blocked": {}
+    },
+    "castle_blue": {
+      "id": "castle_blue",
+      "name": "The Blue Door — Chamber of Storms",
+      "description": "A room filled with howling wind and freezing rain. The floor is slick with ice.",
+      "detailed_desc": "The Blue Door opens onto a tempest. Wind howls through the chamber, whipping rain into your face. The floor is treacherous with black ice.\n\nIn the center of the storm, barely visible through the sleet, a pedestal holds a single item: a pair of WAX EARPLUGS.\n\nThe storm is too fierce. You cannot reach it without being frozen solid. This door was not meant for you.",
+      "items": [],
+      "npcs": [],
+      "exits": {
+        "out": "castle_entrance",
+        "back": "castle_entrance"
+      },
+      "blocked": {}
+    },
+    "castle_green": {
+      "id": "castle_green",
+      "name": "The Green Door — Garden of Stone",
+      "description": "A room that was once a garden. Petrified vines hang from the ceiling like frozen snakes.",
+      "detailed_desc": "The Green Door opens onto what was once a lush garden. Everything — vines, flowers, a small fountain — has turned to grey stone. The air is dry and still.\n\nIn the center of the garden, a stone table holds a SCROLL etched in stone, but the text is too weathered to read. Whatever wisdom was here has been lost to time.\n\nThis door, too, was sealed long ago. The Green path holds nothing for you now.",
+      "items": [],
+      "npcs": [],
+      "exits": {
+        "out": "castle_entrance",
+        "back": "castle_entrance"
+      },
+      "blocked": {}
+    },
+    "castle_black": {
+      "id": "castle_black",
+      "name": "The Black Door — The Void",
+      "description": "Absolute darkness. The floor may or may not exist. You cannot tell.",
+      "detailed_desc": "You open the Black Door and step into — nothing.\n\nThere is no light. No sound. No sensation of floor beneath your feet, yet you do not fall. You simply... exist, in a space that has no dimensions.\n\nA voice — perhaps your own thoughts — whispers: 'You were not meant to enter here. The Black Door is the end of all journeys, not the middle. Go back.'\n\nYou step backward and find yourself outside again, shaken.",
+      "items": [],
+      "npcs": [],
+      "exits": {
+        "out": "castle_entrance",
+        "back": "castle_entrance"
+      },
+      "blocked": {}
     },
     "island_trumpet": {
       "id": "island_trumpet",
       "name": "Island of the Giant Trumpet",
       "description": "A barren island with a single giant brass trumpet mounted on a cliff, pointing out to sea.",
-      "detailed_desc": "This island is a bare rock with a single feature: an enormous BRASS TRUMPET, as large as a ship, mounted on a stone pedestal at the edge of a cliff.\n\nThe trumpet points out to sea. A mechanism of gears and levers connects to a set of giant leather bellows behind it. One pull of the lever would produce a sound that would carry for miles.\n\nA chilling inscription is carved into the pedestal:\n\n'One blast of this trumpet will shatter any ship within a league. The sound is the voice of the sea god's anger. Do not sound it unless you wish to drown all who hear.'\n\nBut you notice something: there is a small CLOTH stuffed into the trumpet's bell. Someone else was here before you, and they tried to muffle it. Maybe they knew something you don't.",
+      "detailed_desc": "This island is a bare rock with a single feature: an enormous BRASS TRUMPET, as large as a ship, mounted on a stone pedestal at the edge of a cliff.\n\nThe trumpet points out to sea. A mechanism of gears and levers connects to a set of giant leather bellows behind it. One pull of the lever would produce a sound that would carry for miles.\n\nA chilling inscription is carved into the pedestal:\n\n'One blast of this trumpet will shatter any ship within a league. The sound is the voice of the sea god's anger. Do not sound it unless you wish to drown all who hear.'\n\nBut you notice something: there is a small CLOTH stuffed into the trumpet's bell. Someone else was here before you, and they tried to muffle it.\n\nThere are also WAX EARPLUGS lying nearby. Whoever was here left in a hurry.\n\nWARNING: The trumpet's bellows are filling again. If you try to leave without muffling the trumpet, the blast will deafen your crew!",
       "items": [
         "earplugs",
         "trumpet_muffler"
@@ -1389,7 +2262,9 @@
       "exits": {
         "northwest": "sea3"
       },
-      "blocked": {}
+      "blocked": {
+        "northwest": "THE TRUMPET BLASTS as you try to leave! The sound is deafening! You stagger back, ears ringing. You need to muffle the trumpet first, or protect yourself with earplugs!"
+      }
     },
     "island_demons": {
       "id": "island_demons",
@@ -1423,21 +2298,394 @@
       },
       "blocked": {}
     },
-    "homecoming": {
-      "id": "homecoming",
+    "homecoming_beach": {
+      "id": "homecoming_beach",
       "name": "The Coast of Ireland — Home at Last",
-      "description": "The familiar coast of Ireland. But nothing will ever be the same.",
-      "detailed_desc": "After countless islands and wonders — after giant ants and talking cats, after laughing kings and weeping monks, after glass bridges and silver bells — your curragh finally scrapes onto a familiar shore.\n\nThis is the coast where your father was murdered. You recognize the strand, the black rocks, the twisted tree that has grown a little more twisted in your absence. The tide is coming in. It sounds different now — less like water, more like time.\n\nYour crew steps onto the sand behind you. Diurán's hand is on his sword — he's a poet, not a fighter, but he'll fight. Conganchnes stands at your shoulder, his unbreakable skin gleaming. Fergus hangs back, watching the sky for omens.\n\nAnd there — by a fire — sit three men. They are the raiders who killed Ailill Ochair Ága. They are the reason you left. The reason you crossed the edge of the world.\n\nThey see you. They reach for their weapons — old, rusted blades, not well cared for. They haven't been warriors in a long time.\n\nBut there is something in their eyes — not defiance, but weariness. They are old now. The firelight shows grey in their beards, deep lines in their faces. They look like men who have been waiting for this moment for years. Dreading it.\n\nOne of them speaks. His voice is cracked, uncertain:\n\n\"We knew you would come, son of Ailill. We have been waiting. We've been waiting for a long time.\"\n\nThe prophecy scroll whispers in your pack: 'Vengeance is a cup that empties the drinker.'\n\nThe wind carries the smell of home. Your crew stands behind you, weapons drawn.\n\nThis is the moment your voyage was meant to end. But how?",
+      "description": "The familiar grey strand where your father fell. The tide murmurs like an old storyteller.",
+      "detailed_desc": "After countless islands and wonders — after giant ants and talking cats, after laughing kings and weeping monks, after glass bridges and silver bells — your curragh finally scrapes onto a familiar shore.\n\nThis is the strand where your father was murdered. You recognise the black rocks, the twisted tree that has grown a little more twisted in your absence, the exact spot where Ailill Ochair Ága drew his last breath.\n\nThe tide is coming in. It sounds different now — less like water, more like time. Three years of voyaging, and you have returned to the same patch of sand.\n\nYour crew steps onto the beach behind you. Diurán's hand is on his sword — he's a poet, not a fighter, but he'll fight. Conganchnes stands at your shoulder, his unbreakable skin gleaming. Fergus hangs back, watching the sky for omens.\n\nAnd there — by a driftwood fire — sits someone you recognise.\n\nThe DRUID from your village. The same old man who gave you the Magic Thread and told you to take three times nine men. He is stirring a small pot, the same pot he was stirring three years ago, as if no time has passed at all.",
+      "items": [],
+      "npcs": [],
+      "exits": {
+        "up": "homecoming_hill",
+        "hill": "homecoming_hill",
+        "inland": "homecoming_hill",
+        "north": "homecoming_hill"
+      },
+      "blocked": {}
+    },
+    "homecoming_hill": {
+      "id": "homecoming_hill",
+      "name": "The Hill of Ailill Ochair Ága",
+      "description": "A windswept hill overlooking the Aran Islands. A cairn of grey stones marks where the Wolf fell.",
+      "detailed_desc": "You climb the hill above the strand, following the path your father walked a thousand times before. The wind is stronger up here — it whips your hair and tugs at your cloak.\n\nAt the summit stands a CAIRN of grey stones, each one stacked with care. This is where your father's body was laid to rest. The stones are weathered now — three years of Atlantic wind and rain have softened their edges, but the cairn stands firm.\n\nFrom here you can see the whole island: the stone huts of your village, the grey thread of the road, the endless sea that carried you to the edge of the world and brought you back.\n\nA small offering lies at the base of the cairn: a few wildflowers, a crust of bread, a half-full cup of mead. Someone still remembers.",
+      "items": [],
+      "npcs": [],
+      "exits": {
+        "down": "homecoming_beach",
+        "back": "homecoming_beach",
+        "beach": "homecoming_beach",
+        "south": "homecoming_beach",
+        "east": "homecoming_choice",
+        "forward": "homecoming_choice",
+        "onward": "homecoming_choice"
+      },
+      "blocked": {}
+    },
+    "homecoming_choice": {
+      "id": "homecoming_choice",
+      "name": "The Point of Decision",
+      "description": "A rocky promontory overlooking the sea. This is where it ends.",
+      "detailed_desc": "You walk the narrow path to the edge of the cliff. The sea crashes below, the same sea that carried you to thirty islands and thirty wonders.\n\nAhead, the sun is setting over the Atlantic — gold and crimson bleeding into the water like a wound, like a blessing, like the end of a story.",
+      "items": [],
+      "npcs": [],
+      "exits": {
+        "back": "homecoming_hill",
+        "west": "homecoming_hill",
+        "down": "homecoming_beach"
+      },
+      "blocked": {}
+    },
+    "mill_exterior": {
+      "id": "mill_exterior",
+      "name": "The Mill of the Sea — Exterior",
+      "description": "A towering mill of black stone stands on a cliff, its great wheel dipping into the sea and churning the water into foam.",
+      "detailed_desc": "A massive MILL of black stone dominates this island. It stands on a cliff at the edge of the sea, and its great wheel — as wide as your entire curragh — dips into the water, churning the sea into white foam. The grinding noise is immense — a deep, rhythmic GRIND-GRIND-GRIND that you feel in your teeth.\n\nThe sea around the island is violent — whirlpools form and dissolve where the wheel churns. The water looks milk-white from the constant grinding.\n\nAn old man shuffles near the entrance to the mill, muttering to himself. He does not seem to have noticed you yet.\n\nA stone archway leads INTO the mill proper. The grinding is louder from inside.",
+      "items": [],
+      "npcs": [
+        "mill_guardian"
+      ],
+      "exits": {
+        "in": "mill_interior",
+        "enter": "mill_interior",
+        "southwest": "sea2",
+        "back": "sea2"
+      },
+      "blocked": {}
+    },
+    "mill_interior": {
+      "id": "mill_interior",
+      "name": "The Mill of the Sea — Grinding Chamber",
+      "description": "Inside the mill. Great bronze gears the size of houses turn slowly, meshing with crushing force. The floor vibrates.",
+      "detailed_desc": "You step inside the mill, and the noise doubles. Great GEARS of bronze and iron turn in the dim light — each one the size of a house, meshing with a force that could crush stone to powder.\n\nIn the center of the chamber, a massive MILLSTONE — a wheel of black granite taller than three men — grinds against a stone base. Between them, seawater pours in and emerges as... nothing. It simply disappears, ground into the fabric of reality.\n\nA fragment of the millstone lies on the floor — broken off, perhaps by a previous visitor who tried and failed to stop the mill. It is HEAVY.\n\nThe gears turn with terrible purpose. If you could jam something into them — something heavy and strong — you might stop the wheel. The old guardian said you can only 'feed' the mill. Perhaps that is the answer: give it something heavy enough to choke on.",
+      "items": [
+        "millstone_fragment"
+      ],
+      "npcs": [],
+      "exits": {
+        "out": "mill_exterior",
+        "back": "mill_exterior"
+      },
+      "blocked": {}
+    },
+    "island_sheep": {
+      "id": "island_sheep",
+      "name": "Island of Black & White Sheep",
+      "description": "An island split down the middle — a field of black grass on one side, white grass on the other. Sheep cross between them and change color as they walk.",
+      "detailed_desc": "This island is divided into two perfect halves.\n\nTo the left, a field of BLACK grass, so dark it seems to drink the light. White sheep graze there, but as you watch, one crosses the invisible boundary — and the moment it steps onto the black grass, its fleece turns BLACK. It continues grazing, apparently unconcerned by its transformation.\n\nTo the right, a field of WHITE grass, so pale it glows faintly. Black sheep graze there, turning white the moment they cross over.\n\nA narrow path runs between the two fields, bordered by neither black nor white grass — a grey ribbon of packed earth. At the far end stands a figure in a tattered cloak, watching you.\n\nAcross both fields, a GHOSTLY SHEPHERD walks slowly, his crook trailing through the grass. He leaves no footprints.",
+      "items": [],
+      "npcs": [
+        "ghostly_shepherd"
+      ],
+      "exits": {
+        "northeast": "sea2",
+        "back": "sea2"
+      },
+      "blocked": {
+        "northeast": "The sheep have blocked the path! A wall of black and white wool surges across the trail. The shepherd's riddle echoes in your mind: 'Neither black nor white, yet containing both.'"
+      }
+    },
+    "sheep_pasture": {
+      "id": "sheep_pasture",
+      "name": "The Shepherd's Pasture",
+      "description": "A quiet pasture at the far end of the grey path, where a single fleece hangs on a wooden post.",
+      "detailed_desc": "The grey path opens into a small, peaceful pasture. The shepherd's crook stands planted in the ground, and hanging from it is a FLEECE — shimmering, shifting between black and white as you look at it.\n\nThe ghostly shepherd sits on a grey stone, watching you with twilight eyes.\n\n'You answered the riddle,' he says softly. 'The fleece is yours. It is neither black nor white — it is both. It is the space between. Wear it well, traveler, and remember: the truest path is never one thing or the other, but the grey road between extremes.'\n\nThe sheep have parted to let you pass. The way back to the sea is clear.",
+      "items": [
+        "fleece_of_change"
+      ],
+      "npcs": [
+        "ghostly_shepherd"
+      ],
+      "exits": {
+        "back": "island_sheep",
+        "northeast": "sea2"
+      },
+      "blocked": {}
+    },
+    "island_horses": {
+      "id": "island_horses",
+      "name": "Island of Giant Horses",
+      "description": "A wide, grassy island where horses the size of war elephants gallop across the plains, their hooves shaking the earth.",
+      "detailed_desc": "This is an island of grass and thunder.\n\nHERDS of GIANT HORSES gallop across the plains — each one the size of a small house, their manes streaming like banners, their hooves striking the earth with the force of falling trees. The ground trembles constantly.\n\nAt the center of the herd stands the STALLION KING — a magnificent white horse larger than all the others, his mane flowing like sea-foam, his eyes burning with wild intelligence. He watches you with the unmistakable expression of a king who does not suffer fools.\n\nThe herd mills around him, snorting and stamping. They do not attack — yet. But they make it clear: you are not welcome here unless you prove yourself.",
+      "items": [
+        "horsehair_bridle"
+      ],
+      "npcs": [
+        "stallion_king"
+      ],
+      "exits": {
+        "southeast": "sea2",
+        "back": "sea2"
+      },
+      "blocked": {
+        "southeast": "The herd encircles you! The Stallion King snorts a warning. You must calm the horses or fight them before you can leave."
+      }
+    },
+    "island_flaming_cat": {
+      "id": "island_flaming_cat",
+      "name": "Island of the Flaming Cat",
+      "description": "A small, warm island dominated by a single pedestal of black stone. A golden crystal rests atop it, pulsing with inner light.",
+      "detailed_desc": "This island is small — barely more than a large rock jutting from the sea. But it is unnaturally warm, as if heated from below. The air shimmers with heat haze.\n\nAt the center stands a PEDESTAL of black obsidian, carved with images of cats in various stages of growth — from tiny kittens to enormous, flame-wreathed beasts.\n\nOn top of the pedestal rests a SUNSTONE — a golden crystal that pulses with captured sunlight, casting warm, dancing beams across the island.\n\nA LITTLE CAT sits at the base of the pedestal — a tiny, rust-colored kitten with emerald eyes. It purrs and rubs against the stone, gazing up at the crystal with obvious adoration.\n\nWhen you approach, it looks up at you and mews. It seems to be saying: 'This is mine. But maybe — just maybe — we can come to an arrangement.'",
+      "items": [
+        "sunstone"
+      ],
+      "npcs": [
+        "little_cat"
+      ],
+      "exits": {
+        "west": "sea3",
+        "back": "sea3"
+      },
+      "blocked": {}
+    },
+    "wall_of_water": {
+      "id": "wall_of_water",
+      "name": "The Wall of Water",
+      "description": "A towering wall of water rises before your ship, impossibly high, stretching from the seafloor to the clouds.",
+      "detailed_desc": "A WALL OF WATER rises before you — a vertical ocean, stretching from the depths below to the heavens above. It is translucent, greenish, moving with a slow, powerful current that defies all nature.\n\nThe wall hums — a deep, resonant sound like a mountain singing. Your curragh rocks in the turbulence at its base. Spray drenches you.\n\nFergus stares, his face pale. 'Captain... I have never seen anything like this. It is a boundary. The sea itself has become a wall. We cannot sail through — it would crush us. But we cannot sail around it either. It stretches as far as I can see.'\n\nThere must be a way to calm the waters. The Magic Thread on your mast... the Silver Bell... something that can speak to the sea's anger.",
+      "items": [],
+      "npcs": [],
+      "exits": {
+        "northwest": "sea2",
+        "back": "sea2",
+        "through": "sea3"
+      },
+      "blocked": {
+        "northwest": "The wall of water thunders before you. You cannot leave until you find a way through.",
+        "through": "A towering wall of water blocks your path. You must calm the waters before you can pass through."
+      }
+    },
+    "island_oxen": {
+      "id": "island_oxen",
+      "name": "Island of the Sacred Oxen",
+      "description": "A green, misty island where two massive white oxen with golden horns stand motionless, watching the sea.",
+      "detailed_desc": "A green island, covered in mist that glows with a pale, golden light. The grass is thick and soft — it feels like walking on clouds.\n\nTwo SACRED OXEN stand in the center of the island — magnificent white beasts with horns of pure gold. They are as still as statues, their breath forming clouds in the cool air. Their eyes are deep, dark pools — ancient, patient, knowing.\n\nThey do not move as you approach. But they WATCH you.\n\nOne of them lowers its massive head, presenting its golden horn as if offering it. Or perhaps it is a challenge. The meaning is unclear.\n\nThe smaller ox lows softly — a sound like a distant thunder, mournful and beautiful.",
+      "items": [],
+      "npcs": [
+        "sacred_oxen"
+      ],
+      "exits": {
+        "north": "sea3",
+        "back": "sea3"
+      },
+      "blocked": {}
+    },
+    "oxen_glade": {
+      "id": "oxen_glade",
+      "name": "The Oxen's Glade",
+      "description": "A peaceful glade where the sacred oxen have made their home for centuries. The grass here glows faintly with a golden light.",
+      "detailed_desc": "You step into the sacred glade, and the mist parts around you like a curtain.\n\nThe oxen stand at the center, their golden horns casting warm light in all directions. The grass beneath your feet glows faintly, as if infused with gold dust.\n\nThe larger ox lowers its head and gently places its golden horn at your feet. It steps back and lows softly — a sound of peace, of offering.\n\n'Take it,' a voice seems to say — not in words, but in understanding. 'Take what you need, and go in peace. We have guarded this island long enough. Perhaps it is time for the horn to see the world beyond the mist.'\n\nThe smaller ox nuzzles your hand. Its breath is warm and smells of hay and ancient sunlight.",
+      "items": [
+        "golden_horn"
+      ],
+      "npcs": [
+        "sacred_oxen"
+      ],
+      "exits": {
+        "out": "island_oxen",
+        "back": "island_oxen"
+      },
+      "blocked": {}
+    },
+    "freshwater_well": {
+      "id": "freshwater_well",
+      "name": "The Strand of the Freshwater Well",
+      "description": "A sandy beach on the edge of a dark sea. A single well of white stone stands at the high-tide mark, shimmering with otherworldly light.",
+      "detailed_desc": "A strand of pale sand curves along the edge of a dark sea. The waves here are gentle — they lap at the shore like a tired animal, making soft, hushing sounds.\n\nAt the high-tide mark, a WELL of white stone rises from the sand. It is ancient — the stone is worn smooth by centuries of wind and salt.\n\nInside the well, WATER shimmers — not reflecting the grey sky above, but glowing with its own silvery light. It is the clearest water you have ever seen, and looking into it, you see not your reflection, but... something else. A path. A door. A truth you have not yet faced.\n\nA small cup of horn hangs from a peg on the well's rim, as if waiting for visitors.\n\nAn inscription is carved around the well's rim:\n\n'Drink and see what is hidden. Take and carry the light. But know this: the water shows only truth, and truth is not always kind.'",
+      "items": [
+        "water_of_vision"
+      ],
+      "npcs": [],
+      "exits": {
+        "east": "sea3",
+        "back": "sea3"
+      },
+      "blocked": {}
+    },
+    "great_fish_belly": {
+      "id": "great_fish_belly",
+      "name": "The Great Fish — Belly of the Beast",
+      "description": "You are inside the belly of a fish the size of a cathedral. The walls pulse wetly. It is dark, hot, and the air smells of brine and bile.",
+      "detailed_desc": "Darkness. Warmth. A wet, rhythmic pulse all around you.\\\n\\\nYou are INSIDE something. Something alive.\\\n\\\nThe walls are slick and pink, flexing with each slow contraction. The floor — if it can be called a floor — is spongy and uneven, slick with half-digested seawater. The air is thick and warm, and you taste salt and iron on your tongue.\\\n\\\nYour curragh is intact — the fish swallowed your boat whole, and now you drift in this fleshy chamber, surrounded by the slow, terrible digestion of the deep.\\\n\\\nThere are no exits. No doors. No light.\\\n\\\nBut the walls... they are thin in places. Thin enough to cut through. Thin enough to BURN through. If you have something sharp, or something that burns, you might be able to cut your way out.",
       "items": [],
       "npcs": [],
       "exits": {},
       "blocked": {}
+    },
+    "great_fish_carcass": {
+      "id": "great_fish_carcass",
+      "name": "The Great Fish — Carcass",
+      "description": "The fish floats lifeless on the surface, a gaping wound in its side. Your boat drifts nearby.",
+      "detailed_desc": "The Great Fish floats belly-up on the dark water. It is enormous — the size of a small island. Its scales are the color of storm clouds, and its dead eye stares at nothing.\\\n\\\nYou clamber out through the wound you made, gasping for clean air. Your crew follows, coughing and cheering.\\\n\\\nFergus kneels on the fish's belly. 'I'm never eating fish again. Never. Not even on Fridays.'\\\n\\\nBetween the fish's gaping jaws, you spot something gleaming — a single massive tooth, broken off during the swallowing. It is serrated, curved, and as long as your forearm. It could be a weapon. A reminder. Both.\\\n\\\nTake the FISH TOOTH before you go.",
+      "items": [
+        "fish_tooth"
+      ],
+      "npcs": [],
+      "exits": {
+        "out": "sea3",
+        "back": "sea3"
+      },
+      "blocked": {}
+    },
+    "island_fountain": {
+      "id": "island_fountain",
+      "name": "Island of the Fountain",
+      "description": "A small, green island with a single white stone fountain at its center. The water glows with a pale, milky luminescence.",
+      "detailed_desc": "This island is a perfect circle of green grass, no larger than a village green. At its center stands a FOUNTAIN of white stone, ancient and weather-worn, carved with spirals and knotwork that seem to shift when you look at them sideways.\\\n\\\nWater flows from the fountain — not clear, but MILK-WHITE, shimmering with an inner light. It pools in a basin below and overflows into a channel that feeds the grass.\\\n\\\nAn inscription circles the basin, worn but legible:\\\n\\\n    'Drink and you shall dream.\\\n     Take and you shall carry.\\\n     Give and you shall heal.'\\\n\\\nThe water smells faintly of honey and fresh cream. It looks drinkable. It looks like it might do something.",
+      "items": [
+        "fountain_water"
+      ],
+      "npcs": [],
+      "exits": {
+        "back": "sea3",
+        "east": "sea3"
+      },
+      "blocked": {}
+    },
+    "island_silence": {
+      "id": "island_silence",
+      "name": "Island of Silenced Music",
+      "description": "A beautiful valley where everything is muted. The birds open their beaks but no sound comes out. The wind blows but does not rustle the leaves.",
+      "detailed_desc": "This valley should be full of sound — birds singing, wind rustling through the leaves, a stream chattering over stones. But there is NOTHING.\\\n\\\nThe silence is so complete you can hear your own blood moving through your veins. You can hear your eyelids blinking. The absence of noise is a physical weight.\\\n\\\nThe valley is beautiful — green grass, flowering trees, a crystal stream — but it is a beauty that has been frozen, mummified, preserved in silence.\\\n\\\nAt the far end of the valley, on a throne of grey stone, sits a figure draped in flowing grey robes. It does not move. It does not breathe. But you know it is waiting.\\\n\\\nAn iron bell hangs from a branch of a dead tree nearby. When you look at it, you feel an overwhelming urge to ring it — but also a deep, primal fear of what might happen if you do.\\\n\\\nThe silence here is not natural. It is enforced. By something. Or someone.",
+      "items": [],
+      "npcs": [
+        "silence_guardian"
+      ],
+      "exits": {
+        "back": "sea3",
+        "west": "sea3",
+        "grove": "silence_grove",
+        "deeper": "silence_grove",
+        "in": "silence_grove"
+      },
+      "blocked": {}
+    },
+    "silence_grove": {
+      "id": "silence_grove",
+      "name": "The Silent Grove",
+      "description": "A small grove of silver-leaved trees surrounding a white clearing. The Silent Bell hangs on a branch, utterly still.",
+      "detailed_desc": "Beyond the valley, hidden behind a curtain of silver-leaved willows, you find a small clearing. The grass here is soft and white, like moonlit snow.\\\n\\\nAt the center of the clearing, a single dead tree stands. Hanging from its lowest branch is an iron BELL — cold, black, and silent. It does not move, even though there is no wind.\\\n\\\nThe grey figure does not follow you here. For now, you are alone with the bell.\\\n\\\nYou can TAKE the Silent Bell. It makes no sound when you touch it.",
+      "items": [
+        "silent_bell"
+      ],
+      "npcs": [],
+      "exits": {
+        "back": "island_silence",
+        "out": "island_silence"
+      },
+      "blocked": {}
+    },
+    "promised_land": {
+      "id": "promised_land",
+      "name": "The Promised Land",
+      "description": "A land of impossible beauty — golden fruit hangs from silver trees, rivers of wine flow through meadows of eternal spring, and the air smells of home.",
+      "detailed_desc": "This is the island at the end of the world.\\\n\\\nIt is everything you have ever wanted. The sky is the perfect blue of a summer afternoon that never fades. The trees bear fruit of pure gold and silver. Rivers of wine and honey wind through meadows of flowers that bloom in colours you have never seen.\\\n\\\nThe air is warm and gentle. The grass is soft as silk. In the distance, you can see white buildings of marble and crystal — a city that gleams like a promise.\\\n\\\nYour crew stands frozen, tears streaming down their faces. Diurán whispers: 'This is it, Captain. This is what the poets sing about. This is the Land of Promise.'\\\n\\\nA figure approaches — a luminous being in white robes, its face radiating infinite kindness and peace.\\\n\\\nIt opens its arms and speaks:\\\n\\\n'Welcome, Mael Duin. Welcome home. You have crossed the edges of the world, braved monsters and wonders, and now you stand at the threshold of the Land of Promise. Here there is no pain, no sorrow, no death. Stay with us forever. All you have to do is say yes.'\\\n\\\nThe offer hangs in the air. It is the most tempting thing you have ever heard.\\\n\\\nBut somewhere — far away, across the sea — there is a small grey island where a woman waits. And a child who grew up without a father. And a story that is not yet finished.",
+      "items": [],
+      "npcs": [
+        "guardian_of_peace"
+      ],
+      "exits": {
+        "back": "sea3",
+        "return": "sea3"
+      },
+      "blocked": {}
+    },
+    "island_giant": {
+      "id": "island_giant",
+      "name": "Island of the Giant Killer",
+      "description": "A rocky island dominated by a high cliff. A monstrous giant perches on top, silhouetted against the grey sky, a pile of stones beside him.",
+      "detailed_desc": "This island is little more than a jagged rock jutting from the sea — a single, steep-sided CLIFF that rises a hundred feet above the waves. The rock is dark basalt, streaked with white where seabirds have nested for centuries.\n\nAt the top of the cliff, silhouetted against the grey sky, stands the GIANT. He is massive — twenty feet of crude muscle and malice — and beside him lies a pile of stones, each one large enough to crush a man. His shadow falls across the water like a stain.\n\nThe only way to approach is by sea, and the giant has already seen you. His arm draws back. A stone is coming.\n\nThe shore is rocky but passable. A narrow path leads to the base of the cliff.",
+      "items": [],
+      "npcs": [
+        "giant"
+      ],
+      "exits": {
+        "back": "sea2",
+        "sea": "sea2",
+        "southwest": "sea2"
+      },
+      "blocked": {}
+    },
+    "treasure_cave": {
+      "id": "treasure_cave",
+      "name": "Island of the Treasure",
+      "description": "A small, barren island with a single dark cave at its center. The mouth is blocked by a massive serpent coiled in the shadows.",
+      "detailed_desc": "A small, barren island of grey stone and sparse grass. Nothing grows here — the soil is too thin, the wind too harsh.\n\nAt the center of the island, a CAVE mouth yawns in the rock. It is dark inside, but you can see a faint golden glow emanating from the depths — the glint of ancient treasure.\n\nCoiled before the cave entrance is a massive SERPENT, its scales shimmering with a deep, oily green. It is the size of a small ship, and its body completely blocks the way in. Its eyes — vertical slits of gold — open and fix on you with ancient hunger.\n\nIt hisses, tasting the air. It knows what you want. It knows you will have to go through it.",
+      "items": [],
+      "npcs": [
+        "treasure_serpent"
+      ],
+      "exits": {
+        "back": "sea1",
+        "sea": "sea1",
+        "northwest": "sea1",
+        "in": "treasure_cave",
+        "enter": "treasure_cave"
+      },
+      "blocked": {
+        "in": "The serpent blocks the cave entrance with its massive body. You must deal with it first — FIGHT it, GIVE it the Antidote Herb, or BRIBE it with treasure.",
+        "enter": "The serpent blocks the cave entrance with its massive body. You must deal with it first."
+      }
+    },
+    "island_dog": {
+      "id": "island_dog",
+      "name": "Island of the Dog",
+      "description": "A grassy mound rises from the sea. At its summit, a stone pedestal holds a gleaming silver torc. A massive hound lies beside it, ever watchful.",
+      "detailed_desc": "A gentle, grassy island — a single green mound rising from the grey sea like the back of a sleeping whale. The grass is soft and thick, and wildflowers grow in scattered patches.\n\nAt the summit of the mound stands a stone PEDESTAL, ancient and weathered. Upon it rests a SILVER TORC — a beautiful neck-ring of woven silver wire, gleaming with the light of a thousand years. It is clearly a masterwork of ancient craftsmanship.\n\nBefore the pedestal, curled like a guard who has never abandoned his post, lies a GREAT HOUND the size of a small horse. Its coat is iron-grey, and its eyes glow like banked embers. It watches you approach with the patient stillness of a creature that has waited centuries.\n\nIt does not attack. Not yet. But it makes it clear: the torc is not yours to take lightly.",
+      "items": [
+        "silver_torc"
+      ],
+      "npcs": [
+        "great_hound"
+      ],
+      "exits": {
+        "back": "sea1",
+        "sea": "sea1",
+        "northeast": "sea1"
+      },
+      "blocked": {}
+    },
+    "island_lion": {
+      "id": "island_lion",
+      "name": "Island of the Lion",
+      "description": "A scrub-covered island with a large cave at its center. A mountain lion crouches before it, wounded and furious.",
+      "detailed_desc": "A harsh island of scrub brush and sharp rocks. The wind whistles through the thorny bushes, creating an eerie, keening sound.\n\nAt the center of the island, a wide CAVE mouth opens into the hillside. Before it, crouched in a posture of pure aggression, is a MOUNTAIN LION. Its coat is the colour of dried grass, and its muscles ripple beneath the skin with coiled power.\n\nBut you notice something — a deep GASH along its flank, weeping and infected. The beast is in agony, and its fury is born of pain. Its roars are as much anguish as anger.\n\nYou could FIGHT it (with Magic Harpoon or Giant's Club), USE the Silver Bell to calm it, or TALK to it with the Speaking Feather to learn of its wound.",
+      "items": [],
+      "npcs": [
+        "mountain_lion"
+      ],
+      "exits": {
+        "back": "sea2",
+        "sea": "sea2",
+        "south": "sea2"
+      },
+      "blocked": {}
+    },
+    "anchorite_cave": {
+      "id": "anchorite_cave",
+      "name": "The Anchorite's Cave",
+      "description": "A small cave on a lonely rock, just large enough for one man to shelter. A single candle burns within, casting a warm, steady light.",
+      "detailed_desc": "A solitary rock rises from the sea — barely large enough to be called an island. On it, a small CAVE has been worn into the stone by wind and wave. Inside, a single CANDLE burns with a flame that does not flicker, though the wind howls outside.\n\nSitting cross-legged at the mouth of the cave is a man in a simple grey robe. His face is weathered by decades of salt spray and contemplation. His eyes are calm — the calm of someone who has stopped running. Beside him, a small wooden cross rests on a stone.\n\nHe looks up as you approach, and smiles — a warm, genuine smile that makes the grey day feel brighter. The sea around the rock is unusually calm, as if the water itself respects his peace.\n\nThere is nothing to take here. No treasure. No puzzle. Only a man who has been waiting to speak with you.",
+      "items": [],
+      "npcs": [
+        "anchorite"
+      ],
+      "exits": {
+        "back": "sea2",
+        "sea": "sea2",
+        "east": "sea2"
+      },
+      "blocked": {}
     }
   },
-  "crew": [],
-  "crew_templates": {
-    "diuran": {"id": "diuran", "name": "Diurán", "description": "The poet and scribe, always ready with a verse.", "role": "poet"},
-    "conganchnes": {"id": "conganchnes", "name": "Conganchnes", "description": "A warrior whose skin cannot be wounded. Terrifying in battle.", "role": "champion"},
-    "fergus": {"id": "fergus", "name": "Fergus", "description": "The navigator, who can read the stars and the waves.", "role": "navigator"}
-  }
+  "crew": []
 }

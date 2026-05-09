@@ -21,11 +21,27 @@ def serialize_item(item):
         "use_text": item.use_text if isinstance(item.use_text, str) else None,
     }
 
+# Known visibility conditions for key NPCs (matching the Python visible_if lambdas)
+# These are derived from the _shared.py definitions and engine added_later patches
+KNOWN_VISIBLE_IF = {
+    "ailill": {"not_flag": "witnessed_death"},
+    "mother": {"not_flag": "witnessed_death"},
+    "beach_mother": {"flag": "witnessed_death"},
+    "young_conganchnes": {"not_flag": "recruited_young_conganchnes"},
+    "young_fergus": {"not_flag": "recruited_young_fergus"},
+    "young_diuran": {"not_flag": "recruited_young_diuran"},
+    "giant": {"not_any": ["giant_defeated", "giant_mollified"]},
+    "treasure_serpent": {"not_flag": "serpent_passed"},
+    "great_hound": {"not_flag": "dog_pacified"},
+    "mountain_lion": {"not_any": ["lion_fought", "lion_pacified"]},
+    "black_pig": {"not_flag": "pig_pacified"},
+    "serpent": {"not_flag": "serpent_calmed"},
+}
+
 def serialize_npc(npc):
     dialogue = {}
     for key, val in npc.dialogue.items():
         if key == "on_take":
-            # Can't serialize lambdas; store the item IDs
             if isinstance(val, dict):
                 dialogue[key] = {k: True for k in val.keys()}
         elif isinstance(val, str):
@@ -39,6 +55,7 @@ def serialize_npc(npc):
         "aliases": npc.aliases,
         "dialogue": dialogue,
         "state": npc.state,
+        "visible_if": KNOWN_VISIBLE_IF.get(npc.id),
     }
 
 def serialize_location(loc_id, loc):
