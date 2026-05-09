@@ -166,7 +166,7 @@ def register(items, npcs):
             "Or someone."
         ),
         items=[],
-        npcs=[],
+        npcs=[npcs["silence_guardian"]],
         exits={"back": "sea3", "west": "sea3", "grove": "silence_grove", "deeper": "silence_grove", "in": "silence_grove"},
         ambient=lambda s: (
             "The silence presses in. You can hear your own heartbeat. Your own breath. "

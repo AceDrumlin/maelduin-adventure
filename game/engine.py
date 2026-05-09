@@ -438,6 +438,9 @@ def handle_talk(state, npc_name, topic=None):
             state.set_flag("queen_choice_offered")
             state.awaiting_choice = "queen_stay"
             result += "\n\n(Type YES to stay. Type NO to resist and leave.)"
+        # Don't re-offer the choice if already decided
+        elif npc.id == "queen" and state.has_flag("queen_choice_offered"):
+            pass  # Return the normal greeting without the choice prompt
 
         return result
     return f"{npc.name} looks at you but says nothing."
@@ -610,8 +613,12 @@ def handle_restart(state, args):
 def handle_sail(state, args):
     """Special handler for sailing between islands."""
     loc = state.get_location()
-    if not loc or loc.id == "home":
-        return "You are on land. You need to be at sea or on the shore to sail."
+    if not loc:
+        return "You are lost. You cannot sail from here."
+
+    # Already at sea — sailing is just looking around
+    if loc.id in ("sea1", "sea2", "sea3"):
+        return "You are already at sea. Try a direction (north/south/east/west) to reach an island."
 
     # Try to find any exit that leads back to sea
     for direction, target in loc.exits.items():
@@ -814,7 +821,7 @@ def handle_sing(state, args):
 
     # Check if Diuran is here or at sea
     loc = state.get_location()
-    if loc and loc.id == "sea1":
+    if loc and loc.id in ("sea1", "sea2", "sea3"):
         return (
             f'You belt out a shanty: "{args}"\n\n'
             "Your crew joins in, their rough voices carrying across the waves. "

@@ -28,6 +28,11 @@ def load_shared():
                 'The tide washes over his feet, and his sword — Wolf\'s Fang — is still clasped in his dead hand.\n\n'
                 'He does not answer. He cannot. The Wolf of the Arans is gone.'
             ),
+            "death": (
+                'Ailill lies still on the cold sand. His eyes are open, staring at the grey sky. '
+                'The tide washes over his feet, and his sword — Wolf\'s Fang — is still clasped in his dead hand.\n\n'
+                'He does not answer. He cannot. The Wolf of the Arans is gone.'
+            ),
             "father": (
                 '"My son? Mael Duin? He\'s asleep by the fire. Barely a year old and already '
                 'he has the grip of a warrior. He grabbed my finger today and would not let go. '
