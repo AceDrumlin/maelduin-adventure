@@ -1316,6 +1316,33 @@ def _topic_response_for_npc(npc_id, topic):
         topic_category = "treasure"
     elif topic_lower in ("story", "tale", "legend", "myth"):
         topic_category = "story"
+    elif topic_lower in ("quest", "mission", "purpose", "task"):
+        topic_category = "quest"
+    elif topic_lower in ("crew", "companion", "friend", "shipmate"):
+        topic_category = "crew"
+    elif topic_lower in ("war", "battle", "fight", "combat", "conflict"):
+        topic_category = "war"
+    elif topic_lower in ("wife", "husband", "spouse", "bride"):
+        topic_category = "wife"
+    elif topic_lower in ("baby", "child", "infant", "son", "daughter"):
+        topic_category = "baby"
+    elif topic_lower in ("islands", "island", "shore", "land"):
+        topic_category = "islands"
+    elif topic_lower in ("navigation", "steer", "rudder", "star", "direction"):
+        topic_category = "navigation"
+    elif topic_lower in ("fight", "duel", "strike", "attack", "defend"):
+        topic_category = "fight"
+    elif topic_lower in ("give", "gift", "offering", "donation"):
+        topic_category = "give"
+    elif topic_lower in ("talk", "speak", "converse", "chat", "discuss"):
+        topic_category = "talk"
+    elif topic_lower in ("calm", "peace", "stillness", "quiet", "silence"):
+        topic_category = "calm"
+    elif topic_lower in ("ring", "circle", "band", "token"):
+        topic_category = "ring"
+    elif topic_lower in ("apology", "sorry", "regret", "remorse", "penitence"):
+        topic_category = "apology"
+
 
     # Check NPC-specific topic overrides
     npc_pers = _npc_personality(npc_id)
@@ -1474,6 +1501,61 @@ for npc_id in WISE_NPCS:
         '"Love and wisdom are the same thing, seen from different angles."',
     ])
 
+
+    _TOPIC_FALLBACKS[(npc_id, "quest")] = lambda: _r([
+        '"Every quest is a story waiting to be told. What is yours?"',
+        '"A quest without hardship is just a walk. But every walk teaches something."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "crew")] = lambda: _r([
+        '"Your crew is your strength. A lone sailor is a drowned sailor."',
+        '"Good companions are rarer than gold. Treasure them."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "war")] = lambda: _r([
+        '"War is the failure of words. But sometimes words fail first."',
+        '"I have seen war. It leaves scars that no amount of time can heal."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "wife")] = lambda: _r([
+        '"A good wife is like a steady shore. She waits, but she also guides you home."',
+        '"Marriage is a voyage in itself. Longer and harder than any sea crossing."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "baby")] = lambda: _r([
+        '"A child is hope made flesh. The future walking on unsteady legs."',
+        '"Babies know nothing and everything. They are the wisest of us all."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "islands")] = lambda: _r([
+        '"Every island is a world unto itself. Some are friendly, some are not."',
+        '"The islands hold secrets older than any man or god."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "navigation")] = lambda: _r([
+        '"Navigate by the stars, but do not forget to look at the waves."',
+        '"The best navigators trust the sea as much as the sky."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "fight")] = lambda: _r([
+        '"A wise man wins without fighting. But if you must fight, fight wisely."',
+        '"The best fights are the ones you walk away from."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "give")] = lambda: _r([
+        '"Giving is not losing. It is planting seeds for a future harvest."',
+        '"A gift given freely returns tenfold. A gift given grudgingly returns nothing."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "talk")] = lambda: _r([
+        '"Talking is the bridge between souls. Build it carefully."',
+        '"Words are like arrows. Once released, they cannot be called back."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "calm")] = lambda: _r([
+        '"Calm is not the absence of storm. It is the stillness within."',
+        '"In calm waters, a wise sailor prepares for rough seas."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "ring")] = lambda: _r([
+        '"A ring is a circle. It has no end, just like a promise."',
+        '"Rings bind. Be certain of what you bind yourself to."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "apology")] = lambda: _r([
+        '"An apology is a gift of humility. Few give it freely."',
+        '"The strongest words are often the hardest to say. "I am sorry" is one of them."',
+    ])
+
+
 # Dangerous NPCs
 for npc_id in DANGEROUS_NPCS:
     _TOPIC_FALLBACKS[(npc_id, "vengeance")] = _dangerous_on_vengeance
@@ -1523,6 +1605,61 @@ for npc_id in DANGEROUS_NPCS:
         '"Gods? Overrated. I could take a god in a fight. Maybe. On a good day."',
     ])
 
+
+    _TOPIC_FALLBACKS[(npc_id, "quest")] = lambda: _r([
+        '"A quest? Sounds like work. I don\'t do work."',
+        '"Your quest is your problem. Don\'t drag me into it."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "crew")] = lambda: _r([
+        '"Crew? You mean people I haven\'t eaten yet?"',
+        '"I don\'t need a crew. I work alone. People get in the way."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "war")] = lambda: _r([
+        '"War is my favourite sport. The prizes are... memorable."',
+        '"War. Finally, something worth talking about."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "wife")] = lambda: _r([
+        '"A wife? Tried that. She tried to kill me. Fair play to her."',
+        '"Marriage is a battlefield. I prefer ones with fewer rules."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "baby")] = lambda: _r([
+        '"Babies? Too small. Not enough meat on them."',
+        '"Children are just adults who haven\'t learned to be miserable yet."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "islands")] = lambda: _r([
+        '"Islands are good for hiding bodies. And treasure. Mostly both."',
+        '"I own an island. You can visit. You just can\'t leave."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "navigation")] = lambda: _r([
+        '"I navigate by instinct. And by threats. Mostly threats."',
+        '"Stars? Who needs stars when you have a good sense of direction and a bad attitude?"',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "fight")] = lambda: _r([
+        '"Fight? I thought you\'d never ask. Let\'s go."',
+        '"I fight. That\'s what I do. Everything else is just waiting."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "give")] = lambda: _r([
+        '"Give me your stuff. That\'s how giving works, right?"',
+        '"I give nothing and expect everything. It\'s a simple philosophy."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "talk")] = lambda: _r([
+        '"Talking? I prefer action. But if you insist, make it quick."',
+        '"You talk too much. Say something useful or say nothing."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "calm")] = lambda: _r([
+        '"Calm is boring. I like storms. Storms have personality."',
+        '"Being calm is a waste of good anger."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "ring")] = lambda: _r([
+        '"A ring? Is it valuable? If not, I don\'t care."',
+        '"Rings are for poets and fools. I prefer things that cut."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "apology")] = lambda: _r([
+        '"Apology? I never apologise. It\'s a sign of weakness."',
+        '"Sorry? I\'m sorry you\'re still talking."',
+    ])
+
+
 # Social NPCs
 for npc_id in SOCIAL_NPCS:
     _TOPIC_FALLBACKS[(npc_id, "love")] = _social_on_love
@@ -1569,6 +1706,59 @@ for npc_id in SOCIAL_NPCS:
         'They\'ve never let me down."',
         '"The gods? I\'m on speaking terms with a few. They owe me money."',
     ])
+    _TOPIC_FALLBACKS[(npc_id, "quest")] = lambda: _r([
+        '"A quest? Count me in! I love a good adventure."',
+        '"Every quest needs a good bard to sing about it afterwards."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "crew")] = lambda: _r([
+        '"The crew is like family. A dysfunctional, smelly family that I love dearly."',
+        '"Good crew members are hard to find. The bad ones make better stories."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "war")] = lambda: _r([
+        '"War is terrible. But the songs about it are magnificent."',
+        '"I prefer peace. War is bad for business and even worse for drinking."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "wife")] = lambda: _r([
+        '"Marriage is an adventure. Just make sure you bring snacks."',
+        '"A wife is a treasure. One you have to negotiate with constantly."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "baby")] = lambda: _r([
+        '"Babies are cute. Until they start crying. Then they\'re loud and cute."',
+        '"Children are the future. Also very expensive. Worth it though."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "islands")] = lambda: _r([
+        '"Islands are great! Beautiful views, exotic locals, questionable cuisine."',
+        '"I\'ve been to many islands. The best ones have good taverns."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "navigation")] = lambda: _r([
+        '"I navigate by the position of the nearest tavern. It\'s a reliable system."',
+        '"Navigation? Just follow the birds. Or the fish. Or the smell of land."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "fight")] = lambda: _r([
+        '"Fighting? Only if someone spills my drink first."',
+        '"I prefer a good argument over a good fight. Words hurt more."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "give")] = lambda: _r([
+        '"Generosity is its own reward. Also, people remember who gave them stuff."',
+        '"Give freely, but keep a little for yourself. Balance is key."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "talk")] = lambda: _r([
+        '"Talking is my favourite activity. Right after eating and sleeping."',
+        '"A good conversation is like a good meal. Best shared with friends."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "calm")] = lambda: _r([
+        '"Calm is nice. But a little excitement makes life worth living."',
+        '"I can be calm. I just choose not to be, most of the time."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "ring")] = lambda: _r([
+        '"A ring is a promise you can wear on your finger. Try doing that with a promise."',
+        '"Rings are nice. But have you seen my brooch collection?"',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "apology")] = lambda: _r([
+        '"An apology costs nothing and can be worth everything."',
+        '"\"I\'m sorry\" are two of the hardest words to say. But they can fix almost anything."',
+    ])
+
 
 # Neutral NPC topic responses (fallback for any NPC not in wise/dangerous/social)
 _TOPIC_FALLBACKS[("neutral", "advice")] = lambda: _r([
@@ -1629,6 +1819,59 @@ _TOPIC_FALLBACKS[("neutral", "monster")] = lambda: _r([
     '"I\'ve seen things that would make your hair stand on end. '
     'Fortunately, I\'m bald."',
 ])
+_TOPIC_FALLBACKS[("neutral", "quest")] = lambda: _r([
+    '"A quest? I suppose we all have one. Mine involves dinner."',
+    '"Quests are fine. Just make sure you pack enough supplies."',
+])
+_TOPIC_FALLBACKS[("neutral", "crew")] = lambda: _r([
+    '"Your crew are the people who haven\'t abandoned you yet. That counts for something."',
+    '"I\'ve sailed with many crews. The good ones are the ones that don\'t mutiny."',
+])
+_TOPIC_FALLBACKS[("neutral", "war")] = lambda: _r([
+    '"War is politics with teeth. Ugly business all around."',
+    '"I stay out of wars. They have a habit of making you dead."',
+])
+_TOPIC_FALLBACKS[("neutral", "wife")] = lambda: _r([
+    '"Wives are like the weather. Unpredictable, powerful, and you learn to live with it."',
+    '"I had a wife once. She left. I don\'t blame her."',
+])
+_TOPIC_FALLBACKS[("neutral", "baby")] = lambda: _r([
+    '"Babies are small, loud, and demand everything. Just like a king, but cuter."',
+    '"Children are a blessing. Also a lot of work. Mostly work."',
+])
+_TOPIC_FALLBACKS[("neutral", "islands")] = lambda: _r([
+    '"Islands are just mountains that got tired of walking."',
+    '"Every island has a story. And mosquitoes. Definitely mosquitoes."',
+])
+_TOPIC_FALLBACKS[("neutral", "navigation")] = lambda: _r([
+    '"Navigation is the art of not getting lost. I am not an artist."',
+    '"I navigate by guesswork and hope. It\'s worked so far."',
+])
+_TOPIC_FALLBACKS[("neutral", "fight")] = lambda: _r([
+    '"Fighting is a last resort. But sometimes it\'s the only resort."',
+    '"I don\'t start fights. But I finish them."',
+])
+_TOPIC_FALLBACKS[("neutral", "give")] = lambda: _r([
+    '"Giving is nice. Getting is nicer. But giving makes you feel good."',
+    '"I give what I can spare. Which is usually not much."',
+])
+_TOPIC_FALLBACKS[("neutral", "talk")] = lambda: _r([
+    '"Talking is how we avoid hitting each other. Mostly."',
+    '"I\'m not much of a talker. But I\'ll listen if it\'s interesting."',
+])
+_TOPIC_FALLBACKS[("neutral", "calm")] = lambda: _r([
+    '"Calm is underrated. Everyone wants excitement until they get it."',
+    '"A calm day is a good day. Enjoy it while it lasts."',
+])
+_TOPIC_FALLBACKS[("neutral", "ring")] = lambda: _r([
+    '"A ring? They\'re nice. I lost mine somewhere. Probably traded it for food."',
+    '"Rings are symbols. What they symbolise is up to you."',
+])
+_TOPIC_FALLBACKS[("neutral", "apology")] = lambda: _r([
+    '"Apologies are like bandages. They don\'t undo the wound, but they help it heal."',
+    '"Saying sorry is easy. Meaning it is the hard part."',
+])
+
 
 
 # ---------------------------------------------------------------------------
@@ -1740,3 +1983,109 @@ def get_talk_topic_response(state, npc, topic):
             return result()
         return result
     return None
+    _TOPIC_FALLBACKS[(npc_id, "quest")] = lambda: _r([
+        '"Every quest is a story waiting to be told. What is yours?"',
+        '"A quest without hardship is just a walk. But every walk teaches something."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "crew")] = lambda: _r([
+        '"Your crew is your strength. A lone sailor is a drowned sailor."',
+        '"Good companions are rarer than gold. Treasure them."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "war")] = lambda: _r([
+        '"War is the failure of words. But sometimes words fail first."',
+        '"I have seen war. It leaves scars that no amount of time can heal."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "wife")] = lambda: _r([
+        '"A good wife is like a steady shore. She waits, but she also guides you home."',
+        '"Marriage is a voyage in itself. Longer and harder than any sea crossing."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "baby")] = lambda: _r([
+        '"A child is hope made flesh. The future walking on unsteady legs."',
+        '"Babies know nothing and everything. They are the wisest of us all."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "islands")] = lambda: _r([
+        '"Every island is a world unto itself. Some are friendly, some are not."',
+        '"The islands hold secrets older than any man or god."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "navigation")] = lambda: _r([
+        '"Navigate by the stars, but do not forget to look at the waves."',
+        '"The best navigators trust the sea as much as the sky."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "fight")] = lambda: _r([
+        '"A wise man wins without fighting. But if you must fight, fight wisely."',
+        '"The best fights are the ones you walk away from."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "give")] = lambda: _r([
+        '"Giving is not losing. It is planting seeds for a future harvest."',
+        '"A gift given freely returns tenfold. A gift given grudgingly returns nothing."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "talk")] = lambda: _r([
+        '"Talking is the bridge between souls. Build it carefully."',
+        '"Words are like arrows. Once released, they cannot be called back."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "calm")] = lambda: _r([
+        '"Calm is not the absence of storm. It is the stillness within."',
+        '"In calm waters, a wise sailor prepares for rough seas."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "ring")] = lambda: _r([
+        '"A ring is a circle. It has no end, just like a promise."',
+        '"Rings bind. Be certain of what you bind yourself to."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "apology")] = lambda: _r([
+        '"An apology is a gift of humility. Few give it freely."',
+        '"The strongest words are often the hardest to say. \"I am sorry\" is one of them."',
+    ])
+
+    _TOPIC_FALLBACKS[(npc_id, "quest")] = lambda: _r([
+        '"A quest? Sounds like work. I don\'t do work."',
+        '"Your quest is your problem. Don\'t drag me into it."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "crew")] = lambda: _r([
+        '"Crew? You mean people I haven\'t eaten yet?"',
+        '"I don\'t need a crew. I work alone. People get in the way."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "war")] = lambda: _r([
+        '"War is my favourite sport. The prizes are... memorable."',
+        '"War. Finally, something worth talking about."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "wife")] = lambda: _r([
+        '"A wife? Tried that. She tried to kill me. Fair play to her."',
+        '"Marriage is a battlefield. I prefer ones with fewer rules."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "baby")] = lambda: _r([
+        '"Babies? Too small. Not enough meat on them."',
+        '"Children are just adults who haven\'t learned to be miserable yet."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "islands")] = lambda: _r([
+        '"Islands are good for hiding bodies. And treasure. Mostly both."',
+        '"I own an island. You can visit. You just can\'t leave."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "navigation")] = lambda: _r([
+        '"I navigate by instinct. And by threats. Mostly threats."',
+        '"Stars? Who needs stars when you have a good sense of direction and a bad attitude?"',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "fight")] = lambda: _r([
+        '"Fight? I thought you\'d never ask. Let\'s go."',
+        '"I fight. That\'s what I do. Everything else is just waiting."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "give")] = lambda: _r([
+        '"Give me your stuff. That\'s how giving works, right?"',
+        '"I give nothing and expect everything. It\'s a simple philosophy."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "talk")] = lambda: _r([
+        '"Talking? I prefer action. But if you insist, make it quick."',
+        '"You talk too much. Say something useful or say nothing."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "calm")] = lambda: _r([
+        '"Calm is boring. I like storms. Storms have personality."',
+        '"Being calm is a waste of good anger."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "ring")] = lambda: _r([
+        '"A ring? Is it valuable? If not, I don\'t care."',
+        '"Rings are for poets and fools. I prefer things that cut."',
+    ])
+    _TOPIC_FALLBACKS[(npc_id, "apology")] = lambda: _r([
+        '"Apology? I never apologise. It\'s a sign of weakness."',
+        '"Sorry? I\'m sorry you\'re still talking."',
+    ])
+

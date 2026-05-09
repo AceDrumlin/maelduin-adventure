@@ -330,7 +330,7 @@ def register(items, npcs):
             "She smiles at you — a smile that promises everything and costs nothing."
         ),
         npcs=[npcs["queen"]],
-        items=[],
+        items=[items["truth_ring"]],
         exits={"northwest": "sea1"},
         ambient=lambda s: (
             "The music swells. A woman laughs somewhere. The food smells incredible. "

@@ -119,7 +119,7 @@ def register(items, npcs):
             "there's enough for everyone. Sit. Eat. Tell me why you're really here.\""
         ),
         npcs=[npcs["hermit"]],
-        items=[items["otter_pelt"]],
+        items=[items["otter_pelt"], items["hermit_blessing"]],
         exits={"west": "sea2"},
         on_enter=lambda s: (
             "The hermit's blessing washes over you as you step onto the rock. "
@@ -188,7 +188,7 @@ def register(items, npcs):
             "One of them flicks its tail and says — actually says, in a clear voice — "
             "'Nice try, land-walker.'"
         ),
-        items=[],
+        items=[items["wisdom_salmon"]],
         npcs=[],
         exits={"southeast": "sea2"},
         ambient=lambda s: (

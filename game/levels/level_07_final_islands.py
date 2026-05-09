@@ -82,7 +82,8 @@ def register(items, npcs):
         ),
         items=[],
         npcs=[npcs["treasure_serpent"]],
-        exits={"back": "sea1", "sea": "sea1", "northwest": "sea1"},
+        exits={"back": "sea1", "sea": "sea1", "northwest": "sea1",
+               "in": "treasure_cave", "enter": "treasure_cave"},
         blocked={
             "in": (
                 "The serpent blocks the cave entrance with its massive body. "

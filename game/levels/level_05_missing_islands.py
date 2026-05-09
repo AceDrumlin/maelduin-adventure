@@ -175,7 +175,7 @@ def register(items, npcs):
             "The herd mills around him, snorting and stamping. They do not attack — yet. "
             "But they make it clear: you are not welcome here unless you prove yourself."
         ),
-        items=[],
+        items=[items["horsehair_bridle"]],
         npcs=[npcs["stallion_king"]],
         exits={"southeast": "sea2", "back": "sea2"},
         blocked={
@@ -383,7 +383,7 @@ def register(items, npcs):
             "'Drink and see what is hidden. Take and carry the light. "
             "But know this: the water shows only truth, and truth is not always kind.'"
         ),
-        items=[],
+        items=[items["water_of_vision"]],
         npcs=[],
         exits={"east": "sea3", "back": "sea3"},
         ambient=lambda s: (
