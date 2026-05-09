@@ -57,7 +57,7 @@ def load_shared():
 
     npcs["mother"] = NPC(
         "mother", "Your Mother", "A woman with tired eyes and a gentle face. She sits by the cradle, her hand resting on it as if she is afraid to let go. She has not laughed all night. She knows something is wrong.",
-        aliases=["mother", "mother", "woman", "your mother", "ailill's wife", "wife"],
+        aliases=["mother", "woman", "your mother", "ailill's wife", "wife"],
         dialogue={
             "greeting": (
                 'She looks up at you with eyes that have seen too much.\n\n'
@@ -846,7 +846,7 @@ def _make_npcs():
 
     n["skull"] = NPC(
         "skull", "The Talking Skull", "A human skull impaled on a thornbush. Its jaw clatters as it speaks, and its empty eye sockets somehow convey a look of profound boredom.",
-        aliases=["skull", "talking skull", "skull", "head", "jaw"],
+        aliases=["skull", "talking skull", "head", "jaw"],
         dialogue={
             "greeting": (
                 'The skull clacks its teeth together before speaking:\n\n'
@@ -1092,7 +1092,7 @@ def _make_npcs():
     n["little_cat"] = NPC(
         "little_cat", "The Little Cat",
         "A tiny, scruffy kitten, no larger than your fist, with fur the color of rust and eyes like twin emeralds. It purrs constantly, a sound like a tiny engine. It is utterly unafraid of you.",
-        aliases=["cat", "kitten", "little cat", "small cat", "kitty"],
+        aliases=["cat", "kitten", "little cat", "small cat", "kitty", "flaming cat"],
         dialogue={
             "greeting": (
                 "The little cat looks up at you, blinks slowly, and lets out a tiny 'mew.' It rubs against your ankle, leaving a trail of warm fur. Its purring intensifies.\n\n"
@@ -1132,7 +1132,7 @@ def _make_npcs():
 
     n["foster_mother"] = NPC(
         "foster_mother", "Your Foster Mother", "A woman in her fifties, her face weathered by wind and grief. Her hands are gentle but strong. She has raised you as her own since you were a baby, and she has carried the secret of your father's death like a stone in her chest for twenty years.",
-        aliases=["mother", "foster mother", "woman", "foster mother"],
+        aliases=["mother", "foster mother", "woman"],
         dialogue={
             "greeting": (
                 'Your foster mother looks at you with eyes that have seen too much and loved too deeply.\n\n'
@@ -1246,7 +1246,7 @@ def _make_npcs():
 
     n["young_druid"] = NPC(
         "young_druid", "The Druid (Younger)", "The same druid, but years younger. He still moves like an old man, though. Some people are born ancient.",
-        aliases=["young druid", "old man", "wise man"],
+        aliases=["druid", "young druid", "young"],
         dialogue={
             "greeting": (
                 'The druid looks at you with knowing eyes.\n\n'
@@ -1336,7 +1336,7 @@ def _make_npcs():
     n["guardian_of_peace"] = NPC(
         "guardian_of_peace", "The Guardian of Peace",
         "A luminous figure in flowing white robes, surrounded by a soft golden light. Its face is kind and infinitely gentle, radiating a warmth that feels like coming home after a long journey. Its eyes hold the compassionate patience of something that has watched the ages turn.",
-        aliases=["guardian", "angel", "luminous figure", "being", "spirit", "guardian of peace"],
+        aliases=["guardian", "angel", "luminous figure", "being", "spirit", "guardian of peace", "peace"],
         dialogue={
             "greeting": (
                 "The Guardian of Peace opens its arms, and a wave of warmth washes over you.\n\n"
