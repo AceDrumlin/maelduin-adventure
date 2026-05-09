@@ -631,6 +631,14 @@ def handle_fight(state, target):
         return "There's nothing to fight here."
 
     # Check for fightable NPCs/creatures via location-specific logic
+    if loc.id == "island_giant":
+        return _fight_giant(state)
+    if loc.id == "treasure_cave":
+        return _fight_treasure_serpent(state)
+    if loc.id == "island_dog":
+        return _fight_hound(state)
+    if loc.id == "island_lion":
+        return _fight_mountain_lion(state)
     # This is handled by hooks in the world module
     if loc.id == "sea_monsters" and not state.has_flag("sea_monster_defeated"):
         if state.has_flag("got_harpoon"):
@@ -666,6 +674,96 @@ def handle_fight(state, target):
             '"OINK," it says, with evident satisfaction. It then wanders back to the tree and goes to sleep.\n\n'
             "You are unharmed, but your pride is in tatters. You were defeated by a pig."
         )
+
+    return f"There's nothing to fight here. You can't just attack {target} for no reason."
+
+
+def _fight_giant(state):
+    if state.has_flag("giant_defeated"):
+        return "The giant is already dead. His body lies at the base of the cliff."
+    if state.has_flag("giant_mollified"):
+        return "The giant is peacefully chewing his food. He ignores you."
+    if state.has_flag("giant_encountered") and not state.has_flag("giant_defeated") and not state.has_flag("giant_mollified"):
+        if state.get_item_from_inventory("magic_harpoon"):
+            state.set_flag("giant_defeated")
+            state.score += 3
+            from .levels._shared import items as shared_items
+            club = shared_items.get("giants_club")
+            loc = state.get_location()
+            if club and loc:
+                loc.items.append(club)
+            return (
+                "You hurl the Magic Harpoon at the giant. It strikes him square in the chest — "
+                "a blow that would kill any mortal man. The giant bellows in pain, tearing at the harpoon, "
+                "but the enchanted weapon returns to your hand before he can pull it free.\n\n"
+                "He stumbles backward, clutching his wound, and topples from the cliff. The ground shakes "
+                "as his body crashes onto the rocks below. The waves wash over him, and he is still.\n\n"
+                "At the base of the cliff, his GIANT'S CLUB lies among the rocks.\n\n"
+                "(+3 points.)"
+            )
+        return (
+            "You draw your sword and charge, but the giant hurls a stone that smashes into the ground "
+            "at your feet. You dive aside, barely avoiding being crushed. You need the Magic Harpoon "
+            "to bring this giant down."
+        )
+    return f"There's nothing to fight here. You can't just attack {target} for no reason."
+
+
+def _fight_treasure_serpent(state):
+    if state.has_flag("serpent_passed"):
+        return "The serpent has already been dealt with. The cave is open."
+    if state.has_flag("serpent_encountered") and not state.has_flag("serpent_passed"):
+        state.set_flag("serpent_passed")
+        state.score += 3
+        from .levels._shared import items as shared_items
+        gold = shared_items.get("treasure_gold")
+        loc = state.get_location()
+        if gold and loc:
+            loc.items.append(gold)
+        return (
+            "You steel yourself and rush at the serpent with your weapon drawn! It strikes with blinding speed — "
+            "but Conganchnes shoves you aside, taking the blow on his invulnerable skin.\n\n"
+            "The serpent recoils, hissing in confusion. In that moment, you land a blow on its neck. "
+            "It thrashes wildly and retreats deeper into the cave.\n\n"
+            "Beyond the entrance, you see the gleam of ANCIENT GOLD. The treasure is yours.\n\n"
+            "(+3 points. Ancient Gold lies in the cave.)"
+        )
+    return f"There's nothing to fight here. You can't just attack {target} for no reason."
+
+
+def _fight_hound(state):
+    if state.has_flag("dog_pacified"):
+        return "The great hound is peacefully dozing. It has finally earned its rest."
+    if state.has_flag("dog_encountered") or True:
+        state.set_flag("dog_pacified")
+        state.score += 3
+        return (
+            "You raise your weapon and face the Great Hound. It does not back down — "
+            "it springs at you with jaws wide, but at the last moment, you sidestep and "
+            "strike its flank. The hound yelps and retreats, tail between its legs.\n\n"
+            "It watches you from a distance as you take the Silver Torc from the pedestal. "
+            "It does not interfere.\n\n"
+            "(+3 points.)"
+        )
+
+
+def _fight_mountain_lion(state):
+    if state.has_flag("lion_pacified") or state.has_flag("lion_fought"):
+        return "The mountain lion is gone — driven off or healed."
+    state.set_flag("lion_fought")
+    state.score += 3
+    from .levels._shared import items as shared_items
+    claw = shared_items.get("lions_claw")
+    loc = state.get_location()
+    if claw and loc:
+        loc.items.append(claw)
+    return (
+        "You raise your weapon against the wounded lion. It snarls and lunges — "
+        "but its injury slows it. You strike true, and the beast collapses.\n\n"
+        "When it falls, one of its claws breaks off. You pick it up — it is razor-sharp "
+        "and still warm. The Lion's Claw could serve as a dagger.\n\n"
+        "(+3 points. Gained: Lion's Claw)"
+    )
 
     return f"There's nothing to fight here. You can't just attack {target} for no reason."
 

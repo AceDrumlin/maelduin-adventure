@@ -1621,10 +1621,21 @@ def _make_npcs():
                 "'You will return when the wind is ready. And the wind is always ready — "
                 "it is you who are not.'\n\n"
                 "He smiles at your expression.\n\n"
-                "'You still have something to do, Mael Duin. One last island. One last choice. "
-                "But you already know what it is. You have always known.\n\n"
-                "'Home is not a direction. It is a decision. "
-                "When you make the right one, the wind will carry you there in a single breath.'"
+                "'You have not yet finished your voyage. But you will. "
+                "And when you do, you will find that home was never a place — "
+                "it was a feeling. And that feeling has been with you all along.'"
+            ),
+            "sea": (
+                "'The sea is God's breath upon the water,' he says softly. "
+                "'It is older than the mountains, older than sin, older than memory. "
+                "It carries prayers in its currents and secrets in its depths.\n\n"
+                "'You have sailed upon it for three years, Mael Duin. "
+                "You have learned its language — the rhythm of the tides, the warnings in the clouds, "
+                "the songs in the creaking of your curragh's timbers.\n\n"
+                "'The sea has changed you. It has washed away what was not essential. "
+                "Look at your hands. They are the same hands that pushed off from the Aran shore. "
+                "But the man they belong to is not the same.\n\n"
+                "'That is what the sea does. It is a mirror, and it shows you who you truly are.'"
             ),
             "death": (
                 "'Death is not the enemy, Mael Duin. It is the doorway. "

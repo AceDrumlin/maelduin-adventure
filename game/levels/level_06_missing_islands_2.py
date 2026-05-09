@@ -258,6 +258,7 @@ def register(items, npcs):
         ),
         on_enter=lambda s: (
             s.__setattr__('awaiting_choice', 'promised_land') or
+            s.set_flag("promised_land_visited") or
             "You step onto the shore of the Promised Land, and your heart breaks with beauty.\n\n"
             "Everything is perfect. The grass is the exact softness you love. "
             "The temperature is exactly right. The fruit tastes of everything good "

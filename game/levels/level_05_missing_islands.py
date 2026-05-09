@@ -69,7 +69,7 @@ def register(items, npcs):
             "you might stop the wheel. The old guardian said you can only 'feed' the mill. "
             "Perhaps that is the answer: give it something heavy enough to choke on."
         ),
-        items=[],
+        items=[items["millstone_fragment"]],
         npcs=[],
         exits={"out": "mill_exterior", "back": "mill_exterior"},
         ambient=lambda s: (

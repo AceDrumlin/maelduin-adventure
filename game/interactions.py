@@ -250,10 +250,90 @@ _register_give("magic_harpoon", "smith", _give_magic_harpoon_to_smith)
 _register_give("silver_bell", "hermit", _give_silver_bell_to_hermit)
 _register_give("glass_shard", "cat", _give_glass_shard_to_cat)
 _register_give("golden_apple", "black_pig", _give_golden_apple_to_pig)
-_register_give("antidote_herb", "serpent", _give_antidote_herb_to_serpent)
+_register_give("antidote_herb", "treasure_serpent", _give_antidote_herb_to_serpent)
 _register_give("otter_pelt", "hermit", _give_otter_pelt_to_hermit)
 # everlasting_fruit gets special per-NPC handling below
 _register_give("everlasting_fruit", "__any__", _give_everlasting_fruit_to_any)
+
+# ---- LEVEL 07 GIVE HANDLERS ----
+def _give_food_to_giant(state, item, npc):
+    state.set_flag("giant_mollified")
+    state.score += 1
+    return (
+        f'You offer {item.name} to the giant. He squints at it, sniffs suspiciously, '
+        "then snatches it from your hand and stuffs it into his mouth.\n\n"
+        "'Hmph,' he grunts, chewing noisily. 'Not bad. You may pass, little man. "
+        "But tell your friends to bring better food next time.'\n\n"
+        "The giant settles back onto his cliff, patting his belly with satisfaction. "
+        "He does not throw any more stones.\n\n"
+        "(+1 point. No crew lost.)"
+    )
+
+def _give_treasure_to_serpent(state, item, npc):
+    return (
+        "The serpent eyes the treasure with ancient hunger. "
+        "Its coils shift, allowing you a glimpse deeper into the cave.\n\n"
+        "'Mine,' it hisses. 'But... you have brought me gold. Shiny gold. "
+        "I am... satisfied. Take what you need from the cave. "
+        "Leave the gold, and we are even.'\n\n"
+        "The serpent's coils part just enough for one person to slip through.\n\n"
+        "(+2 points.)"
+    )
+
+def _give_antidote_herb_to_treasure_serpent(state, item, npc):
+    state.set_flag("serpent_passed")
+    state.score += 3
+    from .levels._shared import items as shared_items
+    gold = shared_items.get("treasure_gold")
+    loc = state.get_location()
+    if gold and loc:
+        loc.items.append(gold)
+    return (
+        'You offer the Antidote Herb to the serpent. It recoils at first, hissing, '
+        "but then its forked tongue flicks out, tasting the herb.\n\n"
+        "It takes the herb into its mouth and swallows. Almost immediately, "
+        "the sickly green hue fades from its scales, replaced by a healthy emerald.\n\n"
+        "'The herb... it heals the poison that has been eating at me for decades.' "
+        "The serpent's voice is softer now, almost grateful.\n\n"
+        "It uncoils from the cave entrance and slithers aside. Beyond, you see "
+        "the gleam of ANCIENT GOLD.\n\n"
+        "(+3 points. The serpent is healed and grateful.)"
+    )
+
+def _give_food_to_hound(state, item, npc):
+    state.set_flag("dog_pacified")
+    state.score += 2
+    return (
+        f'You offer {item.name} to the Great Hound. It sniffs cautiously, '
+        "then takes it gently from your hand with surprising delicacy for a creature its size.\n\n"
+        "The hound wolfs it down in two bites, then licks its chops and lies down, "
+        "its head on its paws. It watches you with soft, grateful eyes.\n\n"
+        "It does not stir as you take the Silver Torc from the pedestal. "
+        "Its tail thumps once on the ground.\n\n"
+        "(+2 points. The Great Hound has accepted you.)"
+    )
+
+def _give_food_to_lion(state, item, npc):
+    state.score += 1
+    return (
+        f'You offer {item.name} to the wounded lion. It snarls weakly at first, '
+        "but the scent of food is too much. It takes the offering and eats ravenously.\n\n"
+        "When it finishes, it licks its wounded flank and looks at you with slightly less hostility. "
+        "It does not move aside, but it does not attack either.\n\n"
+        "The lion still blocks the cave, but it is no longer actively hostile. "
+        "You may need to do more to earn its trust."
+    )
+
+_register_give("crew_provisions", "giant", _give_food_to_giant)
+_register_give("everlasting_fruit", "giant", _give_food_to_giant)
+_register_give("demon_coin", "treasure_serpent", _give_treasure_to_serpent)
+_register_give("golden_apple", "treasure_serpent", _give_treasure_to_serpent)
+_register_give("antidote_herb", "treasure_serpent", _give_antidote_herb_to_treasure_serpent)
+_register_give("everlasting_fruit", "great_hound", _give_food_to_hound)
+_register_give("crew_provisions", "great_hound", _give_food_to_hound)
+_register_give("talking_cat_tribute", "great_hound", _give_food_to_hound)
+_register_give("everlasting_fruit", "mountain_lion", _give_food_to_lion)
+_register_give("crew_provisions", "mountain_lion", _give_food_to_lion)
 
 
 # ---------------------------------------------------------------------------
