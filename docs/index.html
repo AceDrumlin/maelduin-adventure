@@ -6,90 +6,100 @@
 <title>The Voyage of Mael Duin</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#0a0806;color:#c8b89a;font-family:ui-monospace,'Cascadia Code','JetBrains Mono','Menlo','Consolas','DejaVu Sans Mono',monospace;height:100vh;height:100dvh;overflow:hidden;background-image:radial-gradient(ellipse at 20% 50%,#1a1410 0%,#0a0806 70%)}
+body{background:#0a0806;color:#f0ebe4;font-family:ui-monospace,'Cascadia Code','JetBrains Mono','Menlo','Consolas','DejaVu Sans Mono',monospace;height:100vh;height:100dvh;overflow:hidden;background-image:radial-gradient(ellipse at 20% 50%,#1a1410 0%,#0a0806 70%)}
 #game{display:flex;flex-direction:column;height:100vh;height:100dvh;max-width:900px;margin:0 auto;position:relative}
 
 /* ── HEADER ── */
-#header{flex-shrink:0;background:linear-gradient(180deg,#0f0b08,#0a0806);border-bottom:1px solid #2a1f14}
-#title-row{display:flex;align-items:center;justify-content:center;gap:8px;padding:2px 0}
-#title-row pre{color:#b8860b;font-size:8px;line-height:1;text-shadow:0 0 8px rgba(184,134,11,.3)}
-.celtic{color:#5a4a3a;font-size:16px;user-select:none}
-#status-bar{display:flex;justify-content:space-between;font-size:10px;color:#5a4a3a;padding:2px 8px;border-top:1px solid #1a1410;font-family:ui-monospace,'Cascadia Code','JetBrains Mono','Menlo','Consolas','DejaVu Sans Mono',monospace}
-.status-val{color:#b8860b}
+#header{flex-shrink:0;background:linear-gradient(180deg,#0f0b08,#0a0806);border-bottom:1px solid #2a1f14;position:relative}
+#title-row{display:flex;align-items:center;justify-content:center;gap:8px;padding:4px 0}
+#title-row pre{color:#d4a017;font-size:8px;line-height:1;text-shadow:0 0 8px rgba(212,160,23,.4)}
+.celtic{color:#8b7355;font-size:16px;user-select:none}
+
+/* ── STATUS BAR — redesigned ── */
+#status-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:4px 12px;border-top:1px solid #1a1410;font-family:ui-monospace,'Cascadia Code','JetBrains Mono','Menlo','Consolas','DejaVu Sans Mono',monospace}
+#status-location{display:flex;align-items:baseline;gap:6px;flex-shrink:1;min-width:0;overflow:hidden}
+#status-location .loc-name{color:#d4a017;font-weight:bold;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:.5px}
+.status-label{color:#6b5a4a;font-size:10px;text-transform:uppercase;letter-spacing:1px;flex-shrink:0}
+#status-metrics{display:flex;gap:14px;flex-shrink:0}
+#status-metrics .stat{display:flex;align-items:baseline;gap:4px;white-space:nowrap}
+#status-metrics .stat .status-val{color:#d4a017;font-weight:bold;font-size:13px}
 
 /* ── OUTPUT ── */
-#output{flex:1;min-height:0;overflow-y:auto;padding:8px 14px;white-space:pre-wrap;word-wrap:break-word;line-height:1.6;font-size:15px;scroll-behavior:smooth;color:#c8b89a;-webkit-overflow-scrolling:touch}
+#output{flex:1;min-height:0;overflow-y:auto;padding:10px 16px;white-space:pre-wrap;word-wrap:break-word;line-height:1.6;font-size:15px;scroll-behavior:smooth;color:#f0ebe4;-webkit-overflow-scrolling:touch}
 #output::-webkit-scrollbar{width:4px}
 #output::-webkit-scrollbar-track{background:#0a0806}
-#output::-webkit-scrollbar-thumb{background:#2a1f14;border-radius:2px}
+#output::-webkit-scrollbar-thumb{background:#3a2a1a;border-radius:2px}
 
 /* ── INVENTORY BAR ── */
-#inventory-bar{display:flex;gap:3px;padding:2px 8px;background:#0d0906;border-top:1px solid #1a1410;flex-shrink:0;overflow-x:auto;flex-wrap:wrap;min-height:18px}
-.inv-item{background:#1a1410;border:1px solid #2a1f14;border-radius:2px;padding:1px 5px;white-space:nowrap;color:#8b7d6b;font-size:9px}
+#inventory-bar{display:flex;gap:4px;padding:3px 10px;background:#0d0906;border-top:1px solid #1a1410;flex-shrink:0;overflow-x:auto;flex-wrap:wrap;min-height:22px}
+.inv-item{background:#1a1210;border:1px solid #3a2a1a;border-radius:3px;padding:2px 7px;white-space:nowrap;color:#d4c9b8;font-size:11px}
 
 /* ── INPUT ROW ── */
-#input-row{display:flex;padding:5px 10px;border-top:1px solid #2a1f14;gap:5px;flex-shrink:0;background:#0f0b08}
-#prompt{color:#b8860b;font-weight:bold;font-size:14px;line-height:34px;margin-right:1px;flex-shrink:0}
-#cmd{flex:1;background:#0d0906;border:1px solid #2a1f14;color:#c8b89a;font-family:ui-monospace,'Cascadia Code','JetBrains Mono','Menlo','Consolas','DejaVu Sans Mono',monospace;font-size:13px;padding:6px 10px;border-radius:3px;outline:none;min-width:0}
-#cmd:focus{border-color:#b8860b}#cmd::placeholder{color:#3a2a1a;font-size:11px}
-#send{background:#b8860b;color:#0a0806;border:none;padding:6px 14px;font-size:13px;border-radius:3px;cursor:pointer;font-weight:bold;font-family:ui-monospace,'Cascadia Code','JetBrains Mono','Menlo','Consolas','DejaVu Sans Mono',monospace;flex-shrink:0}
+#input-row{display:flex;padding:6px 12px;border-top:1px solid #2a1f14;gap:6px;flex-shrink:0;background:#0f0b08}
+#prompt{color:#d4a017;font-weight:bold;font-size:15px;line-height:38px;margin-right:1px;flex-shrink:0}
+#cmd{flex:1;background:#0d0906;border:1px solid #3a2a1a;color:#f0ebe4;font-family:ui-monospace,'Cascadia Code','JetBrains Mono','Menlo','Consolas','DejaVu Sans Mono',monospace;font-size:14px;padding:8px 12px;border-radius:4px;outline:none;min-width:0}
+#cmd:focus{border-color:#d4a017}#cmd::placeholder{color:#4a3a2a;font-size:12px}
+#send{background:#d4a017;color:#0a0806;border:none;padding:8px 18px;font-size:14px;border-radius:4px;cursor:pointer;font-weight:bold;font-family:ui-monospace,'Cascadia Code','JetBrains Mono','Menlo','Consolas','DejaVu Sans Mono',monospace;flex-shrink:0;transition:background .2s}
+#send:hover{background:#e6b422}
+#send:active{background:#b8860b}
 
 /* ── MESSAGES ── */
-.msg{animation:fadeIn .3s ease;padding:1px 0;line-height:1.4}
+.msg{animation:fadeIn .3s ease;padding:2px 0;line-height:1.5}
 @keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
-.loc{color:#b8860b;font-weight:bold}.sys{color:#6b8e50;font-style:italic;opacity:.8}
-.combat{color:#c0392b}.humor{color:#d4a017;font-style:italic}.err{color:#c0392b;background:rgba(192,57,43,.1);padding:2px 6px;border-radius:2px}
+.loc{color:#d4a017;font-weight:bold}
+.sys{color:#8bc34a;font-style:italic;opacity:.85}
+.combat{color:#e74c3c}.humor{color:#f0c040;font-style:italic}.err{color:#e74c3c;background:rgba(231,76,60,.15);padding:2px 8px;border-radius:3px}
+
+/* ── SIDE TOGGLE (hamburger) ── */
+#side-toggle{position:absolute;top:50%;right:8px;transform:translateY(-50%);color:#b8860b;cursor:pointer;font-size:20px;z-index:20;padding:6px 10px;border-radius:4px;background:rgba(184,134,11,.08);transition:all .2s;line-height:1;user-select:none}
+#side-toggle:hover{color:#f0d060;background:rgba(184,134,11,.18)}
+#side-toggle:active{background:rgba(184,134,11,.28)}
 
 /* ── SIDE PANEL ── */
-#side-toggle{position:absolute;top:4px;right:10px;color:#5a4a3a;cursor:pointer;font-size:16px;z-index:20;padding:2px 6px}
-#side-toggle:hover{color:#b8860b}
-#side-panel{position:fixed;top:0;right:-300px;width:280px;height:100vh;height:100dvh;background:#0f0b08;border-left:2px solid #2a1f14;padding:40px 14px 14px;transition:right .3s ease;overflow-y:auto;z-index:19}
+#side-panel{position:fixed;top:0;right:-300px;width:280px;height:100vh;height:100dvh;background:#0f0b08;border-left:2px solid #3a2a1a;padding:44px 16px 16px;transition:right .3s ease;overflow-y:auto;z-index:19}
 #side-panel.open{right:0}
-#side-panel h3{color:#b8860b;font-size:11px;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;border-bottom:1px solid #1a1410;padding-bottom:3px}
-#score-detail{margin:8px 0;font-size:11px;color:#5a4a3a;line-height:1.6}
-#score-detail span{color:#c8b89a}
-#crew-list{list-style:none;font-size:11px}
-#crew-list li{padding:2px 0}
-#crew-list .dead{opacity:.4;text-decoration:line-through}
-#restart-btn{display:block;width:100%;margin-top:12px;padding:7px;background:transparent;border:1px solid #4a2a1a;color:#8b3a3a;font-family:ui-monospace,'Cascadia Code','JetBrains Mono','Menlo','Consolas','DejaVu Sans Mono',monospace;font-size:12px;border-radius:3px;cursor:pointer}
-#restart-btn:hover{background:#4a2a1a;color:#c0392b}
-.backdrop{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:18;display:none}
+#side-panel h3{color:#d4a017;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;border-bottom:1px solid #2a1f14;padding-bottom:4px}
+#score-detail{margin:10px 0;font-size:12px;color:#8b7a6a;line-height:1.8}
+#score-detail span{color:#f0ebe4}
+#crew-list{list-style:none;font-size:12px;color:#c8b89a}
+#crew-list li{padding:3px 0}
+#crew-list .dead{opacity:.35;text-decoration:line-through;color:#6b5a4a}
+#restart-btn{display:block;width:100%;margin-top:16px;padding:10px;background:transparent;border:1px solid #5a3a2a;color:#c0392b;font-family:ui-monospace,'Cascadia Code','JetBrains Mono','Menlo','Consolas','DejaVu Sans Mono',monospace;font-size:13px;border-radius:4px;cursor:pointer;transition:all .2s}
+#restart-btn:hover{background:#3a1a1a;color:#e74c3c}
+.backdrop{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);z-index:18;display:none}
 .backdrop.show{display:block}
 
-/* ── MOBILE: HIDE ASCII TITLE ── */
+/* ── MOBILE ── */
 @media(max-width:600px){
-  #header{padding:4px 0!important}
   #title-row pre{display:none!important}
   .celtic{display:none!important}
-  #title-row{min-height:0!important;padding:0!important}
-  #status-bar{flex-wrap:wrap!important;font-size:12px!important;padding:3px 8px!important;gap:2px 6px!important;line-height:1.4!important}
-  #status-bar span{font-size:12px!important}
-  #output{font-size:16px!important;padding:8px 12px!important;line-height:1.5!important}
-  #inventory-bar{min-height:24px!important;padding:3px 8px!important}
+  #title-row{padding:2px 0!important;min-height:0!important}
+  #header{padding:2px 0!important;border-bottom-width:1px!important}
+  /* Status bar: split into two rows */
+  #status-bar{flex-wrap:wrap!important;gap:2px!important;padding:6px 10px!important}
+  #status-location{width:100%!important;justify-content:center!important}
+  #status-location .loc-name{font-size:15px!important}
+  #status-location .status-label{display:none!important}
+  #status-metrics{width:100%!important;justify-content:space-around!important}
+  #status-metrics .stat .status-val{font-size:14px!important}
+  #status-metrics .stat .status-label{font-size:10px!important}
+  #output{font-size:16px!important;padding:8px 12px!important}
+  #inventory-bar{min-height:26px!important;padding:4px 8px!important}
   .inv-item{font-size:11px!important;padding:2px 6px!important}
   #input-row{padding:8px 10px!important}
   #cmd{font-size:16px!important;padding:10px 12px!important}
-  #prompt{font-size:18px!important;line-height:40px!important}
+  #prompt{font-size:18px!important;line-height:42px!important}
   #side-panel{width:260px!important;right:-280px!important}
+  #side-toggle{font-size:22px!important;padding:8px 12px!important;top:50%!important;right:6px!important}
 }
-  #title-row{min-height:0;padding:0;height:0}
-  #header{padding:0;border-bottom-width:0}
-  #status-bar{font-size:8px;padding:1px 4px}
-  #status-bar span{font-size:8px}
-  #output{font-size:12px;padding:4px 8px}
-  #inventory-bar{min-height:0;padding:1px 4px}
-  #inventory-bar .inv-item{font-size:8px;padding:0 3px}
-  #input-row{padding:3px 6px}
-  #side-panel{width:240px;right:-260px}
-  #prompt{font-size:12px;line-height:28px}
-  #send{font-size:11px;padding:4px 8px}
-}
+
 @media(max-width:380px){
-  #status-bar span{font-size:8px}
-  #prompt{font-size:12px;line-height:30px}
-  #input-row{padding:4px 6px}
-  #cmd{padding:4px 6px;font-size:11px}
-  #send{padding:4px 8px;font-size:11px}
+  #status-location .loc-name{font-size:13px!important}
+  #status-metrics .stat .status-val{font-size:12px!important}
+  #prompt{font-size:16px!important;line-height:38px!important}
+  #input-row{padding:6px 8px!important}
+  #cmd{padding:8px 10px!important;font-size:15px!important}
+  #send{padding:6px 12px!important;font-size:12px!important}
 }
 </style>
 </head>
@@ -106,12 +116,18 @@ body{background:#0a0806;color:#c8b89a;font-family:ui-monospace,'Cascadia Code','
 </pre>
 <span class="celtic">&#9763;</span>
 </div>
-<div id="status-bar">
-<span>LOC: <span class="status-val" id="loc-display">--</span></span>
-<span>SCR: <span class="status-val" id="score-display">0</span></span>
-<span>DAY: <span class="status-val" id="day-display">1</span></span>
-<span>CREW: <span class="status-val" id="crew-display">3/3</span></span>
+  <div id="status-bar">
+<div id="status-location">
+<span class="status-label">LOCATION</span>
+<span class="loc-name" id="loc-display">--</span>
 </div>
+<div id="status-metrics">
+<span class="stat"><span class="status-label">SCORE</span> <span class="status-val" id="score-display">0</span></span>
+<span class="stat"><span class="status-label">DAY</span> <span class="status-val" id="day-display">1</span></span>
+<span class="stat"><span class="status-label">CREW</span> <span class="status-val" id="crew-display">3/3</span></span>
+</div>
+</div>
+<div id="side-toggle" title="Voyage Log">&#9776;</div>
 </div>
 <div id="output">Loading the voyage...</div>
 <div id="inventory-bar"></div>
@@ -129,7 +145,7 @@ body{background:#0a0806;color:#c8b89a;font-family:ui-monospace,'Cascadia Code','
 <button id="send">Go</button>
 </div>
 </div>
-<div id="side-toggle" title="Voyage Log">&#9776;</div>
+
 <script src="game.js?v=3"></script>
 </body>
 </html>
