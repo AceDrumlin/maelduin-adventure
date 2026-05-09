@@ -843,6 +843,11 @@ def _make_npcs():
                 'But you came ashore. That takes guts. Or poor judgment. Both, probably!"\n\n'
                 'It chirps what sounds like laughter.'
             ),
+            "greeting_if_feather_taken": (
+                'The chatty bird hops closer, eyeing your pack.\n\n'
+                '"I see you found the old one\'s feather. Those things are special.\n\n'
+                '"Mine don\'t do that, by the way. I\'m using mine for flying."'
+            ),
             "feather": (
                 '"Looking for a feather? The old one up top sheds them sometimes. '
                 'They\'re magic, you know. Whisper secrets when you hold them to your ear. '
@@ -867,6 +872,20 @@ def _make_npcs():
                 '"You are strange. You are not ant. But you are not enemy either. What brings you to my grove?"\n\n'
                 'A worker ant approaches, holding a golden fruit in its jaws. It offers it to you.\n\n'
                 'The queen waits. The gift is offered. Whether you take it or not is your choice.'
+            ),
+            "greeting_if_took_fruit": (
+                'The Queen Ant clicks her mandibles slowly as you approach.\n\n'
+                'You took the fruit. That is what ants do.\n\n'
+                'A worker ant pauses beside you, holding another golden fruit. The offer still stands.'
+            ),
+            "greeting_if_took_fruit": (
+                'The Queen Ant clicks her mandibles slowly as you approach. The worker ants '
+                'continue their labours, carrying golden fruit to and fro.\n\n'
+                'She tilts her head, regarding you with her compound eyes. You sense neither '
+                'hostility nor welcome \u2014 just acknowledgment. You took the fruit. '
+                'That is what ants do.\n\n'
+                'A worker ant pauses beside you, holding another golden fruit in its jaws. '
+                'The Queen waits. The offer still stands.'
             ),
             "fruit": (
                 'The queen ant gestures with a feeler toward the golden fruit. '
@@ -1423,6 +1442,11 @@ def _make_npcs():
                 "It pauses, and the silence becomes so complete you can hear your own blood moving.\n\n"
                 "'You may stay. But you must not break the silence. If you sing or laugh or speak above a whisper... there will be a price.'"
             ),
+            "greeting_if_got_silent_bell": (
+                'The grey figure stands motionless, its blank face turned toward the empty grove.\n\n'
+                '"You have taken the bell. The silence is complete now.\n\n'
+                'You may pass freely. The valley has nothing left to teach you."'
+            ),
             "anger": (
                 "The Guardian of Silence turns its blank face toward you. The temperature drops.\n\n"
                 "'YOU HAVE BROKEN THE SILENCE. Sound is a wound upon the world, and you have opened a wound in my valley. You must pay tribute — give me something precious — and the silence will be restored.'\n\n"
@@ -1450,6 +1474,10 @@ def _make_npcs():
                 "'Here there is no pain, no sorrow, no hunger, no death. The rivers run with wine and honey. The trees bear fruit of pure gold. The air is warm and gentle. Stay with us forever. All you have to do is say yes.'\n\n"
                 "Its smile is radiant. The offer is sincere.\n\n"
                 "(Type YES to stay forever. Type NO to refuse and receive the Wind of Return.)"
+            ),
+            "greeting_if_stayed_in_promised_land": (
+                'The Guardian of Peace smiles warmly.\n\n'
+                '"You chose peace. The land welcomes you home."'
             ),
             "stay": (
                 "'Stay. Rest. Be at peace. You have earned this. There is nothing waiting for you back there — no revenge worth taking, no love worth leaving. Stay in the land where all is well.'\n\n"
