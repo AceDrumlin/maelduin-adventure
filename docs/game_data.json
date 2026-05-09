@@ -1434,24 +1434,10 @@
       "blocked": {}
     }
   },
-  "crew": [
-    {
-      "id": "diuran",
-      "name": "Diurán",
-      "description": "The poet and scribe, always ready with a verse.",
-      "role": "poet"
-    },
-    {
-      "id": "conganchnes",
-      "name": "Conganchnes",
-      "description": "A warrior whose skin cannot be wounded. Terrifying in battle.",
-      "role": "champion"
-    },
-    {
-      "id": "fergus",
-      "name": "Fergus",
-      "description": "The navigator, who can read the stars and the waves.",
-      "role": "navigator"
-    }
-  ]
+  "crew": [],
+  "crew_templates": {
+    "diuran": {"id": "diuran", "name": "Diurán", "description": "The poet and scribe, always ready with a verse.", "role": "poet"},
+    "conganchnes": {"id": "conganchnes", "name": "Conganchnes", "description": "A warrior whose skin cannot be wounded. Terrifying in battle.", "role": "champion"},
+    "fergus": {"id": "fergus", "name": "Fergus", "description": "The navigator, who can read the stars and the waves.", "role": "navigator"}
+  }
 }

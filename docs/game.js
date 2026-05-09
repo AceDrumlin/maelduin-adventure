@@ -4,6 +4,7 @@
 // ─── DATA ──────────────────────────────────────────────────────────
 let G = null;  // game_data loaded from JSON
 let STATE = null;
+const TOTAL_CREW = 3;
 
 function loadGameData(data) {
   G = data;
@@ -45,6 +46,16 @@ function getItem(id) {
   return G.items[id] || null;
 }
 
+function getCrewTemplate(id) {
+  return G.crew_templates ? G.crew_templates[id] : null;
+}
+
+const PROLOGUE_CREW_MAP = {
+  'young_conganchnes': 'conganchnes',
+  'young_fergus': 'fergus',
+  'young_diuran': 'diuran',
+};
+
 // ─── GAME STATE ─────────────────────────────────────────────────────
 
 function newState() {
@@ -57,7 +68,7 @@ function newState() {
     days: 0,
     gameOver: false,
     won: false,
-    crew: JSON.parse(JSON.stringify(G.crew)).map(c => ({...c, alive: true})),
+    crew: [],
     awaitingChoice: null,
     choiceData: null,
     visited: {},
@@ -104,6 +115,14 @@ function loseCrew(id) {
   const member = id ? alive.find(c => c.id === id) : alive[Math.floor(Math.random() * alive.length)];
   if (member) { member.alive = false; return member; }
   return null;
+}
+
+function addCrewMember(memberId) {
+  if (STATE.crew.some(c => c.id === memberId)) return false;
+  const tpl = getCrewTemplate(memberId);
+  if (!tpl) return false;
+  STATE.crew.push({...tpl, alive: true});
+  return true;
 }
 
 // ─── LOCATION HELPERS ────────────────────────────────────────────────
@@ -217,6 +236,13 @@ function h_go(direction) {
   const newLoc = getLocation(newLocId);
   if (!newLoc) return `You try to go ${dir} but find nothing there.`;
 
+  // Block sailing from harbor without full crew
+  if (STATE.location === 'village_harbor' && newLocId === 'sea1' && STATE.crew.length < TOTAL_CREW) {
+    const have = STATE.crew.length;
+    const need = TOTAL_CREW - have;
+    return `You need to recruit your full crew before sailing! You have ${have}/${TOTAL_CREW} companions. Talk to them at the training field or feast hall to recruit them. (${need} more needed)`;
+  }
+
   STATE.location = newLocId;
   STATE.turns++;
 
@@ -299,6 +325,19 @@ function h_talk(npcName) {
       result += '\n\n(Type YES to stay. Type NO to resist and leave.)';
     }
 
+    // Recruit companions in prologue
+    if (!hasFlag('recruited_' + npc.id) && !STATE.crew.some(c => c.id === PROLOGUE_CREW_MAP[npc.id]) &&
+        PROLOGUE_CREW_MAP[npc.id]) {
+      setFlag('recruited_' + npc.id);
+      const crewId = PROLOGUE_CREW_MAP[npc.id];
+      const success = addCrewMember(crewId);
+      if (success) {
+        result += '\n\n"Will you join me on my voyage?"\n\n' +
+          npc.name + ' grins. "I was wondering when you\'d ask. Of course I will!"\n\n' +
+          '(' + npc.name.replace(' (Young)', '') + ' has joined your crew! You now have ' + STATE.crew.length + '/' + TOTAL_CREW + ' companions.)';
+      }
+    }
+
     return result;
   }
   return `${npc.name} looks at you but says nothing.`;
@@ -355,6 +394,9 @@ function h_wait() {
 }
 
 function h_crew() {
+  if (STATE.crew.length === 0) {
+    return '=== YOUR CREW ===\n\nYou have no crew yet. Recruit companions for your voyage. Talk to them in the village to ask them to join you.';
+  }
   const alive = STATE.crew.filter(c => c.alive);
   const dead = STATE.crew.filter(c => !c.alive);
   let text = '=== YOUR CREW ===\n';
@@ -374,7 +416,7 @@ Turns: ${STATE.turns}
 Score: ${STATE.score}
 Islands visited: ${visited}
 Items carried: ${STATE.inventory.length}
-Crew alive: ${totalCrewAlive()}/${STATE.crew.length}
+Crew alive: ${totalCrewAlive()}/${TOTAL_CREW}
 Game over: ${STATE.gameOver}`;
 }
 
@@ -559,7 +601,7 @@ You return to your village a different man. The druid is waiting for you by the 
 
 === THE END ===
 Thank you for playing The Voyage of Mael Duin.
-Final score: ${STATE.score} | Islands visited: ${islands} | Days at sea: ${STATE.days} | Crew survived: ${totalCrewAlive()}/${STATE.crew.length}
+Final score: ${STATE.score} | Islands visited: ${islands} | Days at sea: ${STATE.days} | Crew survived: ${totalCrewAlive()}/${TOTAL_CREW}
 
 "Forgiveness is a cup that fills the drinker."`;
 }
@@ -588,7 +630,7 @@ It doesn't.
 
 === THE END ===
 Thank you for playing The Voyage of Mael Duin.
-Final score: ${STATE.score} | Islands visited: ${islands} | Days at sea: ${STATE.days} | Crew survived: ${totalCrewAlive()}/${STATE.crew.length}
+Final score: ${STATE.score} | Islands visited: ${islands} | Days at sea: ${STATE.days} | Crew survived: ${totalCrewAlive()}/${TOTAL_CREW}
 
 "Vengeance is a cup that empties the drinker."`;
 }
@@ -721,7 +763,7 @@ function initUI() {
     locD.textContent = loc ? loc.name : '—';
     scoreD.textContent = STATE.score;
     dayD.textContent = STATE.days + 1;
-    crewD.textContent = totalCrewAlive() + '/' + STATE.crew.length;
+    crewD.textContent = totalCrewAlive() + '/' + TOTAL_CREW;
 
     // Inventory bar
     invBar.innerHTML = '';
@@ -748,7 +790,7 @@ function initUI() {
     document.getElementById('panel-day').textContent = STATE.days + 1;
     document.getElementById('panel-islands').textContent = visited;
     document.getElementById('panel-items').textContent = STATE.inventory.length;
-    document.getElementById('panel-crew').textContent = alive + '/' + STATE.crew.length;
+    document.getElementById('panel-crew').textContent = alive + '/' + TOTAL_CREW;
 
     // Inventory (compact side panel list)
     const panelInv = document.getElementById('panel-inventory');
@@ -767,12 +809,20 @@ function initUI() {
 
     // Crew list
     crewList.innerHTML = '';
-    for (const c of STATE.crew) {
+    if (STATE.crew.length === 0) {
       const li = document.createElement('li');
-      const icon = c.alive ? '✓' : '✗';
-      li.textContent = icon + ' ' + c.name + ' (' + c.role + ')';
-      if (!c.alive) li.classList.add('dead');
+      li.textContent = 'No crew recruited yet. Talk to them in the village!';
+      li.style.color = '#6b5a4a';
+      li.style.fontStyle = 'italic';
       crewList.appendChild(li);
+    } else {
+      for (const c of STATE.crew) {
+        const li = document.createElement('li');
+        const icon = c.alive ? '✓' : '✗';
+        li.textContent = icon + ' ' + c.name + ' (' + c.role + ')';
+        if (!c.alive) li.classList.add('dead');
+        crewList.appendChild(li);
+      }
     }
 
     cmd.disabled = STATE.gameOver;
@@ -971,10 +1021,14 @@ function deserializeState(data) {
   STATE.days = data.days || 0;
   STATE.gameOver = !!data.game_over;
   STATE.won = !!data.won;
+  // Rebuild crew from saved IDs (crew now starts empty, so recreate from templates)
+  STATE.crew = [];
   if (data.crew) {
     for (const cdata of data.crew) {
-      const c = STATE.crew.find(c => c.id === cdata.id);
-      if (c) c.alive = cdata.alive;
+      const tpl = getCrewTemplate(cdata.id);
+      if (tpl) {
+        STATE.crew.push({...tpl, alive: cdata.alive !== false});
+      }
     }
   }
   STATE.awaitingChoice = data.awaiting_choice || null;

@@ -1208,6 +1208,14 @@ def _make_npcs():
                 '"You want to fight? Now? We\'re about to sail across the ocean! '
                 'Fine. One round. Don\'t blame me when I knock you on your backside."'
             ),
+            "recruit": (
+                'Conganchnes slaps you on the back, nearly knocking the wind out of you.\n\n'
+                '"Join your crew? I thought you\'d never ask! '
+                'I\'ve been sharpening my sword for exactly this. '
+                'Lead on, Captain — I\'ll follow you to the ends of the earth. '
+                'And the ends of anyone who gets in our way."\n\n'
+                '(Type YES to welcome Conganchnes into your crew.)'
+            ),
         }
     )
 
@@ -1225,6 +1233,16 @@ def _make_npcs():
                 'They say this journey will change everything. Every single thing.\n\n'
                 'Also that I should have worn a warmer cloak. But it\'s too late for that now."'
             ),
+            "recruit": (
+                'Fergus folds his star charts with careful precision.\n\n'
+                '"Join your crew? I\'ve already charted the course. '
+                'The stars have been telling me for years that I\'d sail with you one day. '
+                'I just didn\'t know when you\'d finally ask.\n\n'
+                'I can navigate us through any storm, read any sky, '
+                'and find our way home when all seems lost. '
+                'You need me, Captain. And I... I need this voyage."\n\n'
+                '(Type YES to welcome Fergus into your crew.)'
+            ),
         }
     )
 
@@ -1240,6 +1258,16 @@ def _make_npcs():
                 'I\'m going to make this voyage into the greatest epic ever sung. '
                 'Assuming we survive, of course. A tragic ending would sell more copies, '
                 'but I\'d prefer a happy one. For friendship. And also because I\'d like to keep living."'
+            ),
+            "recruit": (
+                'Diurán sets down his quill and smiles.\n\n'
+                '"Join your crew? Captain, I\'ve been writing this story in my head '
+                'since the day we met. Every chapter, every verse, every song — '
+                'they all lead to this moment.\n\n'
+                'I will chronicle every island, every monster, every miracle. '
+                'When we return, the world will know the name Mael Duin. '
+                'And they\'ll know it because I wrote it down."\n\n'
+                '(Type YES to welcome Diurán into your crew.)'
             ),
         }
     )

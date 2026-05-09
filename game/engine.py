@@ -92,6 +92,20 @@ class CrewMember:
         self.alive = alive
 
 
+CREW_TEMPLATES = {
+    "diuran": {"id": "diuran", "name": "Diurán", "description": "The poet and scribe, always ready with a verse.", "role": "poet"},
+    "conganchnes": {"id": "conganchnes", "name": "Conganchnes", "description": "A warrior whose skin cannot be wounded. Terrifying in battle.", "role": "champion"},
+    "fergus": {"id": "fergus", "name": "Fergus", "description": "The navigator, who can read the stars and the waves.", "role": "navigator"},
+}
+
+# Map prologue NPC IDs to crew template IDs for recruitment
+CREW_NPC_MAP = {
+    "young_conganchnes": "conganchnes",
+    "young_fergus": "fergus",
+    "young_diuran": "diuran",
+}
+
+
 class GameState:
     def __init__(self):
         self.current_location = "ailill_keep"
@@ -103,11 +117,7 @@ class GameState:
         self.game_over = False
         self.won = False
         self.message_log = []
-        self.crew = [
-            CrewMember("diuran", "Diurán", "The poet and scribe, always ready with a verse.", "poet"),
-            CrewMember("conganchnes", "Conganchnes", "A warrior whose skin cannot be wounded. Terrifying in battle.", "champion"),
-            CrewMember("fergus", "Fergus", "The navigator, who can read the stars and the waves.", "navigator"),
-        ]
+        self.crew = []  # Start empty — recruit companions through the prologue
         self.dead_crew = []
         self.known_islands = []
         self.awaiting_choice = None  # For choice-based interactions
@@ -158,6 +168,16 @@ class GameState:
 
     def set_flag(self, flag, value=True):
         self.flags[flag] = value
+
+    def add_crew(self, member_id):
+        """Add a crew member by ID if not already in crew."""
+        if any(c.id == member_id for c in self.crew):
+            return False
+        if member_id not in CREW_TEMPLATES:
+            return False
+        tpl = CREW_TEMPLATES[member_id]
+        self.crew.append(CrewMember(**tpl))
+        return True
 
     def total_crew_alive(self):
         return sum(1 for c in self.crew if c.alive)
@@ -214,9 +234,15 @@ class GameState:
                 state.inventory.append(ITEMS[item_id])
         # Restore crew alive status
         for cdata in data.get("crew", []):
-            for c in state.crew:
-                if c.id == cdata.get("id"):
-                    c.alive = cdata.get("alive", True)
+            cid = cdata.get("id")
+            existing = next((c for c in state.crew if c.id == cid), None)
+            if existing:
+                existing.alive = cdata.get("alive", True)
+            elif cid in CREW_TEMPLATES:
+                # Crew was saved with members; restore them from templates
+                tpl = dict(CREW_TEMPLATES[cid])
+                tpl["alive"] = cdata.get("alive", True)
+                state.crew.append(CrewMember(**tpl))
         return state
 
 
@@ -498,6 +524,13 @@ def handle_talk(state, npc_name, topic=None):
     if "greeting" in npc.dialogue:
         result = npc.dialogue["greeting"]
 
+        # Check if this NPC can be recruited (young companions in prologue)
+        if "recruit" in npc.dialogue and not state.has_flag(f"recruited_{npc.id}"):
+            if not any(c.id == npc.id for c in state.crew):
+                result += "\n\n" + npc.dialogue["recruit"]
+                state.awaiting_choice = f"recruit_{npc.id}"
+                state.choice_data = {"npc_id": npc.id}
+
         # Special: Ailill at the keep is gone after his death
         if npc.id == "ailill" and state.has_flag("witnessed_death"):
             return (
@@ -650,6 +683,8 @@ def handle_wait(state, args):
 
 
 def handle_crew(state, args):
+    if not state.crew:
+        return 'You have no crew yet. Find companions to join your voyage by talking to people.'
     alive = [c for c in state.crew if c.alive]
     dead = state.dead_crew
     lines = ["=== YOUR CREW ==="]
@@ -976,7 +1011,18 @@ def handle_sing(state, args):
 
 def handle_yes(state, args):
     """Handle YES response to a choice."""
-    if state.awaiting_choice == "queen_stay":
+    if state.awaiting_choice and state.awaiting_choice.startswith('recruit_'):
+        npc_id = state.awaiting_choice.replace('recruit_', '')
+        crew_id = CREW_NPC_MAP.get(npc_id, npc_id)
+        name = CREW_TEMPLATES.get(crew_id, {}).get("name", npc_id.capitalize())
+        if state.add_crew(crew_id):
+            state.set_flag(f"recruited_{npc_id}")
+            state.awaiting_choice = None
+            return f'"{name} joins your crew!"'
+        else:
+            state.awaiting_choice = None
+            return f"{name} is already in your crew."
+    elif state.awaiting_choice == "queen_stay":
         return _queen_stay_choice(state)
     elif state.awaiting_choice == "ending" or state.awaiting_choice == "ending_forgiven":
         if state.awaiting_choice == "ending_forgiven":
@@ -1026,7 +1072,10 @@ def handle_yes(state, args):
 
 def handle_no(state, args):
     """Handle NO response to a choice."""
-    if state.awaiting_choice == "queen_stay":
+    if state.awaiting_choice and state.awaiting_choice.startswith('recruit_'):
+        state.awaiting_choice = None
+        return 'Very well. Perhaps another time. You can talk to them again if you change your mind.'
+    elif state.awaiting_choice == "queen_stay":
         state.set_flag("resisted_queen")
         state.score += 5
         state.awaiting_choice = None

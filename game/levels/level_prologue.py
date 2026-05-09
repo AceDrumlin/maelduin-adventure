@@ -317,6 +317,13 @@ def register(items, npcs):
         items=[items["fathers_ring"]],
         npcs=[npcs["foster_mother"], npcs["druid"], npcs["young_diuran"], npcs["young_conganchnes"], npcs["young_fergus"]],
         exits={"west": "sea1", "beach": "sea1", "sea": "sea1", "sail": "sea1", "home": "home"},
+        blocked={
+            "west": ("You need to recruit your companions first! They are waiting at the training field or feast hall.", lambda s: len(s.crew) < 3),
+            "beach": ("You need to recruit your companions first! They are waiting at the training field or feast hall.", lambda s: len(s.crew) < 3),
+            "sea": ("You need to recruit your companions first! They are waiting at the training field or feast hall.", lambda s: len(s.crew) < 3),
+            "sail": ("You need to recruit your companions first! They are waiting at the training field or feast hall.", lambda s: len(s.crew) < 3),
+            "home": ("You need to recruit your companions before you can return home. They are waiting at the training field or feast hall.", lambda s: len(s.crew) < 3),
+        },
         on_enter=lambda s: (
             "The wind catches the sail. The curragh groans against the sand.\n\n"
             "Twenty-seven men. One boat. One quest.\n\n"
