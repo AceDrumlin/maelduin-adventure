@@ -704,7 +704,6 @@ function initUI() {
   const dayD = document.getElementById('day-display');
   const crewD = document.getElementById('crew-display');
   const crewList = document.getElementById('crew-list');
-  const scoreDetail = document.getElementById('score-detail');
   const restartBtn = document.getElementById('restart-btn');
 
   function scrollBtm() { setTimeout(() => output.scrollTop = output.scrollHeight, 30); }
@@ -733,18 +732,48 @@ function initUI() {
       invBar.appendChild(s);
     }
 
+    // ── Side Panel ──
+    const visited = Object.keys(STATE.visited).length;
+    const alive = totalCrewAlive();
+
+    // Location
+    document.getElementById('panel-loc-name').textContent = loc ? loc.name : '—';
+    document.getElementById('panel-loc-desc').textContent = loc
+      ? (loc.description || loc.detailed_desc || '').split('\n')[0]
+      : '';
+
+    // Stats
+    document.getElementById('panel-score').textContent = STATE.score;
+    document.getElementById('panel-turns').textContent = STATE.turns;
+    document.getElementById('panel-day').textContent = STATE.days + 1;
+    document.getElementById('panel-islands').textContent = visited;
+    document.getElementById('panel-items').textContent = STATE.inventory.length;
+    document.getElementById('panel-crew').textContent = alive + '/' + STATE.crew.length;
+
+    // Inventory (compact side panel list)
+    const panelInv = document.getElementById('panel-inventory');
+    panelInv.innerHTML = '';
+    if (STATE.inventory.length === 0) {
+      panelInv.innerHTML = '<span class="panel-empty">Empty</span>';
+    } else {
+      for (const item of STATE.inventory) {
+        const s = document.createElement('span');
+        s.className = 'panel-inv-item';
+        s.textContent = '• ' + item.name;
+        s.title = item.description;
+        panelInv.appendChild(s);
+      }
+    }
+
     // Crew list
     crewList.innerHTML = '';
     for (const c of STATE.crew) {
       const li = document.createElement('li');
-      li.textContent = c.name + ' (' + c.role + ')';
+      const icon = c.alive ? '✓' : '✗';
+      li.textContent = icon + ' ' + c.name + ' (' + c.role + ')';
       if (!c.alive) li.classList.add('dead');
       crewList.appendChild(li);
     }
-
-    // Score details
-    const visited = Object.keys(STATE.visited).length;
-    scoreDetail.innerHTML = 'Islands: <span>' + visited + '</span> | Items: <span>' + STATE.inventory.length + '</span>';
 
     cmd.disabled = STATE.gameOver;
     sendBtn.disabled = STATE.gameOver;

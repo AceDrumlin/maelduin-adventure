@@ -56,13 +56,21 @@ body{background:#0a0806;color:#f0ebe4;font-family:ui-monospace,'Cascadia Code','
 #side-toggle:active{background:rgba(184,134,11,.28)}
 
 /* ── SIDE PANEL ── */
-#side-panel{position:fixed;top:0;right:-300px;width:280px;height:100vh;height:100dvh;background:#0f0b08;border-left:2px solid #3a2a1a;padding:44px 16px 16px;transition:right .3s ease;overflow-y:auto;z-index:19}
+#side-panel{position:fixed;top:0;right:-300px;width:280px;height:100vh;height:100dvh;background:#0f0b08;border-left:2px solid #3a2a1a;padding:44px 12px 12px;transition:right .3s ease;overflow-y:auto;z-index:19}
 #side-panel.open{right:0}
-#side-panel h3{color:#d4a017;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;border-bottom:1px solid #2a1f14;padding-bottom:4px}
-#score-detail{margin:10px 0;font-size:12px;color:#8b7a6a;line-height:1.8}
-#score-detail span{color:#f0ebe4}
-#crew-list{list-style:none;font-size:12px;color:#c8b89a}
-#crew-list li{padding:3px 0}
+.panel-section{margin-bottom:12px}
+.panel-section h3{color:#d4a017;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;border-bottom:1px solid #2a1f14;padding-bottom:3px}
+#panel-loc-name{color:#f0ebe4;font-size:14px;font-weight:bold;margin-bottom:2px}
+#panel-loc-desc{color:#8b7a6a;font-size:11px;line-height:1.4;overflow:hidden;text-overflow:ellipsis}
+#panel-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px 4px}
+.stat-block{text-align:center;padding:4px 2px;background:#0d0906;border:1px solid #1a1410;border-radius:3px}
+.stat-block .stat-label{display:block;color:#6b5a4a;font-size:8px;text-transform:uppercase;letter-spacing:.5px}
+.stat-block .stat-number{display:block;color:#d4a017;font-size:16px;font-weight:bold;line-height:1.3}
+#panel-inventory{display:flex;flex-wrap:wrap;gap:3px;min-height:18px}
+.panel-inv-item{color:#c8b89a;font-size:11px;padding:1px 0;cursor:default}
+.panel-empty{color:#4a3a2a;font-size:11px;font-style:italic}
+#crew-list{list-style:none;font-size:12px;color:#c8b89a;margin:0}
+#crew-list li{padding:2px 0;font-size:11px}
 #crew-list .dead{opacity:.35;text-decoration:line-through;color:#6b5a4a}
 #restart-btn{display:block;width:100%;margin-top:16px;padding:10px;background:transparent;border:1px solid #5a3a2a;color:#c0392b;font-family:ui-monospace,'Cascadia Code','JetBrains Mono','Menlo','Consolas','DejaVu Sans Mono',monospace;font-size:13px;border-radius:4px;cursor:pointer;transition:all .2s}
 #restart-btn:hover{background:#3a1a1a;color:#e74c3c}
@@ -162,12 +170,50 @@ body{background:#0a0806;color:#f0ebe4;font-family:ui-monospace,'Cascadia Code','
 <div id="inventory-bar"></div>
 <div class="backdrop" id="backdrop"></div>
 <div id="side-panel">
-<h3>&#128220; Voyage Log</h3>
-<div id="score-detail"></div>
-<h3>&#128373; Crew</h3>
-<ul id="crew-list"></ul>
-<button id="save-game-btn" class="side-save-btn">&#128190; Save / Load Game</button>
-<button id="restart-btn">&#128260; New Voyage</button>
+  <div class="panel-section" id="panel-location">
+    <h3>📍 Location</h3>
+    <div id="panel-loc-name">--</div>
+    <div id="panel-loc-desc"></div>
+  </div>
+  <div class="panel-section">
+    <h3>📊 Voyage Stats</h3>
+    <div id="panel-stats">
+      <div class="stat-block">
+        <span class="stat-label">Score</span>
+        <span class="stat-number" id="panel-score">0</span>
+      </div>
+      <div class="stat-block">
+        <span class="stat-label">Turns</span>
+        <span class="stat-number" id="panel-turns">0</span>
+      </div>
+      <div class="stat-block">
+        <span class="stat-label">Day</span>
+        <span class="stat-number" id="panel-day">1</span>
+      </div>
+      <div class="stat-block">
+        <span class="stat-label">Islands</span>
+        <span class="stat-number" id="panel-islands">0</span>
+      </div>
+      <div class="stat-block">
+        <span class="stat-label">Items</span>
+        <span class="stat-number" id="panel-items">0</span>
+      </div>
+      <div class="stat-block">
+        <span class="stat-label">Crew</span>
+        <span class="stat-number" id="panel-crew">3/3</span>
+      </div>
+    </div>
+  </div>
+  <div class="panel-section">
+    <h3>🎒 Inventory</h3>
+    <div id="panel-inventory"><span class="panel-empty">Empty</span></div>
+  </div>
+  <div class="panel-section">
+    <h3>👥 Crew</h3>
+    <ul id="crew-list"></ul>
+  </div>
+  <button id="save-game-btn" class="side-save-btn">💾 Save / Load Game</button>
+  <button id="restart-btn" class="side-restart-btn">🔄 New Voyage</button>
 </div>
 <div id="input-row">
 <span id="prompt">&#9656;</span>
