@@ -483,6 +483,14 @@ def _make_npcs():
                 "When you find what you seek... you may find it is not what you expected.\"\n\n"
                 "He presses a shimmering thread into your hand."
             ),
+            "greeting_if_learned_truth": (
+                "The druid nods slowly, a hint of a smile on his ancient face.\n\n"
+                "\"So. You know. The truth sits heavy in your chest, doesn't it? "
+                "Good. That means you are ready.\n\n"
+                "The magic thread will guide you. The sea will test you. "
+                "And when you return, you will not be the man who left.\n\n"
+                "Now go. The tide waits for no man, not even one with vengeance in his heart.\""
+            ),
             "murder": (
                 "\"Your father, Ailill Ochair Ága. Slain by raiders from the Northern Isles. "
                 "They came in the night, burned your village, and left his body on the strand. "
@@ -514,6 +522,13 @@ def _make_npcs():
                 "\"You are in my house. Few humans visit. Fewer still leave without giving me something I want. "
                 "I smell... milk. Do you have milk for me?\"\n\n"
                 "The cat's tail twitches expectantly."
+            ),
+            "greeting_if_cat_pacified": (
+                "The enormous cat is sprawled across its golden throne, purring like a dozen bees in a barrel.\n\n"
+                "\"Ah. The milk-bringer. You may approach. I have deemed you... acceptable.\n\n"
+                "You may pass through my island whenever you wish. Consider yourself one of the few humans "
+                "I don't actively despise. Don't let it go to your head.\"\n\n"
+                "It closes its eyes and resumes purring."
             ),
             "milk": (
                 "\"Milk. Yes. I like milk. Do you have milk?\""
@@ -555,6 +570,15 @@ def _make_npcs():
                 'Your crew looks at you with hopeful eyes.\n\n'
                 "Will you stay, Mael Duin?"
             ),
+            "greeting_if_resisted_queen": (
+                'The Queen watches you from her throne, her smile cold and precise.\n\n'
+                '\"You\'re back. I didn\'t think you would be. Most men who leave do not return — '
+                'they cannot bear to see what they have refused.\n\n'
+                'But you are not most men, are you, Mael Duin? You have the Wolf\'s blood in you. '
+                'Stubborn. Foolish. Brave.\n\n'
+                'I respect you for it. But do not mistake respect for warmth. '
+                'My island is no longer open to you. Leave before I change my mind.\"'
+            ),
             "stay": (
                 '"Stay with us forever. What is there to return to? A cold village, a blood feud, '
                 "a grave you cannot fill with vengeance? Here, there is only warmth.\""
@@ -578,9 +602,18 @@ def _make_npcs():
         dialogue={
             "greeting": (
                 'The hermit looks at you with eyes that have seen too much and want nothing.\n\n'
-                '"You have traveled far, Mael Duin. And yet you have not traveled at all. '
+                '\"You have traveled far, Mael Duin. And yet you have not traveled at all. '
                 'The sea you cross is the sea within you — stormy, deep, full of monsters you have yet to name.\n\n'
                 "Sit with me. The otter will share his fish. And I will tell you what the waves have been whispering.\""
+            ),
+            "greeting_if_otter_pelt_returned": (
+                'The hermit is sitting on his rock, the otter pelt wrapped around his shoulders. '
+                'He looks warmer now. More at peace.\n\n'
+                '\"Mael Duin. You returned my companion\'s pelt. I cannot thank you enough.\n\n'
+                "It\'s funny — I thought the otter was gone forever. "
+                "But he never really left. He was just waiting to come home in a different form.\n\n"
+                'You carry the same burden I carried — the weight of a father lost. '
+                "But you carry it forward. That takes strength.\""
             ),
             "father": (
                 '"Your father is at peace. He does not ask for revenge. He asks that you live."'
@@ -608,10 +641,24 @@ def _make_npcs():
         dialogue={
             "greeting": (
                 "The giant smith bellows over the roar of his forge:\n\n"
-                '"HO, LITTLE MAN! You\'ve come to the forge at the edge of the world! '
+                '\"HO, LITTLE MAN! You\'ve come to the forge at the edge of the world! '
                 "Most people sail right past — they hear the hammering and think it's thunder. "
                 "But you came closer. That takes guts. Or stupidity. Both, probably.\"\n\n"
                 "He laughs, and the ground shakes."
+            ),
+            "greeting_if_got_harpoon": (
+                'The smith looks up from his work and grins, his face lit by the glow of the forge.\n\n'
+                '\"Back again, little man? I hope you\'re not looking for another harpoon — '
+                'one masterpiece per customer is my rule.\n\n'
+                'But if you\'ve got something shiny to trade, I\'m always listening. '
+                'A smith\'s work is never done.\"'
+            ),
+            "greeting_if_got_harpoon": (
+                'The smith looks up from his work and grins, his face lit by the glow of the forge.\n\n'
+                '\"Back again, little man? I hope you\'re not looking for another harpoon — '
+                'one masterpiece per customer is my rule.\n\n'
+                'But if you\'ve got something shiny to trade, I\'m always listening. '
+                'A smith\'s work is never done.\"'
             ),
             "weapon": (
                 '"A weapon, eh? I forged the sword that hangs at the sun\'s belt. '
@@ -674,6 +721,14 @@ def _make_npcs():
                 '"HA HA HA HA! Your FACE! The way you LOOK! So SERIOUS! '
                 "Like you've never laughed in your LIFE! Oh, this is the BEST day!\"\n\n"
                 "He laughs so hard he falls off his stool, gets up, and keeps laughing."
+            ),
+            "greeting_if_king_pacified": (
+                'The Laughing King wipes a tear from his eye and lets out a long, contented sigh.\n\n'
+                '"Ahhh. That was a good laugh. The BEST laugh.\n\n'
+                'He smiles a genuine, peaceful smile.\n\n'
+                '"You know, I\'d forgotten what silence sounds like. It\'s... nice. '
+                'Still funny, though. Everything is still funny. Just... quieter."\n\n'
+                "He hums contentedly, tapping his fingers on his one-legged stool."
             ),
             "serious": (
                 '"Serious? SERIOUS?! Why would anyone be serious when you can LAUGH?! '
@@ -1149,6 +1204,13 @@ def _make_npcs():
                 'He was not a simple man. He was a storm in human shape.\n\n'
                 'And you are his son. Never forget that."'
             ),
+            "greeting_if_training_seen": (
+                'Your foster mother watches you with proud, sad eyes.\n\n'
+                '\"Look at you. A warrior now. I remember when you were so small you fit in the crook of my arm.\n\n'
+                'She steps closer and adjusts your collar, a gesture from childhood.\n\n'
+                '\"Your father\'s ring. I kept it all these years. '
+                'He would want you to have it. You have his strength, Mael Duin.\"'
+            ),
             "father": (
                 '"Ailill. Your father. He was the Wolf of the Arans. '
                 'He led the raids against the Northern Isles. He was feared and loved in equal measure.\n\n'
@@ -1184,6 +1246,14 @@ def _make_npcs():
                 'Slain on the beach like a dog while his wife watched.\n\n'
                 'What are you going to do about it, boy? Cry? Run to the druid? '
                 'Or are you going to do something a real man would do?"'
+            ),
+            "greeting_if_taunting_seen": (
+                'Lorc\xe1n looks up as you approach, his face flushing. '
+                'He does not meet your eyes.\n\n'
+                '\"Look... about what I said. I was drunk. That\'s not an excuse.'
+                '\n\nHe shifts uncomfortably.\n\n'
+                '\"Your father was a great man. If you sail after those raiders, '
+                'I hope you find them. And I hope you come back."'
             ),
             "apology": (
                 '"An apology? You want an apology from me?\n\n'
