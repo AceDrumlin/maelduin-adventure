@@ -52,7 +52,8 @@ def load_shared():
                 'something more.\n\n'
                 'She worries. That is her job. My job is to make sure she has nothing to worry about."'
             ),
-        }
+        },
+        visible_if=lambda s: not s.has_flag('witnessed_death'),
     )
 
     npcs["mother"] = NPC(
@@ -79,7 +80,8 @@ def load_shared():
                 'Mothers give birth to children who will bury them. That is the natural order.\n\n'
                 'I just hope he remembers me. When I am gone. I hope he knows I loved him."'
             ),
-        }
+        },
+        visible_if=lambda s: not s.has_flag('witnessed_death'),
     )
 
     _make_npcs()
@@ -841,7 +843,8 @@ def _make_npcs():
                 '"Mael Duin. My son. He is so small. He will not remember any of this. '
                 'Perhaps that is a mercy. Perhaps it is a cruelty. I do not know which."'
             ),
-        }
+        },
+        visible_if=lambda s: s.has_flag('witnessed_death'),
     )
 
     n["skull"] = NPC(
@@ -991,7 +994,8 @@ def _make_npcs():
                 "If you have something edible... I MIGHT listen. MIGHT. "
                 "No promises. I'm a pig of my word. Which means I change my mind a lot.\""
             ),
-        }
+        },
+        visible_if=lambda s: not s.has_flag('pig_pacified'),
     )
 
     n["serpent"] = NPC(
@@ -1022,7 +1026,8 @@ def _make_npcs():
                 "The island would probably dissolve. The herb you seek is the only antidote. "
                 "Funny, isn't it? The cure grows beside the poison.\""
             ),
-        }
+        },
+        visible_if=lambda s: not s.has_flag('serpent_calmed'),
     )
 
     # ---- MISSING ISLANDS NPCS ----
@@ -1216,7 +1221,8 @@ def _make_npcs():
                 'And the ends of anyone who gets in our way."\n\n'
                 '(Type YES to welcome Conganchnes into your crew.)'
             ),
-        }
+        },
+        visible_if=lambda s: not s.has_flag('recruited_young_conganchnes'),
     )
 
     n["young_fergus"] = NPC(
@@ -1243,7 +1249,8 @@ def _make_npcs():
                 'You need me, Captain. And I... I need this voyage."\n\n'
                 '(Type YES to welcome Fergus into your crew.)'
             ),
-        }
+        },
+        visible_if=lambda s: not s.has_flag('recruited_young_fergus'),
     )
 
     n["young_diuran"] = NPC(
@@ -1269,7 +1276,8 @@ def _make_npcs():
                 'And they\'ll know it because I wrote it down."\n\n'
                 '(Type YES to welcome Diurán into your crew.)'
             ),
-        }
+        },
+        visible_if=lambda s: not s.has_flag('recruited_young_diuran'),
     )
 
     n["young_druid"] = NPC(
@@ -1442,7 +1450,8 @@ def _make_npcs():
                 "I don't stop to ask their family history.'\n\n"
                 "He throws another stone for emphasis."
             ),
-        }
+        },
+        visible_if=lambda s: not (s.has_flag('giant_defeated') or s.has_flag('giant_mollified')),
     )
 
     n["treasure_serpent"] = NPC(
@@ -1494,7 +1503,8 @@ def _make_npcs():
                 "You slip past the serpent into the cave. The treasure awaits.\n\n"
                 "(+1 point. You may now enter the cave.)"
             ),
-        }
+        },
+        visible_if=lambda s: not s.has_flag('serpent_passed'),
     )
 
     n["great_hound"] = NPC(
@@ -1544,7 +1554,8 @@ def _make_npcs():
                 "and never returned. I have kept my promise. I hope he kept his.'\n\n"
                 "The hound whines softly and lays its head on its paws."
             ),
-        }
+        },
+        visible_if=lambda s: not s.has_flag('dog_pacified'),
     )
 
     n["mountain_lion"] = NPC(
@@ -1602,7 +1613,8 @@ def _make_npcs():
                 "'You have my gratitude, feather-borne one. Go in peace.'\n\n"
                 "(+3 points. Gained: Lion's Claw.)"
             ),
-        }
+        },
+        visible_if=lambda s: not (s.has_flag('lion_fought') or s.has_flag('lion_pacified')),
     )
 
     n["anchorite"] = NPC(

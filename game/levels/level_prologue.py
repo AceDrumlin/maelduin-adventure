@@ -15,7 +15,20 @@ def register(items, npcs):
     
     # Store reference to the keep location for runtime NPC management
     ailill_keep_ref = {}
-    
+
+    def _keep_describe(state):
+        if state.has_flag("witnessed_death"):
+            return (
+                "Ailill's Keep — Empty Hall",
+                "The great hall is silent now. The torches have burned low. "
+                "The benches are empty. The feast is over.\n\n"
+                "At the head of the hall, Ailill's throne stands vacant. "
+                "The cradle by the fire is empty too.\n\n"
+                "The hall feels like a tomb. The laughter is a memory.\n\n"
+                "(Type OUT or WEST to go to the beach.)"
+            )
+        return None
+
     l["ailill_keep"] = Location(
         "ailill_keep", "Ailill's Keep — The Night of the Wolf",
         "The great hall of Ailill Ochair Ága, the Wolf of the Arans. Torchlight. Feasting. The last night of peace.",
@@ -38,13 +51,15 @@ def register(items, npcs):
         items=[],
         npcs=[npcs["ailill"], npcs["mother"], npcs["young_druid"]],
         exits={"west": "ailill_beach", "out": "ailill_beach", "door": "ailill_beach"},
+        describe=_keep_describe,
         ambient=lambda s: (
             "The hall roars with laughter and song. A warrior is telling a joke about a sea serpent "
             "and a monk. It's not a very good joke. Everyone loves it."
-            if s.turns < 5 else
-            "The torches flicker. Someone has opened the door. A draft creeps across the floor."
+            if not s.has_flag('witnessed_death') else
+            "The hall is quiet now. Embers crackle. A loose shutter bangs in the wind."
         ),
         on_enter=lambda s: (
+            s.set_flag("started_prologue") or
             "You are not Mael Duin. Not yet.\n\n"
             "You are a ghost in this hall — a witness to history. "
             "This is the story of how your father died, and how you came to be.\n\n"
@@ -68,6 +83,20 @@ def register(items, npcs):
                 "The salt spray stings your eyes. Or perhaps it's something else.\n\n"
                 "Ailill Ochair Ága, the Wolf of the Arans, is dead.\n\n"
                 "You are one year old. You will not remember this. But it will shape everything."
+            )
+        return None
+
+    def _beach_describe(state):
+        """Beach changes after death is witnessed."""
+        if state.has_flag("time_passed") or state.has_flag("childhood_seen"):
+            return (
+                "The Strand — Empty Shore",
+                "The tide rises and falls on a beach that remembers nothing. The sand is smooth and untroubled. "
+                "The grey sea stretches to the horizon. Whatever happened here has been washed away by time.\n\n"
+                "Ailill Ochair Ága lies somewhere beneath the waves, his bones picked clean by fish. "
+                "The Wolf of the Arans is part of the sea now.\n\n"
+                "There is nothing left to see here. Only the wind and the gulls and the endless water.\n\n"
+                "(Type ONWARD to continue.)"
             )
         return None
 
@@ -102,11 +131,32 @@ def register(items, npcs):
             if not s.has_flag("witnessed_death") else
             "The beach is empty now. Only the stones remember what happened here."
         ),
+        describe=_beach_describe,
+
     )
 
     # ────────────────────────────────────────────────────────────
     # SCENE 3: THE FOSTER VILLAGE — Childhood
     # ────────────────────────────────────────────────────────────
+    def _foster_describe(state):
+        """Foster village after time has moved on."""
+        if state.has_flag("childhood_seen") and state.has_flag("training_seen"):
+            return (
+                "The Foster Village — Empty Nest",
+                "The village is quiet now. The children who played here have grown. The goats that wandered the lanes "
+                "are gone. An old woman sits in a doorway, weaving. She looks up as you pass, and her eyes widen.\n\n"
+                "'You went, then.' She nods. 'We all knew you would. The sea always calls its own.'\n\n"
+                "The village feels smaller than you remember. Or perhaps you are bigger."
+            )
+        if state.has_flag("childhood_seen"):
+            return (
+                "The Foster Village — Years Later",
+                "The village is much the same, but you are not. The stones are the same stones. The goats are "
+                "different goats. A familiar DRUID sits by a fire, stirring his eternal pot. He nods as you pass.\n\n"
+                "He is patient. He knows you will come to him when you are ready."
+            )
+        return None
+
     l["foster_village"] = Location(
         "foster_village", "The Foster Village — Ten Years Later",
         "A small village on the Aran Islands. Children play in the dirt. Goats wander freely. Life continues.",
@@ -129,6 +179,7 @@ def register(items, npcs):
         npcs=[npcs["foster_mother"], npcs["young_druid"]],
         exits={"onward": "training_field", "forward": "training_field", "grow": "training_field"},
         on_enter=lambda s: (
+            s.set_flag("childhood_seen") or
             "A dog barks. A child laughs. The world is simple when you're ten.\n\n"
             "You don't know that your father was a hero. You don't know about the blood on the beach. "
             "You only know that the sea is grey and the sky is grey and somewhere, "
@@ -144,11 +195,36 @@ def register(items, npcs):
             "The druid is teaching a group of children to count. "
             "They are not very good at it. He is very patient."
         ),
+        describe=_foster_describe,
+
     )
 
     # ────────────────────────────────────────────────────────────
     # SCENE 4: THE TRAINING FIELD — Becoming a Warrior
     # ────────────────────────────────────────────────────────────
+    def _training_describe(state):
+        """Training field after companions are recruited."""
+        has_conganchnes = state.has_flag("recruited_young_conganchnes")
+        has_fergus = state.has_flag("recruited_young_fergus")
+        has_diuran = state.has_flag("recruited_young_diuran")
+        all_gone = has_conganchnes and has_fergus and has_diuran
+        if state.has_flag("training_seen") and all_gone:
+            return (
+                "The Training Field — Empty",
+                "The training field is quiet now. Wooden swords lie scattered on the grass, slowly rotting. "
+                "Your companions are gone. Only the ghosts of old training sessions remain.\n\n"
+                "Your foster mother no longer comes to watch. She has said her goodbyes.\n\n"
+                "The field feels like a memory of a life you used to live."
+            )
+        if state.has_flag("training_seen") and has_conganchnes:
+            return (
+                "The Training Field — One Friend Gone",
+                "The training field feels emptier without Conganchnes. His absence is a hole in the air.\n\n"
+                "Fergus studies star charts. Diurán writes poetry. Your foster mother watches from the edge.\n\n"
+                "The sea glitters in the distance, waiting."
+            )
+        return None
+
     l["training_field"] = Location(
         "training_field", "The Training Field — Five Years Later",
         "A grassy field by the sea. Wooden swords lie scattered on the ground. Young men train here.",
@@ -173,6 +249,7 @@ def register(items, npcs):
         npcs=[npcs["young_conganchnes"], npcs["young_fergus"], npcs["young_diuran"], npcs["foster_mother"]],
         exits={"onward": "feast_hall", "forward": "feast_hall", "grow": "feast_hall"},
         on_enter=lambda s: (
+            s.set_flag("training_seen") or
             "The sea glitters in the afternoon light. For a moment, everything is perfect.\n\n"
             "You have friends. You have a home. You have purpose.\n\n"
             "It will not last."
@@ -186,11 +263,32 @@ def register(items, npcs):
             "Diurán reads aloud his latest poem. It's about a warrior who fights a sea monster. "
             "It's not very good. You tell him it's excellent."
         ),
+        describe=_training_describe,
+
     )
 
     # ────────────────────────────────────────────────────────────
     # SCENE 5: THE FEAST HALL — The Taunting
     # ────────────────────────────────────────────────────────────
+    def _feast_describe(state):
+        """Feast hall after the taunting and recruitment."""
+        if state.has_flag("taunting_seen") and state.has_flag("learned_truth"):
+            return (
+                "The Feast Hall — After the Truth",
+                "The hall is empty now. The fire has burned low, and the benches are cold. "
+                "Lorcán is gone. Your companions are gathering their things.\n\n"
+                "The truth has been spoken. The air smells of salt and destiny.\n\n"
+                "The druid's sanctuary lies to the NORTH."
+            )
+        if state.has_flag("taunting_seen"):
+            return (
+                "The Feast Hall — After the Taunt",
+                "Lorcán's words hang in the air like smoke. 'The bastard of Inishmore.'\n\n"
+                "Your father was Ailill Ochair Ága, the Wolf of the Arans, and he was murdered.\n\n"
+                "The druid's sanctuary is to the NORTH. He will have the full truth."
+            )
+        return None
+
     l["feast_hall"] = Location(
         "feast_hall", "The Feast Hall — Twenty Years Old",
         "The same hall where Ailill once feasted. Different faces. Different songs. But the same silence beneath the laughter.",
@@ -220,6 +318,7 @@ def register(items, npcs):
         npcs=[npcs["lorcan"], npcs["young_diuran"], npcs["young_conganchnes"], npcs["young_fergus"]],
         exits={"out": "druid_sanctuary", "door": "druid_sanctuary", "north": "druid_sanctuary"},
         on_enter=lambda s: (
+            s.set_flag("taunting_seen") or
             "The fire crackles. The mead is sweet. But there is poison in this hall tonight.\n\n"
             "You are about to learn the truth. And once you learn it, nothing will ever be the same."
             if not s.has_flag("taunting_seen") else None
@@ -229,6 +328,8 @@ def register(items, npcs):
             if not s.has_flag("taunting_seen") else
             "The hall feels empty now. The laughter is gone. The fire has burned low."
         ),
+        describe=_feast_describe,
+
     )
 
     # ────────────────────────────────────────────────────────────
@@ -245,6 +346,17 @@ def register(items, npcs):
             return (
                 "The fire crackles. The druid's eyes are ancient — older than the hills, older than grief.\n\n"
                 '"Sit," he says. "Eat. Listen. The truth is a heavy meal. You should not take it on an empty stomach."'
+            )
+        return None
+
+    def _druid_describe(state):
+        """Druid sanctuary changes after truth is learned."""
+        if state.has_flag("learned_truth") and state.has_flag("set_sail"):
+            return (
+                "The Druid's Sanctuary — Return",
+                "The grove is quiet. The fire has burned to embers. The druid is gone.\n\n"
+                "The magic thread is with you. The sea is waiting.\n\n"
+                "There is nothing left for you here."
             )
         return None
 
@@ -283,11 +395,25 @@ def register(items, npcs):
             "The fire pops. An owl calls somewhere in the dark. "
             "The druid hums an old song — a lament, older than the Christian bells."
         ),
+        describe=_druid_describe,
+
     )
 
     # ────────────────────────────────────────────────────────────
     # SCENE 7: THE VILLAGE HARBOR — Setting Sail
     # ────────────────────────────────────────────────────────────
+    def _harbor_describe(state):
+        """Harbor changes after sailing."""
+        if state.has_flag("set_sail"):
+            return (
+                "The Harbor — After Departure",
+                "The beach where your curragh lay is empty now. The tide has erased the marks.\n\n"
+                "Your foster mother stands alone on the sand, watching the horizon.\n\n"
+                "'The sea takes what it wants,' she says. 'Be sure it gives you back.'\n\n"
+                "The harbor is a place of farewells. You have made yours."
+            )
+        return None
+
     l["village_harbor"] = Location(
         "village_harbor", "The Harbor — The Day of Departure",
         "A grey morning. A curragh on the beach. Twenty-seven men. The start of the voyage.",
@@ -325,6 +451,7 @@ def register(items, npcs):
             "home": ("You need to recruit your companions before you can return home. They are waiting at the training field or feast hall.", lambda s: len(s.crew) < 3),
         },
         on_enter=lambda s: (
+            s.set_flag("set_sail") or
             "The wind catches the sail. The curragh groans against the sand.\n\n"
             "Twenty-seven men. One boat. One quest.\n\n"
             "Ahead: the open sea, thirty islands, monsters, gods, wonders, and the men who killed your father.\n\n"
@@ -336,6 +463,8 @@ def register(items, npcs):
             "Gulls cry overhead. Waves hiss on the shingle. "
             "Somewhere, a woman begins to sing — a farewell song, old as the islands."
         ),
+        describe=_harbor_describe,
+
     )
 
     # ────────────────────────────────────────────────────────────

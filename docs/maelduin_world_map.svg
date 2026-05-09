@@ -1,0 +1,908 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 3200" width="2400" height="3200">
+  <defs>
+    <!-- Parchment texture -->
+    <radialGradient id="parchment" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#f5e6c8"/>
+      <stop offset="60%" stop-color="#e8d5a3"/>
+      <stop offset="100%" stop-color="#c4a66a"/>
+    </radialGradient>
+
+    <!-- Ocean gradients -->
+    <radialGradient id="sea1_water" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#6a9fb5" stop-opacity="0.6"/>
+      <stop offset="80%" stop-color="#4a7a8e" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#c4a66a" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="sea2_water" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#3a5f8a" stop-opacity="0.7"/>
+      <stop offset="80%" stop-color="#2a4a6e" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#c4a66a" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="sea3_water" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1a1a3a" stop-opacity="0.8"/>
+      <stop offset="80%" stop-color="#0a0a2a" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#c4a66a" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Island gradients -->
+    <radialGradient id="island_green" cx="40%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#8fbc6a"/>
+      <stop offset="60%" stop-color="#5a8a3a"/>
+      <stop offset="100%" stop-color="#3a5a22"/>
+    </radialGradient>
+    <radialGradient id="island_sand" cx="40%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#e8d5a3"/>
+      <stop offset="60%" stop-color="#c4a66a"/>
+      <stop offset="100%" stop-color="#8a6a3a"/>
+    </radialGradient>
+    <radialGradient id="island_dark" cx="40%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#5a4a3a"/>
+      <stop offset="60%" stop-color="#3a2a1a"/>
+      <stop offset="100%" stop-color="#1a0a0a"/>
+    </radialGradient>
+    <radialGradient id="island_fire" cx="40%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#e8a040"/>
+      <stop offset="60%" stop-color="#c06020"/>
+      <stop offset="100%" stop-color="#6a2010"/>
+    </radialGradient>
+    <radialGradient id="island_ice" cx="40%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#c0dde8"/>
+      <stop offset="60%" stop-color="#8ab8c8"/>
+      <stop offset="100%" stop-color="#4a7888"/>
+    </radialGradient>
+
+    <!-- Compass rose -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <!-- Drop shadow for islands -->
+    <filter id="shadow">
+      <feDropShadow dx="2" dy="3" stdDeviation="3" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Background parchment -->
+  <rect width="2400" height="3200" fill="url(#parchment)"/>
+
+  <!-- Decorative border -->
+  <rect x="20" y="20" width="2360" height="3160" fill="none" stroke="#8a6a3a" stroke-width="4" rx="8"/>
+  <rect x="30" y="30" width="2340" height="3140" fill="none" stroke="#8a6a3a" stroke-width="1.5" rx="6"/>
+  <rect x="38" y="38" width="2324" height="3124" fill="none" stroke="#a0804a" stroke-width="0.5" rx="4"/>
+
+  <!-- Title -->
+  <text x="1200" y="80" text-anchor="middle" font-family="Georgia, serif" font-size="42" font-weight="bold" fill="#3a2010" letter-spacing="3">THE VOYAGE OF MAEL DUIN</text>
+  <text x="1200" y="115" text-anchor="middle" font-family="Georgia, serif" font-size="18" font-style="italic" fill="#6a4a2a" letter-spacing="2">A Cartographic Record of the Islands &amp; Wonders of the Western Sea</text>
+  <line x1="800" y1="130" x2="1600" y2="130" stroke="#8a6a3a" stroke-width="1"/>
+
+  <!-- Compass Rose (top right) -->
+  <g transform="translate(2150, 200)" filter="url(#glow)">
+    <circle cx="0" cy="0" r="55" fill="none" stroke="#6a4a2a" stroke-width="1.5"/>
+    <circle cx="0" cy="0" r="50" fill="none" stroke="#8a6a3a" stroke-width="0.5"/>
+    <!-- N -->
+    <polygon points="0,-50 -8,-8 0,0 8,-8" fill="#3a2010"/>
+    <polygon points="0,-50 -8,-8 0,0 8,-8" fill="#3a2010" transform="rotate(180)"/>
+    <!-- E/W -->
+    <polygon points="0,-35 -8,-8 0,0 8,-8" fill="#6a4a2a" transform="rotate(90)"/>
+    <polygon points="0,-35 -8,-8 0,0 8,-8" fill="#6a4a2a" transform="rotate(270)"/>
+    <text x="0" y="-60" text-anchor="middle" font-family="Georgia" font-size="14" font-weight="bold" fill="#3a2010">N</text>
+    <text x="0" y="70" text-anchor="middle" font-family="Georgia" font-size="12" fill="#6a4a2a">S</text>
+    <text x="65" y="5" text-anchor="middle" font-family="Georgia" font-size="12" fill="#6a4a2a">E</text>
+    <text x="-65" y="5" text-anchor="middle" font-family="Georgia" font-size="12" fill="#6a4a2a">W</text>
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(50, 180)">
+    <rect x="0" y="0" width="240" height="170" fill="#f5e6c8" stroke="#8a6a3a" stroke-width="1.5" rx="4" opacity="0.85"/>
+    <text x="120" y="22" text-anchor="middle" font-family="Georgia" font-size="13" font-weight="bold" fill="#3a2010">LEGEND</text>
+    <line x1="15" y1="30" x2="225" y2="30" stroke="#8a6a3a" stroke-width="0.5"/>
+
+    <!-- Sea hub -->
+    <circle cx="25" cy="48" r="8" fill="#4a7a8e" stroke="#2a4a5e" stroke-width="1.5"/>
+    <text x="42" y="52" font-family="Georgia" font-size="11" fill="#3a2010">Sea Hub (navigation point)</text>
+
+    <!-- Story area -->
+    <rect x="17" y="63" width="16" height="12" fill="#e8d5a3" stroke="#8a6a3a" stroke-width="1" rx="2"/>
+    <text x="42" y="73" font-family="Georgia" font-size="11" fill="#3a2010">Story Location (prologue)</text>
+
+    <!-- Island -->
+    <ellipse cx="25" cy="90" rx="8" ry="6" fill="#8fbc6a" stroke="#5a8a3a" stroke-width="1"/>
+    <text x="42" y="94" font-family="Georgia" font-size="11" fill="#3a2010">Island / Landmark</text>
+
+    <!-- Blocked path -->
+    <line x1="15" y1="112" x2="35" y2="112" stroke="#c03030" stroke-width="2" stroke-dasharray="4,3"/>
+    <text x="42" y="116" font-family="Georgia" font-size="11" fill="#3a2010">Blocked / Hazardous path</text>
+
+    <!-- Key item -->
+    <rect x="19" y="128" width="12" height="12" fill="#d4a030" stroke="#8a6020" stroke-width="0.8" rx="1"/>
+    <text x="42" y="139" font-family="Georgia" font-size="11" fill="#3a2010">Key Item available</text>
+
+    <!-- NPC -->
+    <circle cx="25" cy="156" r="5" fill="#6a4a8a" stroke="#3a2a5a" stroke-width="1"/>
+    <text x="42" y="160" font-family="Georgia" font-size="11" fill="#3a2010">NPC / Character present</text>
+  </g>
+
+  <!-- ============================================================ -->
+  <!-- PROLOGUE REGION — The Past (top left area, flowing downward) -->
+  <!-- ============================================================ -->
+
+  <!-- Region label -->
+  <text x="450" y="190" text-anchor="middle" font-family="Georgia, serif" font-size="16" font-weight="bold" fill="#3a1a0a" opacity="0.7">— THE PROLOGUE —</text>
+  <text x="450" y="207" text-anchor="middle" font-family="Georgia, serif" font-size="11" font-style="italic" fill="#6a4a2a" opacity="0.6">A Life Remembered • Twenty Years in Brief</text>
+
+  <!-- ailill_keep -->
+  <g transform="translate(400, 240)" filter="url(#shadow)">
+    <rect x="-65" y="-28" width="130" height="56" rx="6" fill="#f0dda0" stroke="#8a6a3a" stroke-width="1.5"/>
+    <text x="0" y="-6" text-anchor="middle" font-family="Georgia" font-size="10" font-weight="bold" fill="#3a2010">Ailill's Keep</text>
+    <text x="0" y="8" text-anchor="middle" font-family="Georgia" font-size="8" font-style="italic" fill="#6a4a2a">The Night of the Wolf</text>
+    <text x="0" y="20" text-anchor="middle" font-family="Georgia" font-size="7" fill="#8a6a3a">Ailill • Mother • Druid</text>
+    <!-- NPC indicator -->
+    <circle cx="52" cy="-20" r="4" fill="#6a4a8a" opacity="0.8"/>
+  </g>
+
+  <!-- Arrow: ailill_keep → ailill_beach -->
+  <line x1="465" y1="296" x2="465" y2="340" stroke="#8a6a3a" stroke-width="1.5"/>
+  <polygon points="465,342 461,335 469,335" fill="#8a6a3a"/>
+  <text x="478" y="322" font-family="Georgia" font-size="8" fill="#6a4a2a">west</text>
+
+  <!-- ailill_beach -->
+  <g transform="translate(450, 370)" filter="url(#shadow)">
+    <rect x="-70" y="-30" width="140" height="60" rx="6" fill="#d4c4a0" stroke="#8a6a3a" stroke-width="1.5"/>
+    <text x="0" y="-8" text-anchor="middle" font-family="Georgia" font-size="10" font-weight="bold" fill="#3a2010">The Strand</text>
+    <text x="0" y="6" text-anchor="middle" font-family="Georgia" font-size="8" font-style="italic" fill="#6a4a2a">Where the Wolf Fell</text>
+    <text x="0" y="18" text-anchor="middle" font-family="Georgia" font-size="7" fill="#8a6a3a">Ailill's body • Mother • Druid</text>
+    <text x="0" y="28" text-anchor="middle" font-family="Georgia" font-size="7" fill="#c04040">← east back to Keep</text>
+    <circle cx="55" cy="-22" r="4" fill="#6a4a8a" opacity="0.8"/>
+  </g>
+
+  <!-- Arrow: ailill_beach → foster_village -->
+  <line x1="450" y1="430" x2="430" y2="480" stroke="#8a6a3a" stroke-width="1.5"/>
+  <polygon points="428,484 425,476 434,478" fill="#8a6a3a"/>
+  <text x="408" y="460" font-family="Georgia" font-size="8" fill="#6a4a2a">onward</text>
+
+  <!-- foster_village -->
+  <g transform="translate(400, 510)" filter="url(#shadow)">
+    <rect x="-75" y="-28" width="150" height="56" rx="6" fill="#e0c890" stroke="#8a6a3a" stroke-width="1.5"/>
+    <text x="0" y="-6" text-anchor="middle" font-family="Georgia" font-size="10" font-weight="bold" fill="#3a2010">Foster Village</text>
+    <text x="0" y="8" text-anchor="middle" font-family="Georgia" font-size="8" font-style="italic" fill="#6a4a2a">Ten Years Later</text>
+    <text x="0" y="20" text-anchor="middle" font-family="Georgia" font-size="7" fill="#8a6a3a">Foster Mother • Druid</text>
+    <circle cx="58" cy="-20" r="4" fill="#6a4a8a" opacity="0.8"/>
+    <rect x="56" y="-28" width="8" height="8" fill="#d4a030" rx="1"/>
+    <text x="0" y="30" text-anchor="middle" font-family="Georgia" font-size="7" fill="#6a4a2a">🎁 Carved Wooden Horse</text>
+  </g>
+
+  <!-- Arrow: foster_village → training_field -->
+  <line x1="400" y1="566" x2="390" y2="610" stroke="#8a6a3a" stroke-width="1.5"/>
+  <polygon points="388,614 385,606 394,608" fill="#8a6a3a"/>
+  <text x="362" y="594" font-family="Georgia" font-size="8" fill="#6a4a2a">onward</text>
+
+  <!-- training_field -->
+  <g transform="translate(360, 640)" filter="url(#shadow)">
+    <rect x="-85" y="-30" width="170" height="60" rx="6" fill="#d0c088" stroke="#8a6a3a" stroke-width="1.5"/>
+    <text x="0" y="-8" text-anchor="middle" font-family="Georgia" font-size="10" font-weight="bold" fill="#3a2010">Training Field</text>
+    <text x="0" y="6" text-anchor="middle" font-family="Georgia" font-size="8" font-style="italic" fill="#6a4a2a">Five Years Later</text>
+    <text x="0" y="18" text-anchor="middle" font-family="Georgia" font-size="7" fill="#8a6a3a">Conganchnes • Fergus • Diurán</text>
+    <text x="0" y="28" text-anchor="middle" font-family="Georgia" font-size="7" fill="#6a4a2a">Foster Mother watches</text>
+    <circle cx="68" cy="-22" r="4" fill="#6a4a8a" opacity="0.8"/>
+  </g>
+
+  <!-- Arrow: training_field → feast_hall -->
+  <line x1="350" y1="700" x2="340" y2="750" stroke="#8a6a3a" stroke-width="1.5"/>
+  <polygon points="338,754 335,746 344,748" fill="#8a6a3a"/>
+  <text x="312" y="730" font-family="Georgia" font-size="8" fill="#6a4a2a">onward</text>
+
+  <!-- feast_hall -->
+  <g transform="translate(320, 780)" filter="url(#shadow)">
+    <rect x="-80" y="-30" width="160" height="60" rx="6" fill="#c0a870" stroke="#8a4020" stroke-width="1.5"/>
+    <text x="0" y="-8" text-anchor="middle" font-family="Georgia" font-size="10" font-weight="bold" fill="#3a2010">The Feast Hall</text>
+    <text x="0" y="6" text-anchor="middle" font-family="Georgia" font-size="8" font-style="italic" fill="#6a4a2a">Twenty Years Old</text>
+    <text x="0" y="18" text-anchor="middle" font-family="Georgia" font-size="7" fill="#8a6a3a">Lorcán the Taunter</text>
+    <text x="0" y="28" text-anchor="middle" font-family="Georgia" font-size="7" fill="#c04040">⚠ The truth revealed</text>
+    <circle cx="63" cy="-22" r="4" fill="#6a4a8a" opacity="0.8"/>
+  </g>
+
+  <!-- Arrow: feast_hall → druid_sanctuary -->
+  <line x1="320" y1="840" x2="350" y2="890" stroke="#8a6a3a" stroke-width="1.5"/>
+  <polygon points="353,894 346,892 349,884" fill="#8a6a3a"/>
+  <text x="345" y="870" font-family="Georgia" font-size="8" fill="#6a4a2a">north</text>
+
+  <!-- druid_sanctuary -->
+  <g transform="translate(390, 920)" filter="url(#shadow)">
+    <rect x="-75" y="-30" width="150" height="60" rx="6" fill="#b0c888" stroke="#6a8a3a" stroke-width="1.5"/>
+    <text x="0" y="-8" text-anchor="middle" font-family="Georgia" font-size="10" font-weight="bold" fill="#3a2010">Druid's Sanctuary</text>
+    <text x="0" y="6" text-anchor="middle" font-family="Georgia" font-size="8" font-style="italic" fill="#6a4a2a">The Old Druid's Grove</text>
+    <text x="0" y="18" text-anchor="middle" font-family="Georgia" font-size="7" fill="#8a6a3a">Magic Thread • 3×9 men</text>
+    <text x="0" y="28" text-anchor="middle" font-family="Georgia" font-size="7" fill="#6a4a2a">🎁 Magic Thread</text>
+    <circle cx="58" cy="-22" r="4" fill="#6a4a8a" opacity="0.8"/>
+    <rect x="56" y="-32" width="8" height="8" fill="#d4a030" rx="1"/>
+  </g>
+
+  <!-- Arrow: druid_sanctuary → village_harbor -->
+  <line x1="465" y1="950" x2="550" y2="1000" stroke="#8a6a3a" stroke-width="1.5"/>
+  <polygon points="554,1003 547,1002 550,994" fill="#8a6a3a"/>
+  <text x="510" y="970" font-family="Georgia" font-size="8" fill="#6a4a2a">harbor</text>
+
+  <!-- fathers_tomb -->
+  <g transform="translate(290, 990)" filter="url(#shadow)">
+    <rect x="-55" y="-20" width="110" height="40" rx="4" fill="#a09080" stroke="#6a5a4a" stroke-width="1"/>
+    <text x="0" y="-2" text-anchor="middle" font-family="Georgia" font-size="9" font-weight="bold" fill="#3a2010">Ailill's Cairn</text>
+    <text x="0" y="10" text-anchor="middle" font-family="Georgia" font-size="7" fill="#6a4a2a">Overlooking the sea</text>
+  </g>
+
+  <!-- Arrow: fathers_tomb → village_harbor -->
+  <line x1="345" y1="1000" x2="460" y2="1000" stroke="#6a4a2a" stroke-width="1" stroke-dasharray="6,3"/>
+  <text x="400" y="995" text-anchor="middle" font-family="Georgia" font-size="7" fill="#6a4a2a">down</text>
+
+  <!-- village_harbor -->
+  <g transform="translate(590, 1040)" filter="url(#shadow)">
+    <rect x="-95" y="-32" width="190" height="64" rx="6" fill="#c0b898" stroke="#5a8a7a" stroke-width="2"/>
+    <text x="0" y="-10" text-anchor="middle" font-family="Georgia" font-size="10" font-weight="bold" fill="#3a2010">The Harbor</text>
+    <text x="0" y="4" text-anchor="middle" font-family="Georgia" font-size="8" font-style="italic" fill="#6a4a2a">The Day of Departure</text>
+    <text x="0" y="16" text-anchor="middle" font-family="Georgia" font-size="7" fill="#8a6a3a">Foster Mother • Druid • Diurán • Conganchnes</text>
+    <text x="0" y="26" text-anchor="middle" font-family="Georgia" font-size="7" fill="#6a4a2a">🎁 Ailill's Signet Ring</text>
+    <circle cx="78" cy="-24" r="4" fill="#6a4a8a" opacity="0.8"/>
+    <rect x="76" y="-36" width="8" height="8" fill="#d4a030" rx="1"/>
+  </g>
+
+  <!-- Big arrow: village_harbor → sea1 (WEST = the voyage begins) -->
+  <line x1="685" y1="1072" x2="850" y2="1072" stroke="#3a6a8a" stroke-width="3"/>
+  <polygon points="855,1072 846,1067 846,1077" fill="#3a6a8a"/>
+  <text x="770" y="1065" text-anchor="middle" font-family="Georgia" font-size="10" font-weight="bold" fill="#2a4a6a">WEST → SET SAIL</text>
+  <text x="770" y="1085" text-anchor="middle" font-family="Georgia" font-size="8" font-style="italic" fill="#4a6a8a">Twenty-seven men. One curragh. The sea awaits.</text>
+
+  <!-- home (alternate starting point) -->
+  <g transform="translate(180, 1040)" filter="url(#shadow)">
+    <rect x="-55" y="-22" width="110" height="44" rx="4" fill="#d0c090" stroke="#8a6a3a" stroke-width="1" stroke-dasharray="3,2"/>
+    <text x="0" y="-4" text-anchor="middle" font-family="Georgia" font-size="9" font-weight="bold" fill="#6a4a2a">Your Village</text>
+    <text x="0" y="8" text-anchor="middle" font-family="Georgia" font-size="7" fill="#8a6a3a">(Alt. starting point)</text>
+    <text x="0" y="18" text-anchor="middle" font-family="Georgia" font-size="7" fill="#6a4a2a">Druid • Provisions</text>
+  </g>
+  <line x1="235" y1="1050" x2="490" y2="1050" stroke="#8a6a3a" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="360" y="1045" text-anchor="middle" font-family="Georgia" font-size="7" fill="#8a6a3a">west →</text>
+
+  <!-- ============================================================ -->
+  <!-- SEA 1 — The First Archipelago -->
+  <!-- ============================================================ -->
+
+  <text x="1100" y="250" text-anchor="middle" font-family="Georgia, serif" font-size="18" font-weight="bold" fill="#2a4a6a" letter-spacing="2">⛵ THE FIRST SEA</text>
+
+  <!-- Sea 1 water circle -->
+  <circle cx="1100" cy="1070" r="180" fill="url(#sea1_water)" stroke="#3a6a8a" stroke-width="1.5" stroke-dasharray="8,3"/>
+
+  <!-- sea1 hub -->
+  <g transform="translate(1100, 1070)" filter="url(#shadow)">
+    <circle cx="0" cy="0" r="30" fill="#4a7a8e" stroke="#2a4a5e" stroke-width="3"/>
+    <text x="0" y="-18" text-anchor="middle" font-family="Georgia" font-size="10" font-weight="bold" fill="#ffffff">SEA 1</text>
+    <text x="0" y="-6" text-anchor="middle" font-family="Georgia" font-size="7" fill="#d0e0e8">The Open Sea</text>
+    <text x="0" y="5" text-anchor="middle" font-family="Georgia" font-size="7" fill="#a0c0d0">Grey Atlantic</text>
+    <text x="0" y="14" text-anchor="middle" font-family="Georgia" font-size="7" fill="#90b0c0">→ deeper</text>
+  </g>
+
+  <!-- island_ants (WEST) -->
+  <g transform="translate(800, 1070)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="50" ry="35" fill="url(#island_green)" stroke="#5a8a3a" stroke-width="1.5"/>
+    <text x="0" y="-5" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#ffffff">Island of</text>
+    <text x="0" y="5" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#ffffff">Giant Ants</text>
+    <text x="0" y="16" text-anchor="middle" font-family="Georgia" font-size="6" fill="#d0e0c0">🎁 Everlasting Fruit</text>
+    <rect x="-48" y="-24" width="8" height="8" fill="#d4a030" rx="1"/>
+  </g>
+
+  <!-- ants_grove -->
+  <g transform="translate(710, 1070)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="32" ry="22" fill="#a0cc77" stroke="#5a8a3a" stroke-width="1"/>
+    <text x="0" y="1" text-anchor="middle" font-family="Georgia" font-size="7" font-weight="bold" fill="#3a5a22">Ant</text>
+    <text x="0" y="9" text-anchor="middle" font-family="Georgia" font-size="7" font-weight="bold" fill="#3a5a22">Grove</text>
+    <text x="0" y="16" text-anchor="middle" font-family="Georgia" font-size="6" fill="#5a7a3a">Queen Ant</text>
+    <line x1="-10" y1="18" x2="10" y2="18" stroke="#c03030" stroke-width="1.5" stroke-dasharray="3,2"/>
+  </g>
+
+  <!-- island_birds (NORTH) -->
+  <g transform="translate(1100, 830)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="50" ry="30" fill="url(#island_ice)" stroke="#4a7888" stroke-width="1.5"/>
+    <text x="0" y="-4" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#2a4a5a">Island of</text>
+    <text x="0" y="6" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#2a4a5a">Speaking Birds</text>
+    <text x="0" y="16" text-anchor="middle" font-family="Georgia" font-size="6" fill="#4a6a8a">🎁 Speaking Feather</text>
+    <rect x="-48" y="-22" width="8" height="8" fill="#d4a030" rx="1"/>
+  </g>
+
+  <!-- birds_nest -->
+  <g transform="translate(1100, 755)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="28" ry="18" fill="#b0c8d8" stroke="#4a7888" stroke-width="1"/>
+    <text x="0" y="1" text-anchor="middle" font-family="Georgia" font-size="7" font-weight="bold" fill="#3a5a6a">Ancient</text>
+    <text x="0" y="9" text-anchor="middle" font-family="Georgia" font-size="7" font-weight="bold" fill="#3a5a6a">Bird's Perch</text>
+  </g>
+
+  <!-- island_cat (NE) -->
+  <g transform="translate(1280, 890)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="48" ry="30" fill="url(#island_sand)" stroke="#8a6a3a" stroke-width="1.5"/>
+    <text x="0" y="-4" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#3a2010">Island of</text>
+    <text x="0" y="6" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#3a2010">the Cat</text>
+    <text x="0" y="16" text-anchor="middle" font-family="Georgia" font-size="6" fill="#6a4a2a">🎁 Bowl of Milk</text>
+    <circle cx="38" cy="-18" r="4" fill="#6a4a8a" opacity="0.8"/>
+    <rect x="-46" y="-22" width="8" height="8" fill="#d4a030" rx="1"/>
+  </g>
+
+  <!-- island_laughing (EAST) -->
+  <g transform="translate(1400, 1070)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="52" ry="32" fill="url(#island_sand)" stroke="#8a6a3a" stroke-width="1.5"/>
+    <text x="0" y="-4" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#3a2010">Island of</text>
+    <text x="0" y="6" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#3a2010">Laughing People</text>
+    <circle cx="40" cy="-18" r="4" fill="#6a4a8a" opacity="0.8"/>
+  </g>
+
+  <!-- glass_bridge (SOUTH) -->
+  <g transform="translate(1100, 1300)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="50" ry="30" fill="url(#island_ice)" stroke="#6a8a8a" stroke-width="1.5"/>
+    <text x="0" y="-4" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#3a4a5a">Island of the</text>
+    <text x="0" y="6" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#3a4a5a">Glass Bridge</text>
+    <text x="0" y="16" text-anchor="middle" font-family="Georgia" font-size="6" fill="#5a6a7a">🎁 Glass Shard</text>
+    <rect x="-48" y="-22" width="8" height="8" fill="#d4a030" rx="1"/>
+  </g>
+
+  <!-- glass_palace -->
+  <g transform="translate(1100, 1380)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="30" ry="20" fill="#c0d0e0" stroke="#6a8a8a" stroke-width="1"/>
+    <text x="0" y="1" text-anchor="middle" font-family="Georgia" font-size="7" font-weight="bold" fill="#3a4a5a">Glass</text>
+    <text x="0" y="9" text-anchor="middle" font-family="Georgia" font-size="7" font-weight="bold" fill="#3a4a5a">Palace</text>
+  </g>
+
+  <!-- island_smithy (NW) -->
+  <g transform="translate(900, 890)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="48" ry="30" fill="url(#island_fire)" stroke="#8a4020" stroke-width="1.5"/>
+    <text x="0" y="-4" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#ffffff">Island of</text>
+    <text x="0" y="6" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#ffffff">the Smithy</text>
+    <text x="0" y="16" text-anchor="middle" font-family="Georgia" font-size="6" fill="#f0d0b0">🎁 Fiery Ash</text>
+    <circle cx="36" cy="-18" r="4" fill="#6a4a8a" opacity="0.8"/>
+    <rect x="-46" y="-22" width="8" height="8" fill="#d4a030" rx="1"/>
+  </g>
+
+  <!-- island_women (SE) -->
+  <g transform="translate(1280, 1260)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="48" ry="30" fill="url(#island_green)" stroke="#8a6a3a" stroke-width="1.5"/>
+    <text x="0" y="-4" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#3a2010">Island of</text>
+    <text x="0" y="6" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#3a2010">Women</text>
+    <circle cx="36" cy="-18" r="4" fill="#6a4a8a" opacity="0.8"/>
+  </g>
+
+  <!-- sea_monsters (SW) -->
+  <g transform="translate(900, 1260)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="50" ry="32" fill="url(#island_dark)" stroke="#2a1a4a" stroke-width="1.5"/>
+    <text x="0" y="-4" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#c0a0d0">The Sea of</text>
+    <text x="0" y="6" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#c0a0d0">Monsters</text>
+    <text x="0" y="17" text-anchor="middle" font-family="Georgia" font-size="6" fill="#a080c0">→ to Women's Island</text>
+  </g>
+
+  <!-- treasure_cave (added from level 07, connects to sea1 via "treasure") -->
+  <g transform="translate(1480, 960)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="42" ry="28" fill="url(#island_dark)" stroke="#6a4a2a" stroke-width="1.5"/>
+    <text x="0" y="-4" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#d0c080">Island of</text>
+    <text x="0" y="5" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#d0c080">Treasure</text>
+    <text x="0" y="14" text-anchor="middle" font-family="Georgia" font-size="6" fill="#a09060">🐍 Serpent guards cave</text>
+    <circle cx="30" cy="-18" r="4" fill="#6a4a8a" opacity="0.8"/>
+    <line x1="-30" y1="16" x2="30" y2="16" stroke="#c03030" stroke-width="1.5" stroke-dasharray="3,2"/>
+    <text x="0" y="25" text-anchor="middle" font-family="Georgia" font-size="5" fill="#c03030">blocked</text>
+  </g>
+
+  <!-- island_dog (added from level 07, connects to sea1 via "dog") -->
+  <g transform="translate(1280, 780)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="40" ry="26" fill="url(#island_sand)" stroke="#8a6a3a" stroke-width="1.5"/>
+    <text x="0" y="-4" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#3a2010">Island of</text>
+    <text x="0" y="5" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#3a2010">the Dog</text>
+    <text x="0" y="14" text-anchor="middle" font-family="Georgia" font-size="6" fill="#6a4a2a">🎁 Silver Torc</text>
+    <circle cx="28" cy="-16" r="4" fill="#6a4a8a" opacity="0.8"/>
+    <rect x="-38" y="-18" width="8" height="8" fill="#d4a030" rx="1"/>
+  </g>
+
+  <!-- Lines connecting sea1 to islands -->
+  <!-- sea1 → island_ants (west) -->
+  <line x1="1070" y1="1060" x2="850" y2="1055" stroke="#3a6a8a" stroke-width="1.2" opacity="0.6"/>
+  <!-- sea1 → island_birds (north) -->
+  <line x1="1100" y1="1040" x2="1100" y2="860" stroke="#3a6a8a" stroke-width="1.2" opacity="0.6"/>
+  <!-- sea1 → island_cat (ne) -->
+  <line x1="1130" y1="1045" x2="1270" y2="895" stroke="#3a6a8a" stroke-width="1.2" opacity="0.6"/>
+  <!-- sea1 → island_laughing (east) -->
+  <line x1="1130" y1="1075" x2="1390" y2="1075" stroke="#3a6a8a" stroke-width="1.2" opacity="0.6"/>
+  <!-- sea1 → glass_bridge (south) -->
+  <line x1="1100" y1="1100" x2="1100" y2="1270" stroke="#3a6a8a" stroke-width="1.2" opacity="0.6"/>
+  <!-- sea1 → island_smithy (nw) -->
+  <line x1="1070" y1="1045" x2="920" y2="895" stroke="#3a6a8a" stroke-width="1.2" opacity="0.6"/>
+  <!-- sea1 → island_women (se) -->
+  <line x1="1130" y1="1095" x2="1270" y2="1255" stroke="#3a6a8a" stroke-width="1.2" opacity="0.6"/>
+  <!-- sea1 → sea_monsters (sw) -->
+  <line x1="1070" y1="1095" x2="920" y2="1255" stroke="#3a6a8a" stroke-width="1.2" opacity="0.6"/>
+
+  <!-- island_ants → ants_grove -->
+  <line x1="750" y1="1070" x2="742" y2="1070" stroke="#5a8a3a" stroke-width="1"/>
+  <!-- island_birds → birds_nest -->
+  <line x1="1100" y1="800" x2="1100" y2="773" stroke="#5a8a3a" stroke-width="1"/>
+  <!-- glass_bridge → glass_palace -->
+  <line x1="1100" y1="1330" x2="1100" y2="1360" stroke="#5a8a3a" stroke-width="1"/>
+
+  <!-- ants_grove blocked indicator -->
+  <line x1="720" y1="1090" x2="730" y2="1090" stroke="#c03030" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <text x="725" y="1105" text-anchor="middle" font-family="Georgia" font-size="6" fill="#c03030">blocked</text>
+
+  <!-- sea_monsters → island_women -->
+  <line x1="950" y1="1260" x2="1230" y2="1260" stroke="#6a4a8a" stroke-width="0.8" stroke-dasharray="4,3"/>
+  <!-- sea_monsters → island_laughing -->
+  <line x1="920" y1="1230" x2="1360" y2="1090" stroke="#6a4a8a" stroke-width="0.8" stroke-dasharray="4,3"/>
+
+  <!-- ============================================================ -->
+  <!-- Transition: SEA 1 → SEA 2 -->
+  <!-- ============================================================ -->
+
+  <line x1="1120" y1="1250" x2="1140" y2="1400" stroke="#2a4a6a" stroke-width="2.5"/>
+  <polygon points="1142,1405 1134,1402 1137,1393" fill="#2a4a6a"/>
+  <text x="1165" y="1335" font-family="Georgia" font-size="9" font-weight="bold" fill="#2a4a6a">DEEPER →</text>
+  <text x="1158" y="1348" font-family="Georgia" font-size="7" font-style="italic" fill="#4a6a8a">Far beyond</text>
+
+  <!-- ============================================================ -->
+  <!-- SEA 2 — The Deeper Sea -->
+  <!-- ============================================================ -->
+
+  <text x="1200" y="1480" text-anchor="middle" font-family="Georgia, serif" font-size="18" font-weight="bold" fill="#2a4a6a" letter-spacing="2">🌊 THE DEEPER SEA</text>
+
+  <!-- Sea 2 water circle -->
+  <circle cx="1200" cy="1680" r="190" fill="url(#sea2_water)" stroke="#2a4a5e" stroke-width="1.5" stroke-dasharray="8,3"/>
+
+  <!-- sea2 hub -->
+  <g transform="translate(1200, 1680)" filter="url(#shadow)">
+    <circle cx="0" cy="0" r="30" fill="#3a5f8a" stroke="#2a4a5e" stroke-width="3"/>
+    <text x="0" y="-18" text-anchor="middle" font-family="Georgia" font-size="10" font-weight="bold" fill="#ffffff">SEA 2</text>
+    <text x="0" y="-6" text-anchor="middle" font-family="Georgia" font-size="7" fill="#c0d0e0">The Deeper Sea</text>
+    <text x="0" y="5" text-anchor="middle" font-family="Georgia" font-size="7" fill="#a0b8c8">Midnight waters</text>
+    <text x="0" y="14" text-anchor="middle" font-family="Georgia" font-size="7" fill="#90a8b8">← back • deeper →</text>
+  </g>
+
+  <!-- island_culdees (NORTH) -->
+  <g transform="translate(1200, 1430)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="48" ry="28" fill="url(#island_sand)" stroke="#8a6a3a" stroke-width="1.5"/>
+    <text x="0" y="-4" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#3a2010">Island of</text>
+    <text x="0" y="5" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#3a2010">the Culdees</text>
+    <text x="0" y="14" text-anchor="middle" font-family="Georgia" font-size="6" fill="#6a4a2a">🎁 Silver Bell</text>
+    <rect x="-46" y="-20" width="8" height="8" fill="#d4a030" rx="1"/>
+  </g>
+
+  <!-- prophecy_tower (SOUTH) -->
+  <g transform="translate(1200, 1920)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="48" ry="28" fill="url(#island_ice)" stroke="#4a7888" stroke-width="1.5"/>
+    <text x="0" y="-4" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#3a4a5a">Island of</text>
+    <text x="0" y="5" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#3a4a5a">Prophecy</text>
+    <text x="0" y="14" text-anchor="middle" font-family="Georgia" font-size="6" fill="#5a6a7a">🎁 Prophecy Scroll</text>
+    <circle cx="36" cy="-18" r="4" fill="#6a4a8a" opacity="0.8"/>
+    <rect x="-46" y="-20" width="8" height="8" fill="#d4a030" rx="1"/>
+  </g>
+
+  <!-- hermit_rock (EAST) -->
+  <g transform="translate(1460, 1680)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="44" ry="30" fill="url(#island_dark)" stroke="#4a5a3a" stroke-width="1.5"/>
+    <text x="0" y="-4" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#d0e0d0">The Hermit's</text>
+    <text x="0" y="5" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#d0e0d0">Rock</text>
+    <text x="0" y="14" text-anchor="middle" font-family="Georgia" font-size="6" fill="#a0b8a0">🎁 Otter Pelt</text>
+    <circle cx="32" cy="-18" r="4" fill="#6a4a8a" opacity="0.8"/>
+    <rect x="-42" y="-20" width="8" height="8" fill="#d4a030" rx="1"/>
+  </g>
+
+  <!-- island_four_fences (WEST) -->
+  <g transform="translate(940, 1680)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="52" ry="32" fill="url(#island_sand)" stroke="#8a6a3a" stroke-width="1.5"/>
+    <text x="0" y="-4" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#3a2010">Island of the</text>
+    <text x="0" y="5" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#3a2010">Four Fences</text>
+    <text x="0" y="14" text-anchor="middle" font-family="Georgia" font-size="6" fill="#6a4a2a">Gold • Silver • Copper • Crystal</text>
+  </g>
+
+  <!-- Four fence sub-areas -->
+  <g transform="translate(850, 1620)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="28" ry="16" fill="#d4a030" stroke="#8a6020" stroke-width="1"/>
+    <text x="0" y="2" text-anchor="middle" font-family="Georgia" font-size="7" font-weight="bold" fill="#3a2010">Gold</text>
+    <text x="0" y="10" text-anchor="middle" font-family="Georgia" font-size="5" fill="#c04040">⚠ Trap!</text>
+  </g>
+  <g transform="translate(850, 1660)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="28" ry="16" fill="#c0c0c0" stroke="#808080" stroke-width="1"/>
+    <text x="0" y="2" text-anchor="middle" font-family="Georgia" font-size="7" font-weight="bold" fill="#3a3a3a">Silver</text>
+    <text x="0" y="10" text-anchor="middle" font-family="Georgia" font-size="5" fill="#6a6a6a">Dead end</text>
+  </g>
+  <g transform="translate(850, 1700)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="28" ry="16" fill="#c08040" stroke="#805020" stroke-width="1"/>
+    <text x="0" y="2" text-anchor="middle" font-family="Georgia" font-size="7" font-weight="bold" fill="#3a2010">Copper</text>
+    <text x="0" y="10" text-anchor="middle" font-family="Georgia" font-size="5" fill="#4a6a2a">🎁 Revolving Key ✓</text>
+    <rect x="-26" y="2" width="6" height="6" fill="#d4a030" rx="1"/>
+  </g>
+  <g transform="translate(850, 1740)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="28" ry="16" fill="#c0d8e8" stroke="#6a8a9a" stroke-width="1"/>
+    <text x="0" y="2" text-anchor="middle" font-family="Georgia" font-size="7" font-weight="bold" fill="#3a4a5a">Crystal</text>
+    <text x="0" y="10" text-anchor="middle" font-family="Georgia" font-size="5" fill="#c04040">⚠ Shatters!</text>
+  </g>
+
+  <!-- island_salmon (NW) -->
+  <g transform="translate(1020, 1490)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="48" ry="28" fill="url(#island_green)" stroke="#5a8a3a" stroke-width="1.5"/>
+    <text x="0" y="-4" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#ffffff">Island of the</text>
+    <text x="0" y="5" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#ffffff">Wisdom Salmon</text>
+    <text x="0" y="14" text-anchor="middle" font-family="Georgia" font-size="6" fill="#d0e0c0">🎁 Wisdom Salmon</text>
+    <rect x="-46" y="-20" width="8" height="8" fill="#d4a030" rx="1"/>
+  </g>
+
+  <!-- mill_exterior (NE, from level 05) -->
+  <g transform="translate(1380, 1510)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="46" ry="28" fill="url(#island_dark)" stroke="#4a3a2a" stroke-width="1.5"/>
+    <text x="0" y="-4" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#d0c0a0">Mill of</text>
+    <text x="0" y="5" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#d0c0a0">the Sea</text>
+    <circle cx="34" cy="-16" r="4" fill="#6a4a8a" opacity="0.8"/>
+  </g>
+  <g transform="translate(1420, 1510)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="24" ry="16" fill="#5a4a3a" stroke="#3a2a1a" stroke-width="1"/>
+    <text x="0" y="2" text-anchor="middle" font-family="Georgia" font-size="6" font-weight="bold" fill="#d0c0a0">Grinding</text>
+    <text x="0" y="9" text-anchor="middle" font-family="Georgia" font-size="6" font-weight="bold" fill="#d0c0a0">Chamber</text>
+    <text x="0" y="15" text-anchor="middle" font-family="Georgia" font-size="5" fill="#c0a080">Millstone Frag.</text>
+  </g>
+
+  <!-- island_sheep (SW, from level 05) -->
+  <g transform="translate(1020, 1870)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="50" ry="30" fill="url(#island_green)" stroke="#5a8a3a" stroke-width="1.5"/>
+    <text x="0" y="-4" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#ffffff">Island of</text>
+    <text x="0" y="5" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#ffffff">Black &amp; White Sheep</text>
+    <text x="0" y="15" text-anchor="middle" font-family="Georgia" font-size="6" fill="#d0e0c0">🎁 Fleece of Change</text>
+    <circle cx="38" cy="-18" r="4" fill="#6a4a8a" opacity="0.8"/>
+    <rect x="-48" y="-22" width="8" height="8" fill="#d4a030" rx="1"/>
+  </g>
+  <!-- sheep_pasture -->
+  <g transform="translate(960, 1900)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="24" ry="16" fill="#a0b888" stroke="#5a8a3a" stroke-width="1"/>
+    <text x="0" y="1" text-anchor="middle" font-family="Georgia" font-size="6" font-weight="bold" fill="#3a5a22">Shepherd's</text>
+    <text x="0" y="8" text-anchor="middle" font-family="Georgia" font-size="6" font-weight="bold" fill="#3a5a22">Pasture</text>
+  </g>
+
+  <!-- island_horses (NW area, from level 05) -->
+  <g transform="translate(1020, 1620)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="46" ry="26" fill="url(#island_sand)" stroke="#8a6a3a" stroke-width="1.5"/>
+    <text x="0" y="-3" text-anchor="middle" font-family="Georgia" font-size="7" font-weight="bold" fill="#3a2010">Island of</text>
+    <text x="0" y="6" text-anchor="middle" font-family="Georgia" font-size="7" font-weight="bold" fill="#3a2010">Giant Horses</text>
+    <text x="0" y="15" text-anchor="middle" font-family="Georgia" font-size="6" fill="#6a4a2a">🎁 Horsehair Bridle</text>
+    <circle cx="34" cy="-16" r="4" fill="#6a4a8a" opacity="0.8"/>
+  </g>
+
+  <!-- wall_of_water (SE transitional, from level 05) -->
+  <g transform="translate(1380, 1900)" filter="url(#shadow)">
+    <rect x="-45" y="-20" width="90" height="40" rx="4" fill="#4a7a9a" stroke="#2a5a7a" stroke-width="2"/>
+    <text x="0" y="-4" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#ffffff">Wall of</text>
+    <text x="0" y="6" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#ffffff">Water</text>
+    <text x="0" y="16" text-anchor="middle" font-family="Georgia" font-size="6" fill="#c0d0e0">→ through to Sea 3</text>
+    <line x1="-35" y1="17" x2="35" y2="17" stroke="#c03030" stroke-width="1.5" stroke-dasharray="3,2"/>
+  </g>
+
+  <!-- island_giant (level 07, to sea2 via "giant") -->
+  <g transform="translate(1380, 1620)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="40" ry="24" fill="url(#island_dark)" stroke="#6a4a2a" stroke-width="1.5"/>
+    <text x="0" y="-3" text-anchor="middle" font-family="Georgia" font-size="7" font-weight="bold" fill="#d0c080">Island of the</text>
+    <text x="0" y="6" text-anchor="middle" font-family="Georgia" font-size="7" font-weight="bold" fill="#d0c080">Giant Killer</text>
+    <circle cx="28" cy="-14" r="4" fill="#6a4a8a" opacity="0.8"/>
+    <text x="0" y="16" text-anchor="middle" font-family="Georgia" font-size="5" fill="#c08080">⚠ ! Loses crew</text>
+  </g>
+
+  <!-- island_lion (level 07, to sea2 via "lion") -->
+  <g transform="translate(1380, 1760)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="38" ry="22" fill="url(#island_sand)" stroke="#8a6a3a" stroke-width="1.5"/>
+    <text x="0" y="-3" text-anchor="middle" font-family="Georgia" font-size="7" font-weight="bold" fill="#3a2010">Island of</text>
+    <text x="0" y="6" text-anchor="middle" font-family="Georgia" font-size="7" font-weight="bold" fill="#3a2010">the Lion</text>
+    <circle cx="26" cy="-14" r="4" fill="#6a4a8a" opacity="0.8"/>
+  </g>
+
+  <!-- anchorite_cave (level 07, to sea2 via "anchorite") -->
+  <g transform="translate(1460, 1680)" filter="url(#shadow)">
+
+  </g>
+  <!-- anchorite is same general area as hermit_rock, but separate island -->
+  <g transform="translate(1550, 1720)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="34" ry="22" fill="url(#island_sand)" stroke="#6a4a2a" stroke-width="1.5"/>
+    <text x="0" y="-3" text-anchor="middle" font-family="Georgia" font-size="7" font-weight="bold" fill="#3a2010">Anchorite's</text>
+    <text x="0" y="5" text-anchor="middle" font-family="Georgia" font-size="7" font-weight="bold" fill="#3a2010">Cave</text>
+    <circle cx="22" cy="-14" r="4" fill="#6a4a8a" opacity="0.8"/>
+  </g>
+
+  <!-- Connecting lines sea2 → islands -->
+  <line x1="1200" y1="1650" x2="1200" y2="1458" stroke="#2a4a5e" stroke-width="1.2" opacity="0.5"/>
+  <line x1="1200" y1="1710" x2="1200" y2="1892" stroke="#2a4a5e" stroke-width="1.2" opacity="0.5"/>
+  <line x1="1230" y1="1680" x2="1450" y2="1680" stroke="#2a4a5e" stroke-width="1.2" opacity="0.5"/>
+  <line x1="1170" y1="1680" x2="990" y2="1680" stroke="#2a4a5e" stroke-width="1.2" opacity="0.5"/>
+  <line x1="1180" y1="1665" x2="1030" y2="1500" stroke="#2a4a5e" stroke-width="1.2" opacity="0.5"/>
+  <line x1="1220" y1="1665" x2="1370" y2="1520" stroke="#2a4a5e" stroke-width="1.2" opacity="0.5"/>
+  <line x1="1180" y1="1695" x2="1030" y2="1865" stroke="#2a4a5e" stroke-width="1.2" opacity="0.5"/>
+  <line x1="1220" y1="1700" x2="1370" y2="1895" stroke="#2a4a5e" stroke-width="1.2" opacity="0.5"/>
+  <line x1="1195" y1="1670" x2="1030" y2="1628" stroke="#2a4a5e" stroke-width="1.2" opacity="0.5"/>
+  <line x1="1210" y1="1690" x2="1370" y2="1628" stroke="#2a4a5e" stroke-width="1.2" opacity="0.5"/>
+  <line x1="1210" y1="1690" x2="1540" y2="1725" stroke="#2a4a5e" stroke-width="1.2" opacity="0.5"/>
+
+  <!-- ============================================================ -->
+  <!-- Transition: SEA 2 → SEA 3 -->
+  <!-- ============================================================ -->
+
+  <line x1="1220" y1="1870" x2="1240" y2="2020" stroke="#1a1a4a" stroke-width="2.5"/>
+  <polygon points="1242,2025 1234,2022 1237,2013" fill="#1a1a4a"/>
+  <text x="1265" y="1950" font-family="Georgia" font-size="9" font-weight="bold" fill="#1a1a4a">FARTHER →</text>
+  <text x="1258" y="1963" font-family="Georgia" font-size="7" font-style="italic" fill="#3a3a6a">Edge of the known world</text>
+
+  <!-- wall_of_water → sea3 connection -->
+  <line x1="1425" y1="1900" x2="1425" y2="2080" stroke="#c03030" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="1440" y="1995" font-family="Georgia" font-size="6" fill="#c03030">through →</text>
+  <text x="1440" y="2005" font-family="Georgia" font-size="6" fill="#c03030">(blocked)</text>
+
+  <!-- ============================================================ -->
+  <!-- SEA 3 — The Final Sea -->
+  <!-- ============================================================ -->
+
+  <text x="1300" y="2100" text-anchor="middle" font-family="Georgia, serif" font-size="18" font-weight="bold" fill="#0a0a3a" letter-spacing="2">🌑 THE FINAL SEA</text>
+  <text x="1300" y="2120" text-anchor="middle" font-family="Georgia, serif" font-size="11" font-style="italic" fill="#3a3a5a" opacity="0.7">Edge of the Known World</text>
+
+  <!-- Sea 3 water circle -->
+  <circle cx="1300" cy="2320" r="200" fill="url(#sea3_water)" stroke="#1a1a4a" stroke-width="1.5" stroke-dasharray="8,3"/>
+
+  <!-- sea3 hub -->
+  <g transform="translate(1300, 2320)" filter="url(#shadow)">
+    <circle cx="0" cy="0" r="32" fill="#1a1a3a" stroke="#0a0a2a" stroke-width="3"/>
+    <text x="0" y="-18" text-anchor="middle" font-family="Georgia" font-size="10" font-weight="bold" fill="#c0c0e0">SEA 3</text>
+    <text x="0" y="-6" text-anchor="middle" font-family="Georgia" font-size="7" fill="#a0a0c0">The Final Sea</text>
+    <text x="0" y="5" text-anchor="middle" font-family="Georgia" font-size="7" fill="#8080a0">Black ink waters</text>
+    <text x="0" y="14" text-anchor="middle" font-family="Georgia" font-size="7" fill="#707090">→ home</text>
+  </g>
+
+  <!-- serpent_island (NORTH) -->
+  <g transform="translate(1300, 2070)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="48" ry="28" fill="url(#island_green)" stroke="#5a8a3a" stroke-width="1.5"/>
+    <text x="0" y="-4" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#ffffff">Island of the</text>
+    <text x="0" y="5" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#ffffff">Great Snake</text>
+    <text x="0" y="14" text-anchor="middle" font-family="Georgia" font-size="6" fill="#d0e0c0">🎁 Antidote Herb</text>
+    <rect x="-46" y="-20" width="8" height="8" fill="#d4a030" rx="1"/>
+  </g>
+  <!-- serpent_island_center -->
+  <g transform="translate(1300, 2000)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="32" ry="20" fill="#a0cc77" stroke="#5a8a3a" stroke-width="1"/>
+    <text x="0" y="0" text-anchor="middle" font-family="Georgia" font-size="7" font-weight="bold" fill="#3a5a22">Serpent's</text>
+    <text x="0" y="8" text-anchor="middle" font-family="Georgia" font-size="7" font-weight="bold" fill="#3a5a22">Ring</text>
+    <line x1="-15" y1="10" x2="15" y2="10" stroke="#c03030" stroke-width="1.5" stroke-dasharray="3,2"/>
+  </g>
+
+  <!-- black_pig (EAST) -->
+  <g transform="translate(1560, 2320)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="44" ry="28" fill="url(#island_sand)" stroke="#8a6a3a" stroke-width="1.5"/>
+    <text x="0" y="-4" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#3a2010">Island of the</text>
+    <text x="0" y="5" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#3a2010">Black Pig</text>
+    <text x="0" y="14" text-anchor="middle" font-family="Georgia" font-size="6" fill="#6a4a2a">🎁 Golden Apple</text>
+    <rect x="-42" y="-20" width="8" height="8" fill="#d4a030" rx="1"/>
+  </g>
+
+  <!-- speaking_skull (WEST) -->
+  <g transform="translate(1040, 2320)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="46" ry="28" fill="url(#island_dark)" stroke="#4a3a2a" stroke-width="1.5"/>
+    <text x="0" y="-4" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#d0c0a0">Island of the</text>
+    <text x="0" y="5" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#d0c0a0">Thorny Bush</text>
+    <circle cx="34" cy="-16" r="4" fill="#6a4a8a" opacity="0.8"/>
+  </g>
+
+  <!-- island_water_horse (SOUTH) -->
+  <g transform="translate(1300, 2570)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="48" ry="28" fill="url(#island_green)" stroke="#3a7a5a" stroke-width="1.5"/>
+    <text x="0" y="-4" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#ffffff">Island of the</text>
+    <text x="0" y="5" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#ffffff">Water Horse</text>
+    <circle cx="36" cy="-16" r="4" fill="#6a4a8a" opacity="0.8"/>
+    <text x="0" y="18" text-anchor="middle" font-family="Georgia" font-size="6" fill="#c08080">⚠ Kelpie! Do not ride</text>
+  </g>
+
+  <!-- island_fiery_pigs (NE) -->
+  <g transform="translate(1520, 2150)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="46" ry="28" fill="url(#island_fire)" stroke="#8a4020" stroke-width="1.5"/>
+    <text x="0" y="-4" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#ffffff">Island of the</text>
+    <text x="0" y="5" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#ffffff">Fiery Pigs</text>
+    <text x="0" y="14" text-anchor="middle" font-family="Georgia" font-size="6" fill="#f0d0b0">🎁 Fiery Ash</text>
+    <rect x="-44" y="-20" width="8" height="8" fill="#d4a030" rx="1"/>
+    <line x1="-24" y1="15" x2="24" y2="15" stroke="#c03030" stroke-width="1.5" stroke-dasharray="3,2"/>
+  </g>
+
+  <!-- island_revolving_castle (NW) -->
+  <g transform="translate(1080, 2150)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="50" ry="30" fill="url(#island_dark)" stroke="#3a2a5a" stroke-width="1.5"/>
+    <text x="0" y="-4" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#c0a0e0">Island of the</text>
+    <text x="0" y="5" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#c0a0e0">Revolving Castle</text>
+    <text x="0" y="15" text-anchor="middle" font-family="Georgia" font-size="6" fill="#a080c0">Red • Blue • Green • Black</text>
+    <line x1="-28" y1="17" x2="28" y2="17" stroke="#c03030" stroke-width="1.5" stroke-dasharray="3,2"/>
+  </g>
+
+  <!-- island_trumpet (SE) -->
+  <g transform="translate(1520, 2490)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="44" ry="28" fill="url(#island_dark)" stroke="#5a4a2a" stroke-width="1.5"/>
+    <text x="0" y="-4" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#d0c080">Island of the</text>
+    <text x="0" y="5" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#d0c080">Giant Trumpet</text>
+    <text x="0" y="14" text-anchor="middle" font-family="Georgia" font-size="6" fill="#a09060">🎁 Wax Earplugs</text>
+    <rect x="-42" y="-20" width="8" height="8" fill="#d4a030" rx="1"/>
+  </g>
+
+  <!-- island_demons (SW) -->
+  <g transform="translate(1080, 2490)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="46" ry="28" fill="url(#island_fire)" stroke="#6a2020" stroke-width="1.5"/>
+    <text x="0" y="-4" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#f0d080">Island of the</text>
+    <text x="0" y="5" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#f0d080">Demon Smith</text>
+    <text x="0" y="14" text-anchor="middle" font-family="Georgia" font-size="6" fill="#f0c080">🎁 Demon's Coin</text>
+    <circle cx="34" cy="-16" r="4" fill="#6a4a8a" opacity="0.8"/>
+    <rect x="-44" y="-20" width="8" height="8" fill="#d4a030" rx="1"/>
+  </g>
+
+  <!-- island_golden_pillar -->
+  <g transform="translate(1430, 2400)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="44" ry="26" fill="url(#island_sand)" stroke="#8a6a3a" stroke-width="2"/>
+    <text x="0" y="-4" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#3a2010">Island of the</text>
+    <text x="0" y="5" text-anchor="middle" font-family="Georgia" font-size="8" font-weight="bold" fill="#3a2010">Golden Pillar</text>
+    <text x="0" y="14" text-anchor="middle" font-family="Georgia" font-size="6" fill="#6a4a2a">🎁 Silver Net • Golden Fish</text>
+    <rect x="-42" y="-18" width="8" height="8" fill="#d4a030" rx="1"/>
+  </g>
+
+  <!-- island_flaming_cat (level 05, sea3 "cat") -->
+  <g transform="translate(1130, 2350)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="38" ry="22" fill="url(#island_fire)" stroke="#8a4020" stroke-width="1.5"/>
+    <text x="0" y="-3" text-anchor="middle" font-family="Georgia" font-size="7" font-weight="bold" fill="#ffffff">Island of the</text>
+    <text x="0" y="5" text-anchor="middle" font-family="Georgia" font-size="7" font-weight="bold" fill="#ffffff">Flaming Cat</text>
+    <text x="0" y="14" text-anchor="middle" font-family="Georgia" font-size="5" fill="#f0d0b0">🎁 Sunstone</text>
+    <circle cx="26" cy="-14" r="4" fill="#6a4a8a" opacity="0.8"/>
+  </g>
+
+  <!-- island_oxen (level 05, sea3 "oxen") -->
+  <g transform="translate(1470, 2220)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="40" ry="24" fill="url(#island_green)" stroke="#5a8a3a" stroke-width="1.5"/>
+    <text x="0" y="-3" text-anchor="middle" font-family="Georgia" font-size="7" font-weight="bold" fill="#ffffff">Island of</text>
+    <text x="0" y="5" text-anchor="middle" font-family="Georgia" font-size="7" font-weight="bold" fill="#ffffff">Sacred Oxen</text>
+    <text x="0" y="14" text-anchor="middle" font-family="Georgia" font-size="5" fill="#d0e0c0">🎁 Golden Horn</text>
+    <circle cx="28" cy="-14" r="4" fill="#6a4a8a" opacity="0.8"/>
+  </g>
+  <g transform="translate(1530, 2220)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="24" ry="16" fill="#a0b888" stroke="#5a8a3a" stroke-width="1"/>
+    <text x="0" y="0" text-anchor="middle" font-family="Georgia" font-size="6" font-weight="bold" fill="#3a5a22">Oxen's</text>
+    <text x="0" y="7" text-anchor="middle" font-family="Georgia" font-size="6" font-weight="bold" fill="#3a5a22">Glade</text>
+  </g>
+
+  <!-- freshwater_well (level 05, sea3 "well") -->
+  <g transform="translate(1080, 2400)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="38" ry="22" fill="url(#island_sand)" stroke="#8a6a3a" stroke-width="1.5"/>
+    <text x="0" y="-3" text-anchor="middle" font-family="Georgia" font-size="7" font-weight="bold" fill="#3a2010">Freshwater</text>
+    <text x="0" y="5" text-anchor="middle" font-family="Georgia" font-size="7" font-weight="bold" fill="#3a2010">Well</text>
+    <text x="0" y="14" text-anchor="middle" font-family="Georgia" font-size="5" fill="#6a4a2a">🎁 Water of Vision</text>
+  </g>
+
+  <!-- great_fish_belly (level 06, sea3 "fish") -->
+  <g transform="translate(1520, 2380)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="40" ry="24" fill="url(#island_dark)" stroke="#2a1a2a" stroke-width="1.5"/>
+    <text x="0" y="-3" text-anchor="middle" font-family="Georgia" font-size="7" font-weight="bold" fill="#d0a0a0">The Great</text>
+    <text x="0" y="5" text-anchor="middle" font-family="Georgia" font-size="7" font-weight="bold" fill="#d0a0a0">Fish</text>
+    <text x="0" y="14" text-anchor="middle" font-family="Georgia" font-size="5" fill="#c080a0">⚠ Swallowed!</text>
+  </g>
+  <!-- great_fish_carcass -->
+  <g transform="translate(1580, 2380)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="24" ry="16" fill="#4a3a3a" stroke="#2a1a2a" stroke-width="1"/>
+    <text x="0" y="0" text-anchor="middle" font-family="Georgia" font-size="6" font-weight="bold" fill="#d0a0a0">Fish</text>
+    <text x="0" y="7" text-anchor="middle" font-family="Georgia" font-size="6" font-weight="bold" fill="#d0a0a0">Carcass</text>
+    <text x="0" y="13" text-anchor="middle" font-family="Georgia" font-size="5" fill="#c080a0">🎁 Tooth</text>
+  </g>
+
+  <!-- island_fountain (level 06, sea3 "fountain") -->
+  <g transform="translate(1170, 2450)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="36" ry="22" fill="url(#island_ice)" stroke="#4a7888" stroke-width="1.5"/>
+    <text x="0" y="-3" text-anchor="middle" font-family="Georgia" font-size="7" font-weight="bold" fill="#3a4a5a">Island of</text>
+    <text x="0" y="5" text-anchor="middle" font-family="Georgia" font-size="7" font-weight="bold" fill="#3a4a5a">the Fountain</text>
+    <text x="0" y="14" text-anchor="middle" font-family="Georgia" font-size="5" fill="#5a6a7a">🎁 Fountain Water</text>
+  </g>
+
+  <!-- island_silence (level 06, sea3 "silence") -->
+  <g transform="translate(1430, 2100)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="42" ry="24" fill="url(#island_ice)" stroke="#6a8a9a" stroke-width="1.5"/>
+    <text x="0" y="-3" text-anchor="middle" font-family="Georgia" font-size="7" font-weight="bold" fill="#3a4a5a">Island of</text>
+    <text x="0" y="5" text-anchor="middle" font-family="Georgia" font-size="7" font-weight="bold" fill="#3a4a5a">Silenced Music</text>
+    <text x="0" y="14" text-anchor="middle" font-family="Georgia" font-size="5" fill="#5a6a7a">🎁 Silent Bell</text>
+    <circle cx="30" cy="-14" r="4" fill="#6a4a8a" opacity="0.8"/>
+  </g>
+  <g transform="translate(1430, 2040)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="22" ry="14" fill="#b0c0c8" stroke="#6a8a9a" stroke-width="1"/>
+    <text x="0" y="0" text-anchor="middle" font-family="Georgia" font-size="6" font-weight="bold" fill="#3a4a5a">Silent</text>
+    <text x="0" y="7" text-anchor="middle" font-family="Georgia" font-size="6" font-weight="bold" fill="#3a4a5a">Grove</text>
+  </g>
+
+  <!-- promised_land (level 06, sea3 "promised") -->
+  <g transform="translate(1430, 2540)" filter="url(#shadow)">
+    <ellipse cx="0" cy="0" rx="50" ry="30" fill="url(#island_green)" stroke="#d4a030" stroke-width="2.5"/>
+    <text x="0" y="-4" text-anchor="middle" font-family="Georgia" font-size="9" font-weight="bold" fill="#3a5a22">THE PROMISED</text>
+    <text x="0" y="6" text-anchor="middle" font-family="Georgia" font-size="9" font-weight="bold" fill="#3a5a22">LAND</text>
+    <circle cx="38" cy="-18" r="4" fill="#6a4a8a" opacity="0.8"/>
+    <text x="0" y="18" text-anchor="middle" font-family="Georgia" font-size="6" fill="#5a8a3a">✦ Final choice: Stay or Return</text>
+  </g>
+
+  <!-- Connecting lines sea3 → islands -->
+  <line x1="1300" y1="2290" x2="1300" y2="2098" stroke="#1a1a4a" stroke-width="1.2" opacity="0.5"/>
+  <line x1="1330" y1="2320" x2="1550" y2="2320" stroke="#1a1a4a" stroke-width="1.2" opacity="0.5"/>
+  <line x1="1270" y1="2320" x2="1085" y2="2320" stroke="#1a1a4a" stroke-width="1.2" opacity="0.5"/>
+  <line x1="1300" y1="2350" x2="1300" y2="2542" stroke="#1a1a4a" stroke-width="1.2" opacity="0.5"/>
+  <line x1="1320" y1="2300" x2="1510" y2="2155" stroke="#1a1a4a" stroke-width="1.2" opacity="0.5"/>
+  <line x1="1280" y1="2300" x2="1090" y2="2155" stroke="#1a1a4a" stroke-width="1.2" opacity="0.5"/>
+  <line x1="1320" y1="2340" x2="1510" y2="2485" stroke="#1a1a4a" stroke-width="1.2" opacity="0.5"/>
+  <line x1="1280" y1="2340" x2="1095" y2="2485" stroke="#1a1a4a" stroke-width="1.2" opacity="0.5"/>
+  <line x1="1330" y1="2325" x2="1430" y2="2410" stroke="#d4a030" stroke-width="1.5" opacity="0.6"/>
+
+  <!-- Additional sea3 connections -->
+  <line x1="1280" y1="2310" x2="1130" y2="2348" stroke="#1a1a4a" stroke-width="1" opacity="0.4"/>
+  <line x1="1320" y1="2310" x2="1470" y2="2225" stroke="#1a1a4a" stroke-width="1" opacity="0.4"/>
+  <line x1="1270" y1="2325" x2="1090" y2="2405" stroke="#1a1a4a" stroke-width="1" opacity="0.4"/>
+  <line x1="1340" y1="2330" x2="1520" y2="2385" stroke="#1a1a4a" stroke-width="1" opacity="0.4"/>
+  <line x1="1280" y1="2335" x2="1170" y2="2455" stroke="#1a1a4a" stroke-width="1" opacity="0.4"/>
+  <line x1="1320" y1="2335" x2="1430" y2="2105" stroke="#1a1a4a" stroke-width="1" opacity="0.4"/>
+  <line x1="1320" y1="2340" x2="1430" y2="2550" stroke="#1a1a4a" stroke-width="1" opacity="0.4"/>
+
+  <!-- serpent_island → serpent_island_center -->
+  <line x1="1300" y1="2042" x2="1300" y2="2020" stroke="#5a8a3a" stroke-width="1"/>
+  <line x1="1290" y1="2030" x2="1310" y2="2030" stroke="#c03030" stroke-width="1.5" stroke-dasharray="3,2"/>
+
+  <!-- island_silence → silence_grove -->
+  <line x1="1430" y1="2076" x2="1430" y2="2054" stroke="#5a8a3a" stroke-width="1"/>
+
+  <!-- great_fish_belly → great_fish_carcass -->
+  <line x1="1560" y1="2380" x2="1556" y2="2380" stroke="#c03030" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="1558" y="2370" text-anchor="middle" font-family="Georgia" font-size="5" fill="#c03030">escape →</text>
+
+  <!-- island_oxen → oxen_glade -->
+  <line x1="1510" y1="2220" x2="1506" y2="2220" stroke="#5a8a3a" stroke-width="1"/>
+
+  <!-- ============================================================ -->
+  <!-- HOMECOMING — The End -->
+  <!-- ============================================================ -->
+
+  <!-- Arrow from sea3 to homecoming -->
+  <line x1="1268" y1="2500" x2="1150" y2="2750" stroke="#8a6a3a" stroke-width="2.5"/>
+  <polygon points="1147,2754 1144,2746 1153,2749" fill="#8a6a3a"/>
+  <text x="1180" y="2620" font-family="Georgia" font-size="10" font-weight="bold" fill="#6a4a2a">HOME →</text>
+  <text x="1180" y="2633" font-family="Georgia" font-size="8" font-style="italic" fill="#8a6a3a">Return to Ireland</text>
+
+  <!-- homecoming -->
+  <g transform="translate(1050, 2790)" filter="url(#shadow)">
+    <rect x="-110" y="-40" width="220" height="80" rx="8" fill="#f0e0b0" stroke="#6a4a2a" stroke-width="2.5"/>
+    <text x="0" y="-15" text-anchor="middle" font-family="Georgia" font-size="13" font-weight="bold" fill="#3a1a0a">🏠 THE HOMECOMING</text>
+    <text x="0" y="2" text-anchor="middle" font-family="Georgia" font-size="9" font-style="italic" fill="#6a4a2a">The Coast of Ireland — at last</text>
+    <text x="0" y="16" text-anchor="middle" font-family="Georgia" font-size="8" fill="#8a6a3a">Your father's killers await by a fire</text>
+    <text x="0" y="30" text-anchor="middle" font-family="Georgia" font-size="8" fill="#c04040">✦ FINAL CHOICE: Vengeance or Forgiveness</text>
+  </g>
+
+  <!-- ============================================================ -->
+  <!-- BOTTOM STATS & DECORATION -->
+  <!-- ============================================================ -->
+
+  <line x1="400" y1="2920" x2="2000" y2="2920" stroke="#8a6a3a" stroke-width="1"/>
+
+  <text x="1200" y="2950" text-anchor="middle" font-family="Georgia, serif" font-size="12" fill="#6a4a2a">
+    ⚓ 64+ Locations  •  3 Sea Regions + Prologue  •  25+ Unique Items  •  20+ NPCs  •  4 Levels of Depth
+  </text>
+
+  <!-- Voyage flow summary -->
+  <text x="1200" y="2980" text-anchor="middle" font-family="Georgia, serif" font-size="11" font-style="italic" fill="#8a6a3a">
+    Prologue (Past) → Harbor → Sea 1 (First Wonders) → Sea 2 (Deeper Mysteries) → Sea 3 (Edge of the World) → Homecoming (Choice)
+  </text>
+
+  <text x="1200" y="3010" text-anchor="middle" font-family="Georgia, serif" font-size="10" fill="#6a4a2a">
+    Based on the medieval Irish immram "The Voyage of Mael Duin" — Cartography by Hermes Agent
+  </text>
+
+  <!-- Decorative sea monsters in corners -->
+  <g transform="translate(100, 2900)" opacity="0.2">
+    <path d="M0,0 Q20,-20 40,0 Q60,20 80,0 Q100,-20 120,0" fill="none" stroke="#3a6a8a" stroke-width="2"/>
+    <circle cx="60" cy="-5" r="3" fill="#3a6a8a"/>
+  </g>
+  <g transform="translate(2200, 2900)" opacity="0.2">
+    <path d="M0,0 Q-20,-15 -40,0 Q-60,15 -80,0" fill="none" stroke="#3a6a8a" stroke-width="2"/>
+    <circle cx="-40" cy="-3" r="3" fill="#3a6a8a"/>
+  </g>
+
+  <!-- Wave decorations at edges -->
+  <g transform="translate(20, 3050)" opacity="0.15">
+    <path d="M0,0 Q30,-15 60,0 Q90,-15 120,0 Q150,-15 180,0" fill="none" stroke="#3a6a8a" stroke-width="2"/>
+    <path d="M50,10 Q80,-5 110,10 Q140,-5 170,10" fill="none" stroke="#3a6a8a" stroke-width="1.5"/>
+  </g>
+  <g transform="translate(1800, 3050)" opacity="0.15">
+    <path d="M0,0 Q30,-15 60,0 Q90,-15 120,0" fill="none" stroke="#3a6a8a" stroke-width="2"/>
+    <path d="M30,10 Q60,-5 90,10" fill="none" stroke="#3a6a8a" stroke-width="1.5"/>
+  </g>
+
+</svg>

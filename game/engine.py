@@ -13,7 +13,7 @@ from .drink_handler import handle_drink
 class Item:
     def __init__(self, id, name, description, examine_text=None,
                  takeable=True, aliases=None, usable_with=None,
-                 use_text=None):
+                 use_text=None, visible_if=None):
         self.id = id
         self.name = name
         self.description = description
@@ -22,6 +22,12 @@ class Item:
         self.aliases = aliases or []
         self.usable_with = usable_with or []  # list of item ids this can be used with
         self.use_text = use_text
+        self.visible_if = visible_if  # callable(state) -> bool; None = always visible
+
+    def is_visible(self, state):
+        if self.visible_if is None:
+            return True
+        return self.visible_if(state)
 
     def match(self, text):
         text = text.lower().strip()
@@ -35,13 +41,19 @@ class Item:
 
 class NPC:
     def __init__(self, id, name, description, dialogue=None,
-                 aliases=None, state=None):
+                 aliases=None, state=None, visible_if=None):
         self.id = id
         self.name = name
         self.description = description
-        self.dialogue = dialogue or {}  # topic -> response or {"condition": ..., "text": ...}
+        self.dialogue = dialogue or {}  # topic -> response or condition-checking structure
         self.aliases = aliases or []
         self.state = state or {}
+        self.visible_if = visible_if  # callable(state) -> bool; None = always visible
+
+    def is_visible(self, state):
+        if self.visible_if is None:
+            return True
+        return self.visible_if(state)
 
     def match(self, text):
         text = text.lower().strip()
@@ -52,11 +64,103 @@ class NPC:
                 return True
         return False
 
+    def get_dialogue(self, topic, state):
+        """Get dialogue text for a topic with full state awareness.
+        
+        Resolution order:
+        1. topic_if_<flag> variants (flag-gated)
+        2. topic_if_fn callable (returns text or None)
+        3. topic_conditions list of (check_fn, text_fn_or_str) pairs
+        4. Exact topic match
+        5. None (not found)
+        """
+        # Stage 1: try custom condition functions keyed as topic_if_fn
+        fn_key = f"{topic}_if_fn"
+        if fn_key in self.dialogue:
+            fn = self.dialogue[fn_key]
+            if callable(fn):
+                result = fn(state)
+                if result:
+                    return result
+        
+        # Stage 2: try conditions list (ordered, first match wins)
+        conditions_key = f"{topic}_conditions"
+        if conditions_key in self.dialogue:
+            conditions = self.dialogue[conditions_key]
+            for entry in conditions:
+                if _check_condition(entry.get("condition", None), state):
+                    text = entry.get("text", "")
+                    if callable(text):
+                        text = text(state)
+                    return text
+        
+        # Stage 3: try flag-gated variants: topic_if_<flag>
+        for key in self.dialogue:
+            if key.startswith(f"{topic}_if_"):
+                flag = key[len(f"{topic}_if_"):]
+                if state.has_flag(flag):
+                    entry = self.dialogue[key]
+                    if isinstance(entry, dict) and "condition" in entry and "text" in entry:
+                        if _check_condition(entry["condition"], state):
+                            text = entry["text"]
+                            return text(state) if callable(text) else text
+                        return None
+                    return entry(state) if callable(entry) else entry
+        
+        # Stage 4: exact topic match
+        if topic in self.dialogue:
+            entry = self.dialogue[topic]
+            if isinstance(entry, dict) and "condition" in entry and "text" in entry:
+                if _check_condition(entry["condition"], state):
+                    text = entry["text"]
+                    return text(state) if callable(text) else text
+                return None
+            return entry(state) if callable(entry) else entry
+        
+        return None
+
+
+def _check_condition(condition, state):
+    """Check a condition against state. Supports multiple formats."""
+    if condition is None:
+        return True
+    if callable(condition):
+        return condition(state)
+    if isinstance(condition, str):
+        if condition.startswith("not_"):
+            return not state.has_flag(condition[4:])
+        if condition.startswith("has_item_"):
+            return state.get_item_from_inventory(condition[9:]) is not None
+        if condition.startswith("visited_"):
+            return state.has_flag(f"{condition[8:]}_visited")
+        if condition.startswith("talked_to_"):
+            return state.has_flag(f"talked_to_{condition[10:]}")
+        return state.has_flag(condition)
+    if isinstance(condition, dict):
+        if "has_all" in condition:
+            return all(state.has_flag(f) for f in condition["has_all"])
+        if "has_any" in condition:
+            return any(state.has_flag(f) for f in condition["has_any"])
+        if "has_none" in condition:
+            return not any(state.has_flag(f) for f in condition["has_none"])
+        if "has_item" in condition:
+            return state.get_item_from_inventory(condition["has_item"]) is not None
+        if "visited" in condition:
+            return state.has_flag(f"{condition['visited']}_visited")
+        if "talked_to" in condition:
+            return state.has_flag(f"talked_to_{condition['talked_to']}")
+        if "crew_alive" in condition:
+            return state.total_crew_alive() >= condition["crew_alive"]
+        if "score_gt" in condition:
+            return state.score > condition["score_gt"]
+    return True
+
 
 class Location:
     def __init__(self, id, name, description, detailed_desc=None,
                  items=None, npcs=None, exits=None, blocked=None,
-                 on_enter=None, on_look=None, ambient=None):
+                 on_enter=None, on_look=None, ambient=None,
+                 describe=None):
         self.id = id
         self.name = name
         self.description = description
@@ -68,6 +172,30 @@ class Location:
         self.on_enter = on_enter  # fn(state) -> str (event text)
         self.on_look = on_look  # fn(state) -> str (additional look text)
         self.ambient = ambient  # fn(state) -> str (ambient description)
+        self.describe = describe  # fn(state) -> (description, detailed_desc) override
+
+    def get_description(self, state):
+        """Get the appropriate description based on state.
+        If describe() returns a tuple (name, description), updates both."""
+        if self.describe:
+            result = self.describe(state)
+            if result:
+                # Support tuple format: (new_name, description)
+                if isinstance(result, tuple):
+                    self.name = result[0]
+                    return result[1]
+                return result
+        if state.has_flag(f"{self.id}_visited"):
+            return self.description
+        return self.detailed_desc
+
+    def get_visible_npcs(self, state):
+        """Return NPCs that should be visible given current state."""
+        return [npc for npc in self.npcs if npc.is_visible(state)]
+
+    def get_visible_items(self, state):
+        """Return items that should be visible given current state."""
+        return [item for item in self.items if item.is_visible(state)]
 
     def get_exits_text(self, state):
         available = []
@@ -105,6 +233,24 @@ CREW_NPC_MAP = {
     "young_diuran": "diuran",
 }
 
+# Global set of NPC ids that are "dead" at the world level
+# When an NPC is killed anywhere, they are removed from ALL locations
+DEAD_NPCS = set()
+
+
+def mark_npc_dead(npc_id):
+    """Mark an NPC as dead across the entire game world."""
+    DEAD_NPCS.add(npc_id)
+    # Remove from all locations
+    for loc in LOCATIONS.values():
+        loc.npcs = [n for n in loc.npcs if n.id != npc_id]
+
+
+def remove_visible_npc(npc_id):
+    """Remove an NPC from all locations (for recruitment/relocation)."""
+    for loc in LOCATIONS.values():
+        loc.npcs = [n for n in loc.npcs if n.id != npc_id]
+
 
 class GameState:
     def __init__(self):
@@ -136,19 +282,21 @@ class GameState:
         return None
 
     def get_npc_at_location(self, name):
+        """Get an NPC at the current location, checking visibility."""
         loc = self.get_location()
         if not loc:
             return None
-        for npc in loc.npcs:
+        for npc in loc.get_visible_npcs(self):
             if npc.match(name):
                 return npc
         return None
 
     def get_item_at_location(self, name):
+        """Get an item at the current location, checking visibility."""
         loc = self.get_location()
         if not loc:
             return None
-        for item in loc.items:
+        for item in loc.get_visible_items(self):
             if item.match(name):
                 return item
         return None
@@ -177,6 +325,10 @@ class GameState:
             return False
         tpl = CREW_TEMPLATES[member_id]
         self.crew.append(CrewMember(**tpl))
+        # When a companion is recruited, remove their NPC self from all locations
+        for npc_id, crew_id in CREW_NPC_MAP.items():
+            if crew_id == member_id:
+                remove_visible_npc(npc_id)
         return True
 
     def total_crew_alive(self):
@@ -320,25 +472,26 @@ def handle_look(state, args):
     if not loc:
         return "The void stares back. You are nowhere."
     text = f"\n=== {loc.name} ===\n\n"
-    if state.has_flag(f"{loc.id}_visited"):
-        text += loc.description + "\n"
-    else:
-        text += loc.detailed_desc + "\n"
-        state.set_flag(f"{loc.id}_visited")
+    
+    # Get description - this may update loc.name if describe() returns a tuple
+    description = loc.get_description(state)
+    text = f"\n=== {loc.name} ===\n\n{description}\n"
+    state.set_flag(f"{loc.id}_visited")
 
-    if loc.items:
-        items_desc = ", ".join(i.name for i in loc.items if i.takeable or True)
-        if items_desc:
-            text += f"\nYou see: {items_desc}\n"
-    if loc.npcs:
-        for npc in loc.npcs:
+    visible_items = loc.get_visible_items(state)
+    if visible_items:
+        items_desc = ", ".join(i.name for i in visible_items)
+        text += f"\nYou see: {items_desc}\n"
+    
+    visible_npcs = loc.get_visible_npcs(state)
+    if visible_npcs:
+        for npc in visible_npcs:
             text += f"\n{npc.name} is here.\n"
     if loc.ambient:
         ambient_text = loc.ambient(state)
         if ambient_text:
             text += f"\n{ambient_text}\n"
 
-    crew_str = ", ".join(f"{c.name} ({c.description})" for c in loc.npcs if hasattr(c, 'name') and c in getattr(loc, 'npcs', []))
     text += "\n" + loc.get_exits_text(state)
 
     if loc.on_look:
@@ -521,8 +674,10 @@ def handle_talk(state, npc_name, topic=None):
         except (ImportError, Exception):
             pass  # Fall through to greeting
 
-    if "greeting" in npc.dialogue:
-        result = npc.dialogue["greeting"]
+    # Use state-aware dialogue
+    greeting = npc.get_dialogue("greeting", state)
+    if greeting:
+        result = greeting
 
         # Check if this NPC can be recruited (young companions in prologue)
         if "recruit" in npc.dialogue and not state.has_flag(f"recruited_{npc.id}"):
@@ -915,17 +1070,16 @@ def _fight_treasure_serpent(state):
 def _fight_hound(state):
     if state.has_flag("dog_pacified"):
         return "The great hound is peacefully dozing. It has finally earned its rest."
-    if state.has_flag("dog_encountered") or True:
-        state.set_flag("dog_pacified")
-        state.score += 3
-        return (
-            "You raise your weapon and face the Great Hound. It does not back down — "
-            "it springs at you with jaws wide, but at the last moment, you sidestep and "
-            "strike its flank. The hound yelps and retreats, tail between its legs.\n\n"
-            "It watches you from a distance as you take the Silver Torc from the pedestal. "
-            "It does not interfere.\n\n"
-            "(+3 points.)"
-        )
+    state.set_flag("dog_pacified")
+    state.score += 3
+    return (
+        "You raise your weapon and face the Great Hound. It does not back down — "
+        "it springs at you with jaws wide, but at the last moment, you sidestep and "
+        "strike its flank. The hound yelps and retreats, tail between its legs.\n\n"
+        "It watches you from a distance as you take the Silver Torc from the pedestal. "
+        "It does not interfere.\n\n"
+        "(+3 points.)"
+    )
 
 
 def _fight_mountain_lion(state):
@@ -945,8 +1099,6 @@ def _fight_mountain_lion(state):
         "and still warm. The Lion's Claw could serve as a dagger.\n\n"
         "(+3 points. Gained: Lion's Claw)"
     )
-
-    return "There's nothing to fight here."
 
 
 def handle_joke(state, args):
@@ -981,7 +1133,7 @@ def handle_joke(state, args):
         "The Laughing King freezes. His eyes go wide. For a moment, there is silence.\n\n"
         'Then he ERUPTS — laughing so hard he falls off his stool, rolls on the ground, '
         "and pounds the earth with his fists. His subjects are laughing too, but at him, not with him.\n\n"
-        '"THAT\'S the one! THAT\'S the BEST joke I\'ve ever heard!" He gasps between gales of laughter. '
+        '"THAT\'s the one! THAT\'s the BEST joke I\'ve ever heard!" He gasps between gales of laughter. '
         '"Here, take this! It\'s the Laughing Potion — one sip and you\'ll be as happy as me!"\n\n'
         "He tosses you a bubbling vial.\n\n"
         "(+2 points. The island is now quiet — well, quieter.)"
@@ -1181,7 +1333,6 @@ def _queen_stay_choice(state):
         lost.alive = False
         state.dead_crew.append(lost)
 
-    state.current_location = "sea1"
     state.current_location = "sea1"
     state.awaiting_choice = None
     return (
