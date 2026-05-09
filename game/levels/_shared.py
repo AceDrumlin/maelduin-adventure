@@ -288,6 +288,7 @@ def _make_items():
         examine_text="A bridle of braided white and black horsehair, studded with sea-shells. When you hold it, you feel the urge to ride fast - impossibly fast - across the open sea.",
         aliases=["bridle", "horsehair bridle", "reins", "horse reins"],
         takeable=True,
+        use_text="You hold the Horsehair Bridle up to the wind. It thrumms with energy, and for a moment you feel the Stallion King's presence beside you — a herd of giant horses galloping across the waves. The bridle glows warmly, eager to be used on a worthy steed.\n\n(Perhaps you can use it on the Water Horse? Try: USE BRIDLE ON WATER HORSE)"
     )
 
     i["sunstone"] = Item(

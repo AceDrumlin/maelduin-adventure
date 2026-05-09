@@ -25,7 +25,7 @@ def register(items, npcs):
             "An old DRUID sits by a fire near the village center. He is stirring a pot that "
             "smells like boiled nettles and regret."
         ),
-        items=[items["crew_provisions"], items["magic_thread"]],
+        items=[items["crew_provisions"]],
         npcs=[npcs["druid"]],
         exits={"west": "sea1", "beach": "sea1", "sea": "sea1", "harbor": "village_harbor", "east": "village_harbor"},
         ambient=lambda s: (

@@ -793,6 +793,14 @@ def _use_hermit_blessing_on_serpent(state, item, target):
     )
 
 
+def _use_magic_thread_on_mast_or_wall(state, item, target):
+    """Use magic thread on mast — dispatches to wall handler if at wall of water."""
+    if state.current_location == "wall_of_water":
+        from .levels._shared import items as shared_items
+        return _use_magic_thread_on_mast_wall(state, item, target)
+    return _use_magic_thread_on_mast(state, item, target)
+
+
 # --- Register specific use combos ---
 
 _register_use("earplugs", "trumpet", _use_earplugs_on_trumpet)
@@ -807,7 +815,7 @@ _register_use("fiery_ash", "fiery_pigs", _use_fiery_ash_on_pigs)
 _register_use("fiery_ash", "pigs", _use_fiery_ash_on_pigs)
 _register_use("fiery_ash", "pig", _use_fiery_ash_on_pigs)
 _register_use("silver_bell", "storm", _use_silver_bell_on_storm)
-_register_use("magic_thread", "mast", _use_magic_thread_on_mast)
+_register_use("magic_thread", "mast", _use_magic_thread_on_mast_or_wall)
 _register_use("truth_ring", "queen", _use_truth_ring_on_queen)
 _register_use("speaking_feather", "skull", _use_speaking_feather_on_skull)
 _register_use("hermit_blessing", "serpent", _use_hermit_blessing_on_serpent)
@@ -1015,13 +1023,13 @@ _register_use("revolving_key", "red door", _use_revolving_key_on_castle)
 _register_use("revolving_key", "keyhole", _use_revolving_key_on_castle)
 
 # Wall of Water — magic thread or silver bell
-_register_use("magic_thread", "mast", _use_magic_thread_on_mast_wall)
+_register_use("magic_thread", "wall_mast", _use_magic_thread_on_mast_wall)
 _register_use("magic_thread", "wall", _use_magic_thread_on_mast_wall)
 _register_use("magic_thread", "water", _use_magic_thread_on_mast_wall)
 _register_use("silver_bell", "wall", _use_silver_bell_on_wall)
 _register_use("silver_bell", "water", _use_silver_bell_on_wall)
-_register_use("magic_thread", "curragh", _use_magic_thread_on_mast_wall)
-_register_use("magic_thread", "ship", _use_magic_thread_on_mast_wall)
+_register_use("magic_thread", "wall_curragh", _use_magic_thread_on_mast_wall)
+_register_use("magic_thread", "wall_ship", _use_magic_thread_on_mast_wall)
 
 # Giant Horses — silver bell or otter pelt
 _register_use("silver_bell", "horses", _use_silver_bell_on_horses)

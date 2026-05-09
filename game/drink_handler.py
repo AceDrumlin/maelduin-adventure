@@ -5,7 +5,7 @@ def handle_drink(state, args):
     loc = state.get_location()
     if not loc:
         return "There is nothing to drink here."
-    if loc.id == "freshwater_well" and not state.has_flag("well_drunk"):
+    if loc.id in ("freshwater_well", "island_fountain") and not state.has_flag("well_drunk"):
         state.set_flag("well_drunk")
         state.set_flag("well_visited")
         state.score += 2

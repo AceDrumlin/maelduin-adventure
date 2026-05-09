@@ -52,7 +52,7 @@ def register(items, npcs):
             "The giant spots your approach and ROARS! He hefts a stone the size of a man's head "
             "and hurls it with terrifying accuracy. It smashes into the side of your curragh, "
             "splintering the frame. Your crew scrambles to keep the boat steady.\n\n"
-            "One of your crew — " + (s.lose_crew() or "a young man from the west").name
+            "One of your crew — " + (s.lose_crew() or type("obj", (), {"name": "a young man from the west"})()).name
             + " — is struck by a flying splinter and falls, clutching his chest. "
             "He does not rise again.\n\n"
             "The giant bellows with laughter and reaches for another stone.\n\n"

@@ -237,12 +237,6 @@ def handle_look(state, args):
         if extra:
             text += "\n\n" + extra
 
-    # Special: homecoming sets the ending choice
-    if loc.id == "homecoming" and not state.has_flag("confronted"):
-        state.set_flag("confronted")
-        state.awaiting_choice = "ending"
-        text += "\n\nType YES to forgive them. Type NO to take your vengeance."
-
     return text
 
 
@@ -682,7 +676,7 @@ def handle_fight(state, target):
             "You are unharmed, but your pride is in tatters. You were defeated by a pig."
         )
 
-    return f"There's nothing to fight here. You can't just attack {target} for no reason."
+    return "There's nothing to fight here."
 
 
 def _fight_giant(state):
@@ -713,7 +707,7 @@ def _fight_giant(state):
             "at your feet. You dive aside, barely avoiding being crushed. You need the Magic Harpoon "
             "to bring this giant down."
         )
-    return f"There's nothing to fight here. You can't just attack {target} for no reason."
+    return "There's nothing to fight here."
 
 
 def _fight_treasure_serpent(state):
@@ -735,7 +729,7 @@ def _fight_treasure_serpent(state):
             "Beyond the entrance, you see the gleam of ANCIENT GOLD. The treasure is yours.\n\n"
             "(+3 points. Ancient Gold lies in the cave.)"
         )
-    return f"There's nothing to fight here. You can't just attack {target} for no reason."
+    return "There's nothing to fight here."
 
 
 def _fight_hound(state):
@@ -772,7 +766,7 @@ def _fight_mountain_lion(state):
         "(+3 points. Gained: Lion's Claw)"
     )
 
-    return f"There's nothing to fight here. You can't just attack {target} for no reason."
+    return "There's nothing to fight here."
 
 
 def handle_joke(state, args):
@@ -866,7 +860,7 @@ def handle_yes(state, args):
         state.game_over = True
         state.won = True
         state.awaiting_choice = None
-        islands_visited = sum(1 for k in state.flags if k.endswith("_visited"))
+        islands_visited = sum(1 for k in state.flags if k.endswith("_visited") and not k.startswith("ailill") and not k.startswith("foster") and not k.startswith("training") and not k.startswith("feast") and not k.startswith("druid") and not k.startswith("village") and not k.startswith("fathers"))
         state.score += islands_visited * 3
         return (
             'You say YES.\n\n'
@@ -993,6 +987,8 @@ def _queen_stay_choice(state):
         lost.alive = False
         state.dead_crew.append(lost)
 
+    state.current_location = "sea1"
+    state.current_location = "sea1"
     state.awaiting_choice = None
     return (
         "You stay. Days turn to weeks. Weeks to months.\n\n"
@@ -1015,7 +1011,7 @@ def _ending_forgive_choice(state):
     state.won = True
 
     # Calculate final score
-    islands_visited = sum(1 for k in state.flags if k.endswith("_visited"))
+    islands_visited = sum(1 for k in state.flags if k.endswith("_visited") and not k.startswith("ailill") and not k.startswith("foster") and not k.startswith("training") and not k.startswith("feast") and not k.startswith("druid") and not k.startswith("village") and not k.startswith("fathers"))
     state.score += islands_visited * 2
 
     return (
@@ -1049,7 +1045,7 @@ def _ending_vengeance_choice(state):
     state.won = True
 
     # Calculate final score
-    islands_visited = sum(1 for k in state.flags if k.endswith("_visited"))
+    islands_visited = sum(1 for k in state.flags if k.endswith("_visited") and not k.startswith("ailill") and not k.startswith("foster") and not k.startswith("training") and not k.startswith("feast") and not k.startswith("druid") and not k.startswith("village") and not k.startswith("fathers"))
     state.score += islands_visited
 
     return (

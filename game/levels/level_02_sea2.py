@@ -272,6 +272,7 @@ def register(items, npcs):
         ),
         items=[], npcs=[], exits={"back": "island_four_fences", "east": "island_four_fences"},
         on_enter=lambda s: (
+            s.set_flag("crystal_tried") or
             (s.lose_crew("diuran") or True) and
             "Diurán is wounded by flying crystal! He cannot continue."
             if not s.has_flag("crystal_tried") else None
