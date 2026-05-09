@@ -932,6 +932,14 @@ def _make_npcs():
                 "Just bushes. Bushes and more bushes.\"\n\n"
                 "The skull's jaw hangs open in what might be a sigh."
             ),
+            "greeting_if_visited_revolving_castle": (
+                'The skull clacks its teeth together as you approach.\n\n'
+                '"Back again? You have the look of someone who has seen the Revolving Castle. '
+                'I can smell the sour mead on you. Did you find Garbh?\n\n'
+                'The skull\'s jaw clatters.\n\n'
+                "You are still breathing, so I assume he didn't kill you. "
+                'That is either very good or very bad. Time will tell."'
+            ),
             "bush": (
                 '"Thornbush. Singular. There\'s only the one. It\'s spiritual, apparently. '
                 "I think it's just a bush that got lucky.\""
@@ -996,6 +1004,12 @@ def _make_npcs():
                 "It stamps a hoof, and the water ripples outward in perfect circles.\n\n"
                 "\"Climb on. I promise you a ride you'll never forget.\""
             ),
+            "greeting_if_kelpie_tricked": (
+                'The Water Horse eyes you warily as you approach. Its ears flatten.\n\n'
+                '"You. I remember you. You tricked me once."\n\n'
+                'It stamps a hoof, and the water ripples.\n\n'
+                '"Say what you need to say, and be gone."'
+            ),
             "ride": (
                 "\"Climb on my back. I'll take you across the sea. "
                 "I won't even drown you. Much.\""
@@ -1022,6 +1036,12 @@ def _make_npcs():
                 "He gestures to a pile of iron coins on a stone table.\n\n"
                 '"I forge coins here. Coins of power. Coins of pain. Coins that buy things no mortal merchant can offer. '
                 "Would you like to make a trade?\""
+            ),
+            "greeting_if_traded_with_demon": (
+                'The Demon Smith looks up from his forge, embers glowing in his cracked skin.\n\n'
+                '"The mortal returns. And you still have your soul. Impressive.\n\n'
+                'He gestures to the coin pile.\n\n'
+                '"Care to do business again?"'
             ),
             "trade": (
                 '"I trade in souls, memories, and shiny objects. What do you have to offer?"'
@@ -1068,6 +1088,14 @@ def _make_npcs():
                 "If you have something edible... I MIGHT listen. MIGHT. "
                 "No promises. I'm a pig of my word. Which means I change my mind a lot.\""
             ),
+            "greeting_if_apple_taken": (
+                'The black pig snorts furiously as you approach, its tusks gleaming.\n\n'
+                '"GRUNFF! The apple thief! I know what you did!"\n\n'
+                'It circles you, snorting and stamping.\n\n'
+                '"That apple was MINE! Centuries I guarded that tree!"\n\n'
+                'It stops and fixes you with a beady eye.\n\n'
+                '"...It was a good apple, was it?"'
+            ),
         },
         visible_if=lambda s: not s.has_flag('pig_pacified'),
     )
@@ -1086,6 +1114,14 @@ def _make_npcs():
                 "\"The antidote herb? It grows here, in the center of my ring. "
                 "It is the only thing on this island I cannot digest — my one weakness. "
                 "Do you think I would simply let you take it? I guard it because it guards the world from me.\""
+            ),
+            "greeting_if_serpent_calmed": (
+                'The great serpent raises its head as you approach. Its eyes are no longer hostile.\n\n'
+                '"You again, little one. You have already taken what you came for.\n\n'
+                'Its tongue flicks out, tasting the air.\n\n'
+                '"Most mortals take the herb and flee. But you came back.\n\n'
+                'It lowers its head to your level.\n\n'
+                '"You are welcome here, little friend."'
             ),
             "mercy": (
                 "The serpent's head lowers slightly. Its voice softens.\n\n"
@@ -1424,6 +1460,14 @@ def _make_npcs():
                 '"I have lived with what I did every day. I see his face in my dreams \u2014 that laughing, impossible face. He haunts me, Mael Duin. Not because I regret it, but because he would have forgiven me if our positions were reversed. And I knew that even as I struck."\n\n'
                 '"If you can forgive me... then maybe the wolf can rest. Maybe we both can."\n\n'
                 'He extends his hand, palm open. No weapon. Just the hand of a tired, old warrior waiting for judgment.'
+            ),
+            "greeting_if_forgave_garbh": (
+                'Garbh looks up as you enter. His one eye softens.\n\n'
+                '"You came back. After everything... you came back."\n\n'
+                'He sets down his drinking horn and stands.\n\n'
+                '"I don\'t know what to call a man who forgives his father\'s killer. '
+                'But the wolf can rest now. And so can I."\n\n'
+                'He extends his hand. This time, it is not a challenge. It is a greeting.'
             ),
         }
     )
