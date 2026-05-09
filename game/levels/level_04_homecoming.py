@@ -22,6 +22,17 @@ def register(items, npcs):
     # ═══════════════════════════════════════════════════════════════
     # SCENE 1: BEACH — Arrival at the Aran Islands
     # ═══════════════════════════════════════════════════════════════
+    def _beach_describe(state):
+        """Beach after the druid has been spoken to."""
+        if state.has_flag("druid_arrival_spoken"):
+            return (
+                "The Coast of Ireland — A Familiar Shore",
+                "The druid is by his fire, easy company now. Your curragh rests on the strand.\n\n"
+                "The hill path rises to the east — the place where your father's cairn stands.\n\n"
+                "The tide murmurs like an old friend who knows you've changed and approves."
+            )
+        return None
+
     l["homecoming_beach"] = Location(
         "homecoming_beach", "The Coast of Ireland — Home at Last",
         "The familiar grey strand where your father fell. The tide murmurs like an old storyteller.",
@@ -64,11 +75,34 @@ def register(items, npcs):
             "The fire crackles softly. A curlew calls across the strand. "
             "The sea, which has been your home for three years, now sounds strange and foreign."
         ),
+        describe=_beach_describe,
     )
 
     # ═══════════════════════════════════════════════════════════════
     # SCENE 2: HILL — Ailill's Cairn
     # ═══════════════════════════════════════════════════════════════
+    def _hill_describe(state):
+        """Hill changes after the ending has been decided."""
+        if state.has_flag("hill_visited") and state.has_flag("ending_decided"):
+            if state.awaiting_choice == "ending_forgiven":
+                return (
+                    "The Hill of Ailill — Peace Descends",
+                    "The cairn stands in golden light. The wind is gentle now, "
+                    "carrying the scent of heather and sea salt. The stones seem warmer.\n\n"
+                    "Your father's cairn feels less like a grave and more like a threshold. "
+                    "Something has been laid to rest here — not just Ailill, but the hatred "
+                    "that bound him to this earth."
+                )
+            elif state.awaiting_choice == "ending_vengeance":
+                return (
+                    "The Hill of Ailill — A Shadow Remains",
+                    "The cairn stands grey against a grey sky. The wind cuts sharp and cold.\n\n"
+                    "The stones seem darker now. The wolf's carving at the base looks more "
+                    "like a snarl than a howl. Something has been added to this place — "
+                    "not peace, but the weight of what was done in Ailill's name."
+                )
+        return None
+
     l["homecoming_hill"] = Location(
         "homecoming_hill", "The Hill of Ailill Ochair Ága",
         "A windswept hill overlooking the Aran Islands. A cairn of grey stones marks where the Wolf fell.",
@@ -104,11 +138,37 @@ def register(items, npcs):
             "The wind whistles through the cairn stones — a sound almost like laughter. "
             "Your father's laughter, perhaps."
         ),
+        describe=_hill_describe,
     )
 
     # ═══════════════════════════════════════════════════════════════
     # SCENE 3: CHOICE — The Final Moment
     # ═══════════════════════════════════════════════════════════════
+    def _choice_describe(state):
+        """Choice location reflects the ending state."""
+        if state.has_flag("homecoming_ending_shown"):
+            if state.awaiting_choice == "ending_forgiven":
+                return (
+                    "The Point of Forgiveness",
+                    "The sun sets in peace. The sea glows gold. Your choice has been made.\n\n"
+                    "The druid has nodded and turned away. Your crew waits on the hill behind you.\n\n"
+                    "It is time to go home."
+                )
+            elif state.awaiting_choice == "ending_vengeance":
+                return (
+                    "The Point of Vengeance",
+                    "The sun sets like a wound in the sky. The sea churns below.\n\n"
+                    "Your choice has been made. The druid has gone. Your crew waits in silence.\n\n"
+                    "You have what you came for. But the victory tastes of ash."
+                )
+            else:
+                return (
+                    "The Point of Decision",
+                    "The moment hangs. The sea crashes below. The sky burns gold and red.\n\n"
+                    "Type YES to forgive. Type NO for vengeance."
+                )
+        return None
+
     l["homecoming_choice"] = Location(
         "homecoming_choice", "The Point of Decision",
         "A rocky promontory overlooking the sea. This is where it ends.",
@@ -124,6 +184,7 @@ def register(items, npcs):
                "down": "homecoming_beach"},
         on_enter=_on_choice_enter,
         on_look=lambda s: _choice_look_text(s),
+        describe=_choice_describe,
     )
 
     LOCATIONS.update(l)

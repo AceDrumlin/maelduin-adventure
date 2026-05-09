@@ -17,6 +17,140 @@ def register(items, npcs):
     _eng.VERBS["oxen"] = ("go", lambda s, a: _eng.handle_go(s, "oxen"))
     _eng.VERBS["well"] = ("go", lambda s, a: _eng.handle_go(s, "well"))
 
+    # ---------------------------------------------------
+    # State-aware describe callbacks
+    # ---------------------------------------------------
+
+    def _mill_exterior_describe(s):
+        if s.has_flag("mill_stopped"):
+            return (
+                "The Mill of the Sea — Silenced",
+                "The great mill stands silent. The black stone walls, once vibrating with the mill's grinding, are still. "
+                "The wheel hangs motionless above the now-calm sea. The whirlpools have faded, leaving only gently lapping waves.\n\n"
+                "The old guardian sits on a stone, weeping silently with joy. He looks up as you approach "
+                "and whispers: 'Thank you. I have not heard silence in seven hundred years. "
+                "The sea is finally at peace.'\n\n"
+                "The archway into the mill is dark and quiet. The grinding is gone."
+            )
+        return None
+
+    def _mill_interior_describe(s):
+        if s.has_flag("mill_stopped"):
+            return (
+                "The Mill of the Sea — Grinding Chamber (Silent)",
+                "The great gears are frozen in place, the millstone fragment wedged between their teeth. "
+                "Silence fills the chamber - a profound, almost sacred silence.\n\n"
+                "Where seawater once poured in and vanished, now a pool of clear, calm water sits in the stone basin. "
+                "It reflects the grey sky above like a mirror.\n\n"
+                "The millstone fragment that was once loose on the floor is now part of the mechanism - "
+                "the key that stopped the endless grinding of the sea."
+            )
+        return None
+
+    def _island_sheep_describe(s):
+        if s.has_flag("sheep_riddle_solved"):
+            return (
+                "The sheep have parted, forming a corridor of grey down the center path. "
+                "They watch you pass with knowing, ancient eyes. One winks at you."
+            )
+        return None
+
+    def _sheep_pasture_describe(s):
+        fleece = items.get("fleece_of_change")
+        if fleece and fleece not in l["sheep_pasture"].items:
+            return (
+                "The Shepherd's Pasture — Gift Given",
+                "The grey path opens into a small, peaceful pasture. The shepherd's crook stands planted in the ground, "
+                "but the fleece is gone - taken by you to warmer climes.\n\n"
+                "The ghostly shepherd sits on his grey stone, watching you with twilight eyes. "
+                "He nods slowly. 'The fleece served its purpose. Go now, traveler - the sea awaits.'\n\n"
+                "The sheep graze peacefully, no longer blocking the path. The way back to the sea is clear."
+            )
+        return None
+
+    def _island_horses_describe(s):
+        if s.has_flag("horses_pacified"):
+            return (
+                "Island of Giant Horses — Calmed",
+                "The herd grazes peacefully, occasionally glancing at you with something like respect. "
+                "The Stallion King stands apart, watching the sea. He nods once - a gesture of acknowledgment.\n\n"
+                "The ground no longer trembles. The air is filled with the gentle sounds of grazing "
+                "and the soft whicker of contented horses."
+            )
+        elif s.has_flag("horses_fought"):
+            return (
+                "Island of Giant Horses — Aftermath",
+                "The herd is subdued, keeping their distance. The Stallion King bears fresh wounds on his flank. "
+                "He watches you with a mixture of respect and wariness.\n\n"
+                "The fight is over, but the memory of it lingers in the air like ozone after a storm."
+            )
+        return None
+
+    def _island_flaming_cat_describe(s):
+        if s.has_flag("flaming_cat_pacified"):
+            return (
+                "Island of the Flaming Cat — Friendly",
+                "The little cat, still small, bats gently at your ankle. It seems pleased with your offering. "
+                "The air is warm and golden.\n\n"
+                "The pedestal of black obsidian stands empty now - the sunstone a gift freely given. "
+                "The carvings of cats on the pedestal seem to smile in the warm light."
+            )
+        return None
+
+    def _wall_of_water_describe(s):
+        if s.has_flag("wall_crossed"):
+            return (
+                "The Wall of Water — Crossed",
+                "The wall has collapsed. The sea is calm once more. Ahead, the way is clear to the deeper waters beyond.\n\n"
+                "Where the wall once stood, gentle waves roll across an open horizon. "
+                "The humming has stopped, replaced by the peaceful sound of normal waves. "
+                "Fergus breathes a sigh of relief."
+            )
+        return None
+
+    def _island_oxen_describe(s):
+        if s.has_flag("oxen_peaceful"):
+            return (
+                "Island of the Sacred Oxen — Peace",
+                "The sacred oxen graze peacefully in the misty green grass. The larger one nods as you pass - "
+                "a gesture of respect between ancient souls.\n\n"
+                "The mist glows gold where they stand, and the air feels light and sacred."
+            )
+        elif s.has_flag("oxen_slaughtered"):
+            return (
+                "Island of the Sacred Oxen — Desecrated",
+                "The island feels different now - darker, heavier. The mist has a grey tinge, and the golden glow is gone.\n\n"
+                "The remaining ox stands alone, its head bowed. The ground where the other fell is marked by dark, "
+                "rich soil - as if the blood itself has been absorbed by the earth."
+            )
+        return None
+
+    def _oxen_glade_describe(s):
+        horn = items.get("golden_horn")
+        if horn and horn not in l["oxen_glade"].items:
+            return (
+                "The Oxen's Glade — Gift Given",
+                "You step into the sacred glade. The mist parts around you, but the golden glow has dimmed.\n\n"
+                "The larger ox stands where you left it, watching you with patient eyes. Its horn is gone - "
+                "a gift willingly given, now carried by you into the wider world.\n\n"
+                "The smaller ox nuzzles your empty hand, as if checking that you still carry the warmth of the horn. "
+                "It lows softly - a sound of farewell."
+            )
+        return None
+
+    def _freshwater_well_describe(s):
+        water = items.get("water_of_vision")
+        if water and water not in l["freshwater_well"].items:
+            return (
+                "The Strand of the Freshwater Well — Water Taken",
+                "The sandy beach curves along the dark sea. The well of white stone stands empty now - "
+                "the water of vision taken by you.\n\n"
+                "The cup of horn hangs from its peg, empty. The well's inner walls reflect only darkness. "
+                "The inscription carved around the rim seems fainter now, as if the words themselves were made of water.\n\n"
+                "But the sea still whispers its ancient secrets, and the sand still glows with a pale, silvery light."
+            )
+        return None
+
     # ===================================================
     # ISLAND 1: THE MILL OF THE SEA
     # (connects from sea2, direction: northeast)
@@ -37,6 +171,7 @@ def register(items, npcs):
         ),
         items=[],
         npcs=[npcs["mill_guardian"]],
+        describe=_mill_exterior_describe,
         exits={"in": "mill_interior", "enter": "mill_interior", "southwest": "sea2", "back": "sea2"},
         ambient=lambda s: (
             "GRIND... GRIND... GRIND... The mill never stops. The sea never stops. "
@@ -71,6 +206,7 @@ def register(items, npcs):
         ),
         items=[items["millstone_fragment"]],
         npcs=[],
+        describe=_mill_interior_describe,
         exits={"out": "mill_exterior", "back": "mill_exterior"},
         ambient=lambda s: (
             "The gears groan. The stone grinds. The sea boils outside. "
@@ -103,6 +239,7 @@ def register(items, npcs):
         ),
         items=[],
         npcs=[npcs["ghostly_shepherd"]],
+        describe=_island_sheep_describe,
         exits={"northeast": "sea2", "back": "sea2"},
         blocked={
             "northeast": (
@@ -145,6 +282,7 @@ def register(items, npcs):
         ),
         items=[items["fleece_of_change"]],
         npcs=[npcs["ghostly_shepherd"]],
+        describe=_sheep_pasture_describe,
         exits={"back": "island_sheep", "northeast": "sea2"},
         on_enter=lambda s: (
             s.set_flag("sheep_riddle_solved") or
@@ -177,6 +315,7 @@ def register(items, npcs):
         ),
         items=[items["horsehair_bridle"]],
         npcs=[npcs["stallion_king"]],
+        describe=_island_horses_describe,
         exits={"southeast": "sea2", "back": "sea2"},
         blocked={
             "southeast": (
@@ -225,6 +364,7 @@ def register(items, npcs):
         ),
         items=[items["sunstone"]],
         npcs=[npcs["little_cat"]],
+        describe=_island_flaming_cat_describe,
         exits={"west": "sea3", "back": "sea3"},
         ambient=lambda s: (
             "The little cat purrs contentedly. The air shimmers with warmth. "
@@ -267,6 +407,7 @@ def register(items, npcs):
         ),
         items=[],
         npcs=[],
+        describe=_wall_of_water_describe,
         exits={"northwest": "sea2", "back": "sea2", "through": "sea3"},
         blocked={
             "northwest": (
@@ -315,6 +456,7 @@ def register(items, npcs):
         ),
         items=[],
         npcs=[npcs["sacred_oxen"]],
+        describe=_island_oxen_describe,
         exits={"north": "sea3", "back": "sea3"},
         ambient=lambda s: (
             "The oxen stand motionless. Their golden horns gleam in the mist. "
@@ -352,6 +494,7 @@ def register(items, npcs):
         ),
         items=[items["golden_horn"]],
         npcs=[npcs["sacred_oxen"]],
+        describe=_oxen_glade_describe,
         exits={"out": "island_oxen", "back": "island_oxen"},
         on_enter=lambda s: (
             s.set_flag("oxen_peaceful") or
@@ -385,6 +528,7 @@ def register(items, npcs):
         ),
         items=[items["water_of_vision"]],
         npcs=[],
+        describe=_freshwater_well_describe,
         exits={"east": "sea3", "back": "sea3"},
         ambient=lambda s: (
             "The water in the well glows softly, pulsing like a slow heartbeat. "

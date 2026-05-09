@@ -17,6 +17,13 @@ def register(items, npcs):
     _eng.VERBS["silence"] = ("go", lambda s, a: _eng.handle_go(s, "silence"))
     _eng.VERBS["promised"] = ("go", lambda s, a: _eng.handle_go(s, "promised"))
 
+    # ---- NPC visibility rules ----
+    npcs["silence_guardian"].visible_if = lambda s: not s.has_flag("got_silent_bell")
+    npcs["guardian_of_peace"].visible_if = lambda s: (
+        not s.has_flag("refused_promised_land") and not s.has_flag("stayed_in_promised_land")
+    )
+    # ---- END NPC visibility rules ----
+
     # ===================================================
     # ISLAND 1: THE GREAT FISH
     # (connects from sea3, direction: fish)
@@ -44,6 +51,14 @@ def register(items, npcs):
         npcs=[],
         exits={},
         blocked={},
+        describe=lambda s: (
+            ("The Great Fish — Empty Belly",
+             "The fish's belly is torn open to the sky. Light pours through the gaping wound in its side. "
+             "The fleshy walls are already beginning to pale and stiffen as the great beast dies. "
+             "Through the hole, you can see the open sea and your boat waiting. "
+             "The crew is gathering near the wound, eager to escape.")
+            if s.has_flag("escaped_fish") else None
+        ),
         ambient=lambda s: (
             "GLOOP... The walls pulse. The air is thick. You feel the pressure "
             "of the deep around you — tons of water and fish-flesh pressing in."
@@ -88,6 +103,12 @@ def register(items, npcs):
         items=[items["fish_tooth"]],
         npcs=[],
         exits={"out": "sea3", "back": "sea3"},
+        describe=lambda s: (
+            "The fish floats dead on the surface, its belly torn open. "
+            "Your boat bobs nearby. The serrated fish tooth is gone — taken. "
+            "There is nothing left here but the memory of your escape from the belly of the beast."
+            if not l["great_fish_carcass"].items else None
+        ),
         on_enter=lambda s: (
             s.set_flag("escaped_fish") or
             "You stagger out of the fish's belly and collapse onto its slick, scaly back. "
@@ -126,6 +147,13 @@ def register(items, npcs):
         items=[items["fountain_water"]],
         npcs=[],
         exits={"back": "sea3", "east": "sea3"},
+        describe=lambda s: (
+            "The fountain basin is empty. The milk-white, luminous water has been taken. "
+            "Only clear, ordinary water trickles from the fountain now, "
+            "flowing without its former magical glow. The ancient inscription "
+            "still circles the basin, but the magic feels... depleted."
+            if not l["island_fountain"].items else None
+        ),
         ambient=lambda s: (
             "The fountain burbles softly. The water glows with a gentle, milky luminescence. "
             "It seems to be waiting."
@@ -168,6 +196,13 @@ def register(items, npcs):
         items=[],
         npcs=[npcs["silence_guardian"]],
         exits={"back": "sea3", "west": "sea3", "grove": "silence_grove", "deeper": "silence_grove", "in": "silence_grove"},
+        describe=lambda s: (
+            "The beautiful valley is still muted and silent, but the oppressive presence is gone. "
+            "The grey stone throne at the far end sits empty. The iron bell no longer hangs from its branch. "
+            "The silence here feels natural now — the quiet of a peaceful valley, "
+            "not the enforced hush of a tyrant."
+            if not l["silence_grove"].items else None
+        ),
         ambient=lambda s: (
             "The silence presses in. You can hear your own heartbeat. Your own breath. "
             "The sound of your own thoughts is unbearably loud."
@@ -205,6 +240,13 @@ def register(items, npcs):
         items=[items["silent_bell"]],
         npcs=[],
         exits={"back": "island_silence", "out": "island_silence"},
+        describe=lambda s: (
+            "A small grove of silver-leaved trees surrounding a white clearing. "
+            "The branch where the Silent Bell once hung is empty. "
+            "The iron hook creaks slightly in the breeze. The silence here is profound, "
+            "but it feels less magical now — just a quiet glade in a silent valley."
+            if not l["silence_grove"].items else None
+        ),
         on_enter=lambda s: (
             "You push through the silver willows and find the hidden grove.\\\n\\\n"
             "The Silent Bell hangs before you — an iron bell that has never rung, "
@@ -252,6 +294,22 @@ def register(items, npcs):
         items=[],
         npcs=[npcs["guardian_of_peace"]],
         exits={"back": "sea3", "return": "sea3"},
+        describe=lambda s: (
+            ("The Promised Land — Farewell",
+             "The land of impossible beauty stretches before you, but it feels different now. "
+             "The golden fruit still hangs from silver trees, and rivers of wine still flow "
+             "through meadows of eternal spring, but you have chosen to leave. "
+             "The Guardian of Peace has blessed your journey and given you the Wind of Return. "
+             "Your home awaits across the sea.")
+            if s.has_flag("refused_promised_land") else
+            ("The Promised Land — Eternal Rest",
+             "You have said YES. The shimmering land enfolds you completely. "
+             "There is no pain here. No hunger. No death. "
+             "Your crew is with you, and you are at peace. "
+             "This is the end of your voyage — the place that was always waiting.")
+            if s.has_flag("stayed_in_promised_land") else
+            None
+        ),
         ambient=lambda s: (
             "The air is perfect. The light is gentle. The river of wine sings a melody "
             "that sounds like your mother's voice."

@@ -9,6 +9,193 @@ def register(items, npcs):
     from ..engine import LOCATIONS
     l = {}
 
+    # ── State-aware describe() functions ──────────────────────────
+
+    def _sea3_describe(state):
+        """After the confrontation, show a changed Final Sea."""
+        if state.has_flag("confronted_murderer"):
+            return (
+                "The Final Sea — Resolution",
+                "The water is still black as ink, but the weight has lifted. "
+                "The sky swirls with colors you've never seen, and now they feel "
+                "like a celebration rather than a warning.\n\n"
+                "The Magic Thread glows warmly, its purpose fulfilled. "
+                "Your father's killers have been confronted. The Silver Net is yours. "
+                "The end of the journey is finally here.\n\n"
+                "Diurán has set down his quill. 'Captain... I think the poem is finished. "
+                "It ends well. For once.'\n\n"
+                "The islands around you seem smaller now, as if the world has shrunk "
+                "to a single point — the path homeward."
+            )
+        return None
+
+    def _serpent_island_describe(state):
+        """After the serpent is pacified, show a welcoming island."""
+        if state.has_flag("serpent_pacified"):
+            return (
+                "Island of the Great Snake — Serpent Pacified",
+                "The enormous serpent has uncoiled and now rests peacefully along the "
+                "shoreline, its massive head pillowed on the sand. Its scales shimmer "
+                "with a gentle purple iridescence, and it blinks slowly, contentedly.\n\n"
+                "The narrow gap between its head and tail is wide open now — the serpent "
+                "has deliberately moved aside to welcome you. The purple antidote herbs "
+                "grow in abundance, and the serpent seems to regard them as a shared "
+                "treasure rather than a guarded secret.\n\n"
+                "As you pass, the serpent exhales a warm, sweet-smelling breath. "
+                "It is not a threat. It is a guardian who has accepted you."
+            )
+        return None
+
+    def _black_pig_describe(state):
+        """After the apple is taken, show an angry pig island."""
+        if state.has_flag("apple_taken"):
+            return (
+                "Island of the Black Pig — Pig Enraged",
+                "The golden apple tree still glitters, but one branch stands noticeably "
+                "empty. The black pig is very much awake now — standing on all fours, "
+                "its golden-tusked head low, snorting plumes of ash.\n\n"
+                "Its eyes are fixed on you with unmistakable intelligence and fury. "
+                "Drool — still liquid gold — drips from its jowls, but now it sizzles "
+                "where it hits the ground.\n\n"
+                "The sign now has a new line scratched beneath the old one: "
+                "'I TOLD YOU. I WILL BITE YOU. I REMEMBER.'"
+            )
+        return None
+
+    def _water_horse_describe(state):
+        """After the kelpie is tricked, show a humiliated kelpie island."""
+        if state.has_flag("kelpie_tricked"):
+            return (
+                "Island of the Water Horse — Kelpie Outsmarted",
+                "The grassy knoll is peaceful now. The Water Horse stands far offshore, "
+                "glaring at you with undisguised resentment. Its too-many teeth are bared "
+                "in a grimace that is half-fury, half-humiliation.\n\n"
+                "Fergus chuckles every time he looks at it. 'Not so clever now, are ye?' "
+                "he mutters. The kelpie snorts and stamps a hoof — but it does not approach.\n\n"
+                "The iridescent scale you took pulses warmly in your pack. The kelpie's "
+                "power is broken on this shore."
+            )
+        return None
+
+    def _fiery_pigs_describe(state):
+        """After the fiery pigs are pacified, show a warm, calm island."""
+        if state.has_flag("fiery_pigs_pacified"):
+            return (
+                "Island of the Fiery Pigs — Pigs Pacified",
+                "The charred grass has been replaced by new, green shoots. The fires "
+                "have banked to warm embers. The fiery pigs now glow with a gentle, "
+                "golden warmth — like living hearth fires rather than raging infernos.\n\n"
+                "They trot amiably around the island, snorting contentedly. One of them "
+                "roots in the ash and finds a small, glowing clover, which it brings to you "
+                "as an offering. Its touch is warm but not burning.\n\n"
+                "The stone altar at the center reads differently now — 'A sacrifice "
+                "offered. The fire remembers. The fire is at peace.'\n\n"
+                "The island feels like a place of renewal rather than destruction."
+            )
+        return None
+
+    def _revolving_castle_describe(state):
+        """After the castle is unlocked, show a still castle."""
+        if state.has_flag("castle_unlocked"):
+            return (
+                "Island of the Revolving Castle — Castle Still",
+                "The black obsidian castle sits motionless. After turning for what must "
+                "have been centuries, it has finally stopped. The grinding has ceased, "
+                "and the silence is startling.\n\n"
+                "The Red Door stands open, revealing a dark entrance hallway. "
+                "The other doors — Blue, Green, Black — are frozen mid-rotation, "
+                "forever caught between where they were and where they were going.\n\n"
+                "The ground around the base is worn into a perfect circle, a testament "
+                "to the centuries of turning. Now it rests, like an old beast that has "
+                "finally been allowed to sleep."
+            )
+        return None
+
+    def _castle_red_describe(state):
+        """After entering the castle for the first time, show a subdued chamber."""
+        if state.has_flag("confronted_murderer") and not state.has_flag("met_garbh_after"):
+            return (
+                "The Red Door — After the Confrontation",
+                "The circular chamber of polished black obsidian is quiet now. "
+                "The shaft of red light still illuminates the stone pedestal at the center, "
+                "but the intensity has faded to a soft, rosy glow.\n\n"
+                "The shadows where Garbh once sat are empty. A discarded drinking horn "
+                "lies on its side. The Silver Net rests on the pedestal, waiting.\n\n"
+                "The castle no longer shudders. It is at peace, as if the confrontation "
+                "drained the last of its restless energy.\n\n"
+                "The air is still. The chamber feels like a memory now — "
+                "the heart of the castle, still beating, but quietly."
+            )
+        return None
+
+    def _trumpet_island_describe(state):
+        """After the trumpet is muffled, show a silent island."""
+        if state.has_flag("trumpet_muffled"):
+            return (
+                "Island of the Giant Trumpet — Trumpet Silenced",
+                "The enormous brass trumpet sits in silence, its mouth firmly stuffed "
+                "with cloth. The bellows behind it are deflated and still. No air builds. "
+                "No blast will come.\n\n"
+                "The island feels almost peaceful now — just a bare rock with a giant "
+                "brass curiosity. The inscription on the pedestal seems antique rather "
+                "than threatening.\n\n"
+                "The wind whistles through the trumpet's valves softly, producing a "
+                "faint, musical hum — the ghost of a sound, harmless and almost beautiful."
+            )
+        return None
+
+    def _demon_island_describe(state):
+        """After meeting the demon smith, show a familiar forge."""
+        if state.has_flag("met_demon"):
+            return (
+                "Island of the Demon Smith — Familiar Forge",
+                "The smoke still wreathes the island and the forge still burns with its "
+                "black flames, but the atmosphere has changed. The demon looks up as you "
+                "approach and grins — his molten gold teeth flashing.\n\n"
+                "'Ah, back again! Always happy to see a return customer.' "
+                "He gestures at the table of black iron coins. 'The usual rate applies. "
+                "You know where to find me.'\n\n"
+                "The CLANG of his hammer is almost musical now, a steady rhythm "
+                "that feels like the heartbeat of the island. The air is still hot, "
+                "but it no longer feels hostile."
+            )
+        return None
+
+    def _golden_pillar_describe(state):
+        """After the golden fish is caught, show an empty net."""
+        if state.has_flag("got_golden_fish"):
+            return (
+                "Island of the Golden Pillar — Net Empty",
+                "The pillar of solid gold still rises from the sea, impossibly tall "
+                "and polished to a mirror shine. But the silver net at its peak now "
+                "hangs empty, gently swaying in the breeze.\n\n"
+                "The pillar seems... satisfied. The faint hum has deepened into a "
+                "contented resonance, like a large bell that has just been rung and "
+                "is settling into silence.\n\n"
+                "The inscription at the base catches the light differently now: "
+                "'He who would climb to heaven's gate must first see what the silver net "
+                "makes great.' You have seen it. You have taken it. The pillar's purpose "
+                "is fulfilled."
+            )
+        return None
+
+    def _serpent_center_describe(state):
+        """After the serpent is pacified, the center feels more welcoming."""
+        if state.has_flag("serpent_pacified"):
+            return (
+                "Within the Serpent's Ring — Garden of Peace",
+                "The center of the island is radiant with peace. The green grass seems "
+                "greener, the spring clearer. Purple antidote herbs grow in abundance, "
+                "their scent calming and restorative.\n\n"
+                "The stone altar at the center, carved with the ouroboros, now seems to "
+                "glow faintly. The serpent's head, visible above, nods gently as you move "
+                "through the space.\n\n"
+                "A quiet voice — perhaps your own, perhaps the island's — whispers: "
+                "'The serpent guards not the island, but the wisdom within. "
+                "And you have proven worthy of that wisdom.'"
+            )
+        return None
+
     # ═══════════════════════════════════════════
     # THE FINAL SEA
     # ═══════════════════════════════════════════
@@ -42,6 +229,7 @@ def register(items, npcs):
             "Was it a star? A ship? A warning? Or just Fergus's lantern?"
         ),
         npcs=[npcs["young_conganchnes"]],
+        describe=_sea3_describe,
     )
 
     # ═══════════════════════════════════════════
@@ -73,6 +261,7 @@ def register(items, npcs):
             if not s.has_flag("serpent_pacified") else
             "The serpent has moved aside, allowing passage. It nods as you pass. A polite snake."
         ),
+        describe=_serpent_island_describe,
     )
 
     l["serpent_island_center"] = Location(
@@ -92,6 +281,7 @@ def register(items, npcs):
         items=[items["antidote_herb"]],
         npcs=[],
         exits={"out": "serpent_island"},
+        describe=_serpent_center_describe,
     )
 
     # ═══════════════════════════════════════════
@@ -120,6 +310,7 @@ def register(items, npcs):
             if not s.has_flag("apple_taken") else
             "The pig glares at you balefully. It remembers. It will always remember."
         ),
+        describe=_black_pig_describe,
     )
 
     # ═══════════════════════════════════════════
@@ -191,6 +382,7 @@ def register(items, npcs):
             "Or you could try to ride it and hope for the best (not recommended)."
             if not s.has_flag("kelpie_tricked") else None
         ),
+        describe=_water_horse_describe,
     )
 
     # ── Water Horse Doom (the kelpie is outsmarted) ──
@@ -256,6 +448,7 @@ def register(items, npcs):
             "If you have Fiery Ash, you could give it to them."
             if not s.has_flag("fiery_pigs_pacified") else None
         ),
+        describe=_fiery_pigs_describe,
     )
 
     # ═══════════════════════════════════════════
@@ -306,6 +499,7 @@ def register(items, npcs):
             "Or you could simply leave and explore other islands."
             if not s.has_flag("castle_unlocked") else None
         ),
+        describe=_revolving_castle_describe,
     )
 
     # ── Castle Entrance (hallway) ──
@@ -360,6 +554,7 @@ def register(items, npcs):
             "This is Garbh. The man who killed your father."
             if not s.has_flag("castle_entered") else None
         ),
+        describe=_castle_red_describe,
     )
 
     l["castle_blue"] = Location(
@@ -458,6 +653,7 @@ def register(items, npcs):
             "Use the EARPLUGS to protect your ears, or use the MUFFLER on the TRUMPET to silence it permanently."
             if not s.has_flag("trumpet_muffled") else None
         ),
+        describe=_trumpet_island_describe,
     )
 
     # ═══════════════════════════════════════════
@@ -490,6 +686,7 @@ def register(items, npcs):
             if not s.has_flag("met_demon") else
             "The forge still burns, but the demon nods politely as you pass. 'Come back anytime.'"
         ),
+        describe=_demon_island_describe,
     )
 
     # ═══════════════════════════════════════════
@@ -527,6 +724,7 @@ def register(items, npcs):
             "The golden pillar still gleams, but the silver net hangs empty now. "
             "The pillar seems... satisfied, somehow."
         ),
+        describe=_golden_pillar_describe,
     )
 
     LOCATIONS.update(l)

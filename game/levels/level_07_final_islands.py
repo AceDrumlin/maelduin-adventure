@@ -39,6 +39,22 @@ def register(items, npcs):
         ),
         items=[],
         npcs=[npcs["giant"]],
+        describe=lambda s: (
+            ("Island of the Fallen Giant",
+             "The cliff rises steeply from the sea, but the giant is no more. "
+             "His body lies among the rocks at the base of the cliff, already being picked clean by seabirds. "
+             "The pile of stones beside his perch is silent. The air is still and quiet, "
+             "and the only sound is the gentle lap of waves against the shore.\n\n"
+             "A crude club — the GIANT'S CLUB — lies near his hand, if you wish to take it.")
+            if s.has_flag("giant_defeated") else
+            ("Island of the Pacified Giant",
+             "The cliff rises steeply from the sea. At its top, the giant sits peacefully, "
+             "whittling a stick with a stone knife. He nods as you pass — the two of you have "
+             "come to an understanding. The pile of throwing stones has been kicked aside.\n\n"
+             "The island feels almost welcoming now, if a giant's presence can ever be called welcoming.")
+            if s.has_flag("giant_mollified") else
+            None
+        ),
         exits={"back": "sea2", "sea": "sea2", "southwest": "sea2"},
         ambient=lambda s: (
             "The giant grumbles on his cliff, occasionally hurling a stone at a passing wave. "
@@ -82,6 +98,15 @@ def register(items, npcs):
         ),
         items=[],
         npcs=[npcs["treasure_serpent"]],
+        describe=lambda s: (
+            "A small, barren island of grey stone and sparse grass. The cave mouth gapes open and unguarded — "
+            "the serpent is gone. A faint golden glow emanates from within, "
+            "the light of ancient treasure waiting to be claimed.\n\n"
+            "The air is still and smells of old stone and forgotten riches. "
+            "Nothing bars your way now."
+            if s.has_flag("serpent_passed") else
+            None
+        ),
         exits={"back": "sea1", "sea": "sea1", "northwest": "sea1",
                "in": "treasure_cave", "enter": "treasure_cave"},
         blocked={
@@ -135,6 +160,16 @@ def register(items, npcs):
         ),
         items=[items["silver_torc"]],
         npcs=[npcs["great_hound"]],
+        describe=lambda s: (
+            ("Island of the Resting Hound",
+             "A gentle, grassy mound rises from the sea. At its summit, a stone pedestal stands silent and empty — "
+             "the silver torc has been claimed. Beside it, the great hound lies curled in the grass, "
+             "its head on its paws, breathing slow and deep.\n\n"
+             "After a thousand years of vigil, it has finally earned its rest. "
+             "The island is at peace.")
+            if s.has_flag("dog_pacified") else
+            None
+        ),
         exits={"back": "sea1", "sea": "sea1", "northeast": "sea1"},
         ambient=lambda s: (
             "The hound yawns, revealing teeth like ivory daggers, then settles back down. "
@@ -178,6 +213,21 @@ def register(items, npcs):
         ),
         items=[],
         npcs=[npcs["mountain_lion"]],
+        describe=lambda s: (
+            ("Island of the Quiet Cave",
+             "A harsh island of scrub brush and sharp rocks. The wind whistles through the thorny bushes. "
+             "At the centre of the island, a wide cave mouth yawns in the hillside — the mountain lion is gone, "
+             "driven off by your blade. A single claw lies on the ground where the beast once stood. "
+             "The cave is open and silent.")
+            if s.has_flag("lion_fought") else
+            ("Island of the Healed Lion",
+             "A harsh island of scrub brush and sharp rocks. The wind whistles through the thorny bushes. "
+             "At the centre of the island, a wide cave mouth opens into the hillside. "
+             "The mountain lion lies nearby, its wound healed, dozing peacefully in the sun. "
+             "It flicks an ear as you approach but does not stir — it knows you mean no harm.")
+            if s.has_flag("lion_pacified") else
+            None
+        ),
         exits={"back": "sea2", "sea": "sea2", "south": "sea2"},
         ambient=lambda s: (
             "The lion paces before the cave, limping slightly. Its growls echo off the rocks."

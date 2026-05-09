@@ -65,6 +65,11 @@ def register(items, npcs):
             "But stealing from monks feels... wrong."
         ),
         items=[items["silver_bell"]],
+        describe=lambda s: (
+            "The island feels incomplete without the bell. The monks are quieter now, "
+            "glancing up at the empty tower. One of them sighs deeply."
+            if s.has_flag("took_bell") else None
+        ),
         npcs=[],
         exits={"south": "sea2"},
         ambient=lambda s: (
@@ -127,6 +132,12 @@ def register(items, npcs):
             "The sea seems quieter. The wind gentler."
             if not s.has_flag("met_hermit") else None
         ),
+        describe=lambda s: (
+            "The bare rock where you met the hermit. He is gone now, but the "
+            "memory of his blessing lingers. The otter still sits there, "
+            "holding a fish, watching you with knowing eyes."
+            if s.has_flag("met_hermit") else None
+        ),
     )
 
     # ═══════════════════════════════════════════
@@ -161,6 +172,11 @@ def register(items, npcs):
             if not s.has_flag("four_fences_solved") else
             "The copper fence has crumbled to dust. A treasure chest lies open at your feet. "
             "Inside: a bronze key that turns of its own accord."
+        ),
+        describe=lambda s: (
+            "The island is peaceful now. Where four fences once stood, only the copper one remains — "
+            "crumbled to dust. A treasure chest lies open, empty save for a lingering warmth."
+            if s.has_flag("four_fences_solved") else None
         ),
         on_enter=lambda s: (
             "A faded sign offers a clue: 'The humble path is the true path. The proud path is the fool's path.'\n\n"
@@ -198,6 +214,11 @@ def register(items, npcs):
             "The remaining salmon eye you warily. They've heard about what happened to their cousin. "
             "One of them mutters 'cannibal' under its breath."
         ),
+        describe=lambda s: (
+            "The stream is quieter now. The remaining salmon keep their distance, "
+            "watching you with wary, knowing eyes. One whispers 'cannibal' as you pass."
+            if s.has_flag("caught_salmon") else None
+        ),
     )
 
 
@@ -220,6 +241,11 @@ def register(items, npcs):
             setattr(s, "awaiting_choice", "fences_gold_penalty") or
             "The gold fence was a trap! You stumble back, lucky to be alive."
             if not s.has_flag("gold_fence_tried") else None
+        ),
+        describe=lambda s: (
+            "The twisted wreckage of the golden gate. Thorns grow from the bent bars. "
+            "The ground is scarred where spikes erupted. No treasure here — only regret."
+            if s.has_flag("gold_fence_tried") else None
         ),
     )
 
@@ -257,6 +283,11 @@ def register(items, npcs):
              "eager to be used. The key to the turning world is yours."
              if not s.has_flag("four_fences_solved") else None)
         ),
+        describe=lambda s: (
+            "The copper gate has crumbled to dust, leaving only a stone pedestal "
+            "where the bronze key once rested. The path is clear and peaceful."
+            if s.has_flag("four_fences_solved") else None
+        ),
     )
 
     l["four_fences_crystal"] = Location(
@@ -276,6 +307,11 @@ def register(items, npcs):
             (s.lose_crew("diuran") or True) and
             "Diurán is wounded by flying crystal! He cannot continue."
             if not s.has_flag("crystal_tried") else None
+        ),
+        describe=lambda s: (
+            "Shards of crystal litter the ground. Where the beautiful gate once stood, "
+            "only jagged fragments remain, glittering in the grey light like frozen tears."
+            if s.has_flag("crystal_tried") else None
         ),
     )
 

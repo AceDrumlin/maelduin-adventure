@@ -9,6 +9,195 @@ def register(items, npcs):
     from ..engine import LOCATIONS
     l = {}
 
+    # ── State-aware describe() functions ──────────────────────────
+
+    def _sea1_describe(state):
+        """Show different text based on how many islands the crew has visited."""
+        island_flags = [
+            "island_ants_visited", "island_birds_visited", "island_cat_visited",
+            "island_laughing_visited", "glass_bridge_visited", "glass_palace_visited",
+            "island_smithy_visited", "island_women_visited", "sea_monsters_visited",
+        ]
+        visited = sum(1 for flag in island_flags if state.has_flag(flag))
+        if visited >= 6:
+            return (
+                "The Open Sea — Long Voyage",
+                "The curragh feels like an old friend now. The crew moves with practiced ease, "
+                "their faces weathered by sun and spray and strangeness. Diurán's "
+                "parchment stack has grown to the size of a small child.\n\n"
+                "The Magic Thread still pulls westward, steady as a heartbeat. "
+                "You have seen wonders that would take a lifetime to describe — "
+                "and yet the sea keeps offering more.\n\n"
+                "Some of the islands you have visited still linger in the crew's conversation. "
+                "The giant ants. The laughing people. The glass bridge over the void. "
+                "Each one has changed you, a little at a time.\n\n"
+                "The horizon still holds secrets. You are ready for them."
+            )
+        if visited >= 3:
+            return (
+                "The Open Sea — Seasoned Voyagers",
+                "Your curragh rises and falls on the grey Atlantic. The crew has found its rhythm — "
+                "oars dipping in unison, sail trimmed to the wind.\n\n"
+                "The druid's Magic Thread flutters from the mast, pulling steadily west. "
+                "Diurán has filled several pages of his epic poem. Conganchnes stands at the prow, "
+                "invulnerable and vigilant. Fergus mutters star-charts under his breath.\n\n"
+                "You have visited several islands now. Each one has left its mark — "
+                "a strange taste in the mouth, a new memory in the mind. "
+                "The crew talks about them at night.\n\n"
+                "More islands dot the horizon. The sea is generous with its mysteries."
+            )
+        if visited >= 1:
+            return (
+                "The Open Sea — First Discoveries",
+                "Your curragh rises and falls on the grey Atlantic. The coast of Ireland is a fading memory.\n\n"
+                "The druid's Magic Thread flutters from the mast, its pull a constant guide. "
+                "You have already visited one of the strange islands that dot these waters. "
+                "The crew is abuzz with wonder — they have seen something the old stories "
+                "never mentioned.\n\n"
+                "Diurán is already trying to capture it in verse. Conganchnes keeps watch "
+                "with renewed alertness. Fergus is recalibrating his sense of the world.\n\n"
+                "The sea stretches before you, full of promise.\n\n"
+                "Islands dot the horizon in every direction. Each one promises strangeness."
+            )
+        return None
+
+    def _island_ants_describe(state):
+        """After the everlasting fruit has been taken, show a stripped island."""
+        if state.get_item_from_inventory("everlasting_fruit") is not None:
+            return (
+                "Island of the Giant Ants — Plundered",
+                "The beach is the same white sand, but the forest beyond feels different. "
+                "The trees that once bore golden fruit now stand bare — the ants have stripped "
+                "every branch in a frenzy after the theft of their prize.\n\n"
+                "The ants themselves are agitated, scurrying back and forth in chaotic patterns. "
+                "A few pause to click their mandibles at you aggressively. You have been marked.\n\n"
+                "The queen ant's mound is visible in the distance. The ants do not seem eager "
+                "to let you near it again."
+            )
+        return None
+
+    def _island_birds_describe(state):
+        """After the speaking feather has been taken, show a quiet island."""
+        if state.get_item_from_inventory("speaking_feather") is not None:
+            return (
+                "Island of the Speaking Birds — Feather Stolen",
+                "The cliffs rise as before, but the birds are subdued. "
+                "They watch you with beady, reproachful eyes. A few whisper among themselves.\n\n"
+                '"He took the feather," one murmurs.\n'
+                '"Did not even ask," adds another.\n'
+                '"Rude," concludes a third, and the flock turns their backs on you collectively.\n\n'
+                "At the top of the cliff, the Ancient Bird is silent. It does not look your way."
+            )
+        return None
+
+    def _island_cat_describe(state):
+        """After the cat is pacified, show a friendlier island."""
+        if state.has_flag("cat_pacified"):
+            return (
+                "Island of the Cat — Friendly Feline",
+                "The small, tidy island remains immaculate, but the atmosphere has changed entirely. "
+                "The massive black cat still sits by the door of the stone house, but now its "
+                "eyes are half-closed in contentment, its tail curled neatly around its paws.\n\n"
+                'As you approach, it rises, stretches luxuriously, and rubs against your leg. '
+                "Its fur is impossibly soft, and it purrs with a sound like distant thunder.\n\n"
+                "\"You may enter,\" it says, its voice a low rumble. \"I have deemed you worthy. "
+                "The house is yours to explore.\"\n\n"
+                "The golden crown sits slightly askew on its head, as if it has been napping."
+            )
+        return None
+
+    def _island_laughing_describe(state):
+        """After the king is pacified, show a calm island."""
+        if state.has_flag("king_pacified"):
+            return (
+                "Island of the Laughing People — Peace",
+                "The island is transformed. The laughter has subsided into gentle smiles and "
+                "contented chuckles. People go about their business — farming, weaving, cooking — "
+                "with quiet joy rather than manic hilarity.\n\n"
+                "The king sits on his one-legged stool, which has been propped up with a stone. "
+                'He nods at you with genuine warmth. "Thank you," he says simply. '
+                '"It is good to breathe again."\n\n'
+                "A woman offers you bread, and this time she does not spill it. "
+                "The horses do not laugh. The chickens lay eggs in peace. "
+                "The island feels like a real home now, not a fever dream."
+            )
+        return None
+
+    def _glass_bridge_describe(state):
+        """After crossing successfully, show the bridge as a known path."""
+        if state.has_flag("crossed_bridge"):
+            return (
+                "Island of the Glass Bridge — Crossed",
+                "The glass bridge spans the chasm, no longer terrifying. It has been crossed. "
+                "The shard or the blessing has done its work, and the path is safe.\n\n"
+                "The chasm still yawns below, but the bridge no longer groans ominously. "
+                "It shimmers in the light like a frozen river, beautiful and benign.\n\n"
+                "The far side beckons peacefully. You could cross again anytime."
+            )
+        return None
+
+    def _glass_palace_describe(state):
+        """After leaving the palace behind, show an empty echo of temptation."""
+        if state.has_flag("left_palace"):
+            return (
+                "The Glass Palace — Abandoned",
+                "The palace of frozen light stands empty now. The music that once played "
+                "without musicians has fallen silent. The honey-sweet air is still, "
+                "as if the place itself is holding its breath.\n\n"
+                "The beautiful woman is gone. The cushions of silk lie undisturbed. "
+                "The transparent floor still reveals the chasm below, but it no longer "
+                "feels like a threat — it feels like a reminder.\n\n"
+                "A voice — your own — whispers in your memory: "
+                "'Stay and you would have forgotten. Leave and you will remember.'\n\n"
+                "You left. You remember. The palace is just a building now."
+            )
+        return None
+
+    def _island_smithy_describe(state):
+        """After getting the harpoon, show a satisfied forge."""
+        if state.has_flag("got_harpoon"):
+            return (
+                "Island of the Smithy — Forge Satisfied",
+                "The volcanic island feels almost peaceful. The forge still belches heat, "
+                "but the hammer has stopped its earth-shaking CLANG. The giant sits on a rock, "
+                "admiring his work with a broad, soot-smudged grin.\n\n"
+                '"A fine weapon," he rumbles, gesturing at the harpoon in your hands. '
+                '"That will pierce anything that needs piercing. Use it well, little sailor."\n\n'
+                "Embers drift lazily through the air. The giant hums contentedly — "
+                "still 'Row, Row, Row Your Boat,' but now in a cheerful major key."
+            )
+        return None
+
+    def _island_women_describe(state):
+        """After leaving or resisting the queen, show an empty island."""
+        if state.has_flag("left_women"):
+            return (
+                "Island of Women — Deserted",
+                "The island of perpetual sunset is eerily quiet. The feast tables are bare, "
+                "the silk gowns gone. Where beautiful women once danced and sang, "
+                "only the wind moves through empty pavilions.\n\n"
+                "The throne of flowers is wilted. A single dried petal lies on the ground. "
+                "The honey-and-jasmine scent has been replaced by the clean, salt smell of the sea.\n\n"
+                "It is as if the island was a stage and the play ended when you refused to stay. "
+                "The props remain. The actors have departed."
+            )
+        return None
+
+    def _sea_monsters_describe(state):
+        """After the sea monster is defeated, show a peaceful stretch of water."""
+        if state.has_flag("sea_monster_defeated"):
+            return (
+                "The Sea of Monsters — Calm Waters",
+                "The water is still glassy, but the menace is gone. The deep green-black "
+                "depths no longer feel like a hungry mouth waiting to close.\n\n"
+                "Fragments of the monster's body bob on the surface, already being picked at "
+                "by seabirds. The crew rows with confidence now, their voices raised in song. "
+                "Diurán is composing a triumphant ballad. Fergus has torn up his will.\n\n"
+                "The sea is just the sea again — vast, deep, and indifferent. "
+                "But sometimes indifference is exactly what you need."
+            )
+        return None
+
     # ═══════════════════════════════════════════
     # THE OPEN SEA — Hub for sea1 islands
     # ═══════════════════════════════════════════
@@ -43,6 +232,7 @@ def register(items, npcs):
             "A whale breaches in the distance. The crew oohs and aahs."
         ),
         npcs=[npcs["young_diuran"]],
+        describe=_sea1_describe,
     )
 
     # ═══════════════════════════════════════════
@@ -73,6 +263,7 @@ def register(items, npcs):
             "The ants now ignore you completely. One of them waves a feeler in your direction. "
             "It might be a greeting. It might be a warning. With ants, it's hard to tell."
         ),
+        describe=_island_ants_describe,
     )
 
     l["ants_grove"] = Location(
@@ -124,6 +315,7 @@ def register(items, npcs):
             if not s.has_flag("bird_talked") else
             "The birds now respectfully nod as you pass. One tips its wing in salute."
         ),
+        describe=_island_birds_describe,
     )
 
     l["birds_nest"] = Location(
@@ -172,6 +364,7 @@ def register(items, npcs):
             "The cat purrs contentedly as you pass. You have been deemed acceptable. "
             "It's the greatest honor of your life."
         ),
+        describe=_island_cat_describe,
     )
 
     # ═══════════════════════════════════════════
@@ -200,6 +393,7 @@ def register(items, npcs):
             "The island seems quieter now. People still chuckle, but it's a gentle mirth. "
             "The king is humming contentedly and trying to fix his stool."
         ),
+        describe=_island_laughing_describe,
     )
 
     # ═══════════════════════════════════════════
@@ -243,6 +437,7 @@ def register(items, npcs):
             "The glass bridge shimmers in the light. It's beautiful and absolutely terrifying. "
             "The wind whistles through the chasm below."
         ),
+        describe=_glass_bridge_describe,
     )
 
     def _glass_palace_enter(state):
@@ -279,6 +474,7 @@ def register(items, npcs):
         npcs=[],
         exits={"back": "glass_bridge", "east": "glass_bridge"},
         on_enter=_glass_palace_enter,
+        describe=_glass_palace_describe,
     )
 
     # ═══════════════════════════════════════════
@@ -311,6 +507,7 @@ def register(items, npcs):
             "The forge is quiet now. The giant waves cheerily as you pass. "
             "'Come back if you need anything else! I do good work!'"
         ),
+        describe=_island_smithy_describe,
     )
 
     # ═══════════════════════════════════════════
@@ -339,6 +536,7 @@ def register(items, npcs):
             "The island is silent now. The palace stands empty, as if everyone left in a hurry. "
             "A single wilted flower lies on the throne."
         ),
+        describe=_island_women_describe,
     )
 
     # ═══════════════════════════════════════════
@@ -372,6 +570,7 @@ def register(items, npcs):
             if not s.has_flag("sea_monster_defeated") else
             "The sea is calm and safe now. Fergus has stopped praying. Diurán has torn up his will."
         ),
+        describe=_sea_monsters_describe,
     )
 
     # Add crew dialogue that references prologue events
