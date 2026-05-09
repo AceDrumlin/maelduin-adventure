@@ -61,14 +61,14 @@ body{background:#0a0806;color:#f0ebe4;font-family:ui-monospace,'Cascadia Code','
 .panel-section{margin-bottom:12px}
 .panel-section h3{color:#d4a017;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;border-bottom:1px solid #2a1f14;padding-bottom:3px}
 #panel-loc-name{color:#f0ebe4;font-size:14px;font-weight:bold;margin-bottom:2px}
-#panel-loc-desc{color:#8b7a6a;font-size:11px;line-height:1.4;overflow:hidden;text-overflow:ellipsis}
+#panel-loc-desc{color:#b8a898;font-size:11px;line-height:1.4;overflow:hidden;text-overflow:ellipsis}
 #panel-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px 4px}
-.stat-block{text-align:center;padding:4px 2px;background:#0d0906;border:1px solid #1a1410;border-radius:3px}
-.stat-block .stat-label{display:block;color:#6b5a4a;font-size:8px;text-transform:uppercase;letter-spacing:.5px}
-.stat-block .stat-number{display:block;color:#d4a017;font-size:16px;font-weight:bold;line-height:1.3}
+.stat-block{text-align:center;padding:4px 2px;background:#120e0a;border:1px solid #2a1f14;border-radius:3px}
+.stat-block .stat-label{display:block;color:#8b7a6a;font-size:9px;text-transform:uppercase;letter-spacing:.5px}
+.stat-block .stat-number{display:block;color:#f0d060;font-size:16px;font-weight:bold;line-height:1.3}
 #panel-inventory{display:flex;flex-wrap:wrap;gap:3px;min-height:18px}
-.panel-inv-item{color:#c8b89a;font-size:11px;padding:1px 0;cursor:default}
-.panel-empty{color:#4a3a2a;font-size:11px;font-style:italic}
+.panel-inv-item{color:#d4c9b8;font-size:11px;padding:1px 0;cursor:default}
+.panel-empty{color:#6b5a4a;font-size:11px;font-style:italic}
 #crew-list{list-style:none;font-size:12px;color:#c8b89a;margin:0}
 #crew-list li{padding:2px 0;font-size:11px}
 #crew-list .dead{opacity:.35;text-decoration:line-through;color:#6b5a4a}
@@ -99,7 +99,8 @@ body{background:#0a0806;color:#f0ebe4;font-family:ui-monospace,'Cascadia Code','
   #input-row{padding:8px 10px!important}
   #cmd{font-size:16px!important;padding:10px 12px!important}
   #prompt{font-size:18px!important;line-height:42px!important}
-  #side-panel{width:260px!important;right:-280px!important}
+  #side-panel{width:260px!important;right:-280px;padding:44px 12px 12px!important}
+  #side-panel.open{right:0!important}
   #side-toggle{font-size:22px!important;padding:8px 12px!important;top:50%!important;right:6px!important}
 }
 
