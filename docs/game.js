@@ -160,6 +160,10 @@ Commands:
   CREW                   - Check on your crew
   SCORE                  - See your progress
   QUIT / Q               - End the voyage
+  SAVE [name]             - Save your game
+  LOAD [name]             - Load a saved game
+  SAVES                   - List saved games
+  DELETE SAVE [name]      - Delete a saved game
   RESTART                - Start over
   HELP                   - Show this message
 
@@ -617,6 +621,10 @@ const VERBS = {
   joke: h_joke, sing: h_sing,
   yes: h_yes, y: h_yes,
   no: h_no, nope: h_no,
+  save: h_save,
+  load: h_load,
+  saves: h_list_saves,
+  delete: h_delete_save,
   help: h_help, '?': h_help, h: h_help,
 };
 
@@ -640,6 +648,7 @@ function parseCommand(text) {
     [/^joke to\s+(.+)$/, h_joke], [/^joke\s+(.+)$/, h_joke],
     [/^fight\s+(.+)$/, h_fight], [/^attack\s+(.+)$/, h_fight],
     [/^sing\s+(.+)$/, h_sing],
+    [/^delete save\s+(.+)$/, h_delete_save],
   ];
 
   for (const [regex, handler] of patterns) {
@@ -813,7 +822,186 @@ function initUI() {
     cmd.focus();
   });
 
+  // ── Save/Load Modal ──
+  const saveModal = document.getElementById('save-modal');
+  const saveModalClose = document.getElementById('save-modal-close');
+  const saveNameInput = document.getElementById('save-name-input');
+  const saveBtn = document.getElementById('save-btn');
+  const saveList = document.getElementById('save-list');
+
+  function refreshSaveList() {
+    const saves = loadSavesIndex();
+    const names = Object.keys(saves);
+    saveList.innerHTML = '';
+    if (!names.length) {
+      saveList.innerHTML = '<div style="color:#5a4a3a;text-align:center;padding:16px;font-size:12px">No saved games yet.</div>';
+      return;
+    }
+    for (const name of names) {
+      const s = saves[name];
+      const ts = (s.timestamp || '').replace('T', ' ').substring(0, 16);
+      const div = document.createElement('div');
+      div.className = 'save-list-entry';
+      div.innerHTML = `
+        <div class="save-list-info">
+          <div class="save-list-name">${name}</div>
+          <div class="save-list-time">${ts}</div>
+        </div>
+        <div class="save-list-actions">
+          <button class="modal-btn load-btn" data-name="${name}">Load</button>
+          <button class="delete-save-btn" data-name="${name}">✕</button>
+        </div>
+      `;
+      div.querySelector('.load-btn').addEventListener('click', () => {
+        const result = h_load(name);
+        addMsg(result);
+        updateUI();
+        saveModal.classList.remove('open');
+        cmd.focus();
+      });
+      div.querySelector('.delete-save-btn').addEventListener('click', () => {
+        h_delete_save(name);
+        refreshSaveList();
+        addMsg(`Save "${name}" deleted.`, 'sys');
+      });
+      saveList.appendChild(div);
+    }
+  }
+
+  document.getElementById('save-game-btn').addEventListener('click', () => {
+    saveModal.classList.add('open');
+    saveNameInput.value = '';
+    saveNameInput.focus();
+    refreshSaveList();
+  });
+
+  saveModalClose.addEventListener('click', () => {
+    saveModal.classList.remove('open');
+    cmd.focus();
+  });
+  saveModal.addEventListener('click', (e) => {
+    if (e.target === saveModal) {
+      saveModal.classList.remove('open');
+      cmd.focus();
+    }
+  });
+
+  saveBtn.addEventListener('click', () => {
+    const name = saveNameInput.value.trim();
+    if (!name) return;
+    const result = h_save(name);
+    addMsg(result, 'sys');
+    refreshSaveList();
+    saveNameInput.value = '';
+    saveNameInput.focus();
+  });
+  saveNameInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') saveBtn.click();
+  });
+
   return { addMsg, updateUI, sendCmd };
+}
+
+// ─── SAVE / LOAD ────────────────────────────────────────────────
+
+function loadSavesIndex() {
+  try {
+    const raw = localStorage.getItem('maelduin_saves');
+    return raw ? JSON.parse(raw) : {};
+  } catch(e) { return {}; }
+}
+
+function writeSavesIndex(index) {
+  try {
+    localStorage.setItem('maelduin_saves', JSON.stringify(index));
+  } catch(e) { /* localStorage quota exceeded */ }
+}
+
+function serializeState() {
+  return {
+    location: STATE.location,
+    inventory_ids: STATE.inventory.map(i => i.id),
+    flags: JSON.parse(JSON.stringify(STATE.flags)),
+    score: STATE.score,
+    turns: STATE.turns,
+    days: STATE.days,
+    game_over: STATE.gameOver,
+    won: STATE.won,
+    crew: STATE.crew.map(c => ({id: c.id, alive: c.alive})),
+    awaiting_choice: STATE.awaitingChoice,
+    visited: JSON.parse(JSON.stringify(STATE.visited)),
+  };
+}
+
+function deserializeState(data) {
+  STATE.location = data.location || 'ailill_keep';
+  STATE.inventory = (data.inventory_ids || []).map(id => getItem(id)).filter(Boolean);
+  STATE.flags = data.flags || {};
+  STATE.score = data.score || 0;
+  STATE.turns = data.turns || 0;
+  STATE.days = data.days || 0;
+  STATE.gameOver = !!data.game_over;
+  STATE.won = !!data.won;
+  if (data.crew) {
+    for (const cdata of data.crew) {
+      const c = STATE.crew.find(c => c.id === cdata.id);
+      if (c) c.alive = cdata.alive;
+    }
+  }
+  STATE.awaitingChoice = data.awaiting_choice || null;
+  STATE.visited = data.visited || {};
+}
+
+function h_save(args) {
+  const name = (args || '').trim();
+  if (!name) return 'Usage: SAVE [name] — give your save a name.';
+  const saves = loadSavesIndex();
+  const now = new Date().toISOString();
+  saves[name] = {
+    version: 1,
+    save_name: name,
+    timestamp: now,
+    state: serializeState(),
+  };
+  writeSavesIndex(saves);
+  return `Game saved as "${name}".`;
+}
+
+function h_load(args) {
+  const name = (args || '').trim();
+  if (!name) return 'Usage: LOAD [name] — load a previously saved game.';
+  const saves = loadSavesIndex();
+  const blob = saves[name];
+  if (!blob) {
+    const names = Object.keys(saves);
+    if (!names.length) return `No save named "${name}" found. No saves exist.`;
+    return `No save named "${name}" found. Available saves: ${names.join(', ')}`;
+  }
+  deserializeState(blob.state);
+  return `Save "${name}" loaded. (${blob.timestamp})\n\n` + h_look();
+}
+
+function h_list_saves(args) {
+  const saves = loadSavesIndex();
+  const names = Object.keys(saves);
+  if (!names.length) return 'No saved games found.';
+  let text = '=== SAVED GAMES ===';
+  for (const name of names) {
+    const s = saves[name];
+    const ts = (s.timestamp || '').replace('T', ' ').substring(0, 16);
+    text += `\n  ${name.padEnd(20)}  ${ts}`;
+  }
+  return text;
+}
+
+function h_delete_save(args) {
+  const name = (args || '').trim();
+  if (!name) return 'Usage: DELETE SAVE [name]';
+  const saves = loadSavesIndex();
+  if (!saves[name]) return `No save named "${name}" found.`;
+  delete saves[name];
+  writeSavesIndex(saves);
+  return `Save "${name}" deleted.`;
 }
 
 // ─── BOOT ───────────────────────────────────────────────────────────────

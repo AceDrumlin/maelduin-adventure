@@ -3,6 +3,10 @@
 import random
 import re
 import textwrap
+import json
+import os
+import pathlib
+import datetime
 from .drink_handler import handle_drink
 
 
@@ -171,6 +175,81 @@ class GameState:
             return member
         return None
 
+    def to_save_dict(self):
+        """Serialize to a JSON-safe dict."""
+        return {
+            "location": self.current_location,
+            "inventory_ids": [item.id for item in self.inventory],
+            "flags": dict(self.flags),
+            "score": self.score,
+            "turns": self.turns,
+            "days": self.days,
+            "game_over": self.game_over,
+            "won": self.won,
+            "crew": [{"id": c.id, "alive": c.alive} for c in self.crew],
+            "awaiting_choice": self.awaiting_choice,
+            "visited": dict(getattr(self, 'visited', {})),
+        }
+
+    @classmethod
+    def from_save_dict(cls, data):
+        """Restore state from a save dict."""
+        from . import world  # noqa: F401 — populates engine.LOCATIONS and engine.ITEMS
+        state = cls()
+        state.current_location = data.get("location", "ailill_keep")
+        state.score = data.get("score", 0)
+        state.turns = data.get("turns", 0)
+        state.days = data.get("days", 0)
+        state.game_over = data.get("game_over", False)
+        state.won = data.get("won", False)
+        state.awaiting_choice = data.get("awaiting_choice", None)
+        state.flags = dict(data.get("flags", {}))
+        state.visited = dict(data.get("visited", {}))
+        # Restore visited flags for backward compat
+        for loc_id in state.visited:
+            state.set_flag(f"{loc_id}_visited", True)
+        # Restore inventory from IDs (ITEMS dict populated by world.py)
+        for item_id in data.get("inventory_ids", []):
+            if item_id in ITEMS:
+                state.inventory.append(ITEMS[item_id])
+        # Restore crew alive status
+        for cdata in data.get("crew", []):
+            for c in state.crew:
+                if c.id == cdata.get("id"):
+                    c.alive = cdata.get("alive", True)
+        return state
+
+
+# ----- Save/Load Helpers -----
+
+def _get_save_dir():
+    """Get the save directory, creating it if needed."""
+    save_dir = os.path.expanduser("~/.maelduin/saves")
+    os.makedirs(save_dir, exist_ok=True)
+    return save_dir
+
+def _sanitize_save_name(name):
+    """Sanitize a save name for use as a filename."""
+    safe = re.sub(r'[^a-zA-Z0-9_\- ]', '', name).strip()
+    return safe if safe else "unnamed"
+
+def _save_path(name):
+    return os.path.join(_get_save_dir(), _sanitize_save_name(name) + ".json")
+
+def list_saves():
+    """Return list of {name, timestamp} dicts."""
+    save_dir = _get_save_dir()
+    saves = []
+    if os.path.isdir(save_dir):
+        for f in sorted(os.listdir(save_dir)):
+            if f.endswith(".json"):
+                path = os.path.join(save_dir, f)
+                name = f[:-5]
+                mtime = os.path.getmtime(path)
+                ts = datetime.datetime.fromtimestamp(mtime).strftime("%Y-%m-%d %H:%M")
+                saves.append({"name": name, "timestamp": ts, "path": path})
+    return saves
+
 
 # ----- Action Handler -----
 
@@ -201,6 +280,10 @@ def handle_help(state, args):
         "  SCORE                  - See your progress\n"
         "  QUIT / Q               - End the voyage\n"
         "  RESTART                - Start over\n"
+        "  SAVE [name]            - Save your game\n"
+        "  LOAD [name]            - Load a saved game\n"
+        "  SAVES                  - List all saved games\n"
+        "  DELETE SAVE [name]     - Delete a saved game\n"
         "  HELP                   - Show this message\n\n"
         "Tip: Try EXAMINE things and TALK TO people!"
     )
@@ -602,6 +685,68 @@ def handle_quit(state, args):
 
 def handle_restart(state, args):
     return "__RESTART__"
+
+
+def handle_save(state, args):
+    name = args.strip() if args else None
+    if not name:
+        return "Usage: SAVE [name] — give your save a name."
+    safe = _sanitize_save_name(name)
+    path = _save_path(safe)
+    blob = {
+        "version": 1,
+        "save_name": safe,
+        "timestamp": datetime.datetime.now().isoformat(),
+        "state": state.to_save_dict(),
+    }
+    with open(path, "w") as f:
+        json.dump(blob, f, indent=2)
+    return f'Game saved as "{safe}".'
+
+
+def handle_load(state, args):
+    name = args.strip() if args else None
+    if not name:
+        return "Usage: LOAD [name] — load a previously saved game."
+    safe = _sanitize_save_name(name)
+    path = _save_path(safe)
+    if not os.path.exists(path):
+        existing = list_saves()
+        if not existing:
+            return f'No save named "{safe}" found. No saves exist.'
+        names = ", ".join(s["name"] for s in existing)
+        return f'No save named "{safe}" found. Available saves: {names}'
+    with open(path) as f:
+        blob = json.load(f)
+    new_state = GameState.from_save_dict(blob["state"])
+    # Replace the caller's state in-place
+    for attr in ["current_location", "inventory", "flags", "score", "turns", "days",
+                 "game_over", "won", "crew", "awaiting_choice", "visited"]:
+        setattr(state, attr, getattr(new_state, attr))
+    state.message_log = []
+    return f'Save "{safe}" loaded. ({blob.get("timestamp", "unknown")})\n\n' + handle_look(state, [])
+
+
+def handle_list_saves(state, args):
+    saves = list_saves()
+    if not saves:
+        return "No saved games found."
+    lines = ["=== SAVED GAMES ==="]
+    for s in saves:
+        lines.append(f"  {s['name']:20s}  {s['timestamp']}")
+    return "\n".join(lines)
+
+
+def handle_delete_save(state, args):
+    name = args.strip() if args else None
+    if not name:
+        return "Usage: DELETE SAVE [name]"
+    safe = _sanitize_save_name(name)
+    path = _save_path(safe)
+    if os.path.exists(path):
+        os.remove(path)
+        return f'Save "{safe}" deleted.'
+    return f'No save named "{safe}" found.'
 
 
 def handle_sail(state, args):
@@ -1128,6 +1273,10 @@ VERBS = {
     "help": ("help", handle_help),
     "?": ("help", handle_help),
     "h": ("help", handle_help),
+    "save": ("save", handle_save),
+    "load": ("load", handle_load),
+    "saves": ("saves", handle_list_saves),
+    "delete": ("delete", handle_delete_save),
 }
 
 
@@ -1219,6 +1368,12 @@ def parse_command(text):
     if m:
         return (handle_sing, m.group(1).strip())
 
+    # Delete save pattern: "delete save [name]"
+    delete_save_pattern = r'^delete save\s+(.+)$'
+    m = re.match(delete_save_pattern, lower)
+    if m:
+        return (handle_delete_save, m.group(1).strip())
+
     # Single word commands
     first_word = words[0]
     if first_word in VERBS:
@@ -1280,3 +1435,4 @@ def process_command(state, text):
 # LOCATIONS will be imported/defined elsewhere
 # This is the forward declaration for the module
 LOCATIONS = {}
+ITEMS = {}  # Populated by world.py

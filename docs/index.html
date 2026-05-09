@@ -66,6 +66,8 @@ body{background:#0a0806;color:#f0ebe4;font-family:ui-monospace,'Cascadia Code','
 #crew-list .dead{opacity:.35;text-decoration:line-through;color:#6b5a4a}
 #restart-btn{display:block;width:100%;margin-top:16px;padding:10px;background:transparent;border:1px solid #5a3a2a;color:#c0392b;font-family:ui-monospace,'Cascadia Code','JetBrains Mono','Menlo','Consolas','DejaVu Sans Mono',monospace;font-size:13px;border-radius:4px;cursor:pointer;transition:all .2s}
 #restart-btn:hover{background:#3a1a1a;color:#e74c3c}
+.side-save-btn{display:block;width:100%;margin-top:12px;padding:10px;background:transparent;border:1px solid #3a2a1a;color:#d4a017;font-family:inherit;font-size:12px;border-radius:4px;cursor:pointer;transition:all .2s}
+.side-save-btn:hover{background:#1a1410;border-color:#d4a017}
 .backdrop{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);z-index:18;display:none}
 .backdrop.show{display:block}
 
@@ -101,6 +103,33 @@ body{background:#0a0806;color:#f0ebe4;font-family:ui-monospace,'Cascadia Code','
   #cmd{padding:8px 10px!important;font-size:15px!important}
   #send{padding:6px 12px!important;font-size:12px!important}
 }
+
+/* ── SAVE/LOAD MODAL ── */
+.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.7);z-index:30;display:none;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:#0f0b08;border:1px solid #3a2a1a;border-radius:8px;width:90%;max-width:420px;max-height:80vh;display:flex;flex-direction:column;box-shadow:0 8px 32px rgba(0,0,0,.5)}
+.modal-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid #2a1f14}
+.modal-header h3{color:#d4a017;font-size:14px;letter-spacing:1px;text-transform:uppercase;margin:0}
+.modal-close{color:#6b5a4a;cursor:pointer;font-size:22px;line-height:1;padding:0 4px}
+.modal-close:hover{color:#f0ebe4}
+.modal-body{padding:12px 16px;overflow-y:auto}
+.save-input-row{display:flex;gap:8px;margin-bottom:12px}
+#save-name-input{flex:1;background:#0d0906;border:1px solid #3a2a1a;color:#f0ebe4;font-family:inherit;font-size:13px;padding:8px 10px;border-radius:4px;outline:none}
+#save-name-input:focus{border-color:#d4a017}
+.modal-btn{font-family:inherit;font-size:12px;padding:8px 16px;border:none;border-radius:4px;cursor:pointer;font-weight:bold}
+.save-btn{background:#d4a017;color:#0a0806}
+.save-btn:hover{background:#e6b422}
+.load-btn{background:#3a2a1a;color:#d4a017;padding:6px 14px}
+.load-btn:hover{background:#4a3a2a}
+.delete-save-btn{background:transparent;color:#6b5a4a;border:1px solid #4a2a1a;padding:4px 10px;font-size:11px;border-radius:3px;cursor:pointer;font-family:inherit}
+.delete-save-btn:hover{color:#e74c3c;border-color:#e74c3c}
+.save-divider{text-align:center;color:#5a4a3a;font-size:11px;letter-spacing:1px;text-transform:uppercase;margin:8px 0}
+.save-list-entry{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border:1px solid #1a1410;border-radius:4px;margin-bottom:6px;transition:border-color .2s}
+.save-list-entry:hover{border-color:#3a2a1a}
+.save-list-info{flex:1;min-width:0}
+.save-list-name{color:#f0ebe4;font-size:13px;font-weight:bold}
+.save-list-time{color:#5a4a3a;font-size:10px}
+.save-list-actions{display:flex;gap:6px;flex-shrink:0}
 </style>
 </head>
 <body>
@@ -137,6 +166,7 @@ body{background:#0a0806;color:#f0ebe4;font-family:ui-monospace,'Cascadia Code','
 <div id="score-detail"></div>
 <h3>&#128373; Crew</h3>
 <ul id="crew-list"></ul>
+<button id="save-game-btn" class="side-save-btn">&#128190; Save / Load Game</button>
 <button id="restart-btn">&#128260; New Voyage</button>
 </div>
 <div id="input-row">
@@ -147,5 +177,22 @@ body{background:#0a0806;color:#f0ebe4;font-family:ui-monospace,'Cascadia Code','
 </div>
 
 <script src="game.js?v=3"></script>
+
+<div id="save-modal" class="modal-overlay">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>💾 Save / Load</h3>
+      <span id="save-modal-close" class="modal-close">&times;</span>
+    </div>
+    <div class="modal-body">
+      <div class="save-input-row">
+        <input type="text" id="save-name-input" placeholder="Save name..." maxlength="40">
+        <button id="save-btn" class="modal-btn save-btn">Save</button>
+      </div>
+      <div class="save-divider">— Saved Games —</div>
+      <div id="save-list"></div>
+    </div>
+  </div>
+</div>
 </body>
 </html>

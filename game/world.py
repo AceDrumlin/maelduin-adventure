@@ -6,3 +6,7 @@ from .levels import load_all, items, npcs
 
 # Populate everything
 load_all()
+
+# Populate engine forward-declarations for save/load
+from . import engine
+engine.ITEMS = items
